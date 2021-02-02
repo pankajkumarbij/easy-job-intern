@@ -5,7 +5,7 @@
 <h2 align="center">
 
 ![https://img.shields.io/badge/Licience-MIT-green](https://img.shields.io/badge/Licience-MIT-green)
-[![gitter](https://img.shields.io/badge/Chat-on%20gitter-red)](#)
+[![gitter](https://img.shields.io/badge/Chat-on%20gitter-red)](https://discord.gg/PBuuPMSVjB)
 [![GitHub issues](https://img.shields.io/github/issues/pankajkumarbij/easy-job-intern?style=plastic)](https://github.com/pankajkumarbij/easy-job-intern/issues)
 [![GitHub forks](https://img.shields.io/github/forks/pankajkumarbij/easy-job-intern)](https://github.com/pankajkumarbij/easy-job-intern/network)
 [![GitHub stars](https://img.shields.io/github/stars/pankajkumarbij/easy-job-intern?style=plastic)](https://github.com/pankajkumarbij/easy-job-intern/pulls)
