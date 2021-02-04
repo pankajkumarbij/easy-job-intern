@@ -29,5 +29,4 @@ Example how to mark a checkbox :-
 - [ ] I have added tests to cover my changes.
 - [ ] All new and existing tests passed.
 - [ ] The title of my pull request is a short description of the requested changes.
-- [ ] Participating in SWOC2021.
-- [ ] Participating in DWOC.
+- [ ] Open Source Program names(OPTIONAL: If you participated in any open-source program then please mention the program name here)
