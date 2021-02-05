@@ -56,4 +56,9 @@ cd easy-job-intern
 ```
 Start Working on it and make a PR.
 
+# Contributor Names:
+
+[pankajkumarbij](https://github.com/pankajkumarbij)
+[96RadhikaJadhav](https://github.com/96RadhikaJadhav/)
+
 💜 **Thanks**
