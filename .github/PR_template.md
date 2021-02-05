@@ -23,6 +23,7 @@ How someone can test your code?
 Example how to mark a checkbox :-
 - [x] My code follows the code style of this project.
 -->
+- [ ] I have added my name in the contributors list at the end of README.md file.
 - [ ] My code follows the code style of this project.
 - [ ] My change requires a change to the documentation.
 - [ ] I have updated the documentation accordingly.
