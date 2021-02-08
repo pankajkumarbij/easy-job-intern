@@ -8,7 +8,8 @@
 [![discord](https://img.shields.io/badge/Chat-on%20discord-red)](https://discord.gg/PBuuPMSVjB)
 [![GitHub issues](https://img.shields.io/github/issues/pankajkumarbij/easy-job-intern?style=plastic)](https://github.com/pankajkumarbij/easy-job-intern/issues)
 [![GitHub forks](https://img.shields.io/github/forks/pankajkumarbij/easy-job-intern)](https://github.com/pankajkumarbij/easy-job-intern/network)
-[![GitHub stars](https://img.shields.io/github/stars/pankajkumarbij/easy-job-intern?style=plastic)](https://github.com/pankajkumarbij/easy-job-intern/pulls)
+[![GitHub stars](https://img.shields.io/github/stars/pankajkumarbij/easy-job-intern?style=plastic)](https://github.com/pankajkumarbij/easy-job-intern)
+[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/pankajkumarbij/easy-job-intern?logo=github)](https://github.com/pankajkumarbij/easy-job-intern)
 ![Contribotion](https://img.shields.io/badge/Contribution-Welcome-brightgreen)
 
 </h2>
