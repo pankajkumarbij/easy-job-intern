@@ -1,0 +1,45 @@
+
+.newFooter {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 5px;
+  }
+  footer ul {
+    padding: 0px 0;
+    margin: 0;
+    width: 100%;
+    border-bottom: 2px dotted #6c6c6c;
+  }
+  footer a {
+    color: inherit;
+    width: 100%;
+  }
+  footer li.listHeading {
+    display: inline-block;
+    margin: 10px 2%;
+  }
+
+  footer li.listFooter{
+      display: block;
+      margin: 0px;
+  
+    }
+ footer li.mob{
+     display: none;
+ }
+@media (max-width: 576px) {
+    footer li.listHeading {
+        display: none;
+        margin: 0;
+     }
+
+    footer li.listFooter{
+        display: none;
+        margin: 0px;
+    
+      }
+      footer li.mob{
+        display: block;
+    }
+  }
