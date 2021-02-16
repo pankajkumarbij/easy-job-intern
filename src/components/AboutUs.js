@@ -25,83 +25,34 @@ export default function AboutUs() {
                     </Card.Body>
                 </Card>
             </div>
-            <Container style={{marginTop:'6%'}}>
-            <Row>
-                    <Col class="col-lg-6 col-md-6 col-sm-12" id="offer-range">
-                        <img src="images/puzzle.png"></img>
-                        <h4>Lorem ipsum</h4>
-                        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-                    </Col>
-                    <Col class="col-lg-6 col-md-6 col-sm-12" id="offer-range">
-                        <img src="images/studying.png"></img>
-                        <h4>Lorem ipsum</h4>
-                        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-                    </Col>
-                </Row>
-            </Container>
-
-            <div style={{padding:'30px 0 80px 0',marginTop:"8%", background:'white'}}>
-            <Container>
+<div style={{padding:'30px 0 80px 0',marginTop:"4%"}}>
+            <Container >
                 <Row>
                     <Col class="col-lg-3 col-md-6 col-sm-12" id="offer-range">
-                    <Card style={{background:'linear-gradient(to bottom, #ccffff 0%, #99ccff 100%)', color:'white', border:'none'}}>
-                        <Card.Img variant="top" src="images/puzzle.png" style={{height:'200px'}}/>
-                        <Card.Body style={{color:'black'}}>
-                            <Card.Title>Title</Card.Title>
-                            <Card.Text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                            </Card.Text>
-                        </Card.Body>
-                        </Card>
+                        <img src="images/desktop.png"></img>
+                        <h4 >Lorem ipsum</h4>
+                        <p>loremipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
                     </Col>
                     <Col class="col-lg-3 col-md-6 col-sm-12" id="offer-range">
-                    <Card style={{background:'linear-gradient(to bottom, #ccffff 0%, #99ccff 100%)', color:'white', border:'none'}}>
-                        <Card.Img variant="top" src="images/inspiration.png" style={{height:'200px'}}/>
-                        <Card.Body style={{color:'black'}}>
-                            <Card.Title>Title</Card.Title>
-                            <Card.Text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                            </Card.Text>
-                        </Card.Body>
-                        </Card>
+                        <img src="images/inspiration.png"></img>
+                        <h4>Lorem ipsum</h4>
+                        <p>loremipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
                     </Col>
                     <Col class="col-lg-3 col-md-6 col-sm-12" id="offer-range">
-                    <Card style={{background:'linear-gradient(to bottom, #ccffff 0%, #99ccff 100%)', color:'white', border:'none'}}>
-                        <Card.Img variant="top" src="images/desktop.png" style={{height:'200px'}}/>
-                        <Card.Body style={{color:'black'}}>
-                            <Card.Title>Title</Card.Title>
-                            <Card.Text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                            </Card.Text>
-                        </Card.Body>
-                        </Card>
+                        <img src="images/puzzle.png"></img>
+                        <h4>Lorem ipsum</h4>
+                        <p>loremipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
                     </Col>
                     <Col class="col-lg-3 col-md-6 col-sm-12" id="offer-range">
-                    <Card style={{background:'linear-gradient(to bottom, #ccffff 0%, #99ccff 100%)', color:'white', border:'none'}}>
-                        <Card.Img variant="top" src="images/read.png" style={{height:'200px'}}/>
-                        <Card.Body style={{color:'black'}}>
-                            <Card.Title>Title</Card.Title>
-                            <Card.Text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                            </Card.Text>
-                        </Card.Body>
-                        </Card>
+                        <img src="images/studying.png"></img>
+                        <h4>Lorem ipsum</h4>
+                        <p>loremipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
                     </Col>
                 </Row>
             </Container>
             </div>
+
+
             </div>
         {/* <Footer   /> */}
         </>
