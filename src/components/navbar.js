@@ -5,8 +5,8 @@ import * as Icon from 'react-bootstrap-icons';
 function NavBar(){
     return(
         <>
-            <Navbar bg="dark" variant="dark" expand="lg">
-                <Navbar.Brand href="#home" style={{color:'yellow'}}>Easy Job Intern</Navbar.Brand>
+            <Navbar bg="secondary" variant="dark" expand="lg">
+                <Navbar.Brand href="#home" style={{color:'yellow'}}><img src="logo.png" height="80px" width="200px" style={{marginLeft:'5%'}}></img></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
