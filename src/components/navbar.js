@@ -6,11 +6,11 @@ function NavBar(){
     return(
         <>
             <Navbar bg="dark" variant="dark" expand="lg">
-                <Navbar.Brand href="#home" style={{color:'yellow'}}>Easy Job Intern</Navbar.Brand>
+                <Navbar.Brand href="home" style={{color:'yellow'}}>Easy Job Intern</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
+                        <Nav.Link href="home">Home</Nav.Link>
                         <Nav.Link href="#link1">Jobs</Nav.Link>
                         <Nav.Link href="#link2">Internship</Nav.Link>
                         <Nav.Link href="#link3">Other Programs</Nav.Link>
@@ -28,8 +28,8 @@ function NavBar(){
                         </InputGroup>
                     </Form>
                     <Nav>
-                        <Nav.Link href="#login"><Button variant="success"><Icon.BoxArrowInRight/> Sign In</Button></Nav.Link>
-                        <Nav.Link href="#signup"><Button variant="warning"><Icon.PersonPlus/> Sign Up</Button></Nav.Link>
+                        <Nav.Link href="login"><Button variant="success"><Icon.BoxArrowInRight/> Sign In</Button></Nav.Link>
+                        <Nav.Link href="signup"><Button variant="warning"><Icon.PersonPlus/> Sign Up</Button></Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
