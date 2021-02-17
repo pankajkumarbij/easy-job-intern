@@ -10,10 +10,11 @@ function NavBar(){
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="home">Home</Nav.Link>
+                        <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link href="#link1">Jobs</Nav.Link>
                         <Nav.Link href="#link2">Internship</Nav.Link>
                         <Nav.Link href="#link3">Other Programs</Nav.Link>
+                        <Nav.Link href="/about">About US</Nav.Link>
                     </Nav>
                     <Form inline className="mr-sm-5">
                         <InputGroup>

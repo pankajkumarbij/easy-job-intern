@@ -4,12 +4,12 @@
     background-color: #ffee93;
     padding-top: 6%;
     padding-bottom: 5%;
-    /* border-radius: 8%; */
-
 }
+
 .container label{
     float: left;
 }
+
 .container input{
     width: 50%;
     margin-left: 21%;

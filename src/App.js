@@ -9,19 +9,17 @@ import AboutUs from './components/AboutUs';
 function App() {
   return (
     <div className="App">
-    <Router>
-      <NavBar />
-      <h1>Welcome to Easy Job Intern</h1>
-      <Switch>
-          <Route path="/login" exact component={LoginForm} />
-          <Route path="/signup" exact component={RegisterForm} />
-      </Switch>
-      </Router>
-      <AboutUs />
-     <Footer/>
+        <NavBar />
+        <Router>
+            <h1>Welcome to Easy Job Intern</h1>
+            <Switch>
+                <Route path="/login" exact component={LoginForm} />
+                <Route path="/signup" exact component={RegisterForm} />
+                <Route path="/about" exact component={AboutUs} />
+            </Switch>
+        </Router>
+        <Footer/>
     </div>
-
-    
   );
 }
 
