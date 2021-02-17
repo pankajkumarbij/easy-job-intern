@@ -7,13 +7,15 @@ function NavBar(){
         <>
             <Navbar bg="secondary" variant="dark" expand="lg">
                 <Navbar.Brand href="#home" style={{color:'yellow'}}><img src="logo.png" height="80px" width="200px" style={{marginLeft:'5%'}}></img></Navbar.Brand>
+
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
+                        <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link href="#link1">Jobs</Nav.Link>
                         <Nav.Link href="#link2">Internship</Nav.Link>
                         <Nav.Link href="#link3">Other Programs</Nav.Link>
+                        <Nav.Link href="/about">About US</Nav.Link>
                     </Nav>
                     <Form inline className="mr-sm-5">
                         <InputGroup>
@@ -28,8 +30,8 @@ function NavBar(){
                         </InputGroup>
                     </Form>
                     <Nav>
-                        <Nav.Link href="#login"><Button variant="success"><Icon.BoxArrowInRight/> Sign In</Button></Nav.Link>
-                        <Nav.Link href="#signup"><Button variant="warning"><Icon.PersonPlus/> Sign Up</Button></Nav.Link>
+                        <Nav.Link href="login"><Button variant="success"><Icon.BoxArrowInRight/> Sign In</Button></Nav.Link>
+                        <Nav.Link href="signup"><Button variant="warning"><Icon.PersonPlus/> Sign Up</Button></Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
