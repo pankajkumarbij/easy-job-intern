@@ -5,7 +5,7 @@ import * as Icon from 'react-bootstrap-icons';
 function NavBar(){
     return(
         <>
-            <Navbar bg="dark" variant="dark" expand="lg">
+            <Navbar bg="secondary" variant="dark" expand="lg">
                 <Navbar.Brand href="#home"><img src="logo.png" height="80px" width="200px" style={{marginLeft:'5%'}}></img></Navbar.Brand>
 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
