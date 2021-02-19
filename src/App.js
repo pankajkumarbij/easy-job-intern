@@ -5,6 +5,7 @@ import RegisterForm from "./components/register";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Footer from './components/Footer';
 import AboutUs from './components/AboutUs';
+import PrivacyPolicy from './components/PrivacyPolicy';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
                 <Route path="/login" exact component={LoginForm} />
                 <Route path="/signup" exact component={RegisterForm} />
                 <Route path="/about" exact component={AboutUs} />
+                <Route path="/privacy-policy" exact component={PrivacyPolicy} />
             </Switch>
         </Router>
         <Footer/>
