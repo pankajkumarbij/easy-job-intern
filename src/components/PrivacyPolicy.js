@@ -1,6 +1,6 @@
 import React from 'react'
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card, Container, Row, Col, Button} from "react-bootstrap";
+import {Container, Row, Col} from "react-bootstrap";
 
 export default function PrivacyPolicy() {
     return (
