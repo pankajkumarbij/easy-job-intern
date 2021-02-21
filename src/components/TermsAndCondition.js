@@ -6,7 +6,7 @@ export default function TermsAndConditions() {
     return (
         <>
             <div style={{background: 'linear-gradient(to bottom, #ccffff 3%, #ccccff 30%)'}}>
-        <h2 style={{fontFamily:'revert', color:'#660066', textAlign:'center', paddingTop:'2%'}}>Privacy Policy</h2>
+        <h2 style={{fontFamily:'revert', color:'#660066', textAlign:'center', paddingTop:'2%'}}>TERMS AND CONDITIONS</h2>
             <Container style={{width:'100%', background:"None", textAlign:'left'}}>
                 <Row>
                     <Col class="col-6">
