@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import AboutUs from './components/AboutUs';
 import {Home} from './components/home';
 import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsAndConditions from './components/TermsAndCondition';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
                 <Route path="/signup" exact component={RegisterForm} />
                 <Route path="/about" exact component={AboutUs} />
                 <Route path="/privacy-policy" exact component={PrivacyPolicy} />
+                <Route path="/Terms-and-Conditions" exact component={TermsAndConditions} />
             </Switch>
         </Router>
         <Footer/>
