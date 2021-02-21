@@ -5,6 +5,7 @@ import RegisterForm from "./components/register";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Footer from './components/Footer';
 import AboutUs from './components/AboutUs';
+import {Home} from './components/home';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsAndConditions from './components/TermsAndCondition';
 
@@ -13,8 +14,8 @@ function App() {
     <div className="App">
         <NavBar />
         <Router>
-            <h1>Welcome to Easy Job Intern</h1>
             <Switch>
+            <Route path="/" exact component={Home} />
                 <Route path="/login" exact component={LoginForm} />
                 <Route path="/signup" exact component={RegisterForm} />
                 <Route path="/about" exact component={AboutUs} />
