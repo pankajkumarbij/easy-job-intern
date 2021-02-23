@@ -16,6 +16,7 @@ function NavBar(){
                         <Nav.Link href="#link2">Internship</Nav.Link>
                         <Nav.Link href="#link3">Other Programs</Nav.Link>
                         <Nav.Link href="/about">About US</Nav.Link>
+                        <Nav.Link href="/contact">Contact us</Nav.Link>
                     </Nav>
                     <Form inline className="mr-sm-5">
                         <InputGroup>
