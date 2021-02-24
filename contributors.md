@@ -11,6 +11,7 @@
    <td>  
         <ul>
             <li><a href='https://github.com/pankajkumarbij/easy-job-intern/pull/16'>#16</a></li>
+            <li><a href='https://github.com/pankajkumarbij/easy-job-intern/pull/30'>#30</a></li>
         </ul>
    </td>
    <td></td>
@@ -68,6 +69,7 @@
    <td>
         <ul>
             <li><a href='https://github.com/pankajkumarbij/easy-job-intern/pull/24'>#24</a></li>
+            <li><a href='https://github.com/pankajkumarbij/easy-job-intern/pull/31'>#31</a></li>
         </ul>
    </td>
    <td></td>
