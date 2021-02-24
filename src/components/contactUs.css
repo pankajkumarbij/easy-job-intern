@@ -1,0 +1,16 @@
+.background{
+    background: linear-gradient(to top, #ccffff 0%, #99ccff 100%);
+    height: 65vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form{
+    background-color: #ffee93;
+    border-radius: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    width: 600px;
+}
