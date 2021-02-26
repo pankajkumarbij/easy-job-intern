@@ -1,17 +1,22 @@
 .container {
   width: 50%;
-  background-color: #ffee93;
+  background-color: #5645f0de;
   padding-top: 6%;
   padding-bottom: 5%;
+  text-align: left;
 }
 
 .container label {
-  float: left;
+  margin-left: 10%;
+  font-weight: 700;
 }
 
+.container button {
+  margin-left: 10%;
+}
 .container input {
-  width: 50%;
-  margin-left: 21%;
+  width: 80%;
+  margin-left: 10%;
 }
 
 .box {

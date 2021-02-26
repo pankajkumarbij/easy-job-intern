@@ -4,19 +4,20 @@ import "./register.css";
 const RegisterForm = () => {
   return (
     <div className="box">
+      <h1>SignUp</h1>
       <div className="container register">
         <Form>
           <Form.Group controlId="formBasicName">
             <Form.Label>Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter Your Name" />
+            <Form.Control type="text" placeholder="Your Name" />
           </Form.Group>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter Email Id" />
+            <Form.Control type="email" placeholder="Your Email Id" />
           </Form.Group>
           <Form.Group controlId="formBasicNumber">
             <Form.Label>Mobile Number</Form.Label>
-            <Form.Control placeholder="Enter Your Mobile Number" />
+            <Form.Control placeholder="Your Mobile Number" />
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
@@ -28,13 +29,13 @@ const RegisterForm = () => {
           </Form.Group>
           <Form.Group controlId="formBasicCollege">
             <Form.Label>College Name</Form.Label>
-            <Form.Control placeholder="Enter Your College Name" />
+            <Form.Control placeholder="Your College Name" />
           </Form.Group>
           <Form.Group>
             <Form.File id="exampleFormControlFile1" label="Upload Your Image" />
           </Form.Group>
 
-          <Button variant="primary" type="submit">
+          <Button variant="success" type="submit">
             Submit
           </Button>
         </Form>
