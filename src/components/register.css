@@ -1,12 +1,11 @@
 .container {
-  width: 50%;
-  /* height: 60%; */
+  width: 60%;
   background-color: #1a2226;
+  opacity: 75%;
   padding-top: 6%;
   padding-bottom: 5%;
   text-align: left;
-
-  border-radius: 5%;
+  border-radius: 1%;
 }
 
 .container label {
@@ -18,10 +17,7 @@
 .container button {
   margin-top: 3%;
   margin-left: 10%;
-  /* margin-left: 42%;
-  margin-bottom: 0%; */
   width: 80%;
-  border-radius: 43%;
 }
 .container input {
   width: 80%;
@@ -36,7 +32,6 @@
   background-size: cover;
   background-color: rgba(194, 181, 194, 0.329);
   background-blend-mode: lighten;
-
   padding-top: 3%;
   padding-bottom: 15%;
 }
