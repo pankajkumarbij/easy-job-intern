@@ -36,7 +36,7 @@ const RegisterForm = () => {
           </Form.Group>
 
           <Button variant="success" type="submit">
-            Submit
+            SignUp
           </Button>
         </Form>
       </div>

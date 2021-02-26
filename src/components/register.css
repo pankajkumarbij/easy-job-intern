@@ -1,18 +1,27 @@
 .container {
   width: 50%;
-  background-color: #5645f0de;
+  /* height: 60%; */
+  background-color: #1a2226;
   padding-top: 6%;
   padding-bottom: 5%;
   text-align: left;
+
+  border-radius: 5%;
 }
 
 .container label {
   margin-left: 10%;
   font-weight: 700;
+  color: aqua;
 }
 
 .container button {
+  margin-top: 3%;
   margin-left: 10%;
+  /* margin-left: 42%;
+  margin-bottom: 0%; */
+  width: 80%;
+  border-radius: 43%;
 }
 .container input {
   width: 80%;
@@ -25,9 +34,9 @@
   background-repeat: repeat;
   background-position: center;
   background-size: cover;
-  background-color: rgba(194, 181, 194, 0.596);
+  background-color: rgba(194, 181, 194, 0.329);
   background-blend-mode: lighten;
 
-  padding-top: 5%;
+  padding-top: 3%;
   padding-bottom: 15%;
 }

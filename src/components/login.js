@@ -12,14 +12,14 @@ function LoginForm() {
           <Form>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Your Email Id" />
+              <Form.Control type="email" placeholder="Enter Your Email Id" />
             </Form.Group>
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" placeholder="Password" />
             </Form.Group>
             <Button variant="success" type="submit">
-              Submit
+              SignIn
             </Button>
           </Form>
         </div>
