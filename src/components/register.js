@@ -27,14 +27,6 @@ const RegisterForm = () => {
             <Form.Label>Confirm Password</Form.Label>
             <Form.Control type="password" placeholder="Confirm Password" />
           </Form.Group>
-          <Form.Group controlId="formBasicCollege">
-            <Form.Label>College Name</Form.Label>
-            <Form.Control placeholder="Your College Name" />
-          </Form.Group>
-          <Form.Group>
-            <Form.File id="exampleFormControlFile1" label="Upload Your Image" />
-          </Form.Group>
-
           <Button variant="success" type="submit">
             SignUp
           </Button>
