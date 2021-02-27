@@ -63,6 +63,7 @@ Start Working on it and make a PR.
 
 <p align="center">
 <a href="https://crosswoc.ieeedtu.in/"><img src="./readme_assets/crosswoc.png" width="25%"></a>
+<a href="https://crosswoc.ieeedtu.in/"><img src="./readme_assets/gssoc_logoNew.png" width="25%" height="200px"></a>
 </p>
 
 # Contributor Names:
