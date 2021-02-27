@@ -1,16 +1,37 @@
-
 .container {
-    width: 50%;
-    background-color: #ffee93;
-    padding-top: 6%;
-    padding-bottom: 5%;
+  width: 60%;
+  background-color: #1a2226;
+  opacity: 75%;
+  padding-top: 6%;
+  padding-bottom: 5%;
+  text-align: left;
+  border-radius: 1%;
 }
 
-.container label{
-    float: left;
+.container label {
+  margin-left: 10%;
+  font-weight: 700;
+  color: aqua;
 }
 
-.container input{
-    width: 50%;
-    margin-left: 21%;
+.container button {
+  margin-top: 3%;
+  margin-left: 10%;
+  width: 80%;
+}
+.container input {
+  width: 80%;
+  margin-left: 10%;
+}
+
+.box {
+  width: 100%;
+  background-image: url("http://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxMjA3fDB8MXxzZWFyY2h8MXx8am9ifHwwfHx8&ixlib=rb-1.2.1&q=80&w=1080");
+  background-repeat: repeat;
+  background-position: center;
+  background-size: cover;
+  background-color: rgba(194, 181, 194, 0.329);
+  background-blend-mode: lighten;
+  padding-top: 3%;
+  padding-bottom: 15%;
 }

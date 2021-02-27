@@ -79,4 +79,17 @@
    <td>300</td>
 </tr>
 
+<tr>
+   <td><a href='https://github.com/raman-thakur'>raman-thakur</a></td>
+   <td></td>
+   <td></td>
+   <td>
+        <ul>
+            <li><a href='https://github.com/pankajkumarbij/easy-job-intern/pull/39'>#39</a></li>
+        </ul>
+   </td>
+   <td></td>
+   <td>200</td>
+</tr>
+
 </table>
