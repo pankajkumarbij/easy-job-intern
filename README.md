@@ -68,11 +68,15 @@ Start Working on it and make a PR.
 
 # Contributor Names:
 
+<!-- Style for contributors' profile image -->
+<style>
 img[src*="#contributors"] {
 	width: 80px;
 	height: 80px;
 	border-radius: 50%;
 }
+</style>
+<!-- -->
 
 <a href="https://github.com/pankajkumarbij">
 <img width="80" height="80" src="https://avatars.githubusercontent.com/u/59636849?s=400&u=022a70168ed33225af6aed2a40d2c3778a36cbfa&v=4"/>
