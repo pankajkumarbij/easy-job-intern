@@ -69,10 +69,10 @@ Start Working on it and make a PR.
 # Contributor Names:
 
 <a href="https://github.com/pankajkumarbij">
-<img src="https://avatars.githubusercontent.com/u/59636849?s=400&u=022a70168ed33225af6aed2a40d2c3778a36cbfa&v=4"/>
+<img style="width: 100px; height: 100px; boder-radius: 50%" src="https://avatars.githubusercontent.com/u/59636849?s=400&u=022a70168ed33225af6aed2a40d2c3778a36cbfa&v=4"/>
 </a>
 <a href="https://github.com/96RadhikaJadhav">
-<img src="https://avatars.githubusercontent.com/u/56536997?s=400&u=ff226cf6f5d0048212e3e46a0aa1c0b2f923c324&v=4"/>
+<img style="width: 100px; height: 100px; boder-radius: 50%" src="https://avatars.githubusercontent.com/u/56536997?s=400&u=ff226cf6f5d0048212e3e46a0aa1c0b2f923c324&v=4"/>
 </a>
 
 💜 **Thanks**
