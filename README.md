@@ -29,7 +29,7 @@ Join Discord : https://discord.gg/PBuuPMSVjB
 
 # Contribution Guidelines
 
-1. Form this repository.
+1. Fork this repository.
 
 2. Clone the repository:
 
@@ -69,6 +69,6 @@ Start Working on it and make a PR.
 # Contributor Names:
 
 [pankajkumarbij](https://github.com/pankajkumarbij)
-[96RadhikaJadhav](https://github.com/96RadhikaJadhav/)
+[96RadhikaJadhav](https://github.com/96RadhikaJadhav)
 
 💜 **Thanks**
