@@ -29,7 +29,7 @@ Join Discord : https://discord.gg/PBuuPMSVjB
 
 # Contribution Guidelines
 
-1. Form this repository.
+1. Fork this repository.
 
 2. Clone the repository:
 
@@ -63,10 +63,12 @@ Start Working on it and make a PR.
 
 <p align="center">
 <a href="https://crosswoc.ieeedtu.in/"><img src="./readme_assets/crosswoc.png" width="25%"></a>
+<a href="https://crosswoc.ieeedtu.in/"><img src="./readme_assets/gssoc_logoNew.png" width="25%" height="200px"></a>
 </p>
 
 # Contributors:
 [pankajkumarbij](https://github.com/pankajkumarbij)
+<<<<<<< HEAD
 [soumya-badkul](https://github.com/soumya-badkul)
 [96RadhikaJadhav](https://github.com/96RadhikaJadhav/)
 [arbazalam01](https://github.com/arbazalam01)
@@ -77,5 +79,8 @@ Start Working on it and make a PR.
   
   <img src="https://contrib.rocks/image?repo=pankajkumarbij/easy-job-intern" />
 </a>
+=======
+[96RadhikaJadhav](https://github.com/96RadhikaJadhav)
+>>>>>>> e8f073f9477526e821fd194db3610a78d24450ed
 
 💜 **Thanks**
