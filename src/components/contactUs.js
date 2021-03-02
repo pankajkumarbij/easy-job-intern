@@ -4,9 +4,9 @@ import './contactUs.css';
 const contactUs = () => {
     return (
         <div className="background" >
-            
+
                 <div className="form">
-                    
+
                     <Form>
                         <h3>Contact Us</h3>
                         <Row>
@@ -40,8 +40,8 @@ const contactUs = () => {
                         </Button>
                     </Form>
                 </div>
-            
-            
+
+
         </div>);
 }
 export default contactUs;
