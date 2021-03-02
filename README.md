@@ -66,9 +66,9 @@ Start Working on it and make a PR.
 <a href="https://crosswoc.ieeedtu.in/"><img src="./readme_assets/gssoc_logoNew.png" width="25%" height="200px"></a>
 </p>
 
-# Contributor Names:
-
-[pankajkumarbij](https://github.com/pankajkumarbij)
-[96RadhikaJadhav](https://github.com/96RadhikaJadhav)
+# Contributors:
+<a href="https://github.com/pankajkumarbij/easy-job-intern/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=pankajkumarbij/easy-job-intern" />
+</a>
 
 💜 **Thanks**
