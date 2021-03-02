@@ -67,20 +67,8 @@ Start Working on it and make a PR.
 </p>
 
 # Contributors:
-[pankajkumarbij](https://github.com/pankajkumarbij)
-<<<<<<< HEAD
-[soumya-badkul](https://github.com/soumya-badkul)
-[96RadhikaJadhav](https://github.com/96RadhikaJadhav/)
-[arbazalam01](https://github.com/arbazalam01)
-[Devenkapoor7303](https://github.com/Devenkapoor7303)
-[Nirbhay1910](https://github.com/Nirbhay1910)
-[luckykumarirai](https://github.com/luckykumarirai)
 <a href="https://github.com/pankajkumarbij/easy-job-intern/graphs/contributors">
-  
   <img src="https://contrib.rocks/image?repo=pankajkumarbij/easy-job-intern" />
 </a>
-=======
-[96RadhikaJadhav](https://github.com/96RadhikaJadhav)
->>>>>>> e8f073f9477526e821fd194db3610a78d24450ed
 
 💜 **Thanks**
