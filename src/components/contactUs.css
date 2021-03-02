@@ -1,16 +1,24 @@
 .background{
-    background: linear-gradient(to top, #ccffff 0%, #99ccff 100%);
+    background: #0d1117;
     height: 65vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .form{
-    background-color: #ffee93;
-    border-radius: 20%;
-    display: flex;
+    background-color: #30363d;
     justify-content: center;
     align-items: center;
-    height: 60vh;
-    width: 600px;
+    padding-left:15px;
+    padding-right:15px;
+    padding-top: 15px;
+    margin-top: 2%;
+
+    height: 500px;
+    width: 390px;
+    color: white;
+}
+.contactUs{
+  padding-top: 5%;
+  margin-bottom: 5%;
 }
