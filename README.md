@@ -66,6 +66,16 @@ Start Working on it and make a PR.
 <a href="https://crosswoc.ieeedtu.in/"><img src="./readme_assets/gssoc_logoNew.png" width="25%" height="200px"></a>
 </p>
 
+
+## Project Maintainer:
+
+<table>
+  <tbody><tr>
+    <td align="center"><a href="https://github.com/pankajkumarbij"><img alt="" src="https://avatars.githubusercontent.com/u/59636849?s=400&u=022a70168ed33225af6aed2a40d2c3778a36cbfa&v=4" width="130px;"><br><sub><b>
+ Pankaj Kumar Bijarniya </b></sub></a><br><a href="" title="Code">💻 </a></td></a></td>
+  </tr>
+</tbody></table>
+
 # Contributors:
 <a href="https://github.com/pankajkumarbij/easy-job-intern/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=pankajkumarbij/easy-job-intern" />
