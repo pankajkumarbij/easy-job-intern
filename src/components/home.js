@@ -6,6 +6,7 @@ const Home = () => {
   return (
     <>
       <div class="home">
+
         <div
           style={{ backgroundColor: "#000000" }}
           class="col d-flex justify-content-center"
