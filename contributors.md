@@ -64,7 +64,11 @@
 
 <tr>
    <td><a href='https://github.com/arbazalam01'>arbazalam01</a></td>
-   <td></td>
+   <td>
+      <ul>
+            <li><a href='https://github.com/pankajkumarbij/easy-job-intern/pull/38'>#38</a></li>
+      </ul>
+   </td>
    <td>
       <ul>
             <li><a href='https://github.com/pankajkumarbij/easy-job-intern/pull/31'>#31</a></li>
@@ -76,7 +80,7 @@
         </ul>
    </td>
    <td></td>
-   <td>300</td>
+   <td>350</td>
 </tr>
 
 <tr>
@@ -90,6 +94,19 @@
    </td>
    <td></td>
    <td>200</td>
+</tr>
+
+<tr>
+   <td><a href='https://github.com/kmryashasvi'>kmryashasvi</a></td>
+   <td>
+        <ul>
+            <li><a href='https://github.com/pankajkumarbij/easy-job-intern/pull/45'>#45</a></li>
+        </ul>
+   </td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td>50</td>
 </tr>
 
 </table>
