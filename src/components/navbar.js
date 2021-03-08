@@ -21,9 +21,9 @@ function NavBar(){
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu>
-                                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-1">Jobs By Industry</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-2">Jobs By Location</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-3">Jobs By Stream</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         </Nav.Link>
@@ -35,9 +35,9 @@ function NavBar(){
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu>
-                                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-1">Internship By Industry</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-2">Internship By Location</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-3">Internship By Stream</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         </Nav.Link>
@@ -50,10 +50,10 @@ function NavBar(){
                         
                     </Nav>
                 
-                    <Form inline className="searchbar">
+                    <Form inline>
                         
                          <FormControl type="text" placeholder="Search" className="mr-sm-1"/>
-                         <Button className="searchbtn"><Icon.Search/></Button>
+                         <Button><Icon.Search/></Button>
                          
                     </Form>
                 
