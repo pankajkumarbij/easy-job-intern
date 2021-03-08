@@ -1,41 +1,96 @@
-import { Button, Navbar, Nav, Form, FormControl, InputGroup } from 'react-bootstrap';
+import { Button, Navbar, Nav, Form, FormControl, NavDropdown, Dropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as Icon from 'react-bootstrap-icons';
+
 
 function NavBar(){
     return(
         <>
-            <Navbar bg="secondary" variant="dark" expand="lg">
-                <Navbar.Brand href="#home"><img src="logo.png" height="80px" width="200px" style={{marginLeft:'5%'}}></img></Navbar.Brand>
+            <Navbar bg="dark" variant="dark" expand="lg">
+                <Navbar.Brand href="#home">E-J-I</Navbar.Brand>
 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="#link1">Jobs</Nav.Link>
-                        <Nav.Link href="#link2">Internship</Nav.Link>
-                        <Nav.Link href="#link3">Other Programs</Nav.Link>
-                        <Nav.Link href="/about">About US</Nav.Link>
-                        <Nav.Link href="/contact">Contact us</Nav.Link>
+                      
+
+                        <Nav.Link>
+                            <Dropdown>
+                                <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                                    Jobs
+                                </Dropdown.Toggle>
+
+                                <Dropdown.Menu>
+                                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </Nav.Link>
+
+                        <Nav.Link>
+                            <Dropdown>
+                                <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                                    Internship
+                                </Dropdown.Toggle>
+
+                                <Dropdown.Menu>
+                                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </Nav.Link>
+
+
+                        <Nav.Link  href="#link3" className="my-auto">Other Programs</Nav.Link>
+                        <Nav.Link href="#link3" className="my-auto px-3">Blogs</Nav.Link>
+                        <Nav.Link href="/about" className="my-auto px-3">About Us</Nav.Link>
+                        <Nav.Link href="/contact" className="my-auto px-3">Contact Us</Nav.Link>
+                        
                     </Nav>
-                    <Form inline className="mr-sm-5">
-                        <InputGroup>
-                            <FormControl
-                                placeholder="Search..."
-                                aria-label="Username"
-                                aria-describedby="search"
-                            />
-                            <InputGroup.Prepend>
-                                <InputGroup.Text type="submit" id="search" style={{borderTopRightRadius:'3px',borderBottomRightRadius:'3px'}}><Icon.Search/></InputGroup.Text>
-                            </InputGroup.Prepend>
-                        </InputGroup>
+                
+                    <Form inline className="searchbar">
+                        
+                         <FormControl type="text" placeholder="Search" className="mr-sm-1"/>
+                         <Button className="searchbtn"><Icon.Search/></Button>
+                         
                     </Form>
+                
                     <Nav>
-                        <Nav.Link href="login"><Button variant="success"><Icon.BoxArrowInRight/> Sign In</Button></Nav.Link>
-                        <Nav.Link href="signup"><Button variant="warning"><Icon.PersonPlus/> Sign Up</Button></Nav.Link>
+                        <Nav.Link>
+                            <Dropdown>
+                                <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                                    Login
+                                </Dropdown.Toggle>
+
+                                <Dropdown.Menu>
+                                    <Dropdown.Item href="#/action-1">Student</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-2">Employee</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </Nav.Link>
+                        <Nav.Link>
+                            <Dropdown>
+                                    <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                                        Signup
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item href="#/action-1">Student</Dropdown.Item>
+                                        <Dropdown.Item href="#/action-2">Employee</Dropdown.Item>
+                                    </Dropdown.Menu>
+                            </Dropdown>
+                            
+                        </Nav.Link>
                     </Nav>
+
+
                 </Navbar.Collapse>
+
+
             </Navbar>
+
         </>
     )
 }
