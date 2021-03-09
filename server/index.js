@@ -1,3 +1,4 @@
+// require('./config/db')
 const express=require("express");
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
@@ -16,6 +17,14 @@ const User = new mongoose.model('User',userSchema);
 
 const app = express();
 app.use(bodyParser.urlencoded({extended : true}));
+const cors = require('cors');
+app.use(cors());
+
+
+
+const UserRouter = require('./api/User');
+
+app.use('/user',UserRouter);
 
 app.get('/',(req,res)=>{
     res.send("Hello World");
