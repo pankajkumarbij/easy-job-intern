@@ -1,19 +1,11 @@
 import { Button, Navbar, Nav, Form, FormControl, Dropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as Icon from 'react-bootstrap-icons';
-import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
-import Home from '../home/home';
-import Login from '../student/login';
-import SignUp from '../student/register';
-import ContactUs from '../contact-us/contact-us';
-import AboutUs from '../about-us/about-us';
-import PrivacyPolicy from '../privacy-policy/privacy-policy';
-import TermsCondition from '../terms-condition/terms-condition';
+import {Link} from 'react-router-dom';
 
 function NavBar(){
     return(
         <>
-        <BrowserRouter>
             <Navbar bg="dark" variant="dark" expand="lg">
                 <Navbar.Brand as={Link} to="/" style={{color: "yellow"}}>Easy Job Intern</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -89,16 +81,6 @@ function NavBar(){
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-            <Switch>
-                <Route path="/" exact > <Home/> </Route>
-                <Route path="/student-login" exact > <Login/> </Route>
-                <Route path="/student-signup" exact > <SignUp/> </Route>
-                <Route path="/about-us" exact > <AboutUs/> </Route>
-                <Route path="/contact-us" exact > <ContactUs/> </Route>
-                <Route path="/privacy-policy" exact > <PrivacyPolicy/> </Route>
-                <Route path="/terms-conditions" exact > <TermsCondition/> </Route>
-            </Switch>
-        </BrowserRouter>
         </>
     )
 }
