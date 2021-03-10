@@ -24,7 +24,7 @@ Join Discord : https://discord.gg/PBuuPMSVjB
 
 | Database | Front-End | Back-End   |
 | -------- | --------- | ---------- |
-| MangoDB   | React      | Node.js    |
+| MongoDB   | React      | Node.js    |
 | &nbsp;   | React Bootstrap | Express.js |
 
 # Contribution Guidelines
