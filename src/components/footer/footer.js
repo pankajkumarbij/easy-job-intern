@@ -291,7 +291,8 @@ function Footer() {
                       fontSize: "0.8rem",
                     }}
                     variant="outline-warning"
-                    href="#"
+                    as={Link}
+                    to="/privacy-policy"
                   >
                     Privacy Policy
                   </Button>{" "}
