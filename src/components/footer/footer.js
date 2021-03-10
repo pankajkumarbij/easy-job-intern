@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import * as Icon from "react-bootstrap-icons";
-import "./Footer.css";
+import "./footer.css";
 
 function Footer() {
   return (

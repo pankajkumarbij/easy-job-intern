@@ -34,7 +34,6 @@ export default function TermsAndConditions() {
                     </Col>
                 </Row>
             </Container>
-            
          </div>
         </>
     )

@@ -2,6 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, Container, Row, Col, Button, ListGroup } from "react-bootstrap";
 import "./home.css";
+
 const Home = () => {
   return (
     <>
@@ -252,4 +253,4 @@ const Home = () => {
   );
 };
 
-export { Home };
+export default Home;
