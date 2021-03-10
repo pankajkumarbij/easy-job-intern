@@ -72,8 +72,6 @@ class contactUs extends Component{
                         </Button>
                     </Form>
                 </div>
-
-
         </div>
         )
     }

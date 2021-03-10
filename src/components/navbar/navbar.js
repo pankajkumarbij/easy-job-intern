@@ -21,6 +21,18 @@ function NavBar(){
                     <Nav className="mr-auto">
                         <Nav.Link>
                             <Dropdown>
+                                <Dropdown.Toggle variant="dark" id="dropdown-basic" >
+                                    Internship
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item as={Link} to="/" > Internship By Industry</Dropdown.Item>
+                                    <Dropdown.Item as={Link} to="/" > Internship By Location</Dropdown.Item>
+                                    <Dropdown.Item as={Link} to="/" > Internship By Stream</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </Nav.Link>
+                        <Nav.Link>
+                            <Dropdown>
                                 <Dropdown.Toggle variant="dark" id="dropdown-basic">
                                     Jobs
                                 </Dropdown.Toggle>
@@ -33,20 +45,17 @@ function NavBar(){
                         </Nav.Link>
                         <Nav.Link>
                             <Dropdown>
-                                <Dropdown.Toggle variant="dark" id="dropdown-basic" >
-                                    Internship
+                                <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                                    Freshers Jobs
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item as={Link} to="/" > By Industry</Dropdown.Item>
-                                    <Dropdown.Item as={Link} to="/" > By Location</Dropdown.Item>
-                                    <Dropdown.Item as={Link} to="/" > By Stream</Dropdown.Item>
+                                    <Dropdown.Item as={Link} to="/" >Freshers Jobs By Industry</Dropdown.Item>
+                                    <Dropdown.Item as={Link} to="/" >Freshers Jobs By Location</Dropdown.Item>
+                                    <Dropdown.Item as={Link} to="/" >Freshers Jobs By Stream</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         </Nav.Link>
-                        <Nav.Link  as={Link} to="/" className="my-auto" active >Other Programs</Nav.Link>
-                        <Nav.Link as={Link} to="/" className="my-auto px-3" active >Blogs</Nav.Link>
-                        <Nav.Link as={Link} to="/about-us" className="my-auto px-3" active >About Us</Nav.Link>
-                        <Nav.Link as={Link} to="/contact-us" className="my-auto px-3" active >Contact Us</Nav.Link>
+                        <Nav.Link as={Link} to="/" className="my-auto px-3" style={{color:"white"}} >Blogs</Nav.Link>
                     </Nav>
                     <Form inline>
                          <FormControl type="text" placeholder="Search" className="mr-sm-1"/>

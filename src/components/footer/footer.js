@@ -48,9 +48,9 @@ function Footer() {
                     <h5>About Easy Job Intern</h5>
                     <ul>
                         <li class='listFooter' ><Button style={{marginBottom: '5px',borderColor:'#343a40', padding: '2px 0.75rem', fontSize:'0.8rem'}} variant="outline-warning" href="#">About Us</Button>{" "}</li>
-                        <li class='listFooter' ><Button style={{marginBottom: '5px',borderColor:'#343a40', padding: '2px 0.75rem', fontSize:'0.8rem'}} variant="outline-warning" href="#">Meet our Founders</Button>{" "}</li>
-                        <li class='listFooter' ><Button style={{marginBottom: '5px',borderColor:'#343a40', padding: '2px 0.75rem', fontSize:'0.8rem'}} variant="outline-warning" href="#">Our Services</Button>{" "}</li>
-                        <li class='listFooter' > <Button style={{marginBottom: '5px',borderColor:'#343a40', padding: '2px 0.75rem', fontSize:'0.8rem'}} variant="outline-warning" href="#">Subscription</Button>{" "}</li>
+                        <li class='listFooter' ><Button style={{marginBottom: '5px',borderColor:'#343a40', padding: '2px 0.75rem', fontSize:'0.8rem'}} variant="outline-warning" href="#">Contact Us</Button>{" "}</li>
+                        <li class='listFooter' ><Button style={{marginBottom: '5px',borderColor:'#343a40', padding: '2px 0.75rem', fontSize:'0.8rem'}} variant="outline-warning" href="#">Terms and Condition</Button>{" "}</li>
+                        <li class='listFooter' > <Button style={{marginBottom: '5px',borderColor:'#343a40', padding: '2px 0.75rem', fontSize:'0.8rem'}} variant="outline-warning" href="#">Privacy Policy</Button>{" "}</li>
                     </ul>
                 </li>
                 <li class="mob">
