@@ -9,6 +9,7 @@ import AboutUs from "./components/about-us/about-us";
 import PrivacyPolicy from "./components/privacy-policy/privacy-policy";
 import TermsCondition from "./components/terms-condition/terms-condition";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+
 function App() {
   return (
     <div className="App">
