@@ -1,7 +1,9 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, Container, Row, Col, Button, ListGroup } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "./home.css";
+
 const Home = () => {
   return (
     <>
@@ -26,7 +28,7 @@ const Home = () => {
                 FIND BEST WINTER & SUMMER INTERNSHIPS FOR STUDENTS IN INDIA
                 Apply to 10,000+ internships for free
               </Card.Text>
-              <Button style={{color: '#000000',backgroundColor: '#ffc107',borderColor: 'black'}} variant="info" href="signup">
+              <Button style={{color: '#000000',backgroundColor: '#ffc107',borderColor: 'black'}} variant="info" as={Link} to="/student-signup" >
                 Get Started
               </Button>
             </Card.Body>
@@ -252,4 +254,4 @@ const Home = () => {
   );
 };
 
-export { Home };
+export default Home;

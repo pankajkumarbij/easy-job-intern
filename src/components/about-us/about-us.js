@@ -1,7 +1,7 @@
 import React from 'react'
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card, Container, Row, Col, Button} from "react-bootstrap";
-import './AboutUs.css'
+import { Card, Container, Row, Col} from "react-bootstrap";
+import './about-us.css'
 
 export default function AboutUs() {
     return(
@@ -29,22 +29,22 @@ export default function AboutUs() {
                     <Container fluid>
                         <Row>
                             <Col class="col-lg-3 col-md-6 col-sm-12" id="offer-range1">
-                                <img src="images/desktop.png"></img>
+                                <img src="images/desktop.png" alt="img"></img>
                                 <h4 >Lorem ipsum</h4>
                                 <p>loremipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
                             </Col>
                             <Col class="col-lg-3 col-md-6 col-sm-12" id="offer-range2">
-                                <img src="images/inspiration.png"></img>
+                                <img src="images/inspiration.png" alt="img"></img>
                                 <h4>Lorem ipsum</h4>
                                 <p>loremipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
                             </Col>
                             <Col class="col-lg-3 col-md-6 col-sm-12" id="offer-range3">
-                                <img src="images/puzzle.png"></img>
+                                <img src="images/puzzle.png" alt="img"></img>
                                 <h4>Lorem ipsum</h4>
                                 <p>loremipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
                             </Col>
                             <Col class="col-lg-3 col-md-6 col-sm-12" id="offer-range4">
-                                <img src="images/studying.png"></img>
+                                <img src="images/studying.png" alt="img"></img>
                                 <h4>Lorem ipsum</h4>
                                 <p>loremipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
                             </Col>

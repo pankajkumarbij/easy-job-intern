@@ -20,7 +20,6 @@ export default function PrivacyPolicy() {
                     </Col>
                 </Row>
             </Container>
-            
         </>
     )
 }
