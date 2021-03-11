@@ -1,8 +1,39 @@
-import React from "react";
-import { Form, Button } from "react-bootstrap";
+import React,{useState} from "react";
+import { Form, Button,Alert } from "react-bootstrap";
 import "./register.css";
 
 function LoginForm() {
+
+ const [email,setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const PostData = () => {
+    fetch("/student/signin",{
+      method: 'post',
+      headers: { 
+          "Content-Type": "application/json"
+       },
+       body:JSON.stringify({
+           email,
+           password
+       })
+  }).then(res=>res.json())
+  .then(data=>{
+      console.log(data)
+      if(data.error){
+         console.log(data.error)
+      }else{
+        localStorage.setItem("jwt",data.token)
+        localStorage.setItem("user",JSON.stringify(data.user))
+         console.log(data.message)
+      }
+  }).catch((err) =>{
+      console.log(err)
+  })
+  setEmail("")
+  setPassword("")
+  }
+
   return (
     <>
       <div className="box">
@@ -12,13 +43,15 @@ function LoginForm() {
           <Form>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter Your Email Id" />
+              <input className="form-control" type="email" placeholder="Enter Your Email Id" value={email} onChange={(e)=>setEmail(e.target.value)} />
             </Form.Group>
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
+              <input className="form-control" type="password" placeholder="Enter Your Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
             </Form.Group>
-            <Button variant="success" type="submit">
+            <Button variant="success" 
+            onClick={()=>PostData()}
+            >
               SignIn
             </Button>
           </Form>
