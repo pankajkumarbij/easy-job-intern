@@ -1,31 +1,48 @@
-import './App.css';
-import NavBar from './components/navbar';
-import LoginForm from "./components/login";
-import contactUs from "./components/contactUs";
-import RegisterForm from "./components/register";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Footer from './components/Footer';
-import AboutUs from './components/AboutUs';
-import {Home} from './components/home';
-import PrivacyPolicy from './components/PrivacyPolicy';
-import TermsAndConditions from './components/TermsAndCondition';
+import "./App.css";
+import NavBar from "./components/navbar/navbar";
+import Footer from "./components/footer/footer";
+import Home from "./components/home/home";
+import Login from "./components/student/login";
+import SignUp from "./components/student/register";
+import ContactUs from "./components/contact-us/contact-us";
+import AboutUs from "./components/about-us/about-us";
+import PrivacyPolicy from "./components/privacy-policy/privacy-policy";
+import TermsCondition from "./components/terms-condition/terms-condition";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
+      <BrowserRouter>
         <NavBar />
-        <Router>
-            <Switch>
-            <Route path="/" exact component={Home} />
-                <Route path="/login" exact component={LoginForm} />
-                <Route path="/signup" exact component={RegisterForm} />
-                <Route path="/about" exact component={AboutUs} />
-                <Route path="/contact" exact component={contactUs} />
-                <Route path="/privacy-policy" exact component={PrivacyPolicy} />
-                <Route path="/Terms-and-Conditions" exact component={TermsAndConditions} />
-            </Switch>
-        </Router>
-        <Footer/>
+        <main>
+          <Switch>
+            <Route path="/" exact compo>
+              <Home />
+            </Route>
+            <Route path="/student-login" exact>
+              <Login />
+            </Route>
+            <Route path="/student-signup" exact>
+              <SignUp />
+            </Route>
+            <Route path="/about-us" exact>
+              <AboutUs />
+            </Route>
+            <Route path="/contact-us" exact>
+              <ContactUs />
+            </Route>
+            <Route path="/privacy-policy" exact>
+              <PrivacyPolicy />
+            </Route>
+            <Route path="/terms-conditions" exact>
+              <TermsCondition />
+            </Route>
+          </Switch>
+        </main>
+
+        <Footer />
+      </BrowserRouter>
     </div>
   );
 }
