@@ -15,29 +15,32 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <NavBar />
-        <Switch>
-          <Route path="/" exact compo>
-            <Home />
-          </Route>
-          <Route path="/student-login" exact>
-            <Login />
-          </Route>
-          <Route path="/student-signup" exact>
-            <SignUp />
-          </Route>
-          <Route path="/about-us" exact>
-            <AboutUs />
-          </Route>
-          <Route path="/contact-us" exact>
-            <ContactUs />
-          </Route>
-          <Route path="/privacy-policy" exact>
-            <PrivacyPolicy />
-          </Route>
-          <Route path="/terms-conditions" exact>
-            <TermsCondition />
-          </Route>
-        </Switch>
+        <main>
+          <Switch>
+            <Route path="/" exact compo>
+              <Home />
+            </Route>
+            <Route path="/student-login" exact>
+              <Login />
+            </Route>
+            <Route path="/student-signup" exact>
+              <SignUp />
+            </Route>
+            <Route path="/about-us" exact>
+              <AboutUs />
+            </Route>
+            <Route path="/contact-us" exact>
+              <ContactUs />
+            </Route>
+            <Route path="/privacy-policy" exact>
+              <PrivacyPolicy />
+            </Route>
+            <Route path="/terms-conditions" exact>
+              <TermsCondition />
+            </Route>
+          </Switch>
+        </main>
+
         <Footer />
       </BrowserRouter>
     </div>
