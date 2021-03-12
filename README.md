@@ -69,6 +69,13 @@ Start Working on it and make a PR.
 <a href="https://crosswoc.ieeedtu.in/"><img src="./readme_assets/gssoc_logoNew.png" width="25%" height="200px"></a>
 </p>
 
+# Mentors
+
+<!-- Banner -->
+<div class="container-fluid">
+  <img class="mx-auto" src="readme_assets/mentor_banner.png">
+</div>
+
 
 ## Project Maintainer:
 
