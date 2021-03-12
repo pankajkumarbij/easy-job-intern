@@ -261,8 +261,9 @@ function Footer() {
                       padding: "2px 0.75rem",
                       fontSize: "0.8rem",
                     }}
+                    as={Link}
+                    to="/contact-us"
                     variant="outline-warning"
-                    href="#"
                   >
                     Contact Us
                   </Button>{" "}
