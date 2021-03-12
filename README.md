@@ -1,4 +1,7 @@
-<h1 align="center"> Easy Job Intern </h1>
+<!-- Banner -->
+<div class="container-fluid">
+  <img class="mx-auto" src="readme_assets/banner.png">
+</div>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
  
