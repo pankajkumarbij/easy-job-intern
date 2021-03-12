@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button,Alert } from "react-bootstrap";
 import "./register.css";
 const RegisterForm = () => {
 
@@ -9,6 +9,8 @@ const [mobile,setMobile] = useState();
 const [password, setPassword] = useState("");
 const [confirmPassword, setconfirmPassword] = useState("");
 const [data,setData] = useState()
+const [error,setError] = useState("")
+const [success, setSuccess] = useState("")
 
 const PostData = () => {
  
@@ -29,8 +31,9 @@ const PostData = () => {
     console.log(data)
     if(data.error){
        console.log(data.error)
+       setError(data.error)
     }else{
-       console.log(data.message)
+       setSuccess(data.message)
     }
 }).catch((err) =>{
     console.log(err)
@@ -42,12 +45,23 @@ setPassword("")
 setconfirmPassword("")
 }
 
+const showError = () => (error ? <Alert variant="danger"> {error} </Alert>:'');
+const showSuccess = () => (success ? <Alert variant="success"> {success} </Alert>:'');
+
+const clearAlert = () => {
+  setError("")
+  setSuccess("")
+}
+
   return (
     <div className="box">
       <h1>SignUp</h1>
-      {JSON.stringify(data)}
+      <div style={{maxWidth: "200px"}}>
+          {showError()}
+          {showSuccess()}
+        </div>
       <div className="container register">
-        <Form>
+        <Form onClick={()=>clearAlert()}>
           <Form.Group controlId="formBasicName">
             <Form.Label>Name</Form.Label>
             <input className="form-control"  value={name} placeholder="Your Name" onChange={(e)=>setName(e.target.value)}  />
