@@ -18,6 +18,9 @@
 </h2>
 
 # About
+<p align="center"><img src="readme_assets/easy-job-intern-about.gif"></p>
+
+<p>
 
 The main motive behind the design of this project to provide the best job and internship opportunities. Companies can post here open application for job and internship so students can make own profile and apply in multiple companies.
 
