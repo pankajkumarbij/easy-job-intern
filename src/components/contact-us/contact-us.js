@@ -3,7 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import './contact-us.css';
 
 const ContactUs = () => {
-  const API_KEY = "xdopqdal";
+  const API_KEY = process.env.FORMSPREE_API_KEY
 
   const [serverState, setServerState] = useState({
     submitting: false,

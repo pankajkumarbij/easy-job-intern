@@ -8,7 +8,6 @@ const [email,setEmail] = useState("");
 const [mobile,setMobile] = useState();
 const [password, setPassword] = useState("");
 const [confirmPassword, setconfirmPassword] = useState("");
-const [data,setData] = useState()
 const [error,setError] = useState("")
 const [success, setSuccess] = useState("")
 
