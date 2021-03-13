@@ -73,11 +73,11 @@ Start Working on it and make a PR.
 
 <!-- Banner -->
 <div class="container-fluid">
-  <img class="mx-auto" src="readme_assets/mentor_banner.png">
+  <img class="mx-auto" src="readme_assets/mentor_banner22.png">
 </div>
 
 
-## Project Maintainer:
+## Project Maintainer/Admin:
 
 <table>
   <tbody><tr>
