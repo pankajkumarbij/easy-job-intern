@@ -19,7 +19,7 @@
 
 # About
 
-<p align="center"><img src="readme_assets/about-easy-job-intern.gif"></p>
+<p align="center"><img src="readme_assets/easy-job-intern-about.gif"></p>
 
 <p>
 
