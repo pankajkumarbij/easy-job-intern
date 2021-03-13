@@ -85,9 +85,9 @@ Start Working on it and make a PR.
 
 <table>
 <tr>
-    <td align="center" thead="Mentor"><a href="https://github.com/asi309"><img src="readme-assests/p3.jfif" width="100px;" alt="Mentor"/><br /><sub><b>Asidipta</b></sub></a></td>
-    <td align="center" thead="Mentor"><a href="https://github.com/Vidit-jindal"><img src="readme-assests/p2.jfif" width="100px;" alt="admin"/><br /><sub><b>Vidit Jindal</b></sub></a></td>
-    <td align="center" thead="Mentor"><a href="https://github.com/palashgdev"><img src="readme-assests/p1.jfif" width="100px;" alt="admin"/><br /><sub><b>Palash Gupta</b></sub></a></td>
+    <td align="center" thead="Mentor"><a href="https://github.com/asi309"><img src="readme_assets/p3.jfif" width="100px;" alt="Mentor"/><br /><sub><b>Asidipta</b></sub></a></td>
+    <td align="center" thead="Mentor"><a href="https://github.com/Vidit-jindal"><img src="readme_assets/p2.jfif" width="100px;" alt="admin"/><br /><sub><b>Vidit Jindal</b></sub></a></td>
+    <td align="center" thead="Mentor"><a href="https://github.com/palashgdev"><img src="readme_assets/p1.jfif" width="100px;" alt="admin"/><br /><sub><b>Palash Gupta</b></sub></a></td>
   </tr>
   </table>
 
