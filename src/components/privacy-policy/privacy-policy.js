@@ -5,7 +5,7 @@ import {Container, Row, Col} from "react-bootstrap";
 export default function PrivacyPolicy() {
     return (
         <>
-            <Container style={{width:'100%', background:"None", textAlign:'left'}}>
+            <Container style={{width:'100%', background:"white", textAlign:'left'}}>
             <h2 style={{fontFamily:'cursive', color:'plum'}}><u>Privacy Policy</u></h2>
             <br/>
                 <Row>

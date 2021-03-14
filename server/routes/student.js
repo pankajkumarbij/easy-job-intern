@@ -5,6 +5,7 @@ var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/"
 const bcrypt = require("bcryptjs")
 const {JWT_SECRET} = require('../keys');
+//const email = require('../utils/email');
 
 const Student = require("../models/student");
 
@@ -28,13 +29,14 @@ router.post("/signup",(req,res)=>{
             return res.status(422).json({error:"User already exsist"})
         }
         bcrypt.hash(password,10)
-        .then(hashedpassword => {
+        .then(async hashedpassword => {
             const student = new Student({
                 name,
                 email,
                 mobile,
                 password:hashedpassword
             })
+            //await email(name, email, mobile);
             student.save()
             .then(user=>{
                 res.json({message:"Saved Succcessfully"})

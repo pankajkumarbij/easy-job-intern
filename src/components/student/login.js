@@ -8,7 +8,6 @@ function LoginForm() {
 
  const [email,setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message,setmessage] = useState("")
   const [error,setError] = useState("")
   const [success, setSuccess] = useState("")
 
@@ -31,9 +30,9 @@ function LoginForm() {
       }else{
         localStorage.setItem("jwt",data.token)
         localStorage.setItem("user",JSON.stringify(data.user))
-       
+        window.location.reload(false);
          setSuccess("Sign in Success")
-}
+      }
   }).catch((err) =>{
       console.log(err)
   })

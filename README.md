@@ -1,4 +1,7 @@
-<h1 align="center"> Easy Job Intern </h1>
+<!-- Banner -->
+<div class="container-fluid">
+  <img class="mx-auto" src="readme_assets/banner.png">
+</div>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
  
@@ -15,6 +18,10 @@
 </h2>
 
 # About
+
+<p align="center"><img src="readme_assets/easy-job-intern-about.gif"></p>
+
+<p>
 
 The main motive behind the design of this project to provide the best job and internship opportunities. Companies can post here open application for job and internship so students can make own profile and apply in multiple companies.
 
@@ -66,15 +73,24 @@ Start Working on it and make a PR.
 <a href="https://crosswoc.ieeedtu.in/"><img src="./readme_assets/gssoc_logoNew.png" width="25%" height="200px"></a>
 </p>
 
-
-## Project Maintainer:
+## ❤️&nbsp; Project Admin
 
 <table>
-  <tbody><tr>
-    <td align="center"><a href="https://github.com/pankajkumarbij"><img alt="" src="https://avatars.githubusercontent.com/u/59636849?s=400&u=022a70168ed33225af6aed2a40d2c3778a36cbfa&v=4" width="130px;"><br><sub><b>
- Pankaj Kumar Bijarniya </b></sub></a><br><a href="" title="Code">💻 </a></td></a></td>
+<tr>
+    <td align="center" thead="admin"><a href="https://github.com/pankajkumarbij"><img alt="" src="https://avatars.githubusercontent.com/u/59636849?s=400&u=022a70168ed33225af6aed2a40d2c3778a36cbfa&v=4" width="100px;" alt="admin"/><br /><sub><b> Pankaj Kumar Bijarniya </b></sub></a></td></tr>
   </tr>
-</tbody></table>
+  </table>
+
+## 👨‍💻 Mentors
+
+<table>
+<tr>
+    <td align="center" thead="Mentor"><a href="https://github.com/asi309"><img src="readme_assets/p3.jfif" width="100px;" alt="Mentor"/><br /><sub><b>Asidipta</b></sub></a></td>
+    <td align="center" thead="Mentor"><a href="https://github.com/Vidit-jindal"><img src="readme_assets/p2.jfif" width="100px;" alt="admin"/><br /><sub><b>Vidit Jindal</b></sub></a></td>
+    <td align="center" thead="Mentor"><a href="https://github.com/palashgdev"><img src="readme_assets/p1.jfif" width="100px;" alt="admin"/><br /><sub><b>Palash Gupta</b></sub></a></td>
+  </tr>
+  </table>
+
 
 # Contributors:
 <a href="https://github.com/pankajkumarbij/easy-job-intern/graphs/contributors">
