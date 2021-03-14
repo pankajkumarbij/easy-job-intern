@@ -1,10 +1,31 @@
+import React,{useState,useEffect} from "react";
 import { Button, Navbar, Nav, Form, FormControl, Dropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as Icon from 'react-bootstrap-icons';
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 
 
 function NavBar(){
+
+
+    useEffect(()=>{
+       const user = isAuth();
+    },[])
+
+    const isAuth =() =>{
+        if(process.browser){
+            const checktoken = localStorage.getItem('jwt');
+            if(checktoken){
+                if(localStorage.getItem('user')){ 
+                    const user = localStorage.getItem('user')
+                    return JSON.parse(user)
+                }else{
+                    return false
+                }
+            }
+        } 
+    }
+
     return(
         <>
             <Navbar bg="dark" variant="dark" expand="lg">
@@ -55,6 +76,20 @@ function NavBar(){
                          <Button><Icon.Search/></Button>
                     </Form>
                     <Nav>
+                        {isAuth() ?
+                            <React.Fragment> 
+                                <Nav.Link>
+                            Welcome-{isAuth().name}
+                        </Nav.Link>
+                            <Nav.Link
+                            onClick={()=>{localStorage.removeItem('jwt'); localStorage.removeItem('user'); window.location.reload(false);}}
+                            >
+                            signout
+                        </Nav.Link>
+                        
+                        </React.Fragment>
+                        :
+                        <React.Fragment>
                         <Nav.Link>
                             <Dropdown>
                                 <Dropdown.Toggle variant="dark" id="dropdown-basic">
@@ -79,6 +114,9 @@ function NavBar(){
                                     </Dropdown.Menu>
                             </Dropdown>
                         </Nav.Link>
+                        </React.Fragment>
+                        
+                        }
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
