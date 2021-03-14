@@ -37,4 +37,7 @@
 }
 
 
-
+main{
+  min-height: 50vh;
+  background-color: #0d1117;
+}
