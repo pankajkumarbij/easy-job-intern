@@ -5,7 +5,7 @@ var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/"
 const bcrypt = require("bcryptjs")
 const {JWT_SECRET} = require('../keys');
-const email = require('../utils/email');
+//const email = require('../utils/email');
 
 const Student = require("../models/student");
 
@@ -36,7 +36,7 @@ router.post("/signup",(req,res)=>{
                 mobile,
                 password:hashedpassword
             })
-            await email(name, email, mobile);
+            //await email(name, email, mobile);
             student.save()
             .then(user=>{
                 res.json({message:"Saved Succcessfully"})
