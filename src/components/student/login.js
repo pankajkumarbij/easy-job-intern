@@ -1,8 +1,10 @@
 import React,{useState} from "react";
+import {useHistory} from 'react-router-dom'
 import { Form, Button,Alert } from "react-bootstrap";
 import "./register.css";
 
 function LoginForm() {
+  const history = useHistory();
 
  const [email,setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,7 +27,8 @@ function LoginForm() {
       }else{
         localStorage.setItem("jwt",data.token)
         localStorage.setItem("user",JSON.stringify(data.user))
-         console.log(data.message)
+        //  console.log(data.message)
+        window.location.reload(false);
       }
   }).catch((err) =>{
       console.log(err)
