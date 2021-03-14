@@ -63,23 +63,23 @@ const clearAlert = () => {
         <Form onClick={()=>clearAlert()}>
           <Form.Group controlId="formBasicName">
             <Form.Label>Name</Form.Label>
-            <input className="form-control"  value={name} placeholder="Your Name" onChange={(e)=>setName(e.target.value)}  />
+            <input className="form-control"  value={name} placeholder="Your Name" onChange={(e)=>setName(e.target.value)} autoFocus required/>
           </Form.Group>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <input className="form-control" value={email} placeholder="Your Email Id" onChange={(e)=>setEmail(e.target.value)} />
+            <input className="form-control" type="email" value={email} placeholder="Your Email Id" onChange={(e)=>setEmail(e.target.value)} required/>
           </Form.Group>
           <Form.Group >
             <Form.Label>Mobile Number</Form.Label>
-            <input className="form-control" type="Number" placeholder="Your Mobile Number" value={mobile} onChange={(e)=>setMobile(e.target.value)} />
+            <input className="form-control" type="number" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" placeholder="Your Mobile Number" value={mobile} onChange={(e)=>setMobile(e.target.value)} required/>
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <input className="form-control" type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
+            <input className="form-control" type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} required/>
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Confirm Password</Form.Label>
-            <input  className="form-control" type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e)=>setconfirmPassword(e.target.value)}/>
+            <input  className="form-control" type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e)=>setconfirmPassword(e.target.value)} required/>
           </Form.Group>
           <Button variant="success"   onClick={()=>PostData()}>
             SignUp

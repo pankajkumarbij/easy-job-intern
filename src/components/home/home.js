@@ -10,7 +10,8 @@ const Home = () => {
       <div class="home">
 
         <div
-          style={{ backgroundColor: "#000000" }}
+          style={{ backgroundColor: "" }}
+          
           class="col d-flex justify-content-center"
         >
           <Card
@@ -25,20 +26,22 @@ const Home = () => {
             <Card.Body>
               <Card.Text>
                 <h2>Easy Job Intern</h2>
-                FIND BEST WINTER & SUMMER INTERNSHIPS FOR STUDENTS IN INDIA
-                Apply to 10,000+ internships for free
+                FIND BEST WINTER & SUMMER INTERNSHIPS FOR STUDENTS IN INDIA<br></br>
+                Apply to 10,000+ internships for free!
               </Card.Text>
-              <Button style={{color: '#000000',backgroundColor: '#ffc107',borderColor: 'black'}} variant="info" as={Link} to="/student-signup" >
-                Get Started
+              <Button style={{color: '#000000',backgroundColor: '#ffc107',borderColor: 'white'}} variant="info" as={Link} to="/student-signup" >
+                Get Started 
               </Button>
             </Card.Body>
           </Card>
         </div>
-        <div style={{ background: "black", padding: "30px 0 80px 0" }}>
+        <div style={{ background: "", padding: "30px 0 80px 0" }}>
+        
           <Container>
+          
             <Row>
               <Col class="col-lg-3 col-md-6 col-sm-12" id="offer-range">
-                <img src="images/industry.png"></img>
+                <img src="images/industry.png" alt=""></img>
                 <h4 style={{ marginTop: 15, marginBottom: 15 }}>
                   Internship By Industry
                 </h4>
@@ -89,7 +92,7 @@ const Home = () => {
                 </ListGroup>
               </Col>
               <Col class="col-lg-3 col-md-6 col-sm-12" id="offer-range">
-                <img src="images/location.png"></img>
+                <img src="images/location.png" alt=""></img>
                 <h4 style={{ marginTop: 15, marginBottom: 15 }}>
                   {" "}
                   Internship By Location
@@ -141,7 +144,7 @@ const Home = () => {
                 </ListGroup>
               </Col>
               <Col class="col-lg-3 col-md-6 col-sm-12" id="offer-range">
-                <img src="images/stream.png"></img>
+                <img src="images/stream.png" alt=""></img>
                 <h4 style={{ marginTop: 15, marginBottom: 15 }}>
                   Internship By Stream
                 </h4>
@@ -194,7 +197,7 @@ const Home = () => {
                 </ListGroup>
               </Col>
               <Col class="col-lg-3 col-md-6 col-sm-12" id="offer-range">
-                <img src="images/ot2.png"></img>
+                <img src="images/ot2.png" alt=""></img>
                 <h4 style={{ marginTop: 15, marginBottom: 15 }}>
                   Online Trainings by Us
                 </h4>
