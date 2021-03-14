@@ -6,6 +6,9 @@ function LoginForm() {
 
  const [email,setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [message,setmessage] = useState("")
+  const [error,setError] = useState("")
+  const [success, setSuccess] = useState("")
 
   const PostData = () => {
     fetch("/student/signin",{
@@ -22,10 +25,11 @@ function LoginForm() {
       console.log(data)
       if(data.error){
          console.log(data.error)
+         setError(data.error)
       }else{
         localStorage.setItem("jwt",data.token)
         localStorage.setItem("user",JSON.stringify(data.user))
-         console.log(data.message)
+         setSuccess("Sign in Success")
       }
   }).catch((err) =>{
       console.log(err)
@@ -34,13 +38,25 @@ function LoginForm() {
   setPassword("")
   }
 
+  const showError = () => (error ? <Alert variant="danger"> {error} </Alert>:'');
+  const showSuccess = () => (success ? <Alert variant="success"> {success} </Alert>:'');
+
+  const clearAlert = () => {
+    setError("")
+    setSuccess("")
+  }
+
   return (
     <>
       <div className="box">
         <h1>Login</h1>
+        <div style={{maxWidth: "200px"}}>
+          {showError()}
+          {showSuccess()}
+        </div>
 
         <div className="container">
-          <Form>
+          <Form onClick={()=>clearAlert()}>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <input className="form-control" type="email" placeholder="Enter Your Email Id" value={email} onChange={(e)=>setEmail(e.target.value)} />
