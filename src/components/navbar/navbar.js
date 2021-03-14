@@ -7,12 +7,9 @@ import { Link,useHistory } from "react-router-dom";
 
 function NavBar(){
 
-    const [data,setData] = useState()
 
     useEffect(()=>{
        const user = isAuth();
-       setData(user)
-       console.log(data)
     },[])
 
     const isAuth =() =>{
