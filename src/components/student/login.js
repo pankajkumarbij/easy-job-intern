@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Form, Button, Alert } from "react-bootstrap";
 import checkValidity from "../../utils/checkValidation";
+
 import "./register.css";
 
 function LoginForm() {
