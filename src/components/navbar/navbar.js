@@ -98,7 +98,7 @@ function NavBar(){
 
                                 <Dropdown.Menu>
                                     <Dropdown.Item as={Link} to="/student-login" >Student</Dropdown.Item>
-                                    <Dropdown.Item as={Link} to="/" >Employee</Dropdown.Item>
+                                    <Dropdown.Item as={Link} to="/employer-login" >Employer</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         </Nav.Link>
@@ -110,7 +110,7 @@ function NavBar(){
 
                                     <Dropdown.Menu>
                                         <Dropdown.Item as={Link} to="/student-signup" >Student</Dropdown.Item>
-                                        <Dropdown.Item as={Link} to="/" >Employee</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/employer-signup" >Employer</Dropdown.Item>
                                     </Dropdown.Menu>
                             </Dropdown>
                         </Nav.Link>
