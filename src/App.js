@@ -4,6 +4,8 @@ import Footer from "./components/footer/footer";
 import Home from "./components/home/home";
 import Login from "./components/student/login";
 import SignUp from "./components/student/register";
+import EmployerSignup from './components/employer/employerSignup';
+import EmployerSignin from './components/employer/employerSignin';
 import ContactUs from "./components/contact-us/contact-us";
 import AboutUs from "./components/about-us/about-us";
 import PrivacyPolicy from "./components/privacy-policy/privacy-policy";
@@ -25,6 +27,12 @@ function App() {
             </Route>
             <Route path="/student-signup" exact>
               <SignUp />
+            </Route>
+            <Route path="/employer-signup" exact>
+            <EmployerSignup />
+            </Route>
+            <Route path="/employer-login" exact>
+              <EmployerSignin />
             </Route>
             <Route path="/about-us" exact>
               <AboutUs />
