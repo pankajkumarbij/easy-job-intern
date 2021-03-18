@@ -1,249 +1,272 @@
-import React, { useState } from "react";
-import { Form, Button, Alert } from "react-bootstrap";
-import checkValidity from "../../utils/checkValidation";
-import "./register.css";
+import React, { Component } from "react";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import Form from "react-bootstrap/Form";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
-const RegisterForm = () => {
-  //creating a dicitionary for every field of the form
-  const initialState = {
-    name: {
-      //value of the input field
-      value: "",
-      //rules to check while validating the input
-      validation: {
-        required: true,
-        minLength: 5,
-      },
-      //error messages to show in case any validation rule is not followed
-      errorMessage: "",
-      // boolean value to check if the whole input field is valid or not
-      valid: false,
-      //boolean value to check if the input field is touched or not
-      touched: false,
-    },
-    email: {
-      value: "",
-      validation: {
-        required: true,
-        isEmail: true,
-      },
-      errorMessage: "",
-      valid: false,
-      touched: false,
-    },
-    mobile: {
-      value: "",
-      validation: {
-        required: true,
-        Length: 10,
-      },
-      errorMessage: "",
-      valid: false,
-      touched: false,
-    },
-    password: {
-      value: "",
-      validation: {
-        required: true,
-        minLength: 8,
-      },
-      errorMessage: "",
-      valid: false,
-      touched: false,
-    },
-    confirmPassword: {
-      value: "",
-      validation: {
-        required: true,
-        minLength: 8,
-        checkPassword: true,
-      },
-      errorMessage: "",
-      valid: false,
-      touched: false,
-    },
-  };
-  const [formValues, setFormValues] = useState(initialState);
+class StudentSignup extends Component {
+  constructor() {
+    super();
+    this.state = {
+      institutionName: null,
+      personName: null,
+      email: null,
+      contact: null,
+      password: null,
+      passwordConfirmation: null,
+      signupError: null,
+      branch: null,
+      year: null,
+      degree: null,
+    };
+  }
 
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const [formIsValid, setFormIsValid] = useState(false); //boolean to check that the whole form is valid or not
+  userTyping = (type, e) => {
+    switch (type) {
+      case "email":
+        console.log("email");
+        this.setState({ email: e.target.value });
+        break;
 
-  const handleChange = (e) => {
-    const updatedFormValues = { ...formValues };
-    const updatedFormElement = { ...updatedFormValues[e.target.name] };
-    updatedFormElement.value = e.target.value;
-    let validOutput = checkValidity(
-      updatedFormElement.value,
-      updatedFormElement.validation,
-      updatedFormValues.password.value
-    );
-    updatedFormElement.valid = validOutput[0];
-    updatedFormElement.errorMessage = validOutput[1];
-    updatedFormElement.touched = true;
-    updatedFormValues[e.target.name] = updatedFormElement;
+      case "password":
+        this.setState({ password: e.target.value });
+        break;
 
-    let formValid = true;
-    for (let inputIdentifiers in updatedFormValues) {
-      formValid = updatedFormValues[inputIdentifiers].valid && formValid;
+      case "passwordConfirmation":
+        this.setState({ passwordConfirmation: e.target.value });
+        break;
+      case "institutionName":
+        this.setState({ institutionName: e.target.value });
+        break;
+      case "personName":
+        this.setState({ personName: e.target.value });
+        break;
+      case "contact":
+        this.setState({ contact: e.target.value });
+        break;
+      case "branch":
+        this.setState({ branch: e.target.value });
+        break;
+      case "year":
+        this.setState({ year: e.target.value });
+        break;
+      case "degree":
+        this.setState({ degree: e.target.value });
+        break;
+      default:
+        break;
     }
-    setFormValues(updatedFormValues);
-    setFormIsValid(formValid);
   };
 
-  const PostData = () => {
-    const { name, email, mobile, password, confirmPassword } = formValues;
-    fetch("/student/signup", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: name.value,
-        email: email.value,
-        password: password.value,
-        mobile: mobile.value,
-        confirmPassword: confirmPassword.value,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.error) {
-          console.log(data.error);
-          setError(data.error);
-        } else {
-          setSuccess(data.message);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    setFormValues(initialState);
+  formIsValid = () => {
+    return this.state.password === this.state.passwordConfirmation;
   };
 
-  const showError = () =>
-    error ? <Alert variant="danger"> {error} </Alert> : "";
-  const showSuccess = () =>
-    success ? <Alert variant="success"> {success} </Alert> : "";
-
-  const clearAlert = () => {
-    setError("");
-    setSuccess("");
+  submitSignup = (e) => {
+    e.preventDefault();
+    if (!this.formIsValid()) {
+      this.setState({ signupError: "Passwords do not match" });
+      return;
+    } else {
+      alert("Signup Successfull!");
+    }
   };
 
-  return (
-    <div className="box">
-      <h1>SignUp</h1>
-      <div style={{ maxWidth: "200px" }}>
-        {showError()}
-        {showSuccess()}
-      </div>
-      <div className="container register">
-        <Form onClick={() => clearAlert()}>
-          <Form.Group controlId="formBasicName">
-            <Form.Label>Name</Form.Label>
-            <input
-              className={`form-control ${
-                !formValues.name.valid && formValues.name.touched
-                  ? "input-error"
-                  : ""
-              }`}
-              placeholder="Your Name"
-              name="name"
-              value={formValues.name.value}
-              onChange={handleChange}
-            />
-            {formValues.name.errorMessage && (
-              <span className="error">{formValues.name.errorMessage}</span>
-            )}
-          </Form.Group>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <input
-              className={`form-control ${
-                !formValues.email.valid && formValues.email.touched
-                  ? "input-error"
-                  : ""
-              }`}
-              placeholder="Your Email Id"
-              name="email"
-              value={formValues.email.value}
-              onChange={handleChange}
-            />
-            {formValues.email.errorMessage && (
-              <span className="error">{formValues.email.errorMessage}</span>
-            )}
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Mobile Number</Form.Label>
-            <input
-              className={`form-control ${
-                !formValues.mobile.valid && formValues.mobile.touched
-                  ? "input-error"
-                  : ""
-              }`}
-              type="Number"
-              name="mobile"
-              placeholder="Your Mobile Number"
-              value={formValues.mobile.value}
-              onChange={handleChange}
-            />
-            {formValues.mobile.errorMessage && (
-              <span className="error">{formValues.mobile.errorMessage}</span>
-            )}
-          </Form.Group>
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <input
-              className={`form-control ${
-                !formValues.password.valid && formValues.password.touched
-                  ? "input-error"
-                  : ""
-              }`}
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formValues.password.value}
-              onChange={handleChange}
-            />
-            {formValues.password.errorMessage && (
-              <span className="error">{formValues.password.errorMessage}</span>
-            )}
-          </Form.Group>
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Confirm Password</Form.Label>
-            <input
-              className={`form-control ${
-                !formValues.confirmPassword.valid &&
-                formValues.confirmPassword.touched
-                  ? "input-error"
-                  : ""
-              }`}
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm Password"
-              value={formValues.confirmPassword.value}
-              onChange={handleChange}
-            />
-            {formValues.confirmPassword.errorMessage && (
-              <span className="error">
-                {formValues.confirmPassword.errorMessage}
-              </span>
-            )}
-          </Form.Group>
-          <Button
-            variant="success"
-            onClick={() => PostData()}
-            disabled={!formIsValid} //disabling the
+  render() {
+    return (
+      <>
+        <div style={{ padding: "4vh 0" }}>
+          <Card
+            style={{
+              width: "40vw",
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: "4vh",
+              marginBottom: "4vh",
+              backgroundImage: "linear-gradient(to right, white , #6EE2CD)",
+            }}
           >
-            SignUp
-          </Button>
-        </Form>
-      </div>
-    </div>
-  );
-};
+            <Card.Header
+              style={{
+                backgroundColor: "#6c6c6c",
+                color: "#6EE2CD",
+                fontFamily: '"Merriweather", serif',
+                fontSize: "1.25rem",
+              }}
+              as="h5"
+            >
+              Student Signup
+            </Card.Header>
+            <Card.Body>
+              <Form onSubmit={(e) => this.submitSignup(e)}>
+                {/* Name of the student */}
+                <Form.Group
+                  style={{ textAlign: "left" }}
+                  onChange={(e) => this.userTyping("personName", e)}
+                >
+                  <Form.Label style={{ fontWeight: "bold" }}>Name</Form.Label>
+                  <Form.Control
+                    style={{ borderColor: "#6EE2CD", color: "#000000" }}
+                    type="text"
+                    placeholder="Enter your name"
+                  />
+                </Form.Group>
 
-export default RegisterForm;
+                {/* Email address */}
+                <Form.Group
+                  style={{ textAlign: "left" }}
+                  controlId="formBasicEmail"
+                  onChange={(e) => this.userTyping("email", e)}
+                >
+                  <Form.Label style={{ fontWeight: "bold" }}>
+                    Email address
+                  </Form.Label>
+                  <Form.Control
+                    style={{ borderColor: "#6EE2CD", color: "#000000" }}
+                    type="email"
+                    placeholder="Enter email"
+                  />
+                </Form.Group>
+
+                {/*  Password */}
+                <Form.Group
+                  style={{ textAlign: "left" }}
+                  controlId="formBasicPassword"
+                  onChange={(e) => this.userTyping("password", e)}
+                >
+                  <Form.Label style={{ fontWeight: "bold" }}>
+                    Password
+                  </Form.Label>
+                  <Form.Control
+                    style={{ borderColor: "#6EE2CD", color: "#000000" }}
+                    type="password"
+                    placeholder="Password"
+                  />
+                </Form.Group>
+
+                {/* Confirm Password */}
+                <Form.Group
+                  style={{ textAlign: "left", marginBottom: "1.6vh" }}
+                  controlId="formBasicPassword"
+                  onChange={(e) => this.userTyping("passwordConfirmation", e)}
+                >
+                  <Form.Label style={{ fontWeight: "bold" }}>
+                    Confirm Password
+                  </Form.Label>
+                  <Form.Control
+                    style={{ borderColor: "#6EE2CD", color: "#000000" }}
+                    type="text"
+                    placeholder="Re-enter Password"
+                  />
+                </Form.Group>
+
+                {/* Contact Number */}
+                <Form.Group
+                  style={{ textAlign: "left" }}
+                  onChange={(e) => this.userTyping("contact", e)}
+                >
+                  <Form.Label style={{ fontWeight: "bold" }}>
+                    Contact
+                  </Form.Label>
+                  <Form.Control
+                    style={{ borderColor: "#6EE2CD", color: "#000000" }}
+                    type="text"
+                    placeholder="Enter your contact number"
+                  />
+                </Form.Group>
+
+                {/* Degree */}
+                <Form.Group
+                  style={{ textAlign: "left" }}
+                  onChange={(e) => this.userTyping("degree", e)}
+                >
+                  <Form.Label style={{ fontWeight: "bold" }}>
+                    Which degree you are pursuing?
+                  </Form.Label>
+                  <Form.Control
+                    style={{ borderColor: "#6EE2CD", color: "#000000" }}
+                    type="text"
+                    placeholder="Enter complete name of your degree"
+                  />
+                </Form.Group>
+
+                {/* College Name */}
+                <Form.Group
+                  style={{ textAlign: "left" }}
+                  controlId="formBasicName"
+                  onChange={(e) => this.userTyping("institutionName", e)}
+                >
+                  <Form.Label style={{ fontWeight: "bold" }}>
+                    College Name
+                  </Form.Label>
+                  <Form.Control
+                    style={{ borderColor: "#6EE2CD", color: "#000000" }}
+                    type="text"
+                    placeholder="Your college name"
+                  />
+                </Form.Group>
+
+                {/* Branch of study */}
+                <Form.Group
+                  style={{ textAlign: "left" }}
+                  onChange={(e) => this.userTyping("branch", e)}
+                >
+                  <Form.Label style={{ fontWeight: "bold" }}>
+                    Field of study
+                  </Form.Label>
+                  <Form.Control
+                    style={{ borderColor: "#6EE2CD", color: "#000000" }}
+                    type="text"
+                    placeholder="Enter your field of study"
+                  />
+                </Form.Group>
+
+                {/* Year of study */}
+                <Form.Group
+                  style={{ textAlign: "left" }}
+                  onChange={(e) => this.userTyping("year", e)}
+                >
+                  <Form.Label style={{ fontWeight: "bold" }}>
+                    Which year of college you are in?
+                  </Form.Label>
+                  <Form.Control
+                    style={{ borderColor: "#6EE2CD", color: "#000000" }}
+                    type="text"
+                    placeholder="Enter your college year"
+                  />
+                </Form.Group>
+
+                {/* Already a user? */}
+                <Form.Group style={{ textAlign: "left", fontSize: "1.5vh" }}>
+                  <Link to="/student-login">
+                    <a style={{ fontWeight: "bold" }}>
+                      Already have an account? Sign in
+                    </a>
+                  </Link>
+                </Form.Group>
+
+                {this.state.signupError ? (
+                  <Form.Text
+                    style={{ paddingBottom: "0.6vh", fontWeight: "bold" }}
+                    className="text-danger"
+                  >
+                    {this.state.signupError}
+                  </Form.Text>
+                ) : null}
+                <Button
+                  style={{ color: "#6EE2CD", fontWeight: "bold" }}
+                  variant="secondary"
+                  type="submit"
+                >
+                  Register
+                </Button>
+              </Form>
+            </Card.Body>
+          </Card>
+        </div>
+      </>
+    );
+  }
+}
+export default StudentSignup;
