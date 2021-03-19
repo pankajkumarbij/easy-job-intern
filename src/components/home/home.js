@@ -2,24 +2,22 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, Container, Row, Col, Button, ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Imgeslider from "../imgeslider/slider"
 import "./home.css";
 
 const Home = () => {
   return (
     <>
-       <div class="home">
+      <div class="home">
 
-             <Imgeslider />
-         <div
+        <div
           style={{ backgroundColor: "" }}
-
+          
           class="col d-flex justify-content-center"
         >
           <Card
             style={{
               width: "75vh",
-              marginTop: "10%",
+              marginTop: "6%",
               opacity: "0.8",
               background: "black",
               color: "white",
@@ -31,15 +29,16 @@ const Home = () => {
                 FIND BEST WINTER & SUMMER INTERNSHIPS FOR STUDENTS IN INDIA<br></br>
                 Apply to 10,000+ internships for free!
               </Card.Text>
-              <Button style={{ color: '#000000', backgroundColor: '#ffc107', borderColor: 'white' }} variant="info" as={Link} to="/student-signup" >
-                Get Started
+              <Button style={{color: '#000000',backgroundColor: '#ffc107',borderColor: 'white'}} variant="info" as={Link} to="/student-signup" >
+                Get Started 
               </Button>
             </Card.Body>
-          </Card> 
-          </div>  
-
+          </Card>
+        </div>
         <div style={{ background: "", padding: "30px 0 80px 0" }}>
+        
           <Container>
+          
             <Row>
               <Col class="col-lg-3 col-md-6 col-sm-12" id="offer-range">
                 <img src="images/industry.png" alt=""></img>
