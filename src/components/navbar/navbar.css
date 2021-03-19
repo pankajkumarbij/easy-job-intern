@@ -1,0 +1,11 @@
+
+.navbar{
+    min-height :80px;
+}
+.logo-image{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: -6px;
+}

@@ -3,6 +3,7 @@ import { Button, Navbar, Nav, Form, FormControl, Dropdown } from 'react-bootstra
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as Icon from 'react-bootstrap-icons';
 import { Link,useHistory } from "react-router-dom";
+import "./navbar.css";
 
 
 function NavBar(){
@@ -28,7 +29,12 @@ function NavBar(){
 
     return(
         <>
-            <Navbar bg="dark" variant="dark" expand="lg">
+            <Navbar bg="dark" variant="dark" expand="lg" class="navbar">
+                <a class="navbar-brand" href="/">
+                    <div class="logo-image">
+                            <img src="navlogo.png" class="img-fluid" />
+                    </div>
+                </a>
                 <Navbar.Brand as={Link} to="/" style={{color: "yellow"}}>Easy Job Intern</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
