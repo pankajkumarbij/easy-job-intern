@@ -1,9 +1,9 @@
 
 .newFooter {
     bottom: 0;
-    width: 100%;
-    padding: 5px;
-    
+    width: 110%;
+    padding: 0px;
+    margin: 0px;
 }
 footer ul {
     padding: 0px 0;
@@ -17,8 +17,8 @@ footer a {
     width: 100%;
 }
 footer li.listHeading {
-    display: inline-block;
-    margin: 2vw 2%;
+    display: block;
+    margin: 2vw 2%;      
    width: 20%;
     
 }
@@ -34,19 +34,3 @@ footer li.mob{
 }
 
 
-
-@media (max-width: 5px) {
-    footer li.listHeading {
-        display: none;
-        margin: 0;
-    }
-
-    footer li.listFooter{
-        display: block;
-        margin: 0px;
-    }
-    
-    footer li.mob{
-        display: block;
-    }
-  }
