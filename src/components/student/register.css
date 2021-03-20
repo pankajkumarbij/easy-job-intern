@@ -8,6 +8,17 @@
   border-radius: 1%;
 }
 
+.error {
+  color: #ff0000;
+  font-size: 1em;
+  margin-left: 10%;
+  display: relative;
+}
+
+.input-error{
+  border: #ff0000 2px solid;
+}
+
 .container label {
   margin-left: 10%;
   font-weight: 700;
@@ -19,6 +30,7 @@
   margin-left: 10%;
   width: 80%;
 }
+
 .container input {
   width: 80%;
   margin-left: 10%;

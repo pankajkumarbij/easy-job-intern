@@ -8,7 +8,7 @@ import axios from "axios";
 
 
 
-class StudentSignin extends Component {
+class EmployerSignin extends Component {
   constructor() {
     super();
     this.state = {
@@ -59,7 +59,7 @@ class StudentSignin extends Component {
             }}
             as="h5"
           >
-            Student Signin
+            Employer Signin
           </Card.Header>
           <Card.Body>
             <Form onSubmit={(e) => this.submitSignin(e)}>
@@ -91,7 +91,7 @@ class StudentSignin extends Component {
                 />
 
 <Form.Group style={{ textAlign: "left", fontSize: "1.5vh", marginTop: '10px' }}>
-                <Link to="/student-signup">
+                <Link to="/employer-signup">
                   <a style={{ fontWeight: "bold" }}>
                     Don't have an account? Sign up
                   </a>
@@ -114,4 +114,4 @@ class StudentSignin extends Component {
     );
   }
 }
-export default StudentSignin;
+export default EmployerSignin;

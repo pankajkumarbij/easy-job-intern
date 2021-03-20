@@ -28,10 +28,12 @@
             <li><a href='https://github.com/pankajkumarbij/easy-job-intern/pull/17'>#17</a></li>
             <li><a href='https://github.com/pankajkumarbij/easy-job-intern/pull/28'>#28</a></li>
             <li><a href='https://github.com/pankajkumarbij/easy-job-intern/pull/51'>#51</a></li>
+            <li><a href='https://github.com/pankajkumarbij/easy-job-intern/pull/116'>#116</a></li>
+            <li><a href='https://github.com/pankajkumarbij/easy-job-intern/pull/119'>#119</a></li>
         </ul>
    </td>
    <td></td>
-   <td>600</td>
+   <td>1000</td>
 </tr>
 
 <tr>
