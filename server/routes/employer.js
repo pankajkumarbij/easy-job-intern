@@ -7,41 +7,38 @@ const bcrypt = require("bcryptjs")
 const {JWT_SECRET} = require('../keys');
 //const email = require('../utils/email');
 
-const Student = require("../models/student");
+const Employer = require("../models/employer");
 
 router.get('/', (req, res)=>{
-    res.json({message:"student auth"})
+    res.json({message:"employer auth"})
 })
 
 // SignUp       post      /auth/signup
 
 router.post("/signup",(req,res)=>{
-    const {institutionName,personName,email,contact,password,passwordConfirmation,branch,year,degree} = req.body
+    const {companyName,personName,email,contact,password,passwordConfirmation} = req.body
     if(password !== passwordConfirmation){
         return res.json({error:"Password dosen't match"})
     }
-    if(!institutionName || !personName || !email || !contact || !password || !passwordConfirmation || !branch || !year || !degree  ){
+    if(!companyName || !personName || !email || !contact || !password || !passwordConfirmation){
         return res.json({error:"Please add all fields"});
     }
-   Student.findOne({email})
+    Employer.findOne({email})
     .then((savedUser)=>{
         if(savedUser){
             return res.json({error:"User already exsist"})
         }
         bcrypt.hash(password,10)
         .then(async hashedpassword => {
-            const student = new Student({
-                institutionName,
+            const employer = new Employer({
+                companyName,
                 personName,
                 email,
                 contact,
-                branch,
-                year,
-                degree,
                 password:hashedpassword
             })
             //await email(name, email, mobile);
-            student.save()
+            employer.save()
             .then(user=>{
                 res.json({message:"Saved Succcessfully",user:user})
             }).catch(err=>{
@@ -60,19 +57,23 @@ router.post('/signin',(req,res)=>{
     if(!email || !password){
         return res.json({error:"Please Add Email or Password"})
     }
-    Student.findOne({email})
+    
+    Employer.findOne({email})
     .then(savedUser => {
+        
         if(!savedUser){
+            
             return res.json({error:"Invalid email or password"})
         }
         else{
         bcrypt.compare(password,savedUser.password)
         .then(doMatch=>{
             if(doMatch){
+            
                 // res.json({message:"SignIn successfull"})
                 const token = jwt.sign({_id:savedUser._id},JWT_SECRET)
-                const {_id,personName,email,contact,branch,year,degree} = savedUser
-               return res.status(200).json({token,user:{_id,email,personName,contact,branch,year,degree}})
+                const {_id,personName,email,contact,companyName} = savedUser
+               return res.json({token,user:{_id,personName,email,contact,companyName}})
             }else{
                 return res.json({error:"Invalid Email or Password"})
             }

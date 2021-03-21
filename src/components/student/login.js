@@ -33,7 +33,24 @@ class StudentSignin extends Component {
 
   submitSignin = (e) => {
     e.preventDefault();
-    alert("Signin Successful!")
+    axios.post('http://localhost:5000/student/signin',{
+      email:  this.state.email,
+      password: this.state.password
+    })
+    .then((res) => {
+      console.log(res)
+      if(res.data.error){
+        alert(res.data.error)
+      }
+      else{
+        console.log("Token: ",res.data.token,"User Details: ", res.data.user);
+        alert("Signin Successfull");
+      }
+    
+    
+    }).catch((err) => {
+      console.log("Error: ",err);
+    })
   };
 
   render() {

@@ -69,7 +69,25 @@ class StudentSignup extends Component {
       this.setState({ signupError: "Passwords do not match" });
       return;
     } else {
-      alert("Signup Successfull!");
+
+      axios.post('http://localhost:5000/student/signup',{
+        personName: this.state.personName,
+        email: this.state.email,
+        password:this.state.password,
+        contact: this.state.contact,
+        passwordConfirmation: this.state.passwordConfirmation,
+        branch: this.state.branch,
+        year: this.state.year,
+        degree: this.state.degree,
+        institutionName: this.state.institutionName
+    })
+    .then((res) => {
+      console.log(res.data.user);
+     alert(res.data.message);
+    
+    }).catch((err) => {
+      console.log(err);
+    })
     }
   };
 
