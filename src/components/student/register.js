@@ -156,7 +156,7 @@ class StudentSignup extends Component {
                   </Form.Label>
                   <Form.Control
                     style={{ borderColor: "#6EE2CD", color: "#000000" }}
-                    type="text"
+                    type="password"
                     placeholder="Re-enter Password"
                   />
                 </Form.Group>
@@ -171,7 +171,7 @@ class StudentSignup extends Component {
                   </Form.Label>
                   <Form.Control
                     style={{ borderColor: "#6EE2CD", color: "#000000" }}
-                    type="text"
+                    type="number"
                     placeholder="Enter your contact number"
                   />
                 </Form.Group>
@@ -254,6 +254,7 @@ class StudentSignup extends Component {
                     {this.state.signupError}
                   </Form.Text>
                 ) : null}
+                
                 <Button
                   style={{ color: "#6EE2CD", fontWeight: "bold" }}
                   variant="secondary"
