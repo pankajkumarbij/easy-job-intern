@@ -25,8 +25,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const StudentRouter = require("./routes/student");
+const EmployerRouter = require("./routes/employer");
 
 app.use("/student", StudentRouter);
+app.use("/employer", EmployerRouter);
 
 app.get("/", (req, res) => {
   res.send("Welcome to easy job intern server");

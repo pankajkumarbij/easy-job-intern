@@ -60,7 +60,21 @@ class EmployerSignup extends Component {
       return;
     }
     else{
-      alert("Signup Successfull!")
+      axios.post('http://localhost:5000/employer/signup',{
+        personName: this.state.personName,
+        email: this.state.email,
+        password:this.state.password,
+        contact: this.state.contact,
+        passwordConfirmation: this.state.passwordConfirmation,
+        companyName: this.state.companyName
+    })
+    .then((res) => {
+      console.log(res.data.user);
+     alert(res.data.message);
+    
+    }).catch((err) => {
+      console.log(err);
+    })
     }
   
   };
