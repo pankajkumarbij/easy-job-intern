@@ -38,6 +38,12 @@ const studentSchema = new Schema({
         type:String,
         required: true
     },
+    tokens:[{
+        token:{
+            type:String,
+            required:true
+        }
+    }]
 
 });
 

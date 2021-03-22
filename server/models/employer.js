@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { List } = require('react-bootstrap-icons');
 const Schema = mongoose.Schema;
 
 const employerSchema = new Schema({
@@ -26,7 +27,12 @@ const employerSchema = new Schema({
         type:String,
         required: true
     },
-
+    tokens:[{
+        token:{
+            type:String,
+            required:true
+        }
+    }]
 });
 
 const Employer = mongoose.model('Employer',employerSchema);

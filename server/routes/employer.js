@@ -21,7 +21,7 @@ router.post("/signup",(req,res)=>{
         return res.json({error:"Password dosen't match"})
     }
     if(!companyName || !personName || !email || !contact || !password || !passwordConfirmation){
-        return res.json({error:"Please add all fields"});
+        return res.json({error:"Please add all fields"})
     }
     Employer.findOne({email})
     .then((savedUser)=>{
@@ -60,16 +60,13 @@ router.post('/signin',(req,res)=>{
     
     Employer.findOne({email})
     .then(savedUser => {
-        
         if(!savedUser){
-            
             return res.json({error:"Invalid email or password"})
         }
         else{
         bcrypt.compare(password,savedUser.password)
         .then(doMatch=>{
             if(doMatch){
-            
                 // res.json({message:"SignIn successfull"})
                 const token = jwt.sign({_id:savedUser._id},JWT_SECRET)
                 const {_id,personName,email,contact,companyName} = savedUser
