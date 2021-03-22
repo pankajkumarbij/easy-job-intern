@@ -8,15 +8,18 @@
   border-radius: 1%;
 }
 
+/* .card_custom{
+  max-width: max-content !important;
+} */
+
 .error {
   color: #ff0000;
   font-size: 1em;
-  margin-left: 10%;
   display: relative;
 }
 
-.input-error{
-  border: #ff0000 2px solid;
+.input-error {
+  border: #ff0000 2px solid !important;
 }
 
 .container label {
@@ -46,4 +49,20 @@
   background-blend-mode: lighten;
   padding-top: 3%;
   padding-bottom: 15%;
+}
+
+@media only screen and (max-width:750px) {
+
+  .register_card_custom {
+    min-width: 80vw !important;
+    font-size: 0.9rem !important;
+  }
+
+  .register_card_custom input {
+    font-size: 0.8rem !important;
+  }
+
+  .error{
+    font-size: 0.7rem;
+  }
 }
