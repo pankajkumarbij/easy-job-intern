@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/employer.js')
+const {JWT_SECRET} = require('../keys')
 
 const auth_employer = async (req,res,next) =>{
     try{
