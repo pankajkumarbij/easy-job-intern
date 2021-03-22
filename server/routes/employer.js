@@ -5,6 +5,7 @@ var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/"
 const bcrypt = require("bcryptjs")
 const {JWT_SECRET} = require('../keys');
+const auth = require('../middleware/auth_employer.js');
 //const email = require('../utils/email');
 
 const Employer = require("../models/employer");
