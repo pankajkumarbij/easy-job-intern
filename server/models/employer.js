@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { List } = require('react-bootstrap-icons');
 const Schema = mongoose.Schema;
 
 const employerSchema = new Schema({
