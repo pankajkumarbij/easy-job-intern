@@ -1,0 +1,12 @@
+@media only screen and (max-width:750px) {
+
+  .employer_form_card_custom {
+    min-width: 80vw !important;
+    font-size: 0.9rem !important;
+  }
+
+  .employer_form_card_custom input {
+    font-size: 0.8rem !important;
+  }
+
+}
