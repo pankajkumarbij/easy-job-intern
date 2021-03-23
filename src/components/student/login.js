@@ -1,62 +1,100 @@
-import React, { Component } from "react";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import Form from "react-bootstrap/Form";
+import React, { useState } from "react";
+import { Button, Card, Form, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import checkValidity from "../../utils/checkValidation";
 import axios from "axios";
+import "./register.css";
 
+function LoginForm() {
+  //creating a dicitionary for every field of the form
+  const initialState = {
+    email: {
+      //value of the input field
+      value: "",
+      //rules to check while validating the input
+      validation: {
+        required: true,
+        isEmail: true,
+      },
+      //error messages to show in case any validation rule is not followed
+      errorMessage: "",
+      // boolean value to check if the whole input field is valid or not
+      valid: false,
+      //boolean value to check if the input field is touched or not
+      touched: false,
+    },
 
+    password: {
+      value: "",
+      validation: {
+        required: true,
+        minLength: 8,
+      },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
+  };
+  const [formValues, setFormValues] = useState(initialState);
 
+  const [formIsValid, setFormIsValid] = useState(false);
 
-class StudentSignin extends Component {
-  constructor() {
-    super();
-    this.state = {
-      email: null,
-      password: null
-    };
-  }
+  const handleChange = (e) => {
+    const updatedFormValues = { ...formValues };
+    const updatedFormElement = { ...updatedFormValues[e.target.name] };
+    updatedFormElement.value = e.target.value;
+    let validOutput = checkValidity(
+      updatedFormElement.value,
+      updatedFormElement.validation,
+      updatedFormValues.password.value
+    );
+    updatedFormElement.valid = validOutput[0];
+    updatedFormElement.errorMessage = validOutput[1];
+    updatedFormElement.touched = true;
+    updatedFormValues[e.target.name] = updatedFormElement;
 
-  userTyping = (type, e) => {
-    switch (type) {
-      case "email":
-        this.setState({ email: e.target.value });
-        break;
-
-      case "password":
-        this.setState({ password: e.target.value });
-        break;
-      default:
-        break;
+    let formValid = true;
+    for (let inputIdentifiers in updatedFormValues) {
+      formValid = updatedFormValues[inputIdentifiers].valid && formValid;
     }
+    setFormValues(updatedFormValues);
+    setFormIsValid(formValid);
   };
 
-  submitSignin = (e) => {
+  const submitSignin = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/student/signin',{
-      email:  this.state.email,
-      password: this.state.password
-    })
-    .then((res) => {
-      console.log(res)
-      if(res.data.error){
-        alert(res.data.error)
-      }
-      else{
-        console.log("Token: ",res.data.token,"User Details: ", res.data.user);
-        alert("Signin Successfull");
-      }
-    
-    
-    }).catch((err) => {
-      console.log("Error: ",err);
-    })
+    const { email, password } = formValues;
+    axios
+      .post("http://localhost:5000/student/signin", {
+        email: email.value,
+        password: password.value,
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.data.error) {
+          console.log(res.data.error);
+          alert(res.data.error);
+        } else {
+          localStorage.setItem("jwt", res.data.token);
+          localStorage.setItem("user", JSON.stringify(res.data.user));
+          console.log(
+            "Token: ",
+            res.data.token,
+            "User Details: ",
+            res.data.user
+          );
+          alert("Signin Successfull");
+        }
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
+    setFormValues(initialState);
   };
 
-  render() {
-    return (
-      <>
-      <div style={{padding: "4vh 0"}}>
+  return (
+    <>
+      <div style={{ padding: "4vh 0" }}>
         <Card
           style={{
             width: "40vw",
@@ -64,8 +102,9 @@ class StudentSignin extends Component {
             marginRight: "auto",
             marginTop: "4vh",
             marginBottom: "4vh",
-            backgroundImage: "linear-gradient(to right, white , #ffc107)"
+            backgroundImage: "linear-gradient(to right, white , #ffc107)",
           }}
+          className='register_card_custom'
         >
           <Card.Header
             style={{
@@ -79,35 +118,63 @@ class StudentSignin extends Component {
             Student Signin
           </Card.Header>
           <Card.Body>
-            <Form onSubmit={(e) => this.submitSignin(e)}>
+            <Form onSubmit={(e) => submitSignin(e)}>
               <Form.Group
                 style={{ textAlign: "left" }}
                 controlId="formBasicEmail"
-                onChange={(e) => this.userTyping("email", e)}
               >
                 <Form.Label style={{ fontWeight: "bold" }}>
                   Email address
                 </Form.Label>
                 <Form.Control
                   style={{ borderColor: "#ffc107", color: "#000000" }}
+                  className={`${
+                    !formValues.email.valid && formValues.email.touched
+                      ? "input-error"
+                      : ""
+                  }`}
                   type="email"
                   placeholder="Enter email"
+                  name="email"
+                  value={formValues.email.value}
+                  onChange={handleChange}
                 />
+                {formValues.email.errorMessage && (
+                  <span className="error">{formValues.email.errorMessage}</span>
+                )}
               </Form.Group>
 
               <Form.Group
                 style={{ textAlign: "left" }}
                 controlId="formBasicPassword"
-                onChange={(e) => this.userTyping("password", e)}
               >
                 <Form.Label style={{ fontWeight: "bold" }}>Password</Form.Label>
                 <Form.Control
                   style={{ borderColor: "#ffc107", color: "#000000" }}
                   type="password"
+                  className={`${
+                    !formValues.password.valid && formValues.password.touched
+                      ? "input-error"
+                      : ""
+                  }`}
                   placeholder="Password"
+                  name="password"
+                  value={formValues.password.value}
+                  onChange={handleChange}
                 />
-
-<Form.Group style={{ textAlign: "left", fontSize: "1.5vh", marginTop: '10px' }}>
+                {formValues.password.errorMessage && (
+                  <span className="error">
+                    {formValues.password.errorMessage}
+                  </span>
+                )}
+              </Form.Group>
+              <Form.Group
+                style={{
+                  textAlign: "left",
+                  fontSize: "1.5vh",
+                  marginTop: "10px",
+                }}
+              >
                 <Link to="/student-signup">
                   <a style={{ fontWeight: "bold" }}>
                     Don't have an account? Sign up
@@ -115,20 +182,19 @@ class StudentSignin extends Component {
                 </Link>
               </Form.Group>
 
-              </Form.Group>
               <Button
                 style={{ color: "#ffc107", fontWeight: "bold" }}
                 variant="secondary"
                 type="submit"
+                disabled={!formIsValid}
               >
                 Signin
               </Button>
             </Form>
           </Card.Body>
         </Card>
-        </div>
-      </>
-    );
-  }
+      </div>
+    </>
+  );
 }
-export default StudentSignin;
+export default LoginForm;

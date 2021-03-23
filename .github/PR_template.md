@@ -26,3 +26,10 @@ How someone can test your code?
 
 ## Open Source Program names (OPTIONAL)
 If you participated in any open-source program then please mention the program name here
+
+
+# Screenshots (Or Videos)
+
+Original             |  Updated
+:-------------------------:|:-------------------------:
+** original screenshot **  |  ** updated screenshot **

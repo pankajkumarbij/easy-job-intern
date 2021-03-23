@@ -26,7 +26,12 @@ const employerSchema = new Schema({
         type:String,
         required: true
     },
-
+    tokens:[{
+        token:{
+            type:String,
+            required:true
+        }
+    }]
 });
 
 const Employer = mongoose.model('Employer',employerSchema);

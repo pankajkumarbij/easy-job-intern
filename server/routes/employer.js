@@ -5,6 +5,7 @@ var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/"
 const bcrypt = require("bcryptjs")
 const {JWT_SECRET} = require('../keys');
+const auth = require('../middleware/auth_employer.js');
 //const email = require('../utils/email');
 
 const Employer = require("../models/employer");
@@ -21,7 +22,7 @@ router.post("/signup",(req,res)=>{
         return res.json({error:"Password dosen't match"})
     }
     if(!companyName || !personName || !email || !contact || !password || !passwordConfirmation){
-        return res.json({error:"Please add all fields"});
+        return res.json({error:"Please add all fields"})
     }
     Employer.findOne({email})
     .then((savedUser)=>{
@@ -60,16 +61,13 @@ router.post('/signin',(req,res)=>{
     
     Employer.findOne({email})
     .then(savedUser => {
-        
         if(!savedUser){
-            
             return res.json({error:"Invalid email or password"})
         }
         else{
         bcrypt.compare(password,savedUser.password)
         .then(doMatch=>{
             if(doMatch){
-            
                 // res.json({message:"SignIn successfull"})
                 const token = jwt.sign({_id:savedUser._id},JWT_SECRET)
                 const {_id,personName,email,contact,companyName} = savedUser
