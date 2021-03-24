@@ -1,7 +1,6 @@
 import Button from "react-bootstrap/Button";
 import * as Icon from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
-// import "./footer.css";
 
 function Footer() { 
   return (
@@ -71,18 +70,18 @@ function Footer() {
           <div className="col-md-3 col-sm-6" style={{paddingRight: "1%", margin:"0px"}}>
           <h5 style={{paddingTop:'2%'}}>About Easy Job Intern</h5>
           <ul className="list-unstyled" style={{borderBottom: '2px dotted #6c6c6c'}}>
-            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  href="#" >
+            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  as={Link} to="/about-us" >
                    About Us
-                  </Button>{" "}</li>
-            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  href="#" >
+                </Button>{" "}</li>
+            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  as={Link} to="/contact-us" >
                   Contact Us
                   </Button>{" "}</li>
-            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  href="#" >
-            Terms and Condition
-                  </Button>{" "}</li>
-            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  href="#" >
-            Privacy Policy
-                  </Button>{" "}</li>
+            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  as={Link} to="/terms-conditions" >
+                  Terms and Condition
+              </Button>{" "}</li>
+            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  as={Link} to="/privacy-policy" >
+                  Privacy Policy
+                </Button>{" "}</li>
           </ul>
         </div>
 
