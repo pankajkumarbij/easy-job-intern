@@ -5,7 +5,8 @@ var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/"
 const bcrypt = require("bcryptjs")
 const {JWT_SECRET} = require('../keys');
-const auth = require('../middleware/auth_student.js');
+const auth_student = require('../middleware/auth_student.js');
+
 //const email = require('../utils/email');
 
 const Student = require("../models/student");
@@ -73,6 +74,8 @@ router.post('/signin',(req,res)=>{
                 // res.json({message:"SignIn successfull"})
                 const token = jwt.sign({_id:savedUser._id},JWT_SECRET)
                 const {_id,personName,email,contact,branch,year,degree} = savedUser
+                savedUser.tokens = savedUser.tokens.concat({token:token})
+                savedUser.save()
                return res.status(200).json({token,user:{_id,email,personName,contact,branch,year,degree}})
             }else{
                 return res.json({error:"Invalid Email or Password"})
@@ -88,5 +91,34 @@ router.post('/signin',(req,res)=>{
 
 })
 
+//patch
+router.patch('/update', auth_student, async(req, res)=>{
+    const updates = Object.keys(req.body)
+    const allowedUpdates = ['personName', 'email','contact', 'password', 'institutionName', 'degree', 'year', 'branch']
+    const isValid = updates.every((update)=>{
+        return allowedUpdates.includes(update)
+    })
+    if(!isValid){
+        res.status(400).send({error: 'Invalid Updates!'})
+    }
+    try{
+        if (updates.includes("password")){
+            req.body.password = await bcrypt.hash(req.body.password, 10)
+        }
+
+        updates.forEach(update => {
+            req.user[update] = req.body[update]
+        })
+        
+        await req.user.save()
+        const {_id,personName,email,contact,branch,year,degree} = req.user
+        return res.status(200).json({user:{_id,email,personName,contact,branch,year,degree}})
+
+    }
+    catch(e){
+        res.status(400).send(e)
+    }
+
+})
 
 module.exports = router
