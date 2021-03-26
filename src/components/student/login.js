@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { Button, Card, Form, Alert } from "react-bootstrap";
+import { Button, Card, Form, Alert, InputGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 import axios from "axios";
 import "./register.css";
+import IconButton from "@material-ui/core/IconButton";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 function LoginForm() {
   //creating a dicitionary for every field of the form
@@ -34,6 +37,7 @@ function LoginForm() {
       valid: false,
       touched: false,
     },
+    showPassword: false,
   };
   const [formValues, setFormValues] = useState(initialState);
 
@@ -92,6 +96,11 @@ function LoginForm() {
     setFormValues(initialState);
   };
 
+  const togglePasswordVisiblity = () => { // to handle visibility of passsword 
+    
+    setFormValues({...formValues, showPassword: !(formValues.showPassword)});
+  
+};
   return (
     <>
       <div style={{ padding: "4vh 0" }}>
@@ -149,24 +158,35 @@ function LoginForm() {
                 controlId="formBasicPassword"
               >
                 <Form.Label style={{ fontWeight: "bold" }}>Password</Form.Label>
-                <Form.Control
-                  style={{ borderColor: "#ffc107", color: "#000000" }}
-                  type="password"
-                  className={`${
-                    !formValues.password.valid && formValues.password.touched
-                      ? "input-error"
-                      : ""
-                  }`}
-                  placeholder="Password"
-                  name="password"
-                  value={formValues.password.value}
-                  onChange={handleChange}
-                />
-                {formValues.password.errorMessage && (
-                  <span className="error">
-                    {formValues.password.errorMessage}
-                  </span>
-                )}
+                <InputGroup>
+                  <Form.Control
+                    style={{ borderColor: "#ffc107", color: "#000000" }}
+                    type={formValues.showPassword?"text":"password"}
+                    className={`${
+                      !formValues.password.valid && formValues.password.touched
+                        ? "input-error"
+                        : ""
+                    }`}
+                    placeholder="Password"
+                    name="password"
+                    value={formValues.password.value}
+                    onChange={handleChange}
+                  />
+                  {formValues.password.errorMessage && (
+                    <span className="error">
+                      {formValues.password.errorMessage}
+                    </span>
+                  )}
+                  <InputGroup.Append>
+                    <InputGroup.Text style={{borderColor: "#ffc107", color: "#000000", height: "37px", width: "28px", paddingLeft:"1px",paddingRight:"1px" }}>
+                      <IconButton style={{width: "25px"}}
+                          onClick={togglePasswordVisiblity}
+                      >
+                        {formValues.showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton> 
+                    </InputGroup.Text>
+                 </InputGroup.Append>
+                </InputGroup>
               </Form.Group>
               <Form.Group
                 style={{
