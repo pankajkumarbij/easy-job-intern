@@ -5,7 +5,7 @@ var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/"
 const bcrypt = require("bcryptjs")
 const {JWT_SECRET} = require('../keys');
-const auth = require('../middleware/auth_employer.js');
+const auth_employer = require('../middleware/auth_employer.js');
 //const email = require('../utils/email');
 
 const Employer = require("../models/employer");
@@ -71,6 +71,8 @@ router.post('/signin',(req,res)=>{
                 // res.json({message:"SignIn successfull"})
                 const token = jwt.sign({_id:savedUser._id},JWT_SECRET)
                 const {_id,personName,email,contact,companyName} = savedUser
+                savedUser.tokens = savedUser.tokens.concat({token:token})
+                savedUser.save()
                return res.json({token,user:{_id,personName,email,contact,companyName}})
             }else{
                 return res.json({error:"Invalid Email or Password"})
