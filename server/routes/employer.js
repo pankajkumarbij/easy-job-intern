@@ -5,7 +5,7 @@ var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/"
 const bcrypt = require("bcryptjs")
 const {JWT_SECRET} = require('../keys');
-const auth = require('../middleware/auth_employer.js');
+const auth_employer = require('../middleware/auth_employer.js');
 //const email = require('../utils/email');
 
 const Employer = require("../models/employer");
@@ -71,6 +71,8 @@ router.post('/signin',(req,res)=>{
                 // res.json({message:"SignIn successfull"})
                 const token = jwt.sign({_id:savedUser._id},JWT_SECRET)
                 const {_id,personName,email,contact,companyName} = savedUser
+                savedUser.tokens = savedUser.tokens.concat({token:token})
+                savedUser.save()
                return res.json({token,user:{_id,personName,email,contact,companyName}})
             }else{
                 return res.json({error:"Invalid Email or Password"})
@@ -83,6 +85,34 @@ router.post('/signin',(req,res)=>{
     catch(err=>{
         return res.json({error:"Something Went Wrong"})
     })
+
+})
+
+//logout
+router.get('/logout', auth_employer , async(req, res)=>{
+    try{
+        req.user.tokens = req.user.tokens.filter((token)=>{
+            return req.token!==token.token
+        })
+        await req.user.save()
+        res.send({message: "logged out!"})
+    }
+    catch(e){
+        res.status(500).send(e)
+    }
+})
+
+
+//logoutAll
+router.get('/logoutAll', auth_employer, async(req, res)=>{
+    try{
+        req.user.tokens = []
+        await req.user.save()
+        res.status(200).send({message: "logged out!"})
+    }
+    catch(e){
+        res.status(500).send(e)
+    }
 
 })
 
