@@ -32,8 +32,12 @@
             <li><a href='https://github.com/pankajkumarbij/easy-job-intern/pull/119'>#119</a></li>
         </ul>
    </td>
-   <td></td>
-   <td>1000</td>
+   <td>
+      <ul>
+            <li><a href='https://github.com/pankajkumarbij/easy-job-intern/pull/132'>#132</a></li>
+      </ul>
+   </td>
+   <td>1500</td>
 </tr>
 
 <tr>
