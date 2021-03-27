@@ -1,8 +1,11 @@
 import React, { Component } from "react";
-import { Button, Card, Form } from "react-bootstrap";
+import { Button, Card, Form, InputGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import './employer.css'
+import './employer.css';
+import IconButton from "@material-ui/core/IconButton";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 class EmployerSignin extends Component {
   constructor() {
@@ -10,7 +13,9 @@ class EmployerSignin extends Component {
     this.state = {
       email: null,
       password: null,
+      showPassword: false, // added to show/hide password
     };
+    
   }
 
   userTyping = (type, e) => {
@@ -25,6 +30,7 @@ class EmployerSignin extends Component {
       default:
         break;
     }
+    console.log(this.state.showPassword)
   };
 
   submitSignin = (e) => {
@@ -51,6 +57,11 @@ class EmployerSignin extends Component {
       .catch((err) => {
         console.log("Error: ", err);
       });
+  };
+  togglePasswordVisiblity = () => { // to handle visibility of passsword 
+    this.setState({
+      showPassword: !(this.state.showPassword)
+    });
   };
 
   render() {
@@ -104,12 +115,28 @@ class EmployerSignin extends Component {
                   <Form.Label style={{ fontWeight: "bold" }}>
                     Password
                   </Form.Label>
-                  <Form.Control
-                    style={{ borderColor: "#ffc107", color: "#000000" }}
-                    type="password"
-                    placeholder="Password"
-                  />
-
+                  
+                  <InputGroup> 
+                         
+                    <Form.Control
+                      style={{ borderColor: "#ffc107", color: "#000000" }}
+                      type={this.state.showPassword?"text":"password"}
+                    
+                    />
+                    <InputGroup.Append>
+                      <InputGroup.Text style={{borderColor: "#ffc107", color: "#000000", height: "37px", width: "28px", paddingLeft:"1px",paddingRight:"1px" }}>
+                        <IconButton style={{width: "25px"}}
+                          onClick={this.togglePasswordVisiblity}
+                        >
+                          {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton> 
+                      </InputGroup.Text>
+                    </InputGroup.Append>
+                  
+                  </InputGroup> 
+                  
+                  
+                  
                   <Form.Group
                     style={{
                       textAlign: "left",
@@ -131,7 +158,9 @@ class EmployerSignin extends Component {
                 >
                   Signin
                 </Button>
+                
               </Form>
+              
             </Card.Body>
           </Card>
         </div>
