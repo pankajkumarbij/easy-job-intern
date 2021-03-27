@@ -483,7 +483,6 @@ const StudentSignup = () => {
                 style={{ color: "#6EE2CD", fontWeight: "bold" }}
                 variant="secondary"
                 type="submit"
-                disabled={!formIsValid}
               >
                 Register
               </Button>

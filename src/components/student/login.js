@@ -206,7 +206,6 @@ function LoginForm() {
                 style={{ color: "#ffc107", fontWeight: "bold" }}
                 variant="secondary"
                 type="submit"
-                disabled={!formIsValid}
               >
                 Signin
               </Button>
