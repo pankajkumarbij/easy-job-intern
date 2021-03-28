@@ -1,40 +1,28 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const studentSchema = new Schema({
-    personName:{
+const employerSchema = new Schema({
+    companyName:{
         type: String,
         required:true,
         // maxlength:40
     },
-    email:{
+    personName:{
         type:String,
         required: true,
         // unique:true
     },
-    contact:{
+    email:{
         type:String,
         required:true,
         // minlength:10,
         // maxlength:10
     },
+    contact:{
+        type:String,
+        required: true
+    },
     password:{
-        type:String,
-        required: true
-    },
-    branch:{
-        type:String,
-        required: true
-    },
-    year:{
-        type:String,
-        required: true
-    },
-    degree:{
-        type:String,
-        required: true
-    },
-    institutionName:{
         type:String,
         required: true
     },
@@ -44,9 +32,8 @@ const studentSchema = new Schema({
             required:true
         }
     }]
-
 });
 
-const Student = mongoose.model('Student',studentSchema);
+const Employer = mongoose.model('Employer',employerSchema);
 
-module.exports = Student;
+module.exports = Employer;

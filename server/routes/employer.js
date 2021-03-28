@@ -5,45 +5,41 @@ var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/"
 const bcrypt = require("bcryptjs")
 const {JWT_SECRET} = require('../keys');
-const auth_student = require('../middleware/auth_student.js');
-
+const auth_employer = require('../middleware/auth_employer.js');
 //const email = require('../utils/email');
 
-const Student = require("../models/student");
+const Employer = require("../models/employer");
 
 router.get('/', (req, res)=>{
-    res.json({message:"student auth"})
+    res.json({message:"employer auth"})
 })
 
 // SignUp       post      /auth/signup
 
 router.post("/signup",(req,res)=>{
-    const {institutionName,personName,email,contact,password,passwordConfirmation,branch,year,degree} = req.body
+    const {companyName,personName,email,contact,password,passwordConfirmation} = req.body
     if(password !== passwordConfirmation){
         return res.json({error:"Password dosen't match"})
     }
-    if(!institutionName || !personName || !email || !contact || !password || !passwordConfirmation || !branch || !year || !degree  ){
-        return res.json({error:"Please add all fields"});
+    if(!companyName || !personName || !email || !contact || !password || !passwordConfirmation){
+        return res.json({error:"Please add all fields"})
     }
-   Student.findOne({email})
+    Employer.findOne({email})
     .then((savedUser)=>{
         if(savedUser){
             return res.json({error:"User already exsist"})
         }
         bcrypt.hash(password,10)
         .then(async hashedpassword => {
-            const student = new Student({
-                institutionName,
+            const employer = new Employer({
+                companyName,
                 personName,
                 email,
                 contact,
-                branch,
-                year,
-                degree,
                 password:hashedpassword
             })
             //await email(name, email, mobile);
-            student.save()
+            employer.save()
             .then(user=>{
                 res.json({message:"Saved Succcessfully",user:user})
             }).catch(err=>{
@@ -62,7 +58,8 @@ router.post('/signin',(req,res)=>{
     if(!email || !password){
         return res.json({error:"Please Add Email or Password"})
     }
-    Student.findOne({email})
+    
+    Employer.findOne({email})
     .then(savedUser => {
         if(!savedUser){
             return res.json({error:"Invalid email or password"})
@@ -73,10 +70,10 @@ router.post('/signin',(req,res)=>{
             if(doMatch){
                 // res.json({message:"SignIn successfull"})
                 const token = jwt.sign({_id:savedUser._id},JWT_SECRET)
-                const {_id,personName,email,contact,branch,year,degree} = savedUser
+                const {_id,personName,email,contact,companyName} = savedUser
                 savedUser.tokens = savedUser.tokens.concat({token:token})
                 savedUser.save()
-               return res.status(200).json({token,user:{_id,email,personName,contact,branch,year,degree}})
+               return res.json({token,user:{_id,personName,email,contact,companyName}})
             }else{
                 return res.json({error:"Invalid Email or Password"})
             }
@@ -91,38 +88,8 @@ router.post('/signin',(req,res)=>{
 
 })
 
-//patch
-router.patch('/update', auth_student, async(req, res)=>{
-    const updates = Object.keys(req.body)
-    const allowedUpdates = ['personName', 'email','contact', 'password', 'institutionName', 'degree', 'year', 'branch']
-    const isValid = updates.every((update)=>{
-        return allowedUpdates.includes(update)
-    })
-    if(!isValid){
-        res.status(400).send({error: 'Invalid Updates!'})
-    }
-    try{
-        if (updates.includes("password")){
-            req.body.password = await bcrypt.hash(req.body.password, 10)
-        }
-
-        updates.forEach(update => {
-            req.user[update] = req.body[update]
-        })
-        
-        await req.user.save()
-        const {_id,personName,email,contact,branch,year,degree} = req.user
-        return res.status(200).json({user:{_id,email,personName,contact,branch,year,degree}})
-
-    }
-    catch(e){
-        res.status(400).send(e)
-    }
-
-})
-
 //logout
-router.get('/logout', auth_student , async(req, res)=>{
+router.get('/logout', auth_employer , async(req, res)=>{
     try{
         req.user.tokens = req.user.tokens.filter((token)=>{
             return req.token!==token.token
@@ -137,7 +104,7 @@ router.get('/logout', auth_student , async(req, res)=>{
 
 
 //logoutAll
-router.get('/logoutAll', auth_student, async(req, res)=>{
+router.get('/logoutAll', auth_employer, async(req, res)=>{
     try{
         req.user.tokens = []
         await req.user.save()

@@ -1,79 +1,217 @@
-import React,{useState} from "react";
-import {useHistory} from 'react-router-dom'
-import { Form, Button,Alert } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button, Card, Form, Alert, InputGroup } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import checkValidity from "../../utils/checkValidation";
+import axios from "axios";
 import "./register.css";
+import IconButton from "@material-ui/core/IconButton";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 function LoginForm() {
-  const history = useHistory();
+  //creating a dicitionary for every field of the form
+  const initialState = {
+    email: {
+      //value of the input field
+      value: "",
+      //rules to check while validating the input
+      validation: {
+        required: true,
+        isEmail: true,
+      },
+      //error messages to show in case any validation rule is not followed
+      errorMessage: "",
+      // boolean value to check if the whole input field is valid or not
+      valid: false,
+      //boolean value to check if the input field is touched or not
+      touched: false,
+    },
 
- const [email,setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error,setError] = useState("")
-  const [success, setSuccess] = useState("")
+    password: {
+      value: "",
+      validation: {
+        required: true,
+        minLength: 8,
+      },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
+    showPassword: false,
+  };
+  const [formValues, setFormValues] = useState(initialState);
 
-  const PostData = () => {
-    fetch("/student/signin",{
-      method: 'post',
-      headers: { 
-          "Content-Type": "application/json"
-       },
-       body:JSON.stringify({
-           email,
-           password
-       })
-  }).then(res=>res.json())
-  .then(data=>{
-      console.log(data)
-      if(data.error){
-         console.log(data.error)
-         setError(data.error)
-      }else{
-        localStorage.setItem("jwt",data.token)
-        localStorage.setItem("user",JSON.stringify(data.user))
-        window.location.reload(false);
-         setSuccess("Sign in Success")
-      }
-  }).catch((err) =>{
-      console.log(err)
-  })
-  setEmail("")
-  setPassword("")
-  }
+  const [formIsValid, setFormIsValid] = useState(false);
 
-  const showError = () => (error ? <Alert variant="danger"> {error} </Alert>:'');
-  const showSuccess = () => (success ? <Alert variant="success"> {success} </Alert>:'');
+  const handleChange = (e) => {
+    const updatedFormValues = { ...formValues };
+    const updatedFormElement = { ...updatedFormValues[e.target.name] };
+    updatedFormElement.value = e.target.value;
+    let validOutput = checkValidity(
+      updatedFormElement.value,
+      updatedFormElement.validation,
+      updatedFormValues.password.value
+    );
+    updatedFormElement.valid = validOutput[0];
+    updatedFormElement.errorMessage = validOutput[1];
+    updatedFormElement.touched = true;
+    updatedFormValues[e.target.name] = updatedFormElement;
 
-  const clearAlert = () => {
-    setError("")
-    setSuccess("")
-  }
+    let formValid = true;
+    for (let inputIdentifiers in updatedFormValues) {
+      formValid = updatedFormValues[inputIdentifiers].valid && formValid;
+    }
+    setFormValues(updatedFormValues);
+    setFormIsValid(formValid);
+  };
 
+  const submitSignin = (e) => {
+    e.preventDefault();
+    const { email, password } = formValues;
+    axios
+      .post("http://localhost:5000/student/signin", {
+        email: email.value,
+        password: password.value,
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.data.error) {
+          console.log(res.data.error);
+          alert(res.data.error);
+        } else {
+          localStorage.setItem("jwt", res.data.token);
+          localStorage.setItem("user", JSON.stringify(res.data.user));
+          console.log(
+            "Token: ",
+            res.data.token,
+            "User Details: ",
+            res.data.user
+          );
+          alert("Signin Successfull");
+        }
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
+    setFormValues(initialState);
+  };
+
+  const togglePasswordVisiblity = () => { // to handle visibility of passsword 
+    
+    setFormValues({...formValues, showPassword: !(formValues.showPassword)});
+  
+};
   return (
     <>
-      <div className="box">
-        <h1>Login</h1>
-        <div style={{maxWidth: "200px"}}>
-          {showError()}
-          {showSuccess()}
-        </div>
+      <div style={{ padding: "4vh 0" }}>
+        <Card
+          style={{
+            width: "40vw",
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: "4vh",
+            marginBottom: "4vh",
+            backgroundImage: "linear-gradient(to right, white , #ffc107)",
+          }}
+          className='register_card_custom'
+        >
+          <Card.Header
+            style={{
+              backgroundColor: "#6c6c6c",
+              color: "#ffc107",
+              fontFamily: '"Merriweather", serif',
+              fontSize: "1.25rem",
+            }}
+            as="h5"
+          >
+            Student Signin
+          </Card.Header>
+          <Card.Body>
+            <Form onSubmit={(e) => submitSignin(e)}>
+              <Form.Group
+                style={{ textAlign: "left" }}
+                controlId="formBasicEmail"
+              >
+                <Form.Label style={{ fontWeight: "bold" }}>
+                  Email address
+                </Form.Label>
+                <Form.Control
+                  style={{ borderColor: "#ffc107", color: "#000000" }}
+                  className={`${
+                    !formValues.email.valid && formValues.email.touched
+                      ? "input-error"
+                      : ""
+                  }`}
+                  type="email"
+                  placeholder="Enter email"
+                  name="email"
+                  value={formValues.email.value}
+                  onChange={handleChange}
+                />
+                {formValues.email.errorMessage && (
+                  <span className="error">{formValues.email.errorMessage}</span>
+                )}
+              </Form.Group>
 
-        <div className="container">
-          <Form onClick={()=>clearAlert()}>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <input className="form-control" type="email" placeholder="Enter Your Email Id" value={email} onChange={(e)=>setEmail(e.target.value)} />
-            </Form.Group>
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <input className="form-control" type="password" placeholder="Enter Your Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
-            </Form.Group>
-            <Button variant="success" 
-            onClick={()=>PostData()}
-            >
-              SignIn
-            </Button>
-          </Form>
-        </div>
+              <Form.Group
+                style={{ textAlign: "left" }}
+                controlId="formBasicPassword"
+              >
+                <Form.Label style={{ fontWeight: "bold" }}>Password</Form.Label>
+                <InputGroup>
+                  <Form.Control
+                    style={{ borderColor: "#ffc107", color: "#000000" }}
+                    type={formValues.showPassword?"text":"password"}
+                    className={`${
+                      !formValues.password.valid && formValues.password.touched
+                        ? "input-error"
+                        : ""
+                    }`}
+                    placeholder="Password"
+                    name="password"
+                    value={formValues.password.value}
+                    onChange={handleChange}
+                  />
+                  {formValues.password.errorMessage && (
+                    <span className="error">
+                      {formValues.password.errorMessage}
+                    </span>
+                  )}
+                  <InputGroup.Append>
+                    <InputGroup.Text style={{borderColor: "#ffc107", color: "#000000", height: "37px", width: "28px", paddingLeft:"1px",paddingRight:"1px" }}>
+                      <IconButton style={{width: "25px"}}
+                          onClick={togglePasswordVisiblity}
+                      >
+                        {formValues.showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton> 
+                    </InputGroup.Text>
+                 </InputGroup.Append>
+                </InputGroup>
+              </Form.Group>
+              <Form.Group
+                style={{
+                  textAlign: "left",
+                  fontSize: "1.5vh",
+                  marginTop: "10px",
+                }}
+              >
+                <Link to="/student-signup">
+                  <a style={{ fontWeight: "bold" }}>
+                    Don't have an account? Sign up
+                  </a>
+                </Link>
+              </Form.Group>
+
+              <Button
+                style={{ color: "#ffc107", fontWeight: "bold" }}
+                variant="secondary"
+                type="submit"
+              >
+                Signin
+              </Button>
+            </Form>
+          </Card.Body>
+        </Card>
       </div>
     </>
   );
