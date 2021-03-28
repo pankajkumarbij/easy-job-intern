@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { signup, signin, logout, logoutAll } = require("../controller/employer/employer.auth");
+const { signup, signin, logout, logoutAll } = require("../controller/employer.auth");
 const auth_employer = require("../middleware/auth_employer");
 
 router.post("/signup", signup);

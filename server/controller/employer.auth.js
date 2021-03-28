@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
-const auth_employer = require("../../middleware/auth_employer");
-const Employer = require("../../models/employer");
+const auth_employer = require("../middleware/auth_employer");
+const Employer = require("../models/employer");
  
 exports.signup = (req,res) => {
     const {companyName,personName,email,contact,password,passwordConfirmation} = req.body
@@ -55,10 +55,10 @@ exports.signin = (req, res) => {
         bcrypt.compare(password,savedUser.password)
         .then(doMatch=>{
             if(doMatch){
-                // res.json({message:"SignIn successfull"})
-                const token = jwt.sign({_id:savedUser._id},JWT_SECRET)
+                return res.json({message:"SignIn successfull"})
+                /*const token = jwt.sign({_id:savedUser._id},JWT_SECRET)
                 const {_id,personName,email,contact,companyName} = savedUser
-               return res.json({token,user:{_id,personName,email,contact,companyName}})
+                return res.json({token,user:{_id,personName,email,contact,companyName}})*/
             }else{
                 return res.json({error:"Invalid Email or Password"})
             }
