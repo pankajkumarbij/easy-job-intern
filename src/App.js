@@ -11,6 +11,7 @@ import AboutUs from "./components/about-us/about-us";
 import PrivacyPolicy from "./components/privacy-policy/privacy-policy";
 import TermsCondition from "./components/terms-condition/terms-condition";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Error from "./components/Error/Error";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
             <Route path="/terms-conditions" exact>
               <TermsCondition />
             </Route>
+            <Route component ={Error}/>
           </Switch>
         </main>
 
