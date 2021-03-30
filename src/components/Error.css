@@ -1,0 +1,35 @@
+*
+{
+  margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ font-family: Arial, Helvetica, sans-serif;
+
+}
+.error {
+  height: 90vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+ justify-content: center;
+  align-items: center;
+  text-shadow: 1px 2px 3px #2b5d61;
+  background-color: #052224;
+  color: #798a8b;
+}
+.error h1,button, p{
+ align-items: center;
+}
+
+
+@media (max-width: 768px) {
+  .error {
+    height: 80vh;
+  }
+  .error h1{
+    font-size: 5rem;
+  }
+  .error p{
+    font-size: 3rem;
+  }
+}
