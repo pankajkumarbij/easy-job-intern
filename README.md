@@ -65,7 +65,8 @@ cd easy-job-intern
   (b) for run server use 'nodemon' or 'node index.js' after change directory to server.
 ```
 Start Working on it and make a PR.
-For a more clear understanding of contribution guidelines please read contributing.MD file.
+<br>
+For a more clear understanding of contribution guidelines please read <a href="https://github.com/pankajkumarbij/easy-job-intern/blob/master/contributing.md">contributing.MD</a> file.
 
 # Open Source Programs we have been associated with: 
 
