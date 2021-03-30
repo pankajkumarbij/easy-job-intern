@@ -64,7 +64,7 @@ exports.signin = (req, res) => {
                 const {_id,personName,email,contact,branch,year,degree} = savedUser
                 savedUser.tokens = savedUser.tokens.concat({token:token})
                 savedUser.save()
-               return res.status(200).json({token,user:{_id,email,personName,contact,branch,year,degree}})
+                return res.status(200).json({token,user:{_id,email,personName,contact,branch,year,degree}})
             }else{
                 return res.json({error:"Invalid Email or Password"})
             }

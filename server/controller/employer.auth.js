@@ -55,10 +55,10 @@ exports.signin = (req, res) => {
         bcrypt.compare(password,savedUser.password)
         .then(doMatch=>{
             if(doMatch){
-                return res.json({message:"SignIn successfull"})
-                /*const token = jwt.sign({_id:savedUser._id},JWT_SECRET)
+                //return res.json({message:"SignIn successfull"})
+                const token = jwt.sign({_id:savedUser._id},JWT_SECRET)
                 const {_id,personName,email,contact,companyName} = savedUser
-                return res.json({token,user:{_id,personName,email,contact,companyName}})*/
+                return res.json({token,user:{_id,personName,email,contact,companyName}})
             }else{
                 return res.json({error:"Invalid Email or Password"})
             }
