@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card, Container, Row, Col } from "react-bootstrap";
+import { Card, Container, Row } from "react-bootstrap";
 import "./about-us.css";
 
 export default function AboutUs() {

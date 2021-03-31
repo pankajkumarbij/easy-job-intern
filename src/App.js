@@ -50,7 +50,6 @@ function App() {
             <Route component ={Error}/>
           </Switch>
         </main>
-
         <Footer />
       </BrowserRouter>
     </div>

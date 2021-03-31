@@ -1,5 +1,5 @@
-import { Button } from "bootstrap";
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Error.css";
 
 const Error = () => {
@@ -8,7 +8,7 @@ const Error = () => {
             <h1>Error 404</h1>
             <p>Sorry this page doesn't exist!</p>
             <Link to = "/">
-                <Button>Go back</Button>
+                Go Back
             </Link>
         </div>
     );
