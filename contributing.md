@@ -12,7 +12,7 @@ We are happy to welcome all the contributions from anyone willing to improve/add
   Clone the repository -
 
   ```
-  https://github.com/pankajkumarbij/easy-job-intern.git
+  https://github.com/<your-user-name>/easy-job-intern.git
   ```
 
   ### Backend
