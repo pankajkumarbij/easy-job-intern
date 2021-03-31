@@ -7,10 +7,78 @@ When contributing to this repository, please first discuss the change you wish t
 This documentation contains a set of guidelines to help you during the contribution process.
 We are happy to welcome all the contributions from anyone willing to improve/add new scripts to this project. Thank you for helping out and remember, **no contribution is too small.**
 
-#### Table Of Contents
+- ## Setup Guidelines
 
-- [Contributing Guidelines](#contributing-guidelines)
-      - [Table Of Contents](#table-of-contents)
+  Clone the repository -
+
+  ```
+  https://github.com/pankajkumarbij/easy-job-intern.git
+  ```
+
+  ### Backend
+
+  1. Run `cd server` on your CLI.
+
+  2. Install the dependencies by running
+
+     ```
+     npm install
+     ```
+
+  3. Run the server
+
+     ```
+     npm run server
+     ```
+
+  ### Frontend
+
+  1. Navigate to the root folder i.e. easy-job-intern.git
+
+  2. Install the dependencies by running
+
+     ```
+     npm install
+     ```
+
+  3. Run the server
+
+     ```
+     npm start
+     ```
+
+     _NOTE: To run the Frontend side of the application it recommended to run the backend server too._
+
+  ## Start Frontend & Backend simultaneously
+
+   1. Navigate to the root folder i.e.  easy-job-intern.git
+
+   2. Install the dependencies by running
+
+      ```
+      npm install
+      ```
+
+      _NOTE:  No need to do  step-2 if frontend is already setup_
+
+   3. Start Frontend & Backend simultaneously
+
+      ```
+      npm run dev
+      ```
+
+  
+
+  
+
+  #### Table Of Contents
+
+  - [Contributing Guidelines](#contributing-guidelines)
+  - [Setup Guidelines](#Setup Guidelines)
+       - [Backend](#Backend)
+       - [Frontend](#Frontend)
+       - [Start Frontend & Backend simultaneously](#Start Frontend & Backend simultaneously)
+
   - [Submitting Contributions👩‍💻👨‍💻](#submitting-contributions)
     - [Step 0 : Find an issue  🔍](#step-0--find-an-issue--)
     - [Step 1 : Fork the Project 🍴](#step-1--fork-the-project-)
