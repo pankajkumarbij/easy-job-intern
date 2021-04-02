@@ -15,7 +15,7 @@ We are happy to welcome all the contributions from anyone willing to improve/add
 - [Submitting Contributions👩‍💻👨‍💻](#submitting-contributions)
   - [Step 0 : Find an issue  🔍](#step-0--find-an-issue--)
   - [Step 1 : Fork the Project 🍴](#step-1--fork-the-project-)
-  - [Step 2 :Setup Guidelines](#Step 2 :Setup Guidelines)
+  - [Step 2 : Setup Guidelines](#Step 2 :Setup Guidelines)
     - [Backend](#Backend)
     - [Frontend](#Frontend)
     - [Start Frontend & Backend simultaneously](#Start Frontend & Backend simultaneously)
@@ -68,7 +68,7 @@ $ git rebase upstream/<branch-name>
 3. Run the server
 
    ```
-   npm run server
+   npm start
    ```
 
 ### Frontend
