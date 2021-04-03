@@ -68,7 +68,7 @@ $ git rebase upstream/<branch-name>
 3. Run the server
 
    ```
-   npm start
+   node index
    ```
 
 ### Frontend
