@@ -1,15 +1,19 @@
-import React, { Component , useState } from "react";
+import React, { Component , useContext, useState } from "react";
 import { Button, Card, Form, Alert , InputGroup } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 import axios from "axios";
 import './employer.css';
 import IconButton from "@material-ui/core/IconButton";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import { UserContext } from "../../App";
 
 
 function EmployerSignin(){
+  const { state, dispatch } = useContext(UserContext);
+  const history = useHistory();
+
   const initialState = {
     email: {
       //value of the input field
@@ -81,6 +85,7 @@ function EmployerSignin(){
         } else {
           localStorage.setItem("jwt", res.data.token);
           localStorage.setItem("user", JSON.stringify(res.data.user));
+          dispatch({ type: "USER", payload: res.data.user });
           console.log(
             "Token: ",
             res.data.token,
@@ -88,6 +93,7 @@ function EmployerSignin(){
             res.data.user
           );
           alert("Signin Successfull");
+          history.push('/');
         }
       })
       .catch((err) => {

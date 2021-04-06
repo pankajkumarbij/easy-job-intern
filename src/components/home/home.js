@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, Container, Row, Col, Button, ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./home.css";
+import { UserContext } from "../../App";
 
 const Home = () => {
+  const { state, dispatch } = useContext(UserContext);
+  console.log(state);
+
   return (
     <>
       <div class="home">
@@ -14,7 +18,7 @@ const Home = () => {
           
           class="col d-flex justify-content-center"
         >
-          <Card
+          {!state && <Card
             style={{
               width: "75vh",
               marginTop: "6%",
@@ -33,57 +37,57 @@ const Home = () => {
                 Get Started 
               </Button>
             </Card.Body>
-          </Card>
+          </Card>}
         </div>
         <div style={{ background: "", padding: "30px 0 80px 0" }}>
         
           <Container>
           
             <Row>
-              <Col class="col-lg-3 col-md-6 col-sm-12" id="offer-range">
+              <Col className="col-lg-3 col-md-6 col-sm-12" id="offer-range">
                 <img src="images/industry.png" alt=""></img>
                 <h4 style={{ marginTop: 15, marginBottom: 15 }}>
                   Internship By Industry
                 </h4>
                 <ListGroup>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     <ListGroup.Item variant="primary">IT</ListGroup.Item>
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     <ListGroup.Item action variant="secondary">
                       Marketing
                     </ListGroup.Item>
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     {" "}
                     <ListGroup.Item action variant="success">
                       Design
                     </ListGroup.Item>
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     {" "}
                     <ListGroup.Item action variant="danger">
                       MBA
                     </ListGroup.Item>
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     {" "}
                     <ListGroup.Item action variant="warning">
                       Engineering
                     </ListGroup.Item>{" "}
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     {" "}
                     <ListGroup.Item action variant="info">
                       Media
                     </ListGroup.Item>{" "}
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     <ListGroup.Item action variant="success">
                       Teaching
                     </ListGroup.Item>
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     {" "}
                     <ListGroup.Item action variant="dark">
                       Finance
@@ -91,51 +95,51 @@ const Home = () => {
                   </a>
                 </ListGroup>
               </Col>
-              <Col class="col-lg-3 col-md-6 col-sm-12" id="offer-range">
+              <Col className="col-lg-3 col-md-6 col-sm-12" id="offer-range">
                 <img src="images/location.png" alt=""></img>
                 <h4 style={{ marginTop: 15, marginBottom: 15 }}>
                   {" "}
                   Internship By Location
                 </h4>
                 <ListGroup>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     <ListGroup.Item variant="primary">Mumbai</ListGroup.Item>
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     <ListGroup.Item action variant="secondary">
                       Pune
                     </ListGroup.Item>
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     {" "}
                     <ListGroup.Item action variant="success">
                       Bangalore
                     </ListGroup.Item>
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     {" "}
                     <ListGroup.Item action variant="danger">
                       Chennai
                     </ListGroup.Item>
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     {" "}
                     <ListGroup.Item action variant="warning">
                       Kolkata
                     </ListGroup.Item>{" "}
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     {" "}
                     <ListGroup.Item action variant="info">
                       Gugaon
                     </ListGroup.Item>{" "}
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     <ListGroup.Item action variant="success">
                       Delhi
                     </ListGroup.Item>
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     {" "}
                     <ListGroup.Item action variant="dark">
                       India
@@ -143,52 +147,52 @@ const Home = () => {
                   </a>
                 </ListGroup>
               </Col>
-              <Col class="col-lg-3 col-md-6 col-sm-12" id="offer-range">
+              <Col className="col-lg-3 col-md-6 col-sm-12" id="offer-range">
                 <img src="images/stream.png" alt=""></img>
                 <h4 style={{ marginTop: 15, marginBottom: 15 }}>
                   Internship By Stream
                 </h4>
                 <ListGroup>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     <ListGroup.Item variant="primary">
                       Management
                     </ListGroup.Item>
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     <ListGroup.Item action variant="secondary">
                       Manufacturing
                     </ListGroup.Item>
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     {" "}
                     <ListGroup.Item action variant="success">
                       Accounts
                     </ListGroup.Item>
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     {" "}
                     <ListGroup.Item action variant="danger">
                       Architecture
                     </ListGroup.Item>
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     {" "}
                     <ListGroup.Item action variant="warning">
                       Machine Learning
                     </ListGroup.Item>{" "}
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     {" "}
                     <ListGroup.Item action variant="info">
                       Data Science
                     </ListGroup.Item>{" "}
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     <ListGroup.Item action variant="success">
                       Development
                     </ListGroup.Item>
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     {" "}
                     <ListGroup.Item action variant="dark">
                       Design
@@ -196,52 +200,52 @@ const Home = () => {
                   </a>
                 </ListGroup>
               </Col>
-              <Col class="col-lg-3 col-md-6 col-sm-12" id="offer-range">
+              <Col className="col-lg-3 col-md-6 col-sm-12" id="offer-range">
                 <img src="images/ot2.png" alt=""></img>
                 <h4 style={{ marginTop: 15, marginBottom: 15 }}>
                   Online Trainings by Us
                 </h4>
                 <ListGroup>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     <ListGroup.Item variant="primary">
                       Programming With Python
                     </ListGroup.Item>
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     <ListGroup.Item action variant="secondary">
                       Digital Marketing
                     </ListGroup.Item>
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     {" "}
                     <ListGroup.Item action variant="success">
                       Web Development
                     </ListGroup.Item>
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     {" "}
                     <ListGroup.Item action variant="danger">
                       Machine Learning
                     </ListGroup.Item>
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     {" "}
                     <ListGroup.Item action variant="warning">
                       Advanced Excel
                     </ListGroup.Item>{" "}
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     {" "}
                     <ListGroup.Item action variant="info">
                       Ethical Hacking
                     </ListGroup.Item>{" "}
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     <ListGroup.Item action variant="success">
                       AutoCAD
                     </ListGroup.Item>
                   </a>
-                  <a class="itemLink" href="#">
+                  <a className="itemLink" href="#">
                     {" "}
                     <ListGroup.Item action variant="dark">
                       Creative Writing
