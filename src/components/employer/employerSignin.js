@@ -73,7 +73,7 @@ function EmployerSignin(){
     e.preventDefault();
     const { email, password } = formValues;
     axios
-      .post("http://localhost:5000/student/signin", {
+      .post("http://localhost:5000/employer/signin", {
         email: email.value,
         password: password.value,
       })
