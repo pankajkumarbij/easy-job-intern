@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
 const auth_employer = require("../middleware/auth_employer");
+const {JWT_SECRET} = require('../keys');
 const Employer = require("../models/employer");
  
 exports.signup = (req,res) => {
