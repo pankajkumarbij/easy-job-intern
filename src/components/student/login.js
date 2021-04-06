@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Card, Form, Alert, InputGroup } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 import axios from "axios";
 import "./register.css";
 import IconButton from "@material-ui/core/IconButton";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import { UserContext } from "../../App";
 
 function LoginForm() {
+  const { state, dispatch } = useContext(UserContext);
+  const history = useHistory();
+
   //creating a dicitionary for every field of the form
   const initialState = {
     email: {
@@ -81,6 +85,7 @@ function LoginForm() {
         } else {
           localStorage.setItem("jwt", res.data.token);
           localStorage.setItem("user", JSON.stringify(res.data.user));
+          dispatch({ type: "USER", payload: res.data.user });
           console.log(
             "Token: ",
             res.data.token,
@@ -88,6 +93,7 @@ function LoginForm() {
             res.data.user
           );
           alert("Signin Successfull");
+          history.push('/');
         }
       })
       .catch((err) => {
