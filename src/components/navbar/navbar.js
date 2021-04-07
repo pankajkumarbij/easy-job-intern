@@ -13,25 +13,25 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../../App";
 
 function NavBar() {
-    const { state, dispatch } = useContext(UserContext);
-    console.log(state);
-//   useEffect(() => {
-//     const user = isAuth();
-//   }, []);
+  const { state, dispatch } = useContext(UserContext);
+  console.log(state);
+  //   useEffect(() => {
+  //     const user = isAuth();
+  //   }, []);
 
-//   const isAuth = () => {
-//     if (process.browser) {
-//       const checktoken = localStorage.getItem("jwt");
-//       if (checktoken) {
-//         if (localStorage.getItem("user")) {
-//           const user = localStorage.getItem("user");
-//           return JSON.parse(user);
-//         } else {
-//           return false;
-//         }
-//       }
-//     }
-//   };
+  //   const isAuth = () => {
+  //     if (process.browser) {
+  //       const checktoken = localStorage.getItem("jwt");
+  //       if (checktoken) {
+  //         if (localStorage.getItem("user")) {
+  //           const user = localStorage.getItem("user");
+  //           return JSON.parse(user);
+  //         } else {
+  //           return false;
+  //         }
+  //       }
+  //     }
+  //   };
 
   return (
     <>
@@ -114,11 +114,31 @@ function NavBar() {
               <Icon.Search />
             </Button>
           </Form>
-          <Nav>
+          <Nav className="ml-auto">
             {state ? (
               <React.Fragment>
-                <Nav.Link>Welcome {state.personName}</Nav.Link>
+                <Nav.Link className="my-auto" style={{ color: "#fff" }}>
+                  Welcome {state.personName}
+                </Nav.Link>
+                <Nav.Link className="my-auto">
+                  <Dropdown>
+                    <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                      Create
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item as={Link} to="/create-internship">
+                        Internship
+                      </Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/">
+                        Job
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Nav.Link>
                 <Nav.Link
+                  className="my-auto"
+                  style={{ color: "#fff" }}
                   onClick={() => {
                     localStorage.removeItem("jwt");
                     localStorage.removeItem("user");
