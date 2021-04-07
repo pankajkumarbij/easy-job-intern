@@ -15,6 +15,7 @@ import Error from "./components/Error/Error";
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { initialState, reducer } from "./reducers/userReducer";
 import NewInternship from "./components/CreateNew/CreateInternship";
+import NewJob from "./components/CreateNew/CreateJob";
 
 export const UserContext = createContext();
 
@@ -48,6 +49,9 @@ const Routing = () => {
       </Route>
       <Route path="/create-internship" exact>
         <NewInternship />
+      </Route>
+      <Route path="/create-job" exact>
+        <NewJob />
       </Route>
       <Route path="/about-us" exact>
         <AboutUs />
