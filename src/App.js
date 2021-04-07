@@ -14,6 +14,7 @@ import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
 import Error from "./components/Error/Error";
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { initialState, reducer } from "./reducers/userReducer";
+import NewInternship from "./components/CreateNew/CreateInternship";
 
 export const UserContext = createContext();
 
@@ -44,6 +45,9 @@ const Routing = () => {
       </Route>
       <Route path="/employer-login" exact>
         <EmployerSignin />
+      </Route>
+      <Route path="/create-internship" exact>
+        <NewInternship />
       </Route>
       <Route path="/about-us" exact>
         <AboutUs />
