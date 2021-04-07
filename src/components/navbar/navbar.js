@@ -130,7 +130,7 @@ function NavBar() {
                       <Dropdown.Item as={Link} to="/create-internship">
                         Internship
                       </Dropdown.Item>
-                      <Dropdown.Item as={Link} to="/">
+                      <Dropdown.Item as={Link} to="/create-job">
                         Job
                       </Dropdown.Item>
                     </Dropdown.Menu>
