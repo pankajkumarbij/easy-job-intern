@@ -1,16 +1,16 @@
-import React, { Component , useContext, useState } from "react";
-import { Button, Card, Form, Alert , InputGroup } from "react-bootstrap";
+import React, { Component, useContext, useState } from "react";
+import { Button, Card, Form, Alert, InputGroup } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 import axios from "axios";
-import './employer.css';
+import "./employer.css";
 import IconButton from "@material-ui/core/IconButton";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { UserContext } from "../../App";
+import toast, { Toaster } from 'react-hot-toast';
 
-
-function EmployerSignin(){
+function EmployerSignin() {
   const { state, dispatch } = useContext(UserContext);
   const history = useHistory();
 
@@ -81,7 +81,10 @@ function EmployerSignin(){
         console.log(res);
         if (res.data.error) {
           console.log(res.data.error);
-          alert(res.data.error);
+          // alert(res.data.error);
+          // toast(res.data.error);
+          const notify = () => toast(res.data.error);
+          notify();
         } else {
           localStorage.setItem("jwt", res.data.token);
           localStorage.setItem("user", JSON.stringify(res.data.user));
@@ -94,8 +97,11 @@ function EmployerSignin(){
             "User Details: ",
             res.data.user
           );
-          alert("Signin Successfull");
-          history.push('/');
+          // alert("Signin Successfull");
+          // toast("Signin Successfull");
+          const notify = () => toast('Signin Successfull');
+          notify();
+          history.push("/");
         }
       })
       .catch((err) => {
@@ -104,48 +110,48 @@ function EmployerSignin(){
     setFormValues(initialState);
   };
 
-  const togglePasswordVisiblity = () => { // to handle visibility of passsword 
-    
-    setFormValues({...formValues, showPassword: !(formValues.showPassword)});
-  
-};
-return (
-  <>
-    <div style={{ padding: "4vh 0" }}>
-      <Card
-        style={{
-          width: "40vw",
-          marginLeft: "auto",
-          marginRight: "auto",
-          marginTop: "4vh",
-          marginBottom: "4vh",
-          backgroundImage: "linear-gradient(to right, white , #ffc107)",
-        }}
-        className='employer_form_card_custom'
-      >
-        <Card.Header
+  const togglePasswordVisiblity = () => {
+    // to handle visibility of passsword
+
+    setFormValues({ ...formValues, showPassword: !formValues.showPassword });
+  };
+  return (
+    <>
+      <div style={{ padding: "4vh 0" }}>
+      <Toaster />
+        <Card
           style={{
-            backgroundColor: "#6c6c6c",
-            color: "#ffc107",
-            fontFamily: '"Merriweather", serif',
-            fontSize: "1.25rem",
+            width: "40vw",
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: "4vh",
+            marginBottom: "4vh",
+            backgroundImage: "linear-gradient(to right, white , #ffc107)",
           }}
-          as="h5"
+          className="employer_form_card_custom"
         >
-          Employer Signin
-        </Card.Header>
-        <Card.Body>
-          <Form onSubmit={(e) => submitSignin(e)}>
-            <Form.Group
-              style={{ textAlign: "left" }}
-              controlId="formBasicEmail"
-             
-            >
-              <Form.Label style={{ fontWeight: "bold" }}>
-                Email address
-              </Form.Label>
-              <Form.Control
-                style={{ borderColor: "#ffc107", color: "#000000" }}
+          <Card.Header
+            style={{
+              backgroundColor: "#6c6c6c",
+              color: "#ffc107",
+              fontFamily: '"Merriweather", serif',
+              fontSize: "1.25rem",
+            }}
+            as="h5"
+          >
+            Employer Signin
+          </Card.Header>
+          <Card.Body>
+            <Form onSubmit={(e) => submitSignin(e)}>
+              <Form.Group
+                style={{ textAlign: "left" }}
+                controlId="formBasicEmail"
+              >
+                <Form.Label style={{ fontWeight: "bold" }}>
+                  Email address
+                </Form.Label>
+                <Form.Control
+                  style={{ borderColor: "#ffc107", color: "#000000" }}
                   className={`${
                     !formValues.email.valid && formValues.email.touched
                       ? "input-error"
@@ -160,22 +166,18 @@ return (
                 {formValues.email.errorMessage && (
                   <span className="error">{formValues.email.errorMessage}</span>
                 )}
-            </Form.Group>
+              </Form.Group>
 
-            <Form.Group
-              style={{ textAlign: "left" }}
-              controlId="formBasicPassword"
-              
-            >
-              <Form.Label style={{ fontWeight: "bold" }}>
-                Password
-              </Form.Label>
-              
-              <InputGroup> 
-                     
-                <Form.Control
-                   style={{ borderColor: "#ffc107", color: "#000000" }}
-                    type={formValues.showPassword?"text":"password"}
+              <Form.Group
+                style={{ textAlign: "left" }}
+                controlId="formBasicPassword"
+              >
+                <Form.Label style={{ fontWeight: "bold" }}>Password</Form.Label>
+
+                <InputGroup>
+                  <Form.Control
+                    style={{ borderColor: "#ffc107", color: "#000000" }}
+                    type={formValues.showPassword ? "text" : "password"}
                     className={`${
                       !formValues.password.valid && formValues.password.touched
                         ? "input-error"
@@ -191,52 +193,58 @@ return (
                       {formValues.password.errorMessage}
                     </span>
                   )}
-                <InputGroup.Append>
-                  <InputGroup.Text style={{borderColor: "#ffc107", color: "#000000", height: "37px", width: "28px", paddingLeft:"1px",paddingRight:"1px" }}>
-                    <IconButton style={{width: "25px"}}
-                      onClick={togglePasswordVisiblity}
+                  <InputGroup.Append>
+                    <InputGroup.Text
+                      style={{
+                        borderColor: "#ffc107",
+                        color: "#000000",
+                        height: "37px",
+                        width: "28px",
+                        paddingLeft: "1px",
+                        paddingRight: "1px",
+                      }}
                     >
-                      {formValues.showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton> 
-                  </InputGroup.Text>
-                </InputGroup.Append>
-              
-              </InputGroup> 
-              
-              
-              
-              <Form.Group
-                style={{
-                  textAlign: "left",
-                  fontSize: "1.5vh",
-                  marginTop: "10px",
-                }}
-              >
-                <Link to="/employer-signup">
-                  <a style={{ fontWeight: "bold" }}>
-                    Don't have an account? Sign up
-                  </a>
-                </Link>
+                      <IconButton
+                        style={{ width: "25px" }}
+                        onClick={togglePasswordVisiblity}
+                      >
+                        {formValues.showPassword ? (
+                          <Visibility />
+                        ) : (
+                          <VisibilityOff />
+                        )}
+                      </IconButton>
+                    </InputGroup.Text>
+                  </InputGroup.Append>
+                </InputGroup>
+
+                <Form.Group
+                  style={{
+                    textAlign: "left",
+                    fontSize: "1.5vh",
+                    marginTop: "10px",
+                  }}
+                >
+                  <Link to="/employer-signup">
+                    <a style={{ fontWeight: "bold" }}>
+                      Don't have an account? Sign up
+                    </a>
+                  </Link>
+                </Form.Group>
               </Form.Group>
-            </Form.Group>
-            <Button
-              style={{ color: "#ffc107", fontWeight: "bold" }}
-              variant="secondary"
-              type="submit"
-            >
-              Signin
-            </Button>
-            
-          </Form>
-          
-        </Card.Body>
-      </Card>
-    </div>
-  </>
-);
+              <Button
+                style={{ color: "#ffc107", fontWeight: "bold" }}
+                variant="secondary"
+                type="submit"
+              >
+                Signin
+              </Button>
+            </Form>
+          </Card.Body>
+        </Card>
+      </div>
+    </>
+  );
 }
-
-
-
 
 export default EmployerSignin;
