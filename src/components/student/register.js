@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { Button, Form, Card, InputGroup } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import checkValidity from "../../utils/checkValidation";
 import "./register.css";
 import IconButton from "@material-ui/core/IconButton";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import toast, { Toaster } from 'react-hot-toast';
+
 const StudentSignup = () => {
+  const history = useHistory();
   //creating a dicitionary for every field of the form
   const initialState = {
     personName: {
@@ -169,7 +172,12 @@ const StudentSignup = () => {
         })
         .then((res) => {
           console.log(res.data.user);
-          alert(res.data.message);
+          // alert(res.data.message);
+          const notify = () => toast(res.data.message);
+          notify();
+          if(res.data.user){
+            history.pushState("/student-login");
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -186,6 +194,7 @@ const StudentSignup = () => {
   return (
     <>
       <div style={{ padding: "4vh 0" }}>
+      <Toaster />
         <Card
           style={{
             width: "40vw",

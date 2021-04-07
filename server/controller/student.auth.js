@@ -4,6 +4,7 @@ const {JWT_SECRET} = require('../keys');
 const auth_student = require('../middleware/auth_student.js');
 const Student = require("../models/student");
 
+
 exports.signup = (req, res) => {
     const {institutionName,personName,email,contact,password,passwordConfirmation,branch,year,degree} = req.body
     if(password !== passwordConfirmation){
