@@ -31,13 +31,13 @@ exports.createInternship = (req, res) => {
     stipend,
     lastDate,
     duration,
+    techstack,
     createdBy: user
   });
 
-  console.log(internship);
 
   internship.save().then((intern) => {
-    res.json({ message: "Saved Succcessfully", internship: intern });
+    res.json({ message: "Saved Succcessfully"});
   }).catch((err) => {
       console.log(err);
       return res.json({error:"Something Went Wrong"})

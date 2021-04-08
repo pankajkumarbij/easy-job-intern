@@ -116,8 +116,11 @@ const NewInternship = () => {
       duration,
     } = formValues;
 
-    axios
-      .post("http://localhost:5000/employer/create-internship", {
+
+    axios({
+      method: "post",
+      url: "http://localhost:5000/employer/create-internship",
+      data: {
         companyName: companyName.value,
         description: description.value,
         location: location.value,
@@ -125,20 +128,28 @@ const NewInternship = () => {
         techstack: techstack.value,
         lastDate: lastDate.value,
         duration: duration.value,
-      })
-      .then((res) => {
-        console.log(res);
-        if (res.data.error) {
-          console.log(res.data.error);
-          // alert(res.data.error);
-          const notify = () => toast(res.data.error);
-          notify();
-        } else {
-          const notify = () => toast("Signin Successfull");
-          notify();
-          history.push("/");
-        }
-      });
+      },
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      console.log(res);
+      if (res.data.error) {
+        console.log(res.data.error);
+        // alert(res.data.error);
+        const notify = () => toast(res.data.error);
+        notify();
+      } else {
+        const notify = () => toast("Signin Successfull");
+        notify();
+        history.push("/");
+      }
+    }).catch((err) => {
+      console.log("Error: ", err);
+    });
+
+    setFormValues(initialState);
   };
 
   return (

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const {ObjectId} = mongoose.Schema.Types;
 
 const internshipSchema = new Schema({
-    personName:{
+    companyName:{
         type: String,
         required:true,
     },
@@ -20,7 +20,7 @@ const internshipSchema = new Schema({
         required:true,
     },
     techstack:{
-        type: [String],
+        type: String,
         required:true,
     },
     lastDate:{

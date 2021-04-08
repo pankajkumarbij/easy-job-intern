@@ -34,6 +34,7 @@ const Routing = () => {
     }
   }, []);
 
+  console.log(state);
 
   if (state) {
     if (state.userType == "employee") {

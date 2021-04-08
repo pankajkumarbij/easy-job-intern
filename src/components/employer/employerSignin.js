@@ -88,7 +88,9 @@ function EmployerSignin() {
         } else {
           localStorage.setItem("jwt", res.data.token);
           localStorage.setItem("user", JSON.stringify(res.data.user));
-          dispatch({ type: "USER", payload: res.data.user });
+          localStorage.setItem("type", JSON.stringify("employee"))
+          dispatch({ type: "USER", payload: {user: res.data.user , userType: "employee"} });
+          console.log(state);
           console.log(
             "Token: ",
             res.data.token,
