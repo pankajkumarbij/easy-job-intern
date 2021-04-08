@@ -1,9 +1,13 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
+import toast, { Toaster } from "react-hot-toast";
 import { Link, useHistory } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 
 const NewInternship = () => {
+  const history = useHistory();
+
   const initialState = {
     companyName: {
       //value of the input field
@@ -84,7 +88,7 @@ const NewInternship = () => {
     updatedFormElement.value = e.target.value;
     let validOutput = checkValidity(
       updatedFormElement.value,
-      updatedFormElement.validation,
+      updatedFormElement.validation
     );
     updatedFormElement.valid = validOutput[0];
     updatedFormElement.errorMessage = validOutput[1];
@@ -101,10 +105,56 @@ const NewInternship = () => {
 
   const submitInternship = (e) => {
     e.preventDefault();
-  }
+
+    const {
+      companyName,
+      description,
+      location,
+      stipend,
+      techstack,
+      lastDate,
+      duration,
+    } = formValues;
+
+
+    axios({
+      method: "post",
+      url: "http://localhost:5000/employer/create-internship",
+      data: {
+        companyName: companyName.value,
+        description: description.value,
+        location: location.value,
+        stipend: stipend.value,
+        techstack: techstack.value,
+        lastDate: lastDate.value,
+        duration: duration.value,
+      },
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      console.log(res);
+      if (res.data.error) {
+        console.log(res.data.error);
+        // alert(res.data.error);
+        const notify = () => toast(res.data.error);
+        notify();
+      } else {
+        const notify = () => toast("Signin Successfull");
+        notify();
+        history.push("/");
+      }
+    }).catch((err) => {
+      console.log("Error: ", err);
+    });
+
+    setFormValues(initialState);
+  };
 
   return (
     <div style={{ padding: "4vh 0" }}>
+      <Toaster />
       <Card
         style={{
           width: "40vw",
@@ -145,7 +195,9 @@ const NewInternship = () => {
                 onChange={handleChange}
               />
               {formValues.companyName.errorMessage && (
-                <span className="error">{formValues.companyName.errorMessage}</span>
+                <span className="error">
+                  {formValues.companyName.errorMessage}
+                </span>
               )}
             </Form.Group>
 
@@ -153,9 +205,7 @@ const NewInternship = () => {
               style={{ textAlign: "left" }}
               controlId="formBasicEmail"
             >
-              <Form.Label style={{ fontWeight: "bold" }}>
-                Location
-              </Form.Label>
+              <Form.Label style={{ fontWeight: "bold" }}>Location</Form.Label>
               <Form.Control
                 style={{ borderColor: "#ffc107", color: "#000000" }}
                 type="text"
@@ -165,7 +215,9 @@ const NewInternship = () => {
                 onChange={handleChange}
               />
               {formValues.location.errorMessage && (
-                <span className="error">{formValues.location.errorMessage}</span>
+                <span className="error">
+                  {formValues.location.errorMessage}
+                </span>
               )}
             </Form.Group>
 
@@ -185,7 +237,9 @@ const NewInternship = () => {
                 onChange={handleChange}
               />
               {formValues.description.errorMessage && (
-                <span className="error">{formValues.description.errorMessage}</span>
+                <span className="error">
+                  {formValues.description.errorMessage}
+                </span>
               )}
             </Form.Group>
 
@@ -193,9 +247,7 @@ const NewInternship = () => {
               style={{ textAlign: "left" }}
               controlId="formBasicEmail"
             >
-              <Form.Label style={{ fontWeight: "bold" }}>
-                Duration
-              </Form.Label>
+              <Form.Label style={{ fontWeight: "bold" }}>Duration</Form.Label>
               <Form.Control
                 style={{ borderColor: "#ffc107", color: "#000000" }}
                 type="text"
@@ -205,7 +257,9 @@ const NewInternship = () => {
                 onChange={handleChange}
               />
               {formValues.duration.errorMessage && (
-                <span className="error">{formValues.duration.errorMessage}</span>
+                <span className="error">
+                  {formValues.duration.errorMessage}
+                </span>
               )}
             </Form.Group>
 
@@ -213,9 +267,7 @@ const NewInternship = () => {
               style={{ textAlign: "left" }}
               controlId="formBasicEmail"
             >
-              <Form.Label style={{ fontWeight: "bold" }}>
-                Stipend
-              </Form.Label>
+              <Form.Label style={{ fontWeight: "bold" }}>Stipend</Form.Label>
               <Form.Control
                 style={{ borderColor: "#ffc107", color: "#000000" }}
                 type="text"
@@ -233,9 +285,7 @@ const NewInternship = () => {
               style={{ textAlign: "left" }}
               controlId="formBasicEmail"
             >
-              <Form.Label style={{ fontWeight: "bold" }}>
-                TechStack
-              </Form.Label>
+              <Form.Label style={{ fontWeight: "bold" }}>TechStack</Form.Label>
               <Form.Control
                 style={{ borderColor: "#ffc107", color: "#000000" }}
                 type="text"
@@ -245,7 +295,9 @@ const NewInternship = () => {
                 onChange={handleChange}
               />
               {formValues.techstack.errorMessage && (
-                <span className="error">{formValues.techstack.errorMessage}</span>
+                <span className="error">
+                  {formValues.techstack.errorMessage}
+                </span>
               )}
             </Form.Group>
 
@@ -253,9 +305,7 @@ const NewInternship = () => {
               style={{ textAlign: "left" }}
               controlId="formBasicEmail"
             >
-              <Form.Label style={{ fontWeight: "bold" }}>
-                Last Date 
-              </Form.Label>
+              <Form.Label style={{ fontWeight: "bold" }}>Last Date</Form.Label>
               <Form.Control
                 style={{ borderColor: "#ffc107", color: "#000000" }}
                 type="date"
@@ -265,20 +315,22 @@ const NewInternship = () => {
                 onChange={handleChange}
               />
               {formValues.lastDate.errorMessage && (
-                <span className="error">{formValues.lastDate.errorMessage}</span>
+                <span className="error">
+                  {formValues.lastDate.errorMessage}
+                </span>
               )}
             </Form.Group>
 
-            
-
-            {<Button
-              style={{ color: "#ffc107", fontWeight: "bold" }}
-              variant="secondary"
-              type="submit"
-              disabled={!formIsValid}
-            >
-              Create
-            </Button>}
+            {
+              <Button
+                style={{ color: "#ffc107", fontWeight: "bold" }}
+                variant="secondary"
+                type="submit"
+                disabled={!formIsValid}
+              >
+                Create
+              </Button>
+            }
           </Form>
         </Card.Body>
       </Card>
