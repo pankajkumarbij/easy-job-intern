@@ -35,7 +35,7 @@ const internshipSchema = new Schema({
         type: ObjectId,
         ref: "Employer"
     }
-})
+}, {timestamps: true})
 
 const Internship = mongoose.model('Internship',internshipSchema);
 
