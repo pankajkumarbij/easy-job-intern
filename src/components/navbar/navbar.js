@@ -14,7 +14,8 @@ import { UserContext } from "../../App";
 
 function NavBar() {
   const { state, dispatch } = useContext(UserContext);
-  console.log(state);
+  if(state) console.log(state.user.personName);
+  
   //   useEffect(() => {
   //     const user = isAuth();
   //   }, []);
@@ -115,12 +116,12 @@ function NavBar() {
             </Button>
           </Form>
           <Nav className="ml-auto">
-            {state ? (
+            {(state && state.user) ? (
               <React.Fragment>
                 <Nav.Link className="my-auto" style={{ color: "#fff" }}>
-                  Welcome {state.personName}
+                  Welcome {state.user.personName}
                 </Nav.Link>
-                <Nav.Link className="my-auto">
+                {state.userType === "employee" && <Nav.Link className="my-auto">
                   <Dropdown>
                     <Dropdown.Toggle variant="dark" id="dropdown-basic">
                       Create
@@ -135,13 +136,14 @@ function NavBar() {
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
-                </Nav.Link>
+                </Nav.Link>}
                 <Nav.Link
                   className="my-auto"
                   style={{ color: "#fff" }}
                   onClick={() => {
                     localStorage.removeItem("jwt");
                     localStorage.removeItem("user");
+                    localStorage.removeItem("type");
                     window.location.reload(false);
                   }}
                 >
