@@ -16,4 +16,5 @@ router.get("/logoutAll", auth_employer, logoutAll);
 router.post("/create-internship", auth_employer, createInternship);
 
 
+
 module.exports = router;

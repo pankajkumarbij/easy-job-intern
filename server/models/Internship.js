@@ -20,7 +20,7 @@ const internshipSchema = new Schema({
         required:true,
     },
     techstack:{
-        type: String,
+        type: [String],
         required:true,
     },
     lastDate:{

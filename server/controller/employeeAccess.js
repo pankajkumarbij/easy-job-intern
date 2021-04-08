@@ -24,6 +24,10 @@ exports.createInternship = (req, res) => {
     return res.json({ error: "Please add all fields" });
   }
 
+  // let techStackArray = new Array();
+  const techStackArray = techstack.split(',');
+  // console.log(techStackArray);
+
   const internship = new Internship({
     companyName,
     description,
@@ -31,9 +35,11 @@ exports.createInternship = (req, res) => {
     stipend,
     lastDate,
     duration,
-    techstack,
+    techstack: techStackArray,
     createdBy: user
   });
+
+  // console.log(internship);
 
 
   internship.save().then((intern) => {
