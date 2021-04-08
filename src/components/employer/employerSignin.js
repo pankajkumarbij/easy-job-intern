@@ -1,15 +1,19 @@
-import React, { Component , useState } from "react";
-import { Button, Card, Form, Alert , InputGroup } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Button, Card, Form, InputGroup } from "react-bootstrap";
+import { Link, useHistory } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 import axios from "axios";
 import './employer.css';
 import IconButton from "@material-ui/core/IconButton";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import { UserContext } from "../../App";
 
 
 function EmployerSignin(){
+  const { dispatch } = useContext(UserContext);
+  const history = useHistory();
+
   const initialState = {
     email: {
       //value of the input field
@@ -41,7 +45,7 @@ function EmployerSignin(){
   };
   const [formValues, setFormValues] = useState(initialState);
 
-  const [formIsValid, setFormIsValid] = useState(false);
+  const [setFormIsValid] = useState(false);
 
   const handleChange = (e) => {
     const updatedFormValues = { ...formValues };
@@ -69,7 +73,7 @@ function EmployerSignin(){
     e.preventDefault();
     const { email, password } = formValues;
     axios
-      .post("http://localhost:5000/student/signin", {
+      .post("http://localhost:5000/employer/signin", {
         email: email.value,
         password: password.value,
       })
@@ -81,6 +85,7 @@ function EmployerSignin(){
         } else {
           localStorage.setItem("jwt", res.data.token);
           localStorage.setItem("user", JSON.stringify(res.data.user));
+          dispatch({ type: "USER", payload: res.data.user });
           console.log(
             "Token: ",
             res.data.token,
@@ -88,6 +93,7 @@ function EmployerSignin(){
             res.data.user
           );
           alert("Signin Successfull");
+          history.push('/');
         }
       })
       .catch((err) => {
@@ -205,7 +211,7 @@ return (
                 }}
               >
                 <Link to="/employer-signup">
-                  <a style={{ fontWeight: "bold" }}>
+                  <a href="/#" style={{ fontWeight: "bold" }}>
                     Don't have an account? Sign up
                   </a>
                 </Link>

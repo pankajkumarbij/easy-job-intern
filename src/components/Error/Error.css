@@ -7,7 +7,7 @@
 
 }
 .error {
-  height: 90vh;
+  /* height: 90vh; */
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -23,9 +23,9 @@
 
 
 @media (max-width: 768px) {
-  .error {
-    height: 80vh;
-  }
+  /* .error {
+    /* height: 80vh; 
+  } */
   .error h1{
     font-size: 5rem;
   }

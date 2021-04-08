@@ -108,7 +108,7 @@ const StudentSignup = () => {
   const [formValues, setFormValues] = useState(initialState);
   const [signupError, setSignupError] = useState(null);
 
-  const [formIsValid, setFormIsValid] = useState(false); //boolean to check that the whole form is valid or not
+  const [setFormIsValid] = useState(false); //boolean to check that the whole form is valid or not
 
   const handleChange = (e) => {
     const updatedFormValues = { ...formValues };
@@ -465,7 +465,7 @@ const StudentSignup = () => {
               {/* Already a user? */}
               <Form.Group style={{ textAlign: "left", fontSize: "1.5vh" }}>
                 <Link to="/student-login">
-                  <a style={{ fontWeight: "bold" }}>
+                  <a href="/#" style={{ fontWeight: "bold" }}>
                     Already have an account? Sign in
                   </a>
                 </Link>

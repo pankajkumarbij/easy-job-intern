@@ -1,5 +1,5 @@
 import React, { useState} from 'react'
-import { Form, Button, Alert } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import './contact-us.css'
 
 const ContactUs = () => {
@@ -105,7 +105,7 @@ const ContactUs = () => {
       lastNameErr.lastNameLong = "*last name is too long*";
       isValid = false ;
     }
-
+    //eslint-disable-next-line
     const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (!email) {

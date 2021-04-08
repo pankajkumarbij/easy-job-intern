@@ -91,25 +91,25 @@ function Footer() {
               <p style={{ fontSize: "15px", marginBottom: "5px" }}>
                 Connect With Us!
               </p>
-              <a href="#">
+              <a href="/#">
                 <Icon.Linkedin
                   style={{ color: "#ffc107" }}
                   className="mx-md-3 mx-2"
                 ></Icon.Linkedin>{" "}
               </a>
-              <a href="#">
+              <a href="/#">
                 <Icon.Facebook
                   style={{ color: "#ffc107" }}
                   className="mx-md-3 mx-2"
                 ></Icon.Facebook>
               </a>
-              <a href="#">
+              <a href="/#">
                 <Icon.Twitter
                   style={{ color: "#ffc107" }}
                   className="mx-md-3 mx-2"
                 ></Icon.Twitter>
               </a>
-              <a href="#">
+              <a href="/#">
                 <Icon.Youtube
                   style={{ color: "#ffc107" }}
                   className="mx-md-3 mx-2"
