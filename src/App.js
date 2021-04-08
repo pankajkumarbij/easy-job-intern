@@ -23,51 +23,104 @@ const Routing = () => {
   const history = useHistory();
   const { state, dispatch } = useContext(UserContext);
 
+  let routes;
+
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
+    const type = JSON.parse(localStorage.getItem("type"));
+    console.log(type);
     if (user) {
-      dispatch({ type: "USER", payload: user });
+      dispatch({ type: "USER", payload: {user: user, userType: type} });
     }
   }, []);
 
-  return (
-    <Switch>
-      <Route path="/" exact compo>
-        <Home />
-      </Route>
-      <Route path="/student-login" exact>
-        <Login />
-      </Route>
-      <Route path="/student-signup" exact>
-        <SignUp />
-      </Route>
-      <Route path="/employer-signup" exact>
-        <EmployerSignup />
-      </Route>
-      <Route path="/employer-login" exact>
-        <EmployerSignin />
-      </Route>
-      <Route path="/create-internship" exact>
-        <NewInternship />
-      </Route>
-      <Route path="/create-job" exact>
-        <NewJob />
-      </Route>
-      <Route path="/about-us" exact>
-        <AboutUs />
-      </Route>
-      <Route path="/contact-us" exact>
-        <ContactUs />
-      </Route>
-      <Route path="/privacy-policy" exact>
-        <PrivacyPolicy />
-      </Route>
-      <Route path="/terms-conditions" exact>
-        <TermsCondition />
-      </Route>
-      <Route component={Error} />
-    </Switch>
-  );
+
+  if (state) {
+    if (state.userType == "employee") {
+      routes = (
+        <Switch>
+          <Route path="/" exact compo>
+            <Home />
+          </Route>
+          <Route path="/create-internship" exact>
+            <NewInternship />
+          </Route>
+          <Route path="/create-job" exact>
+            <NewJob />
+          </Route>
+          <Route path="/about-us" exact>
+            <AboutUs />
+          </Route>
+          <Route path="/contact-us" exact>
+            <ContactUs />
+          </Route>
+          <Route path="/privacy-policy" exact>
+            <PrivacyPolicy />
+          </Route>
+          <Route path="/terms-conditions" exact>
+            <TermsCondition />
+          </Route>
+          <Route component={Error} />
+        </Switch>
+      );
+    } else {
+      routes = (
+        <Switch>
+          <Route path="/" exact compo>
+            <Home />
+          </Route>
+          <Route path="/about-us" exact>
+            <AboutUs />
+          </Route>
+          <Route path="/contact-us" exact>
+            <ContactUs />
+          </Route>
+          <Route path="/privacy-policy" exact>
+            <PrivacyPolicy />
+          </Route>
+          <Route path="/terms-conditions" exact>
+            <TermsCondition />
+          </Route>
+          <Route component={Error} />
+        </Switch>
+      );
+    }
+  } else {
+    routes = (
+      <Switch>
+        <Route path="/" exact compo>
+          <Home />
+        </Route>
+        <Route path="/student-login" exact>
+          <Login />
+        </Route>
+        <Route path="/student-signup" exact>
+          <SignUp />
+        </Route>
+        <Route path="/employer-signup" exact>
+          <EmployerSignup />
+        </Route>
+        <Route path="/employer-login" exact>
+          <EmployerSignin />
+        </Route>
+        <Route path="/about-us" exact>
+          <AboutUs />
+        </Route>
+        <Route path="/contact-us" exact>
+          <ContactUs />
+        </Route>
+        <Route path="/privacy-policy" exact>
+          <PrivacyPolicy />
+        </Route>
+        <Route path="/terms-conditions" exact>
+          <TermsCondition />
+        </Route>
+        <Route component={Error} />
+      </Switch>
+    );
+  }
+
+  return routes;
 };
 
 function App() {

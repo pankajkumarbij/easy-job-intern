@@ -142,6 +142,8 @@ function NavBar() {
                   onClick={() => {
                     localStorage.removeItem("jwt");
                     localStorage.removeItem("user");
+                    localStorage.removeItem("user");
+                    localStorage.removeItem("type");
                     window.location.reload(false);
                   }}
                 >
