@@ -1,5 +1,5 @@
 const express = require("express");
-const { createInternship } = require("../controller/employeeAccess");
+const { createInternship, createJob } = require("../controller/employeeAccess");
 const router = express.Router();
 const {
   signup,
@@ -14,6 +14,7 @@ router.post("/signin", signin);
 router.get("/logout", auth_employer, logout);
 router.get("/logoutAll", auth_employer, logoutAll);
 router.post("/create-internship", auth_employer, createInternship);
+router.post("/create-job", auth_employer, createJob);
 
 
 
