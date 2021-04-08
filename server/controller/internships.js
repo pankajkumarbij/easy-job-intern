@@ -55,10 +55,11 @@ exports.createInternship = (req, res) => {
 exports.getAllInternships = (req, res) => {
   Internship.find()
     .populate("createdBy", "_id personName")
-    .exec((err, internships) => {
-      if (err) {
-        return res.json({ error: "Something Went Wrong" });
-      }
+    .sort("-createdAt")
+    .then((internships) => {
       res.json(internships);
+    })
+    .catch((err) => {
+      return res.json({ error: "Something Went Wrong" });
     });
 };

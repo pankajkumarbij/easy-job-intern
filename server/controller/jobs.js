@@ -52,10 +52,11 @@ exports.createJob = (req, res) => {
 exports.getAllJobs = (req, res) => {
   Job.find()
     .populate("createdBy", "_id personName")
-    .exec((err, jobs) => {
-      if (err) {
-        return res.json({ error: "Something Went Wrong" });
-      }
+    .sort("-createdAt")
+    .then((jobs) => {
       res.json(jobs);
     })
+    .catch((err) => {
+      return res.json({ error: "Something Went Wrong" });
+    });
 };
