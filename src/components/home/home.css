@@ -4,7 +4,7 @@
     font-size: 15px;
 }
 
-.itemLink:hover{
+#offer-range:hover{
     transform: scale(1.1);
 }
 

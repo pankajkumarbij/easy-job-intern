@@ -68,7 +68,7 @@ exports.getAllInternships = (req, res) => {
     .populate("createdBy", "_id personName")
     .sort("-createdAt")
     .then((internships) => {
-      res.json({internships: internships});
+      res.json(internships);
     })
     .catch((err) => {
       return res.json({ error: "Something Went Wrong" });
