@@ -68,7 +68,16 @@ const NewInternship = () => {
       valid: false,
       touched: false,
     },
-    duration: {
+    startDate: {
+      value: "",
+      validation: {
+        required: true,
+      },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
+    endDate: {
       value: "",
       validation: {
         required: true,
@@ -103,8 +112,13 @@ const NewInternship = () => {
     setFormIsValid(formValid);
   };
 
+
+
   const submitInternship = (e) => {
     e.preventDefault();
+    console.log(typeof(formValues.startDate.value));
+    const duration = new Date(formValues.endDate.value)-new Date(formValues.startDate.value);
+    console.log(duration);
 
     const {
       companyName,
@@ -113,9 +127,9 @@ const NewInternship = () => {
       stipend,
       techstack,
       lastDate,
-      duration,
+      startDate,
+      endDate,
     } = formValues;
-
 
     axios({
       method: "post",
@@ -127,27 +141,31 @@ const NewInternship = () => {
         stipend: stipend.value,
         techstack: techstack.value,
         lastDate: lastDate.value,
-        duration: duration.value,
+        startDate: startDate.value,
+        endDate: endDate.value,
+        duration: duration
       },
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
         "Content-Type": "application/json",
       },
-    }).then((res) => {
-      console.log(res);
-      if (res.data.error) {
-        console.log(res.data.error);
-        // alert(res.data.error);
-        const notify = () => toast(res.data.error);
-        notify();
-      } else {
-        const notify = () => toast("Signin Successfull");
-        notify();
-        history.push("/");
-      }
-    }).catch((err) => {
-      console.log("Error: ", err);
-    });
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data.error) {
+          console.log(res.data.error);
+          // alert(res.data.error);
+          const notify = () => toast(res.data.error);
+          notify();
+        } else {
+          const notify = () => toast("Signin Successfull");
+          notify();
+          history.push("/");
+        }
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
 
     setFormValues(initialState);
   };
@@ -247,26 +265,6 @@ const NewInternship = () => {
               style={{ textAlign: "left" }}
               controlId="formBasicEmail"
             >
-              <Form.Label style={{ fontWeight: "bold" }}>Duration</Form.Label>
-              <Form.Control
-                style={{ borderColor: "#ffc107", color: "#000000" }}
-                type="text"
-                placeholder="Enter duration"
-                name="duration"
-                value={formValues.duration.value}
-                onChange={handleChange}
-              />
-              {formValues.duration.errorMessage && (
-                <span className="error">
-                  {formValues.duration.errorMessage}
-                </span>
-              )}
-            </Form.Group>
-
-            <Form.Group
-              style={{ textAlign: "left" }}
-              controlId="formBasicEmail"
-            >
               <Form.Label style={{ fontWeight: "bold" }}>Stipend</Form.Label>
               <Form.Control
                 style={{ borderColor: "#ffc107", color: "#000000" }}
@@ -318,6 +316,44 @@ const NewInternship = () => {
                 <span className="error">
                   {formValues.lastDate.errorMessage}
                 </span>
+              )}
+            </Form.Group>
+
+            <Form.Group
+              style={{ textAlign: "left" }}
+              controlId="formBasicEmail"
+            >
+              <Form.Label style={{ fontWeight: "bold" }}>Last Date</Form.Label>
+              <Form.Control
+                style={{ borderColor: "#ffc107", color: "#000000" }}
+                type="month"
+                placeholder="Enter start date"
+                name="startDate"
+                value={formValues.startDate.value}
+                onChange={handleChange}
+              />
+              {formValues.startDate.errorMessage && (
+                <span className="error">
+                  {formValues.startDate.errorMessage}
+                </span>
+              )}
+            </Form.Group>
+
+            <Form.Group
+              style={{ textAlign: "left" }}
+              controlId="formBasicEmail"
+            >
+              <Form.Label style={{ fontWeight: "bold" }}>Last Date</Form.Label>
+              <Form.Control
+                style={{ borderColor: "#ffc107", color: "#000000" }}
+                type="month"
+                placeholder="Enter end date"
+                name="endDate"
+                value={formValues.endDate.value}
+                onChange={handleChange}
+              />
+              {formValues.endDate.errorMessage && (
+                <span className="error">{formValues.endDate.errorMessage}</span>
               )}
             </Form.Group>
 

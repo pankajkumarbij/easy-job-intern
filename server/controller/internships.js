@@ -7,8 +7,10 @@ exports.createInternship = (req, res) => {
     location,
     stipend,
     techstack,
-    lastDate,
     duration,
+    lastDate,
+    startDate,
+    endDate,
   } = req.body;
   const user = req.user;
 
@@ -19,6 +21,8 @@ exports.createInternship = (req, res) => {
     !stipend ||
     !techstack ||
     !lastDate ||
+    !startDate ||
+    !endDate ||
     !duration
   ) {
     return res.json({ error: "Please add all fields" });
@@ -27,6 +31,11 @@ exports.createInternship = (req, res) => {
   // let techStackArray = new Array();
   const techStackArray = techstack.split(",");
   // console.log(techStackArray);
+  // console.log(typeof(endDate));
+  // const duration = endDate.getMonth() - startDate.getMonth();
+  // console.log(duration);
+
+  // int x = stringToDate(endDate,'/')
 
   const internship = new Internship({
     companyName,
@@ -35,11 +44,13 @@ exports.createInternship = (req, res) => {
     stipend,
     lastDate,
     duration,
+    startDate,
+    endDate,
     techstack: techStackArray,
     createdBy: user,
   });
 
-  // console.log(internship);
+  console.log(internship);
 
   internship
     .save()

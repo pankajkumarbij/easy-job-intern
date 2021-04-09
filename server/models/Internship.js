@@ -31,6 +31,14 @@ const internshipSchema = new Schema({
         type: String,
         required:true,
     },
+    startDate:{
+        type: Date,
+        required:true,
+    },
+    endDate:{
+        type: Date,
+        required:true,
+    },
     createdBy: {
         type: ObjectId,
         ref: "Employer"
