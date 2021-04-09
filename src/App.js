@@ -17,6 +17,8 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 import { initialState, reducer } from "./reducers/userReducer";
 import NewInternship from "./components/CreateNew/CreateInternship";
 import NewJob from "./components/CreateNew/CreateJob";
+import AllInternships from "./components/Internships/AllInternships";
+import AllJobs from "./components/Jobs/AllJobs";
 
 export const UserContext = createContext();
 
@@ -50,6 +52,12 @@ const Routing = () => {
           <Route path="/create-job" exact>
             <NewJob />
           </Route>
+          <Route path="/all-internships" exact>
+            <AllInternships />
+          </Route>
+          <Route path="/all-jobs" exact>
+            <AllJobs />
+          </Route>
           <Route path="/about-us" exact>
             <AboutUs />
           </Route>
@@ -82,6 +90,12 @@ const Routing = () => {
           </Route>
           <Route path="/terms-conditions" exact>
             <TermsCondition />
+          </Route>
+          <Route path="/all-internships" exact>
+            <AllInternships />
+          </Route>
+          <Route path="/all-jobs" exact>
+            <AllJobs />
           </Route>
           <Route component={Error} />
         </Switch>

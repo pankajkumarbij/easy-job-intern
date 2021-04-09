@@ -27,6 +27,10 @@ const JobSchema = new Schema({
     type: Date,
     required: true,
   },
+  startDate: {
+    type: Date,
+    required: true,
+  },
   createdBy: {
     type: ObjectId,
     ref: "Employer",
