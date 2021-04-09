@@ -50,7 +50,7 @@ exports.createInternship = (req, res) => {
     createdBy: user,
   });
 
-  console.log(internship);
+  // console.log(internship);
 
   internship
     .save()
