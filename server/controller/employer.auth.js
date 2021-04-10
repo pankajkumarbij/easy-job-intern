@@ -4,7 +4,7 @@ const auth_employer = require("../middleware/auth_employer");
 const { JWT_SECRET } = require("../keys");
 const Employer = require("../models/employer");
 
-exports.signup = (req, res) => {
+exports.signup = async (req, res) => {
   const {
     companyName,
     personName,
@@ -26,73 +26,48 @@ exports.signup = (req, res) => {
   ) {
     return res.json({ error: "Please add all fields" });
   }
-  Employer.findOne({ email }).then((savedUser) => {
-    if (savedUser) {
-      return res.json({ error: "User already exsist" });
+  try{
+    const savedUser = await Employer.findOne({email})
+    if(savedUser){
+        return res.json({error:"User already exsist"})
     }
-    bcrypt.hash(password, 10).then(async (hashedpassword) => {
-      const employer = new Employer({
-        companyName,
-        personName,
-        email,
-        contact,
-        password: hashedpassword,
-      });
-      //await email(name, email, mobile);
-      employer
-        .save()
-        .then((user) => {
-          res.json({ message: "Saved Succcessfully", user: user });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
-  });
+    const user = new Employer({
+      companyName,
+      personName,
+      email,
+      contact,
+      password,
+    })
+    const token = await user.generateAuthToken()
+    await user.save()
+    
+    res.json({message:"Saved Succcessfully",user:user, token:token})
+  }
+  catch(e){
+      console.log(e)
+  }
 };
 
 // SignIn       post      /auth/signin
 
-exports.signin = (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
-    return res.json({ error: "Please Add Email or Password" });
+exports.signin = async(req, res) => {
+  try{
+    if(!req.body.email || !req.body.password){
+        return res.json({error:"Please Add Email or Password"})
+    }
+    try{
+        savedUser = await Employer.findByCredentials(req.body.email, req.body.password)
+    }
+    catch(e){
+        return res.json({error:"Invalid email or password"})
+    }
+    const { _id, personName, email, contact, companyName} = savedUser
+    const token = await savedUser.generateAuthToken()
+    return res.status(200).json( {token,user:{ _id, personName, email, contact, companyName}})                    
+  } catch(e){
+      return res.json({error:"Something Went Wrong"})
   }
 
-  Employer.findOne({ email })
-    .then((savedUser) => {
-      if (!savedUser) {
-        return res.json({ error: "Invalid email or password" });
-      } else {
-        bcrypt
-          .compare(password, savedUser.password)
-          .then((doMatch) => {
-            if (doMatch) {
-              //return res.json({message:"SignIn successfull"})
-              const token = jwt.sign({ _id: savedUser._id }, JWT_SECRET);
-              const {
-                _id,
-                personName,
-                email,
-                contact,
-                companyName,
-              } = savedUser;
-              return res.json({
-                token,
-                user: { _id, personName, email, contact, companyName },
-              });
-            } else {
-              return res.json({ error: "Invalid Email or Password" });
-            }
-          })
-          .catch((err) => {
-            return res.json({ error: "Something Went Wrong" });
-          });
-      }
-    })
-    .catch((err) => {
-      return res.json({ error: "Something Went Wrong" });
-    });
 };
 
 exports.logout = async (req, res) => {
