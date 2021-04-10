@@ -5,7 +5,7 @@ const auth_student = require('../middleware/auth_student.js');
 const Student = require("../models/student");
 
 
-exports.signup = (req, res) => {
+exports.signup = async (req, res) => {
     const {institutionName,personName,email,contact,password,passwordConfirmation,branch,year,degree} = req.body
     if(password !== passwordConfirmation){
         return res.json({error:"Password dosen't match"})
@@ -13,71 +13,52 @@ exports.signup = (req, res) => {
     if(!institutionName || !personName || !email || !contact || !password || !passwordConfirmation || !branch || !year || !degree  ){
         return res.json({error:"Please add all fields"});
     }
-   Student.findOne({email})
-    .then((savedUser)=>{
+    try{
+        const savedUser = await Student.findOne({email})
         if(savedUser){
             return res.json({error:"User already exsist"})
         }
-        bcrypt.hash(password,10)
-        .then(async hashedpassword => {
-            const student = new Student({
-                institutionName,
-                personName,
-                email,
-                contact,
-                branch,
-                year,
-                degree,
-                password:hashedpassword
-            })
-            //await email(name, email, mobile);
-            student.save()
-            .then(user=>{
-                res.json({message:"Saved Succcessfully",user:user})
-            }).catch(err=>{
-                console.log(err);
-            })
+        const user = new Student({
+            institutionName,
+            personName,
+            email,
+            contact,
+            branch,
+            year,
+            degree,
+            password
         })
-      
-    })
+        const token = await user.generateAuthToken()
+        await user.save()
+        
+        res.json({message:"Saved Succcessfully",user:user, token:token})
+    }
+    catch(e){
+        console.log(e)
+    }
 }
    
 
 // SignIn       post      /auth/signin
 
 
-exports.signin = (req, res) => {
-    const {email,password} = req.body;
-    if(!email || !password){
-        return res.json({error:"Please Add Email or Password"})
-    }
-    Student.findOne({email})
-    .then(savedUser => {
-        if(!savedUser){
+exports.signin = async (req, res) => {
+    try{
+        if(!req.body.email || !req.body.password){
+            return res.json({error:"Please Add Email or Password"})
+        }
+        try{
+            savedUser = await Employer.findByCredentials(req.body.email, req.body.password)
+        }
+        catch(e){
             return res.json({error:"Invalid email or password"})
         }
-        else{
-        bcrypt.compare(password,savedUser.password)
-        .then(doMatch=>{
-            if(doMatch){
-                // res.json({message:"SignIn successfull"})
-                const token = jwt.sign({_id:savedUser._id},JWT_SECRET)
-                const {_id,personName,email,contact,branch,year,degree} = savedUser
-                savedUser.tokens = savedUser.tokens.concat({token:token})
-                savedUser.save()
-                return res.status(200).json({token,user:{_id,email,personName,contact,branch,year,degree}})
-            }else{
-                return res.json({error:"Invalid Email or Password"})
-            }
-        }).catch(err=>{
-            return res.json({error:"Something Went Wrong"})
-        })
-    }
-    }).
-    catch(err=>{
+        const {_id,personName,email,contact,branch,year,degree} = savedUser
+        const token = await savedUser.generateAuthToken()
+        return res.status(200).json( {message: 'SignIn successful', token,user:{_id,email,personName,contact,branch,year,degree}})                    
+    }catch(e){
         return res.json({error:"Something Went Wrong"})
-    })
-
+    }
 }
     
 
@@ -91,11 +72,7 @@ exports.update = async(req, res) => {
         if(!isValid){
             res.status(400).send({error: 'Invalid Updates!'})
         }
-        try{
-            if (updates.includes("password")){
-                req.body.password = await bcrypt.hash(req.body.password, 10)
-            }
-    
+        try{    
             updates.forEach(update => {
                 req.user[update] = req.body[update]
             })
