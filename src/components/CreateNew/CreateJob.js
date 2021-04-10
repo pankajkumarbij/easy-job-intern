@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 
 const NewJob = () => {
