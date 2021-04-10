@@ -6,7 +6,7 @@ const {
   logout,
   logoutAll,
 } = require("../controller/employer.auth");
-const { createFreshersJob } = require("../controller/freshersJob");
+const { createFreshersJob } = require("../controller/freshersjob");
 const { createInternship } = require("../controller/internships");
 const { createJob } = require("../controller/jobs");
 const auth_employer = require("../middleware/auth_employer");
