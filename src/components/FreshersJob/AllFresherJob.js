@@ -73,37 +73,37 @@ const AllFreshersJobs = () => {
      <Toaster />
       <Row className="justify-content-xl-start justify-content-lg-around justify-content-sm-center">
         {freshersJobs &&
-          freshersJobs.map((job) => {
+          freshersJobs.map((fresher) => {
             return (
               <Col
-                key={job._id}
+                key={fresher._id}
                 className="col-xl-4 col-lg-5 col-md-6 col-sm-11 col-12 colPost"
               >
                 <Card className="cardPost">
                   <Card.Body>
                     <Card.Title className="titleOfPost">
-                      {job.companyName}
+                      {fresher.companyName}
                     </Card.Title>
                     <Card.Subtitle className="subtitleOfPost">
-                      {job.location}
+                      {fresher.location}
                     </Card.Subtitle>
                     <Card.Text className="textPost">
-                      {job.description}
+                      {fresher.description}
                     </Card.Text>
                     <ListGroup>
                       <ListGroupItem className="itemPost">
-                        Salary: {job.salary}
+                        Salary: {fresher.salary}
                       </ListGroupItem>
                       <ListGroupItem className="itemPost">
-                        Start Date: {GettingMonth(job.startDate)}
+                        Start Date: {GettingMonth(fresher.startDate)}
                       </ListGroupItem>
                       <ListGroupItem className="itemPost last">
-                        Last Date to Apply: {GettingDate(job.lastDate)}
+                        Last Date to Apply: {GettingDate(fresher.lastDate)}
                       </ListGroupItem>
                     </ListGroup>
                     <div className="tech">
-                      {job.techstack &&
-                        job.techstack.map((skill, i) => (
+                      {fresher.techstack &&
+                        fresher.techstack.map((skill, i) => (
                           <Card.Link key={i} className="TechStack">
                             {skill}
                           </Card.Link>
