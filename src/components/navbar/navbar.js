@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import {
   Button,
   Navbar,
@@ -11,6 +11,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import * as Icon from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../App";
+
+import './navbar.css';
 
 function NavBar() {
   const { state, dispatch } = useContext(UserContext);
@@ -27,10 +29,14 @@ function NavBar() {
           <Nav className="mr-auto">
             <Nav.Link>
               <Dropdown>
-                <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                <Dropdown.Toggle variant="dark" id="dropdown-basic" className="navBTN">
                   Internship
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
+                  <Dropdown.Item as={Link} to="/all-internships">
+                    {" "}
+                    All Internship
+                  </Dropdown.Item>
                   <Dropdown.Item as={Link} to="/">
                     {" "}
                     Internship By Industry
@@ -48,10 +54,13 @@ function NavBar() {
             </Nav.Link>
             <Nav.Link>
               <Dropdown>
-                <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                <Dropdown.Toggle variant="dark" id="dropdown-basic" className="navBTN">
                   Jobs
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
+                  <Dropdown.Item as={Link} to="/all-jobs">
+                    All Jobs 
+                  </Dropdown.Item>
                   <Dropdown.Item as={Link} to="/">
                     Jobs By Industry
                   </Dropdown.Item>
@@ -65,8 +74,8 @@ function NavBar() {
               </Dropdown>
             </Nav.Link>
             <Nav.Link>
-              <Dropdown>
-                <Dropdown.Toggle variant="dark" id="dropdown-basic">
+              <Dropdown className="navLINK">
+                <Dropdown.Toggle variant="dark" id="dropdown-basic" className="navBTN">
                   Freshers Jobs
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -91,21 +100,21 @@ function NavBar() {
               Blogs
             </Nav.Link>
           </Nav>
-          <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-1" />
-            <Button>
+          <Form inline class="searchForm">
+            <FormControl type="text" placeholder="Search" className="mr-sm-1 inputSearch" />
+            <Button className="searchBtn">
               <Icon.Search />
             </Button>
           </Form>
           <Nav className="ml-auto">
             {(state && state.user) ? (
               <React.Fragment>
-                <Nav.Link className="my-auto" style={{ color: "#fff" }}>
+                <Nav.Link className="my-auto navLINK" style={{ color: "#fff" }}>
                   Welcome {state.user.personName}
                 </Nav.Link>
                 {state.userType === "employee" && <Nav.Link className="my-auto">
                   <Dropdown>
-                    <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                    <Dropdown.Toggle variant="dark" id="dropdown-basic" className="navBTN">
                       Create
                     </Dropdown.Toggle>
 
