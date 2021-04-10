@@ -2,10 +2,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 
 const NewFreshersJob = () => {
+  const history = useHistory();
 
   const initialState = {
     companyName: {
@@ -103,8 +104,54 @@ const NewFreshersJob = () => {
     setFormIsValid(formValid);
   };
 
-  const submitJob = (e) => {
+  const submitFreshersJob = (e) => {
     e.preventDefault();
+
+    const {
+      companyName,
+      description,
+      location,
+      salary,
+      techstack,
+      lastDate,
+      startDate,
+    } = formValues;
+
+    axios({
+      method: "post",
+      url: "http://localhost:5000/employer/create-fresherjob",
+      data: {
+        companyName: companyName.value,
+        description: description.value,
+        location: location.value,
+        salary: salary.value,
+        techstack: techstack.value,
+        lastDate: lastDate.value,
+        startDate: startDate.value,
+      },
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data.error) {
+          console.log(res.data.error);
+          // alert(res.data.error);
+          const notify = () => toast(res.data.error);
+          notify();
+        } else {
+          const notify = () => toast("Saved succesfully");
+          notify();
+          history.push("/");
+        }
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
+
+    setFormValues(initialState);
   };
 
   return (
@@ -133,7 +180,7 @@ const NewFreshersJob = () => {
           New Fresher's Job
         </Card.Header>
         <Card.Body>
-          <Form onSubmit={(e) => submitJob(e)}>
+          <Form onSubmit={(e) => submitFreshersJob(e)}>
             <Form.Group
               style={{ textAlign: "left" }}
               controlId="formBasicEmail"
