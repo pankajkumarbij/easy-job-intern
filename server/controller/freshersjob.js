@@ -48,3 +48,15 @@ exports.createFreshersJob = (req, res) => {
       return res.json({ error: "Something Went Wrong" });
     });
 };
+
+exports.getAllFreshersJobs = (req, res) => {
+    Freshers.find()
+      .populate("createdBy", "_id personName")
+      .sort("-createdAt")
+      .then((fresherjob) => {
+        res.json({freshersjob: fresherjob});
+      })
+      .catch((err) => {
+        return res.json({ error: "Something Went Wrong" });
+      });
+  };
