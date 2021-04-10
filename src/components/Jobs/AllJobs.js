@@ -95,6 +95,9 @@ const AllJobs = () => {
                         Salary: {job.salary}
                       </ListGroupItem>
                       <ListGroupItem className="itemPost">
+                        Work Experience: {job.experience && "Atleast"} {job.experience} {job.experience===1 && "year"} {job.experience>1 && "years"}
+                      </ListGroupItem>
+                      <ListGroupItem className="itemPost">
                         Start Date: {GettingMonth(job.startDate)}
                       </ListGroupItem>
                       <ListGroupItem className="itemPost last">
