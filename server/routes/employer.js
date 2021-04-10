@@ -5,6 +5,7 @@ const {
   signin,
   logout,
   logoutAll,
+  update
 } = require("../controller/employer.auth");
 const { createFreshersJob } = require("../controller/freshersjob");
 const { createInternship } = require("../controller/internships");
@@ -18,6 +19,7 @@ router.get("/logoutAll", auth_employer, logoutAll);
 router.post("/create-internship", auth_employer, createInternship);
 router.post("/create-job", auth_employer, createJob);
 router.post("/create-fresherjob", auth_employer, createFreshersJob);
+router.patch("/update", auth_employer, update);
 
 
 

@@ -91,3 +91,27 @@ exports.logoutAll = async (req, res) => {
     res.status(500).send(e);
   }
 };
+
+exports.update = async(req, res) => {
+  const updates = Object.keys(req.body)
+  const allowedUpdates = ['personName', 'email','contact', 'password', 'companyName']
+  const isValid = updates.every((update)=>{
+      return allowedUpdates.includes(update)
+  })
+  if(!isValid){
+      res.status(400).send({error: 'Invalid Updates!'})
+  }
+  try{    
+      updates.forEach(update => {
+          req.user[update] = req.body[update]
+      })
+      
+      await req.user.save()
+      const {_id, personName, email, contact, companyName} = req.user
+      return res.status(200).json({user:{_id, personName, email, contact, companyName}})
+
+  }
+  catch(e){
+      res.status(400).send({error: 'something went werong!'})
+  }
+}
