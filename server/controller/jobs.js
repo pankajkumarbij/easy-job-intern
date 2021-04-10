@@ -9,6 +9,7 @@ exports.createJob = (req, res) => {
     techstack,
     lastDate,
     startDate,
+    experience
   } = req.body;
   const user = req.user;
 
@@ -19,7 +20,8 @@ exports.createJob = (req, res) => {
     !salary ||
     !techstack ||
     !lastDate ||
-    !startDate
+    !startDate ||
+    !experience
   ) {
     return res.json({ error: "Please add all fields" });
   }
@@ -35,6 +37,7 @@ exports.createJob = (req, res) => {
     salary,
     lastDate,
     startDate,
+    experience,
     techstack: techStackArray,
     createdBy: user,
   });
@@ -57,7 +60,7 @@ exports.getAllJobs = (req, res) => {
     .populate("createdBy", "_id personName")
     .sort("-createdAt")
     .then((jobs) => {
-      res.json(jobs);
+      res.json({jobs: jobs});
     })
     .catch((err) => {
       return res.json({ error: "Something Went Wrong" });

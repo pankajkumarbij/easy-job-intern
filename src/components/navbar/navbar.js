@@ -16,24 +16,6 @@ function NavBar() {
   const { state, dispatch } = useContext(UserContext);
   if(state) console.log(state.user.personName);
   
-  //   useEffect(() => {
-  //     const user = isAuth();
-  //   }, []);
-
-  //   const isAuth = () => {
-  //     if (process.browser) {
-  //       const checktoken = localStorage.getItem("jwt");
-  //       if (checktoken) {
-  //         if (localStorage.getItem("user")) {
-  //           const user = localStorage.getItem("user");
-  //           return JSON.parse(user);
-  //         } else {
-  //           return false;
-  //         }
-  //       }
-  //     }
-  //   };
-
   return (
     <>
       <Navbar bg="dark" variant="dark" expand="lg">
@@ -133,6 +115,9 @@ function NavBar() {
                       </Dropdown.Item>
                       <Dropdown.Item as={Link} to="/create-job">
                         Job
+                      </Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/create-freshersjob">
+                        Fresher's Job
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>

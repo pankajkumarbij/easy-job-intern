@@ -50,7 +50,7 @@ exports.createInternship = (req, res) => {
     createdBy: user,
   });
 
-  console.log(internship);
+  // console.log(internship);
 
   internship
     .save()
@@ -68,7 +68,7 @@ exports.getAllInternships = (req, res) => {
     .populate("createdBy", "_id personName")
     .sort("-createdAt")
     .then((internships) => {
-      res.json(internships);
+      res.json({internships: internships});
     })
     .catch((err) => {
       return res.json({ error: "Something Went Wrong" });

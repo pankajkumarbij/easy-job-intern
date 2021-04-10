@@ -27,10 +27,12 @@ app.use(express.urlencoded({ extended: true }));
 const StudentRouter = require("./routes/student");
 const CategoryRouter = require("./routes/Category");
 const EmployerRouter = require("./routes/employer");
+const UserRouter = require("./routes/general");
 
 app.use("/student", StudentRouter);
 app.use("/employer", EmployerRouter);
 app.use("/category",CategoryRouter);
+app.use("/user", UserRouter);
 
 
 app.get("/", (req, res) => {

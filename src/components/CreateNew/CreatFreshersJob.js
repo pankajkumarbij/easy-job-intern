@@ -5,8 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { Link, useHistory } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 
-const NewInternship = () => {
-  const history = useHistory();
+const NewFreshersJob = () => {
 
   const initialState = {
     companyName: {
@@ -41,7 +40,7 @@ const NewInternship = () => {
       valid: false,
       touched: false,
     },
-    stipend: {
+    salary: {
       value: "",
       validation: {
         required: true,
@@ -77,19 +76,11 @@ const NewInternship = () => {
       valid: false,
       touched: false,
     },
-    endDate: {
-      value: "",
-      validation: {
-        required: true,
-      },
-      errorMessage: "",
-      valid: false,
-      touched: false,
-    },
   };
 
   const [formValues, setFormValues] = useState(initialState);
   const [formIsValid, setFormIsValid] = useState(false);
+  console.log(formValues);
 
   const handleChange = (e) => {
     const updatedFormValues = { ...formValues };
@@ -112,62 +103,8 @@ const NewInternship = () => {
     setFormIsValid(formValid);
   };
 
-
-
-  const submitInternship = (e) => {
+  const submitJob = (e) => {
     e.preventDefault();
-    console.log(typeof(formValues.startDate.value));
-    const duration = new Date(formValues.endDate.value)-new Date(formValues.startDate.value);
-    console.log(duration);
-
-    const {
-      companyName,
-      description,
-      location,
-      stipend,
-      techstack,
-      lastDate,
-      startDate,
-      endDate,
-    } = formValues;
-
-    axios({
-      method: "post",
-      url: "http://localhost:5000/employer/create-internship",
-      data: {
-        companyName: companyName.value,
-        description: description.value,
-        location: location.value,
-        stipend: stipend.value,
-        techstack: techstack.value,
-        lastDate: lastDate.value,
-        startDate: startDate.value,
-        endDate: endDate.value,
-        duration: duration
-      },
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        console.log(res);
-        if (res.data.error) {
-          console.log(res.data.error);
-          // alert(res.data.error);
-          const notify = () => toast(res.data.error);
-          notify();
-        } else {
-          const notify = () => toast("Signin Successfull");
-          notify();
-          history.push("/");
-        }
-      })
-      .catch((err) => {
-        console.log("Error: ", err);
-      });
-
-    setFormValues(initialState);
   };
 
   return (
@@ -193,10 +130,10 @@ const NewInternship = () => {
           }}
           as="h5"
         >
-          New Internship
+          New Fresher's Job
         </Card.Header>
         <Card.Body>
-          <Form onSubmit={(e) => submitInternship(e)}>
+          <Form onSubmit={(e) => submitJob(e)}>
             <Form.Group
               style={{ textAlign: "left" }}
               controlId="formBasicEmail"
@@ -244,7 +181,7 @@ const NewInternship = () => {
               controlId="formBasicEmail"
             >
               <Form.Label style={{ fontWeight: "bold" }}>
-                Internship Description
+                Job Description
               </Form.Label>
               <Form.Control
                 style={{ borderColor: "#ffc107", color: "#000000" }}
@@ -265,17 +202,17 @@ const NewInternship = () => {
               style={{ textAlign: "left" }}
               controlId="formBasicEmail"
             >
-              <Form.Label style={{ fontWeight: "bold" }}>Stipend</Form.Label>
+              <Form.Label style={{ fontWeight: "bold" }}>Salaray</Form.Label>
               <Form.Control
                 style={{ borderColor: "#ffc107", color: "#000000" }}
                 type="text"
-                placeholder="Enter stipend"
-                name="stipend"
-                value={formValues.stipend.value}
+                placeholder="Enter salary"
+                name="salary"
+                value={formValues.salary.value}
                 onChange={handleChange}
               />
-              {formValues.stipend.errorMessage && (
-                <span className="error">{formValues.stipend.errorMessage}</span>
+              {formValues.salary.errorMessage && (
+                <span className="error">{formValues.salary.errorMessage}</span>
               )}
             </Form.Group>
 
@@ -323,11 +260,13 @@ const NewInternship = () => {
               style={{ textAlign: "left" }}
               controlId="formBasicEmail"
             >
-              <Form.Label style={{ fontWeight: "bold" }}>Start Month</Form.Label>
+              <Form.Label style={{ fontWeight: "bold" }}>
+                Start Month
+              </Form.Label>
               <Form.Control
                 style={{ borderColor: "#ffc107", color: "#000000" }}
                 type="month"
-                placeholder="Enter start date"
+                placeholder="Enter start month"
                 name="startDate"
                 value={formValues.startDate.value}
                 onChange={handleChange}
@@ -336,24 +275,6 @@ const NewInternship = () => {
                 <span className="error">
                   {formValues.startDate.errorMessage}
                 </span>
-              )}
-            </Form.Group>
-
-            <Form.Group
-              style={{ textAlign: "left" }}
-              controlId="formBasicEmail"
-            >
-              <Form.Label style={{ fontWeight: "bold" }}>End Month</Form.Label>
-              <Form.Control
-                style={{ borderColor: "#ffc107", color: "#000000" }}
-                type="month"
-                placeholder="Enter end date"
-                name="endDate"
-                value={formValues.endDate.value}
-                onChange={handleChange}
-              />
-              {formValues.endDate.errorMessage && (
-                <span className="error">{formValues.endDate.errorMessage}</span>
               )}
             </Form.Group>
 
@@ -374,4 +295,4 @@ const NewInternship = () => {
   );
 };
 
-export default NewInternship;
+export default NewFreshersJob;

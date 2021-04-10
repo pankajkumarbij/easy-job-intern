@@ -16,8 +16,6 @@ router.get("/logout", auth_employer, logout);
 router.get("/logoutAll", auth_employer, logoutAll);
 router.post("/create-internship", auth_employer, createInternship);
 router.post("/create-job", auth_employer, createJob);
-router.get("/all-internships", getAllInternships);
-router.get("/all-jobs", getAllJobs);
 
 
 

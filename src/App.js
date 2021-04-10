@@ -1,4 +1,5 @@
 import "./App.css";
+import React from "react";
 import NavBar from "./components/navbar/navbar";
 import Footer from "./components/footer/footer";
 import Home from "./components/home/home";
@@ -18,6 +19,7 @@ import NewInternship from "./components/CreateNew/CreateInternship";
 import NewJob from "./components/CreateNew/CreateJob";
 import AllInternships from "./components/Internships/AllInternships";
 import AllJobs from "./components/Jobs/AllJobs";
+import NewFreshersJob from "./components/CreateNew/CreatFreshersJob";
 
 export const UserContext = createContext();
 
@@ -50,6 +52,9 @@ const Routing = () => {
           </Route>
           <Route path="/create-job" exact>
             <NewJob />
+          </Route>
+          <Route path="/create-freshersjob" exact>
+            <NewFreshersJob />
           </Route>
           <Route path="/all-internships" exact>
             <AllInternships />
