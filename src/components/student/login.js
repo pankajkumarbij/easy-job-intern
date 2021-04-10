@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Card, Form, Alert, InputGroup } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 import axios from "axios";
 import "./register.css";
 import IconButton from "@material-ui/core/IconButton";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import { UserContext } from "../../App";
+import toast, { Toaster } from 'react-hot-toast';
 
 function LoginForm() {
+  const { state, dispatch } = useContext(UserContext);
+  const history = useHistory();
+
   //creating a dicitionary for every field of the form
   const initialState = {
     email: {
@@ -77,17 +82,24 @@ function LoginForm() {
         console.log(res);
         if (res.data.error) {
           console.log(res.data.error);
-          alert(res.data.error);
+          // alert(res.data.error);
+          const notify = () => toast(res.data.error);
+          notify();
         } else {
           localStorage.setItem("jwt", res.data.token);
           localStorage.setItem("user", JSON.stringify(res.data.user));
+          localStorage.setItem("type", JSON.stringify("student"));
+          dispatch({ type: "USER", payload: { user: res.data.user , userType: "student"} });
           console.log(
             "Token: ",
             res.data.token,
             "User Details: ",
             res.data.user
           );
-          alert("Signin Successfull");
+          // alert("Signin Successfull");
+          const notify = () => toast("Signin Successfull");
+          notify();
+          history.push("/");
         }
       })
       .catch((err) => {
@@ -96,14 +108,15 @@ function LoginForm() {
     setFormValues(initialState);
   };
 
-  const togglePasswordVisiblity = () => { // to handle visibility of passsword 
-    
-    setFormValues({...formValues, showPassword: !(formValues.showPassword)});
-  
-};
+  const togglePasswordVisiblity = () => {
+    // to handle visibility of passsword
+
+    setFormValues({ ...formValues, showPassword: !formValues.showPassword });
+  };
   return (
     <>
       <div style={{ padding: "4vh 0" }}>
+        <Toaster />
         <Card
           style={{
             width: "40vw",
@@ -113,7 +126,7 @@ function LoginForm() {
             marginBottom: "4vh",
             backgroundImage: "linear-gradient(to right, white , #ffc107)",
           }}
-          className='register_card_custom'
+          className="register_card_custom"
         >
           <Card.Header
             style={{
@@ -161,7 +174,7 @@ function LoginForm() {
                 <InputGroup>
                   <Form.Control
                     style={{ borderColor: "#ffc107", color: "#000000" }}
-                    type={formValues.showPassword?"text":"password"}
+                    type={formValues.showPassword ? "text" : "password"}
                     className={`${
                       !formValues.password.valid && formValues.password.touched
                         ? "input-error"
@@ -178,14 +191,28 @@ function LoginForm() {
                     </span>
                   )}
                   <InputGroup.Append>
-                    <InputGroup.Text style={{borderColor: "#ffc107", color: "#000000", height: "37px", width: "28px", paddingLeft:"1px",paddingRight:"1px" }}>
-                      <IconButton style={{width: "25px"}}
-                          onClick={togglePasswordVisiblity}
+                    <InputGroup.Text
+                      style={{
+                        borderColor: "#ffc107",
+                        color: "#000000",
+                        height: "37px",
+                        width: "28px",
+                        paddingLeft: "1px",
+                        paddingRight: "1px",
+                      }}
+                    >
+                      <IconButton
+                        style={{ width: "25px" }}
+                        onClick={togglePasswordVisiblity}
                       >
-                        {formValues.showPassword ? <Visibility /> : <VisibilityOff />}
-                      </IconButton> 
+                        {formValues.showPassword ? (
+                          <Visibility />
+                        ) : (
+                          <VisibilityOff />
+                        )}
+                      </IconButton>
                     </InputGroup.Text>
-                 </InputGroup.Append>
+                  </InputGroup.Append>
                 </InputGroup>
               </Form.Group>
               <Form.Group
