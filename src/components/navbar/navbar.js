@@ -79,6 +79,9 @@ function NavBar() {
                   Freshers Jobs
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
+                  <Dropdown.Item as={Link} to="/all-freshersjobs">
+                    All Freshers Jobs 
+                  </Dropdown.Item>
                   <Dropdown.Item as={Link} to="/">
                     Freshers Jobs By Industry
                   </Dropdown.Item>

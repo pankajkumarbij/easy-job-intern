@@ -54,7 +54,7 @@ exports.getAllFreshersJobs = (req, res) => {
       .populate("createdBy", "_id personName")
       .sort("-createdAt")
       .then((fresherjob) => {
-        res.json({freshersjob: fresherjob});
+        res.json({freshersjobs: fresherjob});
       })
       .catch((err) => {
         return res.json({ error: "Something Went Wrong" });

@@ -20,6 +20,7 @@ import NewJob from "./components/CreateNew/CreateJob";
 import AllInternships from "./components/Internships/AllInternships";
 import AllJobs from "./components/Jobs/AllJobs";
 import NewFreshersJob from "./components/CreateNew/CreatFreshersJob";
+import AllFreshersJobs from "./components/FreshersJob/AllFresherJob";
 
 export const UserContext = createContext();
 
@@ -34,7 +35,7 @@ const Routing = () => {
     const type = JSON.parse(localStorage.getItem("type"));
     console.log(type);
     if (user) {
-      dispatch({ type: "USER", payload: {user: user, userType: type} });
+      dispatch({ type: "USER", payload: { user: user, userType: type } });
     }
   }, []);
 
@@ -61,6 +62,9 @@ const Routing = () => {
           </Route>
           <Route path="/all-jobs" exact>
             <AllJobs />
+          </Route>
+          <Route path="/all-freshersjobs" exact>
+            <AllFreshersJobs />
           </Route>
           <Route path="/about-us" exact>
             <AboutUs />
@@ -100,6 +104,9 @@ const Routing = () => {
           </Route>
           <Route path="/all-jobs" exact>
             <AllJobs />
+          </Route>
+          <Route path="/all-freshersjobs" exact>
+            <AllFreshersJobs />
           </Route>
           <Route component={Error} />
         </Switch>
