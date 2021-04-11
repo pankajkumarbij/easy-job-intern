@@ -48,7 +48,7 @@ exports.signin = async (req, res) => {
             return res.json({error:"Please Add Email or Password"})
         }
         try{
-            savedUser = await Employer.findByCredentials(req.body.email, req.body.password)
+            savedUser = await Student.findByCredentials(req.body.email, req.body.password)
         }
         catch(e){
             return res.json({error:"Invalid email or password"})
