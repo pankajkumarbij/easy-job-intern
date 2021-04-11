@@ -11,7 +11,7 @@ import ContactUs from "./components/contact-us/contact-us";
 import AboutUs from "./components/about-us/about-us";
 import PrivacyPolicy from "./components/privacy-policy/privacy-policy";
 import TermsCondition from "./components/terms-condition/terms-condition";
-import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
+import { BrowserRouter, Switch, Route} from "react-router-dom";
 import Error from "./components/Error/Error";
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { initialState, reducer } from "./reducers/userReducer";
@@ -25,7 +25,6 @@ import AllFreshersJobs from "./components/FreshersJob/AllFresherJob";
 export const UserContext = createContext();
 
 const Routing = () => {
-  const history = useHistory();
   const { state, dispatch } = useContext(UserContext);
 
   let routes;
@@ -37,12 +36,12 @@ const Routing = () => {
     if (user) {
       dispatch({ type: "USER", payload: { user: user, userType: type } });
     }
-  }, []);
+  }, [dispatch]);
 
   console.log(state);
 
   if (state) {
-    if (state.userType == "employee") {
+    if (state.userType === "employee") {
       routes = (
         <Switch>
           <Route path="/" exact compo>

@@ -32,7 +32,7 @@ const AllJobs = () => {
       .catch((err) => {
         console.log("Error: ", err);
       });
-  }, []);
+  }, [jobs]);
 
   if (jobs && jobs[4]) {
     console.log(jobs[4]);

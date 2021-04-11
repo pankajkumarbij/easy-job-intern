@@ -1,5 +1,5 @@
-import React, { Component, useContext, useState } from "react";
-import { Button, Card, Form, Alert, InputGroup } from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import { Button, Card, Form,  InputGroup } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 import axios from "axios";
@@ -45,7 +45,7 @@ function EmployerSignin() {
   };
   const [formValues, setFormValues] = useState(initialState);
 
-  const [formIsValid, setFormIsValid] = useState(false);
+  const [ setFormIsValid] = useState(false);
 
   const handleChange = (e) => {
     const updatedFormValues = { ...formValues };
@@ -226,7 +226,7 @@ function EmployerSignin() {
                   }}
                 >
                   <Link to="/employer-signup">
-                    <a style={{ fontWeight: "bold" }}>
+                    <a href="/#" style={{ fontWeight: "bold" }}>
                       Don't have an account? Sign up
                     </a>
                   </Link>
