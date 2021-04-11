@@ -15,7 +15,7 @@ import { UserContext } from "../../App";
 import './navbar.css';
 
 function NavBar() {
-  const { state, dispatch } = useContext(UserContext);
+  const { state } = useContext(UserContext);
   if(state) console.log(state.user.personName);
   
   return (
