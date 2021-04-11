@@ -1,6 +1,6 @@
-const Job = require("../models/Job");
+const Freshers = require("../models/Freshers");
 
-exports.createJob = (req, res) => {
+exports.createFreshersJob = (req, res) => {
   const {
     companyName,
     description,
@@ -9,7 +9,6 @@ exports.createJob = (req, res) => {
     techstack,
     lastDate,
     startDate,
-    experience
   } = req.body;
   const user = req.user;
 
@@ -20,33 +19,28 @@ exports.createJob = (req, res) => {
     !salary ||
     !techstack ||
     !lastDate ||
-    !startDate ||
-    !experience
+    !startDate
   ) {
     return res.json({ error: "Please add all fields" });
   }
 
-  // let techStackArray = new Array();
   const techStackArray = techstack.split(",");
-  // console.log(techStackArray);
 
-  const job = new Job({
+  const freshersjob = new Freshers({
     companyName,
     description,
     location,
     salary,
     lastDate,
     startDate,
-    experience,
     techstack: techStackArray,
     createdBy: user,
   });
 
-  // console.log(internship);
 
-  job
+  freshersjob
     .save()
-    .then((job) => {
+    .then((freshers) => {
       res.json({ message: "Saved Succcessfully" });
     })
     .catch((err) => {
@@ -55,14 +49,14 @@ exports.createJob = (req, res) => {
     });
 };
 
-exports.getAllJobs = (req, res) => {
-  Job.find()
-    .populate("createdBy", "_id personName")
-    .sort("-createdAt")
-    .then((jobs) => {
-      res.json({jobs: jobs});
-    })
-    .catch((err) => {
-      return res.json({ error: "Something Went Wrong" });
-    });
-};
+exports.getAllFreshersJobs = (req, res) => {
+    Freshers.find()
+      .populate("createdBy", "_id personName")
+      .sort("-createdAt")
+      .then((fresherjob) => {
+        res.json({freshersjobs: fresherjob});
+      })
+      .catch((err) => {
+        return res.json({ error: "Something Went Wrong" });
+      });
+  };

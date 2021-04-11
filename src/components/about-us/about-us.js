@@ -26,7 +26,7 @@ export default function AboutUs() {
             <Card.Body>
               <Row>
                 <div class="col-lg-6 col-md-12 col-sm-12">
-                  <img src="images/32.-Discussion.png" class="about-img"></img>
+                  <img src="images/32.-Discussion.png" class="about-img" alt="about-img"></img>
                 </div>
                 <div
                   class="col-lg-6 col-md-12 col-sm-12  about-part"
@@ -57,7 +57,7 @@ export default function AboutUs() {
           <Container fluid>
             <Row>
               <div class="col-lg-4 col-md-6 col-sm-12" id="offer-range1">
-                <img src="images/INTERN SHIP.png"></img>
+                <img src="images/INTERN SHIP.png" alt="about-intern"></img>
 
                 <h4>Internships</h4>
                 <p>
@@ -69,7 +69,7 @@ export default function AboutUs() {
                 <button class="btn-v">visit it</button>
               </div>
               <div class="col-lg-4 col-md-6 col-sm-12" id="offer-range2">
-                <img src="images/INTERN SHIP (1).png"></img>
+                <img src="images/INTERN SHIP (1).png" alt="about-intern"></img>
                 <h4>Fresher's Jobs</h4>
 
                 <p>
@@ -80,7 +80,7 @@ export default function AboutUs() {
                 <button class="btn-v">visit it</button>
               </div>
               <div class="col-lg-4 col-md-12 col-sm-12" id="offer-range3">
-                <img src="images/JOB - Logo - Google Chrome 27-03-2021 19_58_07 (2).png"></img>
+                <img src="images/JOB - Logo - Google Chrome 27-03-2021 19_58_07 (2).png" alt="about-job"></img>
                 <h4>Jobs</h4>
                 <p class="para">
                   Are you looking for jobs ? Then it is the right place .Choose

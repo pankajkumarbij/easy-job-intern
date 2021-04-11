@@ -2,86 +2,73 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 
-const NewInternship = () => {
+const UpdateInternship = () => {
   const history = useHistory();
+  const postId = useParams().id;
 
   const initialState = {
-    companyName: {
-      //value of the input field
-      value: "",
-      //rules to check while validating the input
-      validation: {
-        required: true,
-      },
-      //error messages to show in case any validation rule is not followed
-      errorMessage: "",
-      // boolean value to check if the whole input field is valid or not
-      valid: false,
-      //boolean value to check if the input field is touched or not
-      touched: false,
-    },
     description: {
       value: "",
-      validation: {
-        required: true,
-      },
+      // validation: {
+      //   // required: true,
+      // },
       errorMessage: "",
       valid: false,
       touched: false,
     },
     location: {
       value: "",
-      validation: {
-        required: true,
-      },
+      // validation: {
+      //   // required: true,
+      // },
       errorMessage: "",
       valid: false,
       touched: false,
     },
     stipend: {
       value: "",
-      validation: {
-        required: true,
-      },
+      // validation: {
+      //   // required: true,
+      // },
       errorMessage: "",
       valid: false,
       touched: false,
     },
     techstack: {
       value: "",
-      validation: {
-        required: true,
-      },
+      // validation: {
+      //   // required: true,
+      // },
       errorMessage: "",
       valid: false,
       touched: false,
     },
     lastDate: {
       value: "",
-      validation: {
-        required: true,
-      },
+      // validation: {
+      //   // required: true,
+      // },
       errorMessage: "",
       valid: false,
       touched: false,
     },
     startDate: {
       value: "",
-      validation: {
-        required: true,
-      },
+      // validation: {
+      //   // required: true,
+      // },
       errorMessage: "",
       valid: false,
       touched: false,
     },
     endDate: {
       value: "",
-      validation: {
-        required: true,
-      },
+      // validation: {
+      //   // required: true,
+      // },
       errorMessage: "",
       valid: false,
       touched: false,
@@ -112,16 +99,14 @@ const NewInternship = () => {
     setFormIsValid(formValid);
   };
 
-
-
   const submitInternship = (e) => {
     e.preventDefault();
-    console.log(typeof(formValues.startDate.value));
-    const duration = new Date(formValues.endDate.value)-new Date(formValues.startDate.value);
+    console.log(typeof formValues.startDate.value);
+    const duration =
+      new Date(formValues.endDate.value) - new Date(formValues.startDate.value);
     console.log(duration);
 
     const {
-      companyName,
       description,
       location,
       stipend,
@@ -131,11 +116,12 @@ const NewInternship = () => {
       endDate,
     } = formValues;
 
+
     axios({
-      method: "post",
-      url: "http://localhost:5000/employer/create-internship",
+      method: "patch",
+      url: "http://localhost:5000/employer/update-internship",
       data: {
-        companyName: companyName.value,
+        postId,
         description: description.value,
         location: location.value,
         stipend: stipend.value,
@@ -158,7 +144,7 @@ const NewInternship = () => {
           const notify = () => toast(res.data.error);
           notify();
         } else {
-          const notify = () => toast("Signin Successfull");
+          const notify = () => toast(res.data.message);
           notify();
           history.push("/");
         }
@@ -168,6 +154,7 @@ const NewInternship = () => {
       });
 
     setFormValues(initialState);
+
   };
 
   return (
@@ -193,32 +180,10 @@ const NewInternship = () => {
           }}
           as="h5"
         >
-          New Internship
+          Update Internship
         </Card.Header>
         <Card.Body>
           <Form onSubmit={(e) => submitInternship(e)}>
-            <Form.Group
-              style={{ textAlign: "left" }}
-              controlId="formBasicEmail"
-            >
-              <Form.Label style={{ fontWeight: "bold" }}>
-                Company Name
-              </Form.Label>
-              <Form.Control
-                style={{ borderColor: "#ffc107", color: "#000000" }}
-                type="text"
-                placeholder="Enter Company Name"
-                name="companyName"
-                value={formValues.companyName.value}
-                onChange={handleChange}
-              />
-              {formValues.companyName.errorMessage && (
-                <span className="error">
-                  {formValues.companyName.errorMessage}
-                </span>
-              )}
-            </Form.Group>
-
             <Form.Group
               style={{ textAlign: "left" }}
               controlId="formBasicEmail"
@@ -323,7 +288,9 @@ const NewInternship = () => {
               style={{ textAlign: "left" }}
               controlId="formBasicEmail"
             >
-              <Form.Label style={{ fontWeight: "bold" }}>Start Month</Form.Label>
+              <Form.Label style={{ fontWeight: "bold" }}>
+                Start Month
+              </Form.Label>
               <Form.Control
                 style={{ borderColor: "#ffc107", color: "#000000" }}
                 type="month"
@@ -362,7 +329,7 @@ const NewInternship = () => {
                 style={{ color: "#ffc107", fontWeight: "bold" }}
                 variant="secondary"
                 type="submit"
-                disabled={!formIsValid}
+                // disabled={!formIsValid}
               >
                 Create
               </Button>
@@ -374,4 +341,4 @@ const NewInternship = () => {
   );
 };
 
-export default NewInternship;
+export default UpdateInternship;

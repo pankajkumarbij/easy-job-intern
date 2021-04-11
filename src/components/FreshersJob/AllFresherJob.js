@@ -1,30 +1,17 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
-import {Link} from 'react-router-dom';
-import {
-  Button,
-  Card,
-  Col,
-  ListGroup,
-  ListGroupItem,
-  Modal,
-  Row,
-} from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Card, Col, ListGroup, ListGroupItem, Row } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
-import * as Icon from "react-bootstrap-icons";
 
-import "./AllInternships.css";
-import { UserContext } from "../../App";
+import "../Internships/AllInternships.css";
 
-const AllInternships = () => {
-  const { state, dispatch } = useContext(UserContext);
-  const [internships, setInternships] = useState([]);
-  console.log(internships);
-  console.log(state);
+const AllFreshersJobs = () => {
+  const [freshersJobs, setFreshersJobs] = useState([]);
+
   useEffect(() => {
     axios({
       method: "get",
-      url: "http://localhost:5000/user/all-internships",
+      url: "http://localhost:5000/user/all-freshersjobs",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -37,19 +24,19 @@ const AllInternships = () => {
           const notify = () => toast(res.data.error);
           notify();
         } else {
-          console.log(res.data.internships);
-          setInternships(res.data.internships);
-          console.log(internships);
+          console.log(res.data.freshersjobs);
+          setFreshersJobs(res.data.freshersjobs);
+          console.log(freshersJobs);
         }
       })
       .catch((err) => {
         console.log("Error: ", err);
       });
-  }, [internships]);
+  }, [freshersJobs]);
 
-  if (internships && internships[4]) {
-    console.log(internships[4]);
-    const t = new Date(internships[4].startDate).toString("YYYY-MM-DD");
+  if (freshersJobs && freshersJobs[4]) {
+    console.log(freshersJobs[4]);
+    const t = new Date(freshersJobs[4].startDate).toString("YYYY-MM-DD");
     console.log(t);
   }
 
@@ -80,57 +67,43 @@ const AllInternships = () => {
     return time;
   };
 
-  const GettingDuration = (time) => {
-    const t = Math.floor(Number(time) / (3600 * 1000 * 24 * 30));
-    console.log(t);
-    return t > 1 ? t + " Months" : t + " Month";
-  };
+
   return (
     <div className="internshipsOuterContainer">
-      
-      <Toaster />
+     <Toaster />
       <Row className="justify-content-xl-start justify-content-lg-around justify-content-sm-center">
-        {internships &&
-          internships.map((internship) => {
-            console.log(internship.createdBy._id, state.user._id);
+        {freshersJobs &&
+          freshersJobs.map((fresher) => {
             return (
               <Col
-                key={internship._id}
+                key={fresher._id}
                 className="col-xl-4 col-lg-5 col-md-6 col-sm-11 col-12 colPost"
               >
                 <Card className="cardPost">
                   <Card.Body>
                     <Card.Title className="titleOfPost">
-                      {internship.companyName}{" "}
-                      {state.user._id == internship.createdBy._id && <Link to={`/update-internship/${internship._id}`}><Icon.PencilSquare style={{ float: "right" }} /></Link> }
-                      
+                      {fresher.companyName}
                     </Card.Title>
                     <Card.Subtitle className="subtitleOfPost">
-                      {internship.location}
+                      {fresher.location}
                     </Card.Subtitle>
                     <Card.Text className="textPost">
-                      {internship.description}
+                      {fresher.description}
                     </Card.Text>
                     <ListGroup>
                       <ListGroupItem className="itemPost">
-                        Stipend: {internship.stipend}
+                        Salary: {fresher.salary}
                       </ListGroupItem>
                       <ListGroupItem className="itemPost">
-                        Duration: {GettingDuration(internship.duration)}
-                      </ListGroupItem>
-                      <ListGroupItem className="itemPost">
-                        Start Date: {GettingMonth(internship.startDate)}
-                      </ListGroupItem>
-                      <ListGroupItem className="itemPost">
-                        End Date: {GettingMonth(internship.endDate)}
+                        Start Date: {GettingMonth(fresher.startDate)}
                       </ListGroupItem>
                       <ListGroupItem className="itemPost last">
-                        Last Date to Apply: {GettingDate(internship.lastDate)}
+                        Last Date to Apply: {GettingDate(fresher.lastDate)}
                       </ListGroupItem>
                     </ListGroup>
                     <div className="tech">
-                      {internship.techstack &&
-                        internship.techstack.map((skill, i) => (
+                      {fresher.techstack &&
+                        fresher.techstack.map((skill, i) => (
                           <Card.Link key={i} className="TechStack">
                             {skill}
                           </Card.Link>
@@ -145,4 +118,4 @@ const AllInternships = () => {
     </div>
   );
 };
-export default AllInternships;
+export default AllFreshersJobs;

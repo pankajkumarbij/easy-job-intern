@@ -1,4 +1,5 @@
 import "./App.css";
+import React from "react";
 import NavBar from "./components/navbar/navbar";
 import Footer from "./components/footer/footer";
 import Home from "./components/home/home";
@@ -10,7 +11,7 @@ import ContactUs from "./components/contact-us/contact-us";
 import AboutUs from "./components/about-us/about-us";
 import PrivacyPolicy from "./components/privacy-policy/privacy-policy";
 import TermsCondition from "./components/terms-condition/terms-condition";
-import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
+import { BrowserRouter, Switch, Route} from "react-router-dom";
 import Error from "./components/Error/Error";
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { initialState, reducer } from "./reducers/userReducer";
@@ -18,11 +19,13 @@ import NewInternship from "./components/CreateNew/CreateInternship";
 import NewJob from "./components/CreateNew/CreateJob";
 import AllInternships from "./components/Internships/AllInternships";
 import AllJobs from "./components/Jobs/AllJobs";
+import NewFreshersJob from "./components/CreateNew/CreatFreshersJob";
+import AllFreshersJobs from "./components/FreshersJob/AllFresherJob";
+import UpdateInternship from "./components/UpdateForm/InternshipUpdate";
 
 export const UserContext = createContext();
 
 const Routing = () => {
-  const history = useHistory();
   const { state, dispatch } = useContext(UserContext);
 
   let routes;
@@ -32,14 +35,14 @@ const Routing = () => {
     const type = JSON.parse(localStorage.getItem("type"));
     console.log(type);
     if (user) {
-      dispatch({ type: "USER", payload: {user: user, userType: type} });
+      dispatch({ type: "USER", payload: { user: user, userType: type } });
     }
-  }, []);
+  }, [dispatch]);
 
   console.log(state);
 
   if (state) {
-    if (state.userType == "employee") {
+    if (state.userType === "employee") {
       routes = (
         <Switch>
           <Route path="/" exact compo>
@@ -48,14 +51,23 @@ const Routing = () => {
           <Route path="/create-internship" exact>
             <NewInternship />
           </Route>
+          <Route path="/update-internship/:id" >
+            <UpdateInternship />
+          </Route>
           <Route path="/create-job" exact>
             <NewJob />
+          </Route>
+          <Route path="/create-freshersjob" exact>
+            <NewFreshersJob />
           </Route>
           <Route path="/all-internships" exact>
             <AllInternships />
           </Route>
           <Route path="/all-jobs" exact>
             <AllJobs />
+          </Route>
+          <Route path="/all-freshersjobs" exact>
+            <AllFreshersJobs />
           </Route>
           <Route path="/about-us" exact>
             <AboutUs />
@@ -95,6 +107,9 @@ const Routing = () => {
           </Route>
           <Route path="/all-jobs" exact>
             <AllJobs />
+          </Route>
+          <Route path="/all-freshersjobs" exact>
+            <AllFreshersJobs />
           </Route>
           <Route component={Error} />
         </Switch>

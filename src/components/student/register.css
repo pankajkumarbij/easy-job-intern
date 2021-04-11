@@ -7,6 +7,10 @@
   text-align: left;
   border-radius: 1%;
 }
+a, a:hover{
+  color: inherit;
+}
+
 
 /* .card_custom{
   max-width: max-content !important;

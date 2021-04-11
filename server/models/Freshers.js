@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const { ObjectId } = mongoose.Schema.Types;
 
-const JobSchema = new Schema({
+const FreshersJobSchema = new Schema({
   companyName: {
     type: String,
     required: true,
@@ -31,16 +31,12 @@ const JobSchema = new Schema({
     type: Date,
     required: true,
   },
-  experience: {
-    type: Number,
-    required: true,
-  },
   createdBy: {
     type: ObjectId,
     ref: "Employer",
   },
 }, {timestamps: true});
 
-const Job = mongoose.model("Job", JobSchema);
+const FreshersJob = mongoose.model("FreshersJob", FreshersJobSchema);
 
-module.exports = Job;
+module.exports = FreshersJob;
