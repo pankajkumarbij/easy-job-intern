@@ -45,7 +45,7 @@ const AllInternships = () => {
       .catch((err) => {
         console.log("Error: ", err);
       });
-  }, [internships]);
+  }, []);
 
   if (internships && internships[4]) {
     console.log(internships[4]);

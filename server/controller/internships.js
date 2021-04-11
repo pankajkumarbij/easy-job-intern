@@ -132,3 +132,18 @@ exports.updateInternship = (req, res) => {
       res.status(500).json({ error: "Something went wrong!" });
     });
 };
+
+exports.getInternshipValues = (req, res) => {
+  const {postId} = req.params;
+  Internship.findById(postId)
+    .then((internship) => {
+      if (!internship) {
+        return res.status(400).json({ error: "Internship does not exists" });
+      }
+      res.json({ internship: internship });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Something went wrong!" });
+    });
+};
