@@ -1,13 +1,26 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Card, Col, ListGroup, ListGroupItem, Row } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import {Link} from 'react-router-dom';
+import {
+  Button,
+  Card,
+  Col,
+  ListGroup,
+  ListGroupItem,
+  Modal,
+  Row,
+} from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
+import * as Icon from "react-bootstrap-icons";
 
 import "./AllInternships.css";
+import { UserContext } from "../../App";
 
 const AllInternships = () => {
+  const { state, dispatch } = useContext(UserContext);
   const [internships, setInternships] = useState([]);
-
+  console.log(internships);
+  console.log(state);
   useEffect(() => {
     axios({
       method: "get",
@@ -68,16 +81,18 @@ const AllInternships = () => {
   };
 
   const GettingDuration = (time) => {
-    const t = Math.floor(Number(time)/(3600 * 1000 * 24 * 30));
+    const t = Math.floor(Number(time) / (3600 * 1000 * 24 * 30));
     console.log(t);
-    return (t>1 ? t + ' Months' : t + ' Month');
+    return t > 1 ? t + " Months" : t + " Month";
   };
   return (
     <div className="internshipsOuterContainer">
+      
       <Toaster />
       <Row className="justify-content-xl-start justify-content-lg-around justify-content-sm-center">
         {internships &&
           internships.map((internship) => {
+            console.log(internship.createdBy._id, state.user._id);
             return (
               <Col
                 key={internship._id}
@@ -86,7 +101,9 @@ const AllInternships = () => {
                 <Card className="cardPost">
                   <Card.Body>
                     <Card.Title className="titleOfPost">
-                      {internship.companyName}
+                      {internship.companyName}{" "}
+                      {state.user._id == internship.createdBy._id && <Link to={`/update-internship/${internship._id}`}><Icon.PencilSquare style={{ float: "right" }} /></Link> }
+                      
                     </Card.Title>
                     <Card.Subtitle className="subtitleOfPost">
                       {internship.location}
