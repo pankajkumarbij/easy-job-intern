@@ -45,7 +45,7 @@ function EmployerSignin() {
   };
   const [formValues, setFormValues] = useState(initialState);
 
-  const [ setFormIsValid] = useState(false);
+  const [formIsValid, setFormIsValid] = useState(false);
 
   const handleChange = (e) => {
     const updatedFormValues = { ...formValues };

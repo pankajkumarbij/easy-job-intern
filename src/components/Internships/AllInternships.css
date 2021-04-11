@@ -18,11 +18,14 @@ body, html{
 .titleOfPost{
     font-size: 1.7rem;
     font-weight: 900;
+    text-align: left;
 }
 .subtitleOfPost{
     font-weight: 300;
     font-style: oblique;
     color: #ccc;
+    text-align: left;
+    padding-bottom: 20px;
 }
 .textPost{
     padding-top: 10px;
