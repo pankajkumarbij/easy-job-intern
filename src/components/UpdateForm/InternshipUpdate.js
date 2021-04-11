@@ -1,73 +1,74 @@
-// import axios from "axios";
+import axios from "axios";
 import React, { useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
-// import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 
 const UpdateInternship = () => {
-  // const history = useHistory();
+  const history = useHistory();
+  const postId = useParams().id;
 
   const initialState = {
     description: {
       value: "",
-      validation: {
-        required: true,
-      },
+      // validation: {
+      //   // required: true,
+      // },
       errorMessage: "",
       valid: false,
       touched: false,
     },
     location: {
       value: "",
-      validation: {
-        required: true,
-      },
+      // validation: {
+      //   // required: true,
+      // },
       errorMessage: "",
       valid: false,
       touched: false,
     },
     stipend: {
       value: "",
-      validation: {
-        required: true,
-      },
+      // validation: {
+      //   // required: true,
+      // },
       errorMessage: "",
       valid: false,
       touched: false,
     },
     techstack: {
       value: "",
-      validation: {
-        required: true,
-      },
+      // validation: {
+      //   // required: true,
+      // },
       errorMessage: "",
       valid: false,
       touched: false,
     },
     lastDate: {
       value: "",
-      validation: {
-        required: true,
-      },
+      // validation: {
+      //   // required: true,
+      // },
       errorMessage: "",
       valid: false,
       touched: false,
     },
     startDate: {
       value: "",
-      validation: {
-        required: true,
-      },
+      // validation: {
+      //   // required: true,
+      // },
       errorMessage: "",
       valid: false,
       touched: false,
     },
     endDate: {
       value: "",
-      validation: {
-        required: true,
-      },
+      // validation: {
+      //   // required: true,
+      // },
       errorMessage: "",
       valid: false,
       touched: false,
@@ -100,10 +101,59 @@ const UpdateInternship = () => {
 
   const submitInternship = (e) => {
     e.preventDefault();
-    // console.log(typeof formValues.startDate.value);
-    // const duration =
-    //   new Date(formValues.endDate.value) - new Date(formValues.startDate.value);
-    // console.log(duration);
+    console.log(typeof formValues.startDate.value);
+    const duration =
+      new Date(formValues.endDate.value) - new Date(formValues.startDate.value);
+    console.log(duration);
+
+    const {
+      description,
+      location,
+      stipend,
+      techstack,
+      lastDate,
+      startDate,
+      endDate,
+    } = formValues;
+
+
+    axios({
+      method: "patch",
+      url: "http://localhost:5000/employer/update-internship",
+      data: {
+        postId,
+        description: description.value,
+        location: location.value,
+        stipend: stipend.value,
+        techstack: techstack.value,
+        lastDate: lastDate.value,
+        startDate: startDate.value,
+        endDate: endDate.value,
+        duration: duration
+      },
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data.error) {
+          console.log(res.data.error);
+          // alert(res.data.error);
+          const notify = () => toast(res.data.error);
+          notify();
+        } else {
+          const notify = () => toast(res.data.message);
+          notify();
+          history.push("/");
+        }
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
+
+    setFormValues(initialState);
 
   };
 
@@ -279,7 +329,7 @@ const UpdateInternship = () => {
                 style={{ color: "#ffc107", fontWeight: "bold" }}
                 variant="secondary"
                 type="submit"
-                disabled={!formIsValid}
+                // disabled={!formIsValid}
               >
                 Create
               </Button>

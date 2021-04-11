@@ -68,9 +68,67 @@ exports.getAllInternships = (req, res) => {
     .populate("createdBy", "_id personName")
     .sort("-createdAt")
     .then((internships) => {
-      res.json({internships: internships});
+      res.json({ internships: internships });
     })
     .catch((err) => {
       return res.json({ error: "Something Went Wrong" });
+    });
+};
+
+exports.updateInternship = (req, res) => {
+  const {
+    postId,
+    description,
+    location,
+    stipend,
+    techstack,
+    duration,
+    lastDate,
+    startDate,
+    endDate,
+  } = req.body;
+
+  Internship.findById(postId)
+    .then((internship) => {
+      console.log(internship);
+      if (description) {
+        internship.description = description;
+      }
+      if (location) {
+        internship.location = location;
+      }
+      if (stipend) {
+        internship.stipend = stipend;
+      }
+      if (techstack) {
+        const techStackArray = techstack.split(",");
+        internship.techstack = techStackArray;
+      }
+      if (duration) {
+        internship.duration = duration;
+      }
+      if (lastDate) {
+        internship.lastDate = lastDate;
+      }
+      if (startDate) {
+        internship.startDate = startDate;
+      }
+      if (endDate) {
+        internship.endDate = endDate;
+      }
+
+      internship
+        .save()
+        .then((intern) => {
+          res.json({ message: "Internship updated sucessfully!" });
+        })
+        .catch((err) => {
+          console.log(err);
+          res.status(500).json({ error: "Something went wrong!" });
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Something went wrong!" });
     });
 };
