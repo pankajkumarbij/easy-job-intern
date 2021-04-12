@@ -1,11 +1,15 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Card, Col, ListGroup, ListGroupItem, Row } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
+import { UserContext } from "../../App";
+import {Link} from 'react-router-dom';
+import * as Icon from "react-bootstrap-icons";
 
 import "../Internships/AllInternships.css";
 
 const AllJobs = () => {
+  const { state, dispatch } = useContext(UserContext);
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
@@ -67,10 +71,9 @@ const AllJobs = () => {
     return time;
   };
 
-
   return (
     <div className="internshipsOuterContainer">
-     <Toaster />
+      <Toaster />
       <Row className="justify-content-xl-start justify-content-lg-around justify-content-sm-center">
         {jobs &&
           jobs.map((job) => {
@@ -82,7 +85,12 @@ const AllJobs = () => {
                 <Card className="cardPost">
                   <Card.Body>
                     <Card.Title className="titleOfPost">
-                      {job.companyName}
+                      {job.companyName}{" "}
+                      {state.user._id == job.createdBy._id && (
+                        <Link to={`/update-job/${job._id}`}>
+                          <Icon.PencilSquare style={{ float: "right" }} />
+                        </Link>
+                      )}
                     </Card.Title>
                     <Card.Subtitle className="subtitleOfPost">
                       {job.location}
@@ -95,7 +103,9 @@ const AllJobs = () => {
                         Salary: {job.salary}
                       </ListGroupItem>
                       <ListGroupItem className="itemPost">
-                        Work Experience: {job.experience && "Atleast"} {job.experience} {job.experience===1 && "year"} {job.experience>1 && "years"}
+                        Work Experience: {job.experience && "Atleast"}{" "}
+                        {job.experience} {job.experience === 1 && "year"}{" "}
+                        {job.experience > 1 && "years"}
                       </ListGroupItem>
                       <ListGroupItem className="itemPost">
                         Start Date: {GettingMonth(job.startDate)}

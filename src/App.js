@@ -22,6 +22,7 @@ import AllJobs from "./components/Jobs/AllJobs";
 import NewFreshersJob from "./components/CreateNew/CreatFreshersJob";
 import AllFreshersJobs from "./components/FreshersJob/AllFresherJob";
 import UpdateInternship from "./components/UpdateForm/InternshipUpdate";
+import UpdateJob from "./components/UpdateForm/JobUpdate";
 
 export const UserContext = createContext();
 
@@ -51,14 +52,17 @@ const Routing = () => {
           <Route path="/create-internship" exact>
             <NewInternship />
           </Route>
-          <Route path="/update-internship/:id" >
-            <UpdateInternship />
-          </Route>
           <Route path="/create-job" exact>
             <NewJob />
           </Route>
           <Route path="/create-freshersjob" exact>
             <NewFreshersJob />
+          </Route>
+          <Route path="/update-internship/:id" >
+            <UpdateInternship />
+          </Route>
+          <Route path="/update-job/:id" >
+            <UpdateJob />
           </Route>
           <Route path="/all-internships" exact>
             <AllInternships />
