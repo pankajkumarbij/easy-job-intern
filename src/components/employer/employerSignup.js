@@ -1,253 +1,417 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Button, Card, Form, InputGroup } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-import './employer.css';
+import checkValidity from "../../utils/checkValidation";
+import "./employer.css";
 import IconButton from "@material-ui/core/IconButton";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import toast, { Toaster } from 'react-hot-toast';
 
-class EmployerSignup extends Component {
-  constructor() {
-    super();
-    this.state = {
-      companyName: null,
-      personName: null,
-      email: null,
-      contact: null,
-      password: null,
-      passwordConfirmation: null,
-      signupError: null,
-      showPassword: false,
-    };
-  }
+const EmployerSignup = () => {
+  const history = useHistory();
+  //listing initial states of the fields present in the form
+  const initialState = {
+    companyName: {
+      value: "",
+      validation: {
+        required: true,
+        minLength: 3,
+      },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
+    email: {
+      value: "",
+      validation: {
+        required: true,
+        isEmail: true,
+      },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
+    password: {
+      value: "",
+      validation: {
+        required: true,
+        minLength: 8,
+      },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
+    passwordConfirmation: {
+      value: "",
+      validation: {
+        required: true,
+        minLength: 8,
+        checkPassword: true,
+      },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
+    showPassword: false,
 
-  userTyping = (type, e) => {
-    switch (type) {
-      case "email":
-        console.log("email");
-        this.setState({ email: e.target.value });
-        break;
+    contact: {
+      value: "",
+      validation: {
+        required: true,
+        Length: 10,
+      },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
+    personName: {
+      value: "",
+      validation: {
+        required: true,
+        minLength: 5,
+      },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
+  };
 
-      case "password":
-        this.setState({ password: e.target.value });
-        break;
+  const [formValues, setFormValues] = useState(initialState);
+  const [signupError, setSignupError] = useState(null);
 
-      case "passwordConfirmation":
-        this.setState({ passwordConfirmation: e.target.value });
-        break;
-      case "companyName":
-        this.setState({ companyName: e.target.value });
-        break;
-      case "personName":
-        this.setState({ personName: e.target.value });
-        break;
-      case "contact":
-        this.setState({ contact: e.target.value });
-        break;
-      default:
-        break;
+  const [ setFormIsValid] = useState(false);
+
+  const handleChange = (e) => {
+    const updatedFormValues = { ...formValues };
+    const updatedFormElement = { ...updatedFormValues[e.target.name] };
+    updatedFormElement.value = e.target.value;
+    let validOutput = checkValidity(
+      updatedFormElement.value,
+      updatedFormElement.validation,
+      updatedFormValues.password.value
+    );
+    updatedFormElement.valid = validOutput[0];
+    updatedFormElement.errorMessage = validOutput[1];
+    updatedFormElement.touched = true;
+    updatedFormValues[e.target.name] = updatedFormElement;
+
+    let formValid = true;
+    for (let inputIdentifiers in updatedFormValues) {
+      formValid = updatedFormValues[inputIdentifiers].valid && formValid;
     }
+    setFormValues(updatedFormValues);
+    setFormIsValid(formValid);
   };
 
-  formIsValid = () => {
-    return this.state.password === this.state.passwordConfirmation;
+  const passwordIsValidChecker = () => {
+    const { password, passwordConfirmation } = formValues;
+    return password.value === passwordConfirmation.value;
   };
 
-  submitSignup = (e) => {
+  const submitSignup = (e) => {
+    const {
+      companyName,
+      email,
+      password,
+      passwordConfirmation,
+      personName,
+      contact,
+    } = formValues;
+
     e.preventDefault();
-    if (!this.formIsValid()) {
-      this.setState({ signupError: "Passwords do not match" });
+    if (!passwordIsValidChecker()) {
+      setSignupError("Passwords do not match");
       return;
     } else {
       axios
         .post("http://localhost:5000/employer/signup", {
-          personName: this.state.personName,
-          email: this.state.email,
-          password: this.state.password,
-          contact: this.state.contact,
-          passwordConfirmation: this.state.passwordConfirmation,
-          companyName: this.state.companyName,
+          personName: personName.value,
+          email: email.value,
+          password: password.value,
+          contact: contact.value,
+          passwordConfirmation: passwordConfirmation.value,
+          companyName: companyName.value,
         })
         .then((res) => {
           console.log(res.data.user);
-          alert(res.data.message);
+          // alert(res.data.message);
+          const notify = () => toast(res.data.message);
+          notify();
+          if(res.data.user){
+            history.push("/employer-login");
+          }
         })
         .catch((err) => {
           console.log(err);
         });
     }
+    setFormValues(initialState);
   };
-  togglePasswordVisiblity = () => { // to handle visibility of passsword 
-    this.setState({
-      showPassword: !(this.state.showPassword)
-    });
+  const togglePasswordVisiblity = () => {
+    setFormValues({ ...formValues, showPassword: !formValues.showPassword });
   };
-  render() {
-    return (
-      <>
-        <div style={{ padding: "4vh 0" }}>
-          <Card
+
+  return (
+    <>
+      <div style={{ padding: "4vh 0" }}>
+        <Toaster />
+        <Card
+          style={{
+            width: "40vw",
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: "4vh",
+            marginBottom: "4vh",
+            backgroundImage: "linear-gradient(to right, white , #6EE2CD)",
+          }}
+          className="employer_form_card_custom"
+        >
+          <Card.Header
             style={{
-              width: "40vw",
-              marginLeft: "auto",
-              marginRight: "auto",
-              marginTop: "4vh",
-              marginBottom: "4vh",
-              backgroundImage: "linear-gradient(to right, white , #6EE2CD)",
+              backgroundColor: "#6c6c6c",
+              color: "#6EE2CD",
+              fontFamily: '"Merriweather", serif',
+              fontSize: "1.25rem",
             }}
-            className="employer_form_card_custom"
+            as="h5"
           >
-            <Card.Header
-              style={{
-                backgroundColor: "#6c6c6c",
-                color: "#6EE2CD",
-                fontFamily: '"Merriweather", serif',
-                fontSize: "1.25rem",
-              }}
-              as="h5"
-            >
-              Employer Signup
-            </Card.Header>
-            <Card.Body>
-              <Form onSubmit={(e) => this.submitSignup(e)}>
-                <Form.Group
-                  style={{ textAlign: "left" }}
-                  controlId="formBasicName"
-                  onChange={(e) => this.userTyping("companyName", e)}
-                >
-                  <Form.Label style={{ fontWeight: "bold" }}>
-                    Company Name
-                  </Form.Label>
+            Employer Signup
+          </Card.Header>
+          <Card.Body>
+            <Form onSubmit={(e) => submitSignup(e)}>
+              {/* Name of the company */}
+              <Form.Group style={{ textAlign: "left" }}>
+                <Form.Label style={{ fontWeight: "bold" }}>
+                  Company Name
+                </Form.Label>
+                <Form.Control
+                  className={`${
+                    !formValues.companyName.valid &&
+                    formValues.companyName.touched
+                      ? "input-error"
+                      : ""
+                  }`}
+                  style={{ borderColor: "#6EE2CD", color: "#000000" }}
+                  type="text"
+                  placeholder="Enter the company name"
+                  name="companyName"
+                  value={formValues.companyName.value}
+                  onChange={handleChange}
+                />
+                {formValues.companyName.errorMessage && (
+                  <span className="error">
+                    {formValues.companyName.errorMessage}
+                  </span>
+                )}
+              </Form.Group>
+
+              {/*Email  */}
+              <Form.Group
+                style={{ textAlign: "left" }}
+                controlId="formBasicEmail"
+              >
+                <Form.Label style={{ fontWeight: "bold" }}>
+                  Email address
+                </Form.Label>
+                <Form.Control
+                  className={`${
+                    !formValues.email.valid && formValues.email.touched
+                      ? "input-error"
+                      : ""
+                  }`}
+                  style={{ borderColor: "#6EE2CD", color: "#000000" }}
+                  type="email"
+                  placeholder="Enter email"
+                  name="email"
+                  value={formValues.email.value}
+                  onChange={handleChange}
+                />
+                {formValues.email.errorMessage && (
+                  <span className="error">{formValues.email.errorMessage}</span>
+                )}
+              </Form.Group>
+
+              {/* Password */}
+              <Form.Group
+                style={{ textAlign: "left" }}
+                controlId="formBasicPassword"
+              >
+                <Form.Label style={{ fontWeight: "bold" }}>Password</Form.Label>
+                <InputGroup>
                   <Form.Control
+                    className={`${
+                      !formValues.password.valid && formValues.password.touched
+                        ? "input-error"
+                        : ""
+                    }`}
                     style={{ borderColor: "#6EE2CD", color: "#000000" }}
-                    type="text"
-                    placeholder="Enter the company name"
+                    type={formValues.showPassword ? "text" : "password"}
+                    placeholder="Password"
+                    name="password"
+                    value={formValues.password.value}
+                    onChange={handleChange}
                   />
-                </Form.Group>
-
-                <Form.Group
-                  style={{ textAlign: "left" }}
-                  controlId="formBasicEmail"
-                  onChange={(e) => this.userTyping("email", e)}
-                >
-                  <Form.Label style={{ fontWeight: "bold" }}>
-                    Email address
-                  </Form.Label>
+                  {formValues.password.errorMessage && (
+                    <span className="error">
+                      {formValues.password.errorMessage}
+                    </span>
+                  )}
+                  <InputGroup.Append>
+                    <InputGroup.Text
+                      style={{
+                        borderColor: "#6EE2CD",
+                        color: "#000000",
+                        height: "37px",
+                        width: "28px",
+                        paddingLeft: "1px",
+                        paddingRight: "1px",
+                      }}
+                    >
+                      <IconButton
+                        style={{ width: "25px" }}
+                        onClick={togglePasswordVisiblity}
+                      >
+                        {formValues.showPassword ? (
+                          <Visibility />
+                        ) : (
+                          <VisibilityOff />
+                        )}
+                      </IconButton>
+                    </InputGroup.Text>
+                  </InputGroup.Append>
+                </InputGroup>
+              </Form.Group>
+              {/* Password Confirmation */}
+              <Form.Group
+                style={{ textAlign: "left", marginBottom: "1.6vh" }}
+                controlId="formBasicPassword"
+              >
+                <Form.Label style={{ fontWeight: "bold" }}>
+                  Confirm Password
+                </Form.Label>
+                <InputGroup>
                   <Form.Control
+                    className={`${
+                      !formValues.passwordConfirmation.valid &&
+                      formValues.passwordConfirmation.touched
+                        ? "input-error"
+                        : ""
+                    }`}
                     style={{ borderColor: "#6EE2CD", color: "#000000" }}
-                    type="email"
-                    placeholder="Enter email"
+                    type="password"
+                    placeholder="Re-enter Password"
+                    name="passwordConfirmation"
+                    value={formValues.passwordConfirmation.value}
+                    onChange={handleChange}
                   />
-                </Form.Group>
+                  {formValues.passwordConfirmation.errorMessage && (
+                    <span className="error">
+                      {formValues.passwordConfirmation.errorMessage}
+                    </span>
+                  )}
+                  <InputGroup.Append>
+                    <InputGroup.Text
+                      style={{
+                        borderColor: "#6EE2CD",
+                        color: "#000000",
+                        height: "37px",
+                        width: "28px",
+                        paddingLeft: "1px",
+                        paddingRight: "1px",
+                      }}
+                    >
+                      <IconButton
+                        style={{ width: "25px" }}
+                        onClick={togglePasswordVisiblity}
+                      >
+                        {formValues.showPassword ? (
+                          <Visibility />
+                        ) : (
+                          <VisibilityOff />
+                        )}
+                      </IconButton>
+                    </InputGroup.Text>
+                  </InputGroup.Append>
+                </InputGroup>
+              </Form.Group>
+              {/* Person Name */}
+              <Form.Group style={{ textAlign: "left" }}>
+                <Form.Label style={{ fontWeight: "bold" }}>Name</Form.Label>
+                <Form.Control
+                  className={`${
+                    !formValues.personName.valid &&
+                    formValues.personName.touched
+                      ? "input-error"
+                      : ""
+                  }`}
+                  style={{ borderColor: "#6EE2CD", color: "#000000" }}
+                  type="text"
+                  placeholder="Enter your name"
+                  name="personName"
+                  value={formValues.personName.value}
+                  onChange={handleChange}
+                />
+                {formValues.personName.errorMessage && (
+                  <span className="error">
+                    {formValues.personName.errorMessage}
+                  </span>
+                )}
+              </Form.Group>
 
-                <Form.Group
-                  style={{ textAlign: "left" }}
-                  controlId="formBasicPassword"
-                  onChange={(e) => this.userTyping("password", e)}
-                >
-                  <Form.Label style={{ fontWeight: "bold" }}>
-                    Password
-                  </Form.Label>
-                  <InputGroup>
-                    <Form.Control
-                      style={{ borderColor: "#6EE2CD", color: "#000000" }}
-                      type={this.state.showPassword?"text":"password"}
-                      placeholder="Password"
-                    />
-                    <InputGroup.Append>
-                      <InputGroup.Text style={{borderColor: "#6EE2CD", color: "#000000", height: "37px", width: "28px", paddingLeft:"1px",paddingRight:"1px" }}>
-                        <IconButton style={{width: "25px"}}
-                          onClick={this.togglePasswordVisiblity}
-                        >
-                          {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
-                        </IconButton> 
-                      </InputGroup.Text>
-                    </InputGroup.Append>
-                  </InputGroup>
-                </Form.Group>
-                
-                <Form.Group
-                  style={{ textAlign: "left", marginBottom: "1.6vh" }}
-                  controlId="formBasicPassword"
-                  onChange={(e) => this.userTyping("passwordConfirmation", e)}
-                >
-                  <Form.Label style={{ fontWeight: "bold" }}>
-                    Confirm Password
-                  </Form.Label>
-                  <InputGroup>
-                    <Form.Control
-                      style={{ borderColor: "#6EE2CD", color: "#000000" }}
-                      type={this.state.showPassword?"text":"password"}
-                      placeholder="Re-enter Password"
-                    />
-                    <InputGroup.Append>
-                      <InputGroup.Text style={{borderColor: "#6EE2CD", color: "#000000", height: "37px", width: "28px", paddingLeft:"1px",paddingRight:"1px" }}>
-                        <IconButton style={{width: "25px"}}
-                          onClick={this.togglePasswordVisiblity}
-                        >
-                          {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
-                        </IconButton> 
-                      </InputGroup.Text>
-                    </InputGroup.Append>
-                  </InputGroup>
-                </Form.Group>
+              {/* contact */}
+              <Form.Group style={{ textAlign: "left" }}>
+                <Form.Label style={{ fontWeight: "bold" }}>Contact</Form.Label>
+                <Form.Control
+                  className={`${
+                    !formValues.contact.valid && formValues.contact.touched
+                      ? "input-error"
+                      : ""
+                  }`}
+                  style={{ borderColor: "#6EE2CD", color: "#000000" }}
+                  type="number"
+                  placeholder="Enter your contact number"
+                  name="contact"
+                  value={formValues.contact.value}
+                  onChange={handleChange}
+                />
+                {formValues.contact.errorMessage && (
+                  <span className="error">
+                    {formValues.contact.errorMessage}
+                  </span>
+                )}
+              </Form.Group>
+              {/* For Existing user */}
+              <Form.Group style={{ textAlign: "left", fontSize: "1.5vh" }}>
+                <Link to="/employer-login">
+                  <a href="/#" style={{ fontWeight: "bold" }}>
+                    Already have an account? Sign in
+                  </a>
+                </Link>
+              </Form.Group>
 
-                <Form.Group
-                  style={{ textAlign: "left" }}
-                  onChange={(e) => this.userTyping("personName", e)}
+              {signupError ? (
+                <Form.Text
+                  style={{ paddingBottom: "0.6vh", fontWeight: "bold" }}
+                  className="text-danger"
                 >
-                  <Form.Label style={{ fontWeight: "bold" }}>Name</Form.Label>
-                  <Form.Control
-                    style={{ borderColor: "#6EE2CD", color: "#000000" }}
-                    type="text"
-                    placeholder="Enter your name"
-                  />
-                </Form.Group>
+                  {signupError}
+                </Form.Text>
+              ) : null}
+              <Button
+                style={{ color: "#6EE2CD", fontWeight: "bold" }}
+                variant="secondary"
+                type="submit"
+              >
+                Register
+              </Button>
+            </Form>
+          </Card.Body>
+        </Card>
+      </div>
+    </>
+  );
+};
 
-                <Form.Group
-                  style={{ textAlign: "left" }}
-                  onChange={(e) => this.userTyping("contact", e)}
-                >
-                  <Form.Label style={{ fontWeight: "bold" }}>
-                    Contact
-                  </Form.Label>
-                  <Form.Control
-                    style={{ borderColor: "#6EE2CD", color: "#000000" }}
-                    type="number"
-                    placeholder="Enter your contact number"
-                  />
-                </Form.Group>
-
-                <Form.Group style={{ textAlign: "left", fontSize: "1.5vh" }}>
-                  <Link to="/employer-login">
-                    <a style={{ fontWeight: "bold" }}>
-                      Already have an account? Sign in
-                    </a>
-                  </Link>
-                </Form.Group>
-
-                {this.state.signupError ? (
-                  <Form.Text
-                    style={{ paddingBottom: "0.6vh", fontWeight: "bold" }}
-                    className="text-danger"
-                  >
-                    {this.state.signupError}
-                  </Form.Text>
-                ) : null}
-                <Button
-                  style={{ color: "#6EE2CD", fontWeight: "bold" }}
-                  variant="secondary"
-                  type="submit"
-                >
-                  Register
-                </Button>
-              </Form>
-            </Card.Body>
-          </Card>
-        </div>
-      </>
-    );
-  }
-}
 export default EmployerSignup;

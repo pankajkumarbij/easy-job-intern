@@ -1,0 +1,61 @@
+body, html{
+    overflow-x: hidden;
+}
+.internshipsOuterContainer{
+    width: 90%;
+    margin: auto;
+    padding: 30px 10px;
+}
+.colPost{
+    margin-bottom: 30px;
+}
+.cardPost{
+    background-color: #52176D85;
+    color: white;
+    border-radius: 10px;
+    height:  100%;
+}
+.titleOfPost{
+    font-size: 1.7rem;
+    font-weight: 900;
+    text-align: left;
+}
+.subtitleOfPost{
+    font-weight: 300;
+    font-style: oblique;
+    color: #ccc;
+    text-align: left;
+    padding-bottom: 20px;
+}
+.textPost{
+    padding-top: 10px;
+    font-weight: 300px;
+    font-size: 15px;
+    text-align: justify;
+}
+.itemPost{
+    font-size: 14px;
+    padding: 8px;
+    background-color: inherit;
+    border-color: #888;
+}
+.last{
+    color: red;
+    margin-bottom: 20px;
+}
+.tech{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.TechStack{
+    background-color: #7f56f0;
+    /* border: 1px solid #88f; */
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+.TechStack:hover{
+    color: white;
+}
