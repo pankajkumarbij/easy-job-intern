@@ -72,7 +72,7 @@ exports.updateJob = (req, res) => {
     postId,
     description,
     location,
-    stipend,
+    salary,
     techstack,
     duration,
     lastDate,
@@ -89,8 +89,8 @@ exports.updateJob = (req, res) => {
       if (location) {
         job.location = location;
       }
-      if (stipend) {
-        job.stipend = stipend;
+      if (salary) {
+        job.salary = salary;
       }
       if (techstack) {
         const techStackArray = techstack.split(",");
