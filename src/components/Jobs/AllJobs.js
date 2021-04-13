@@ -86,7 +86,7 @@ const AllJobs = () => {
                   <Card.Body>
                     <Card.Title className="titleOfPost">
                       {job.companyName}{" "}
-                      {state.user._id == job.createdBy._id && (
+                      {state && job.createdBy && state.user._id == job.createdBy._id && (
                         <Link to={`/update-job/${job._id}`}>
                           <Icon.PencilSquare style={{ float: "right" }} />
                         </Link>
