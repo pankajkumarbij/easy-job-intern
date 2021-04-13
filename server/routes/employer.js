@@ -25,6 +25,7 @@ router.patch("/update", auth_employer, update);
 router.patch("/update-internship", auth_employer, updateInternship);
 router.get("/get-internship/:postId", auth_employer, getInternshipValues);
 router.patch("/update-job", auth_employer, updateJob);
+// router.patch("/update-", auth_employer, updateJob);
 
 
 

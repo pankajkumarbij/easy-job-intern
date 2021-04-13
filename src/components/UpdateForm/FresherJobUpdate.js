@@ -1,14 +1,14 @@
-import axios from "axios";
+// import axios from "axios";
 import React, { useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
-import { useHistory, useParams } from "react-router-dom";
+// import { useHistory, useParams } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 
 
-const UpdateJob = () => {
-  const history = useHistory();
-  const postId = useParams().id;
+const UpdateFresherJob = () => {
+//   const history = useHistory();
+//   const postId = useParams().id;
 
   const initialState = {
     description: {
@@ -65,15 +65,6 @@ const UpdateJob = () => {
       valid: false,
       touched: false,
     },
-    experience: {
-      value: "",
-    //   validation: {
-    //     required: true,
-    //   },
-      errorMessage: "",
-      valid: false,
-      touched: false,
-    },
   };
 
   const [formValues, setFormValues] = useState(initialState);
@@ -104,53 +95,51 @@ const UpdateJob = () => {
   const submitInternship = (e) => {
     e.preventDefault();
 
-    const {
-      description,
-      location,
-      salary,
-      techstack,
-      lastDate,
-      startDate,
-      experience,
-    } = formValues;
+    // const {
+    //   description,
+    //   location,
+    //   salary,
+    //   techstack,
+    //   lastDate,
+    //   startDate,
+    // } = formValues;
 
-    axios({
-      method: "patch",
-      url: "http://localhost:5000/employer/update-job",
-      data: {
-        postId,
-        description: description.value,
-        location: location.value,
-        salary: salary.value,
-        techstack: techstack.value,
-        lastDate: lastDate.value,
-        startDate: startDate.value,
-        experience: experience.value,
-      },
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        console.log(res);
-        if (res.data.error) {
-          console.log(res.data.error);
-          // alert(res.data.error);
-          const notify = () => toast(res.data.error);
-          notify();
-        } else {
-          // setInitialValue(description, )
-          const notify = () => toast(res.data.message);
-          notify();
-          history.push("/");
-        }
-      })
-      .catch((err) => {
-        console.log("Error: ", err);
-      });
+    // axios({
+    //   method: "patch",
+    //   url: "http://localhost:5000/employer/update-job",
+    //   data: {
+    //     postId,
+    //     description: description.value,
+    //     location: location.value,
+    //     salary: salary.value,
+    //     techstack: techstack.value,
+    //     lastDate: lastDate.value,
+    //     startDate: startDate.value,
+    //   },
+    //   headers: {
+    //     Authorization: "Bearer " + localStorage.getItem("jwt"),
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then((res) => {
+    //     console.log(res);
+    //     if (res.data.error) {
+    //       console.log(res.data.error);
+    //       // alert(res.data.error);
+    //       const notify = () => toast(res.data.error);
+    //       notify();
+    //     } else {
+    //       // setInitialValue(description, )
+    //       const notify = () => toast(res.data.message);
+    //       notify();
+    //       history.push("/");
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log("Error: ", err);
+    //   });
 
-    setFormValues(initialState);
+    // setFormValues(initialState);
 
   };
 
@@ -177,7 +166,7 @@ const UpdateJob = () => {
             }}
             as="h5"
           >
-            Update Job
+            Update Fresher's Job
           </Card.Header>
           <Card.Body>
             <Form onSubmit={(e) => submitInternship(e)}>
@@ -309,27 +298,7 @@ const UpdateJob = () => {
                 )}
               </Form.Group>
 
-              <Form.Group
-                style={{ textAlign: "left" }}
-                controlId="formBasicEmail"
-              >
-                <Form.Label style={{ fontWeight: "bold" }}>
-                  Experience
-                </Form.Label>
-                <Form.Control
-                  style={{ borderColor: "#ffc107", color: "#000000" }}
-                  type="Number"
-                  placeholder="Enter experince"
-                  name="experience"
-                  value={formValues.experience.value}
-                  onChange={handleChange}
-                />
-                {formValues.experience.errorMessage && (
-                  <span className="error">
-                    {formValues.experience.errorMessage}
-                  </span>
-                )}
-              </Form.Group>
+
 
               {
                 <Button
@@ -348,4 +317,4 @@ const UpdateJob = () => {
   );
 };
 
-export default UpdateJob;
+export default UpdateFresherJob;

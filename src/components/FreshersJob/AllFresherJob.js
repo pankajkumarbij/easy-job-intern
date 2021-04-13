@@ -1,11 +1,15 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Card, Col, ListGroup, ListGroupItem, Row } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
+import { UserContext } from "../../App";
+import {Link} from 'react-router-dom';
+import * as Icon from "react-bootstrap-icons";
 
 import "../Internships/AllInternships.css";
 
 const AllFreshersJobs = () => {
+  const { state, dispatch } = useContext(UserContext);
   const [freshersJobs, setFreshersJobs] = useState([]);
 
   useEffect(() => {
@@ -67,10 +71,9 @@ const AllFreshersJobs = () => {
     return time;
   };
 
-
   return (
     <div className="internshipsOuterContainer">
-     <Toaster />
+      <Toaster />
       <Row className="justify-content-xl-start justify-content-lg-around justify-content-sm-center">
         {freshersJobs &&
           freshersJobs.map((fresher) => {
@@ -83,6 +86,13 @@ const AllFreshersJobs = () => {
                   <Card.Body>
                     <Card.Title className="titleOfPost">
                       {fresher.companyName}
+                      {state &&
+                        fresher.createdBy &&
+                        state.user._id == fresher.createdBy._id && (
+                          <Link to={`/update-fresherjob/${fresher._id}`}>
+                            <Icon.PencilSquare style={{ float: "right" }} />
+                          </Link>
+                        )}
                     </Card.Title>
                     <Card.Subtitle className="subtitleOfPost">
                       {fresher.location}
