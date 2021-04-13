@@ -8,7 +8,7 @@ const {
   update
 } = require("../controller/employer.auth");
 const { createFreshersJob, updateFreshersJob } = require("../controller/freshersjob");
-const { createInternship, updateInternship, getInternshipValues } = require("../controller/internships");
+const { createInternship, updateInternship, getInternshipValues, deleteInternship } = require("../controller/internships");
 const { createJob, updateJob } = require("../controller/jobs");
 const auth_employer = require("../middleware/auth_employer");
 
@@ -26,6 +26,9 @@ router.patch("/update-internship", auth_employer, updateInternship);
 router.get("/get-internship/:postId", auth_employer, getInternshipValues);
 router.patch("/update-job", auth_employer, updateJob);
 router.patch("/update-fresherjob", auth_employer, updateFreshersJob);
+
+router.delete("/delete-internship", auth_employer, deleteInternship);
+
 
 
 
