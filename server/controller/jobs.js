@@ -130,7 +130,7 @@ exports.deleteJob = (req, res) => {
 
   Job.findByIdAndDelete(postId)
     .then((deletedPost) => {
-      console.log(deletedPost);
+      // console.log(deletedPost);
       res.json({ message: "Job deleted successfully!" , jobs: deletedPost});
     })
     .catch((err) => {
