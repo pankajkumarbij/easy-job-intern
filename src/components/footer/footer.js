@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 import * as Icon from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
-
+import "./footer.css";
 function Footer() { 
   return (
     <>
@@ -94,25 +94,25 @@ function Footer() {
               <a href="/#">
                 <Icon.Linkedin
                   style={{ color: "#ffc107" }}
-                  className="mx-md-3 mx-2"
+                  className="mx-md-3 mx-2 icons"
                 ></Icon.Linkedin>{" "}
               </a>
               <a href="/#">
                 <Icon.Facebook
                   style={{ color: "#ffc107" }}
-                  className="mx-md-3 mx-2"
+                  className="mx-md-3 mx-2 icons"
                 ></Icon.Facebook>
               </a>
               <a href="/#">
                 <Icon.Twitter
                   style={{ color: "#ffc107" }}
-                  className="mx-md-3 mx-2"
+                  className="mx-md-3 mx-2 icons"
                 ></Icon.Twitter>
               </a>
               <a href="/#">
                 <Icon.Youtube
                   style={{ color: "#ffc107" }}
-                  className="mx-md-3 mx-2"
+                  className="mx-md-3 mx-2 icons"
                 ></Icon.Youtube>{" "}
               </a>
               <br />
