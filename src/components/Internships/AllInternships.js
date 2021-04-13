@@ -45,7 +45,7 @@ const AllInternships = () => {
       .catch((err) => {
         console.log("Error: ", err);
       });
-  }, [internships]);
+  }, []);
 
   if (internships && internships[4]) {
     console.log(internships[4]);
@@ -92,7 +92,7 @@ const AllInternships = () => {
       <Row className="justify-content-xl-start justify-content-lg-around justify-content-sm-center">
         {internships &&
           internships.map((internship) => {
-            console.log(internship.createdBy._id, state.user._id);
+            // console.log(internship.createdBy._id, state.user._id);
             return (
               <Col
                 key={internship._id}
@@ -102,7 +102,7 @@ const AllInternships = () => {
                   <Card.Body>
                     <Card.Title className="titleOfPost">
                       {internship.companyName}{" "}
-                      {state.user._id == internship.createdBy._id && <Link to={`/update-internship/${internship._id}`}><Icon.PencilSquare style={{ float: "right" }} /></Link> }
+                      {state && internship.createdBy && state.user._id == internship.createdBy._id && <Link to={`/update-internship/${internship._id}`}><Icon.PencilSquare style={{ float: "right" }} /></Link> }
                       
                     </Card.Title>
                     <Card.Subtitle className="subtitleOfPost">
