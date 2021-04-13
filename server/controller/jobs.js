@@ -124,3 +124,17 @@ exports.updateJob = (req, res) => {
       res.status(500).json({ error: "Something went wrong!" });
     });
 };
+
+exports.deleteJob = (req, res) => {
+  const { postId } = req.body;
+
+  Job.findByIdAndDelete(postId)
+    .then((deletedPost) => {
+      console.log(deletedPost);
+      res.json({ message: "Job deleted successfully!" , jobs: deletedPost});
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Something went wrong!" });
+    });
+};
