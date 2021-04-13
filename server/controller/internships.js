@@ -90,7 +90,7 @@ exports.updateInternship = (req, res) => {
 
   Internship.findById(postId)
     .then((internship) => {
-      console.log(internship);
+      // console.log(internship);
       if (description) {
         internship.description = description;
       }

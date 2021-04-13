@@ -111,7 +111,7 @@ const StudentSignup = () => {
   const [formValues, setFormValues] = useState(initialState);
   const [signupError, setSignupError] = useState(null);
 
-  const [setFormIsValid] = useState(false); //boolean to check that the whole form is valid or not
+  const [formIsValid ,setFormIsValid] = useState(false); //boolean to check that the whole form is valid or not
 
   const handleChange = (e) => {
     const updatedFormValues = { ...formValues };

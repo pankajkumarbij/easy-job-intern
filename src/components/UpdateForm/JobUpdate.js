@@ -1,13 +1,13 @@
-// import axios from "axios";
+import axios from "axios";
 import React, { useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { useHistory, useParams } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 
 
 const UpdateJob = () => {
-//   const history = useHistory();
+  const history = useHistory();
   const postId = useParams().id;
 
   const initialState = {
@@ -103,10 +103,54 @@ const UpdateJob = () => {
 
   const submitInternship = (e) => {
     e.preventDefault();
-    console.log(typeof formValues.startDate.value);
-    const duration =
-      new Date(formValues.endDate.value) - new Date(formValues.startDate.value);
-    console.log(duration);
+
+    const {
+      description,
+      location,
+      salary,
+      techstack,
+      lastDate,
+      startDate,
+      experience,
+    } = formValues;
+
+    axios({
+      method: "patch",
+      url: "http://localhost:5000/employer/update-job",
+      data: {
+        postId,
+        description: description.value,
+        location: location.value,
+        salary: salary.value,
+        techstack: techstack.value,
+        lastDate: lastDate.value,
+        startDate: startDate.value,
+        experience: experience.value,
+      },
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data.error) {
+          console.log(res.data.error);
+          // alert(res.data.error);
+          const notify = () => toast(res.data.error);
+          notify();
+        } else {
+          // setInitialValue(description, )
+          const notify = () => toast(res.data.message);
+          notify();
+          history.push("/");
+        }
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
+
+    setFormValues(initialState);
 
   };
 
@@ -183,11 +227,11 @@ const UpdateJob = () => {
                 style={{ textAlign: "left" }}
                 controlId="formBasicEmail"
               >
-                <Form.Label style={{ fontWeight: "bold" }}>Stipend</Form.Label>
+                <Form.Label style={{ fontWeight: "bold" }}>salary</Form.Label>
                 <Form.Control
                   style={{ borderColor: "#ffc107", color: "#000000" }}
                   type="text"
-                  placeholder="Enter stipend"
+                  placeholder="Enter salary"
                   name="salary"
                   value={formValues.salary.value}
                   onChange={handleChange}

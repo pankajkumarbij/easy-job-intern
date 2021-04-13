@@ -66,3 +66,61 @@ exports.getAllJobs = (req, res) => {
       return res.json({ error: "Something Went Wrong" });
     });
 };
+
+exports.updateJob = (req, res) => {
+  const {
+    postId,
+    description,
+    location,
+    stipend,
+    techstack,
+    duration,
+    lastDate,
+    startDate,
+    experience,
+  } = req.body;
+
+  Job.findById(postId)
+    .then((job) => {
+      // console.log(job);
+      if (description) {
+        job.description = description;
+      }
+      if (location) {
+        job.location = location;
+      }
+      if (stipend) {
+        job.stipend = stipend;
+      }
+      if (techstack) {
+        const techStackArray = techstack.split(",");
+        job.techstack = techStackArray;
+      }
+      if (duration) {
+        job.duration = duration;
+      }
+      if (lastDate) {
+        job.lastDate = lastDate;
+      }
+      if (startDate) {
+        job.startDate = startDate;
+      }
+      if (experience) {
+        job.experience = experience;
+      }
+
+      job
+        .save()
+        .then((intern) => {
+          res.json({ message: "Internship updated sucessfully!" });
+        })
+        .catch((err) => {
+          console.log(err);
+          res.status(500).json({ error: "Something went wrong!" });
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Something went wrong!" });
+    });
+};
