@@ -6,7 +6,7 @@ import { useHistory, useParams } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 
 
-const UpdateJob = () => {
+const UpdateFresherJob = () => {
   const history = useHistory();
   const postId = useParams().id;
 
@@ -65,15 +65,6 @@ const UpdateJob = () => {
       valid: false,
       touched: false,
     },
-    experience: {
-      value: "",
-    //   validation: {
-    //     required: true,
-    //   },
-      errorMessage: "",
-      valid: false,
-      touched: false,
-    },
   };
 
   const [formValues, setFormValues] = useState(initialState);
@@ -103,6 +94,7 @@ const UpdateJob = () => {
 
   const submitInternship = (e) => {
     e.preventDefault();
+    console.log("1");
 
     const {
       description,
@@ -111,12 +103,11 @@ const UpdateJob = () => {
       techstack,
       lastDate,
       startDate,
-      experience,
     } = formValues;
 
     axios({
       method: "patch",
-      url: "http://localhost:5000/employer/update-job",
+      url: "http://localhost:5000/employer/update-fresherjob",
       data: {
         postId,
         description: description.value,
@@ -125,7 +116,6 @@ const UpdateJob = () => {
         techstack: techstack.value,
         lastDate: lastDate.value,
         startDate: startDate.value,
-        experience: experience.value,
       },
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -177,7 +167,7 @@ const UpdateJob = () => {
             }}
             as="h5"
           >
-            Update Job
+            Update Fresher's Job
           </Card.Header>
           <Card.Body>
             <Form onSubmit={(e) => submitInternship(e)}>
@@ -309,27 +299,7 @@ const UpdateJob = () => {
                 )}
               </Form.Group>
 
-              <Form.Group
-                style={{ textAlign: "left" }}
-                controlId="formBasicEmail"
-              >
-                <Form.Label style={{ fontWeight: "bold" }}>
-                  Experience
-                </Form.Label>
-                <Form.Control
-                  style={{ borderColor: "#ffc107", color: "#000000" }}
-                  type="Number"
-                  placeholder="Enter experince"
-                  name="experience"
-                  value={formValues.experience.value}
-                  onChange={handleChange}
-                />
-                {formValues.experience.errorMessage && (
-                  <span className="error">
-                    {formValues.experience.errorMessage}
-                  </span>
-                )}
-              </Form.Group>
+
 
               {
                 <Button
@@ -348,4 +318,4 @@ const UpdateJob = () => {
   );
 };
 
-export default UpdateJob;
+export default UpdateFresherJob;
