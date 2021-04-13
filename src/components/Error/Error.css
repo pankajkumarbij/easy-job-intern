@@ -6,8 +6,8 @@
  font-family: Arial, Helvetica, sans-serif;
 
 }
-.error {
-  /* height: 90vh; */
+.errors {
+  height: 70vh;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -17,7 +17,7 @@
   background-color: #052224;
   color: #798a8b;
 }
-.error h1,button, p{
+.errors h1,button, p{
  align-items: center;
 }
 
