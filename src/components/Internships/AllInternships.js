@@ -112,6 +112,8 @@ const AllInternships = () => {
           console.log(res.data.internships);
           setInternships(res.data.internships);
           console.log(internships);
+          const notify = () => toast(res.data.message);
+          notify();
         }
       })
       .catch((err) => {

@@ -9,7 +9,7 @@ const {
 } = require("../controller/employer.auth");
 const { createFreshersJob, updateFreshersJob } = require("../controller/freshersjob");
 const { createInternship, updateInternship, getInternshipValues, deleteInternship } = require("../controller/internships");
-const { createJob, updateJob } = require("../controller/jobs");
+const { createJob, updateJob, deleteJob } = require("../controller/jobs");
 const auth_employer = require("../middleware/auth_employer");
 
 router.post("/signup", signup);
@@ -28,6 +28,7 @@ router.patch("/update-job", auth_employer, updateJob);
 router.patch("/update-fresherjob", auth_employer, updateFreshersJob);
 
 router.delete("/delete-internship", auth_employer, deleteInternship);
+router.delete("/delete-job", auth_employer, deleteJob);
 
 
 
