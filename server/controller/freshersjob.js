@@ -37,7 +37,6 @@ exports.createFreshersJob = (req, res) => {
     createdBy: user,
   });
 
-
   freshersjob
     .save()
     .then((freshers) => {
@@ -50,13 +49,68 @@ exports.createFreshersJob = (req, res) => {
 };
 
 exports.getAllFreshersJobs = (req, res) => {
-    Freshers.find()
-      .populate("createdBy", "_id personName")
-      .sort("-createdAt")
-      .then((fresherjob) => {
-        res.json({freshersjobs: fresherjob});
-      })
-      .catch((err) => {
-        return res.json({ error: "Something Went Wrong" });
-      });
-  };
+  Freshers.find()
+    .populate("createdBy", "_id personName")
+    .sort("-createdAt")
+    .then((fresherjob) => {
+      res.json({ freshersjobs: fresherjob });
+    })
+    .catch((err) => {
+      return res.json({ error: "Something Went Wrong" });
+    });
+};
+
+
+exports.updateFreshersJob = (req, res) => {
+  const {
+    postId,
+    description,
+    location,
+    salary,
+    techstack,
+    duration,
+    lastDate,
+    startDate,
+  } = req.body;
+
+  Freshers.findById(postId)
+    .then((job) => {
+      // console.log(job);
+      if (description) {
+        job.description = description;
+      }
+      if (location) {
+        job.location = location;
+      }
+      if (salary) {
+        job.salary = salary;
+      }
+      if (techstack) {
+        const techStackArray = techstack.split(",");
+        job.techstack = techStackArray;
+      }
+      if (duration) {
+        job.duration = duration;
+      }
+      if (lastDate) {
+        job.lastDate = lastDate;
+      }
+      if (startDate) {
+        job.startDate = startDate;
+      }
+
+      job
+        .save()
+        .then((fresherjob) => {
+          res.json({ message: "Internship updated sucessfully!" });
+        })
+        .catch((err) => {
+          console.log(err);
+          res.status(500).json({ error: "Something went wrong!" });
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Something went wrong!" });
+    });
+};

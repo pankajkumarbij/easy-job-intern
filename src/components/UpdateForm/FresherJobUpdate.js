@@ -1,14 +1,14 @@
-// import axios from "axios";
+import axios from "axios";
 import React, { useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
-// import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 
 
 const UpdateFresherJob = () => {
-//   const history = useHistory();
-//   const postId = useParams().id;
+  const history = useHistory();
+  const postId = useParams().id;
 
   const initialState = {
     description: {
@@ -94,52 +94,53 @@ const UpdateFresherJob = () => {
 
   const submitInternship = (e) => {
     e.preventDefault();
+    console.log("1");
 
-    // const {
-    //   description,
-    //   location,
-    //   salary,
-    //   techstack,
-    //   lastDate,
-    //   startDate,
-    // } = formValues;
+    const {
+      description,
+      location,
+      salary,
+      techstack,
+      lastDate,
+      startDate,
+    } = formValues;
 
-    // axios({
-    //   method: "patch",
-    //   url: "http://localhost:5000/employer/update-job",
-    //   data: {
-    //     postId,
-    //     description: description.value,
-    //     location: location.value,
-    //     salary: salary.value,
-    //     techstack: techstack.value,
-    //     lastDate: lastDate.value,
-    //     startDate: startDate.value,
-    //   },
-    //   headers: {
-    //     Authorization: "Bearer " + localStorage.getItem("jwt"),
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    //   .then((res) => {
-    //     console.log(res);
-    //     if (res.data.error) {
-    //       console.log(res.data.error);
-    //       // alert(res.data.error);
-    //       const notify = () => toast(res.data.error);
-    //       notify();
-    //     } else {
-    //       // setInitialValue(description, )
-    //       const notify = () => toast(res.data.message);
-    //       notify();
-    //       history.push("/");
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log("Error: ", err);
-    //   });
+    axios({
+      method: "patch",
+      url: "http://localhost:5000/employer/update-fresherjob",
+      data: {
+        postId,
+        description: description.value,
+        location: location.value,
+        salary: salary.value,
+        techstack: techstack.value,
+        lastDate: lastDate.value,
+        startDate: startDate.value,
+      },
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data.error) {
+          console.log(res.data.error);
+          // alert(res.data.error);
+          const notify = () => toast(res.data.error);
+          notify();
+        } else {
+          // setInitialValue(description, )
+          const notify = () => toast(res.data.message);
+          notify();
+          history.push("/");
+        }
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
 
-    // setFormValues(initialState);
+    setFormValues(initialState);
 
   };
 
