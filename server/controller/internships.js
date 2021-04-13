@@ -148,7 +148,7 @@ exports.getInternshipValues = (req, res) => {
     });
 };
 
-exports.searchFilter = async(req, res) => {
+exports.searchFilterInternships = async(req, res) => {
   const match = {}
   if(req.query.location){
     match.location = req.query.location 
