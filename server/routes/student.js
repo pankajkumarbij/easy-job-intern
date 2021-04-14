@@ -5,7 +5,7 @@ const auth_student = require('../middleware/auth_student');
 
 router.post("/signup", signup);
 router.post("/signin", signin);
-router.post("update", update);
+router.patch("/update", auth_student, update);
 router.get('/logout', auth_student, logout);
 router.get('/logoutAll', auth_student, logoutAll);
 

@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { Button, Form, Card, InputGroup } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import checkValidity from "../../utils/checkValidation";
 import "./register.css";
 import IconButton from "@material-ui/core/IconButton";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import toast, { Toaster } from 'react-hot-toast';
+
 const StudentSignup = () => {
+  const history = useHistory();
   //creating a dicitionary for every field of the form
   const initialState = {
     personName: {
@@ -108,7 +111,7 @@ const StudentSignup = () => {
   const [formValues, setFormValues] = useState(initialState);
   const [signupError, setSignupError] = useState(null);
 
-  const [formIsValid, setFormIsValid] = useState(false); //boolean to check that the whole form is valid or not
+  const [formIsValid ,setFormIsValid] = useState(false); //boolean to check that the whole form is valid or not
 
   const handleChange = (e) => {
     const updatedFormValues = { ...formValues };
@@ -169,7 +172,12 @@ const StudentSignup = () => {
         })
         .then((res) => {
           console.log(res.data.user);
-          alert(res.data.message);
+          // alert(res.data.message);
+          const notify = () => toast(res.data.message);
+          notify();
+          if(res.data.user){
+            history.pushState("/student-login");
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -186,6 +194,7 @@ const StudentSignup = () => {
   return (
     <>
       <div style={{ padding: "4vh 0" }}>
+      <Toaster />
         <Card
           style={{
             width: "40vw",
@@ -465,7 +474,7 @@ const StudentSignup = () => {
               {/* Already a user? */}
               <Form.Group style={{ textAlign: "left", fontSize: "1.5vh" }}>
                 <Link to="/student-login">
-                  <a style={{ fontWeight: "bold" }}>
+                  <a href="/#" style={{ fontWeight: "bold" }}>
                     Already have an account? Sign in
                   </a>
                 </Link>
