@@ -148,31 +148,3 @@ exports.getInternshipValues = (req, res) => {
     });
 };
 
-exports.searchFilterInternships = async(req, res) => {
-  const match = {}
-  if(req.query.location){
-    match.location = req.query.location 
-  }
-  if(req.query.duration){
-    match.duration = req.query.duration 
-  }
-  if(req.query.companyName){
-    match.companyName = req.query.companyName 
-  }
-  if(req.query.techstack){
-    match.techstack = { $in: req.query.techstack }
-  }
-  if(req.query.startDate){
-    date = new Date(req.query.startDate).toISOString()
-    match.startDate = date
-  }
-  const internships = await Internship.find(match)
-  try{
-    res.status(200).send({ internships: internships });
-  }
-  catch(e){
-    return res.status(400).send('something went wrong')
-  }
-  // const internship = await Internship.find({ techstack: { $in: match.techstack }, 'location': 'l2'})
-
-}
