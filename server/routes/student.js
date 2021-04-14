@@ -4,6 +4,7 @@ const { signup, signin, update, logout, logoutAll } = require("../controller/stu
 const auth_student = require('../middleware/auth_student');
 const {searchFilterInternships} = require("../controller/internships")
 const {searchFilterJobs} = require("../controller/jobs")
+const {searchFilterFreshersJobs} = require("../controller/freshersjob")
 
 
 router.post("/signup", signup);
@@ -13,5 +14,6 @@ router.get('/logout', auth_student, logout);
 router.get('/logoutAll', auth_student, logoutAll);
 router.get('/searchFilterInternships', auth_student, searchFilterInternships);
 router.get('/searchFilterJobs', auth_student, searchFilterJobs);
+router.get('/searchFilterFreshersJobs', auth_student, searchFilterFreshersJobs);
 
 module.exports = router
