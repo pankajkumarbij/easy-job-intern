@@ -72,7 +72,7 @@ exports.updateJob = (req, res) => {
     postId,
     description,
     location,
-    stipend,
+    salary,
     techstack,
     duration,
     lastDate,
@@ -89,8 +89,8 @@ exports.updateJob = (req, res) => {
       if (location) {
         job.location = location;
       }
-      if (stipend) {
-        job.stipend = stipend;
+      if (salary) {
+        job.salary = salary;
       }
       if (techstack) {
         const techStackArray = techstack.split(",");
@@ -125,3 +125,16 @@ exports.updateJob = (req, res) => {
     });
 };
 
+exports.deleteJob = (req, res) => {
+  const { postId } = req.body;
+
+  Job.findByIdAndDelete(postId)
+    .then((deletedPost) => {
+      // console.log(deletedPost);
+      res.json({ message: "Job deleted successfully!" , jobs: deletedPost});
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Something went wrong!" });
+    });
+};

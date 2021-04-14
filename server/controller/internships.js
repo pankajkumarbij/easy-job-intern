@@ -134,7 +134,7 @@ exports.updateInternship = (req, res) => {
 };
 
 exports.getInternshipValues = (req, res) => {
-  const {postId} = req.params;
+  const { postId } = req.params;
   Internship.findById(postId)
     .then((internship) => {
       if (!internship) {
@@ -148,3 +148,15 @@ exports.getInternshipValues = (req, res) => {
     });
 };
 
+exports.deleteInternship = (req, res) => {
+  const { postId } = req.body;
+
+  Internship.findByIdAndDelete(postId)
+    .then((deletedPost) => {
+      res.json({ message: "Internship deleted successfully!" });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Something went wrong!" });
+    });
+};
