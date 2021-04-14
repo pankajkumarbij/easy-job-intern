@@ -59,3 +59,32 @@ body, html{
 .TechStack:hover{
     color: white;
 }
+.postOptions{
+    float: right;
+    padding: 0;
+    color: #fff !important;
+}
+.postOptionsBtn{
+    background-color: inherit !important;
+    border: none;
+    padding: 0;
+
+}
+.postOptionsBtn::after{
+    content: none;
+}
+.postOptionsBtn:focus{
+    box-shadow: none !important;
+}
+.optionMenu{
+    min-width: fit-content !important;
+    font-size: 1.4rem;
+    background-color: #222;
+    color: #fff !important;
+}
+.optionItem:hover,.optionItem:focus {
+    background-color: #444 !important;
+}
+.optionsMenuIcon{
+    color: #fff !important;
+}

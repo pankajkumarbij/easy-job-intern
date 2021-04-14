@@ -90,7 +90,7 @@ exports.updateInternship = (req, res) => {
 
   Internship.findById(postId)
     .then((internship) => {
-      console.log(internship);
+      // console.log(internship);
       if (description) {
         internship.description = description;
       }
@@ -126,6 +126,34 @@ exports.updateInternship = (req, res) => {
           console.log(err);
           res.status(500).json({ error: "Something went wrong!" });
         });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Something went wrong!" });
+    });
+};
+
+exports.getInternshipValues = (req, res) => {
+  const { postId } = req.params;
+  Internship.findById(postId)
+    .then((internship) => {
+      if (!internship) {
+        return res.status(400).json({ error: "Internship does not exists" });
+      }
+      res.json({ internship: internship });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Something went wrong!" });
+    });
+};
+
+exports.deleteInternship = (req, res) => {
+  const { postId } = req.body;
+
+  Internship.findByIdAndDelete(postId)
+    .then((deletedPost) => {
+      res.json({ message: "Internship deleted successfully!" });
     })
     .catch((err) => {
       console.log(err);

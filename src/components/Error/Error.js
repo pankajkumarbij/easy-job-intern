@@ -4,7 +4,7 @@ import "./Error.css";
 
 const Error = () => {
     return (
-        <div className="error">
+        <div className="errors">
             <h1>Error 404</h1>
             <p>Sorry this page doesn't exist!</p>
             <Link to = "/">

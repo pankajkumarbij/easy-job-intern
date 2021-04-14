@@ -1,75 +1,66 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { useHistory, useParams } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 
-const UpdateInternship = () => {
+
+const UpdateFresherJob = () => {
   const history = useHistory();
   const postId = useParams().id;
-  const [internship, setInternship] = useState();
 
   const initialState = {
     description: {
-      value: null,
-      validation: {
-        required: true,
-      },
+      value: "",
+    //   validation: {
+    //     required: true,
+    //   },
       errorMessage: "",
       valid: false,
       touched: false,
     },
     location: {
-      value: null,
-      validation: {
-        required: true,
-      },
+      value: "",
+    //   validation: {
+    //     required: true,
+    //   },
       errorMessage: "",
       valid: false,
       touched: false,
     },
-    stipend: {
-      value: null,
-      validation: {
-        required: true,
-      },
+    salary: {
+      value: "",
+    //   validation: {
+    //     required: true,
+    //   },
       errorMessage: "",
       valid: false,
       touched: false,
     },
     techstack: {
-      value: null,
-      validation: {
-        required: true,
-      },
+      value: "",
+    //   validation: {
+    //     required: true,
+    //   },
       errorMessage: "",
       valid: false,
       touched: false,
     },
     lastDate: {
-      value: null,
-      validation: {
-        required: true,
-      },
+      value: "",
+    //   validation: {
+    //     required: true,
+    //   },
       errorMessage: "",
       valid: false,
       touched: false,
     },
     startDate: {
-      value: null,
-      validation: {
-        required: true,
-      },
-      errorMessage: "",
-      valid: false,
-      touched: false,
-    },
-    endDate: {
-      value: null,
-      validation: {
-        required: true,
-      },
+      value: "",
+    //   validation: {
+    //     required: true,
+    //   },
       errorMessage: "",
       valid: false,
       touched: false,
@@ -79,89 +70,6 @@ const UpdateInternship = () => {
   const [formValues, setFormValues] = useState(initialState);
   const [formIsValid, setFormIsValid] = useState(false);
 
-  // const setInitialValue = () => {
-  // const updatedFormElementD = { ...updatedFormValues["description"] };
-  // const updatedFormElementL = { ...updatedFormValues["location"] };
-  // const updatedFormElementS = { ...updatedFormValues["stipend"] };
-  // const updatedFormElementTS = { ...updatedFormValues["techstack"] };
-  // const updatedFormElementLD = { ...updatedFormValues["lastDate"] };
-  // const updatedFormElementSD = { ...updatedFormValues["startDate"] };
-  // const updatedFormElementED = { ...updatedFormValues["endDate"] };
-  // updatedFormElementD.value =nullnternship.description;
-  // updatedFormElementL.value = internship.location;
-  // updatedFormElementS.value = internship.stipend;
-  // updatedFormElementTS.value = internship.techstack;
-  // updatedFormElementLD.value = internship.lastDate;
-  // updatedFormElementSD.value = internship.startDate;
-  // updatedFormElementED.value = internship.endDate;
-  // updatedFormValues["description"] = updatedFormElementD;
-  // updatedFormValues["location"] = updatedFormElementL;
-  // updatedFormValues["stipend"] = updatedFormElementS;
-  // updatedFormValues["techstack"] = updatedFormElementTS;
-  // updatedFormValues["lastDate"] = updatedFormElementLD;
-  // updatedFormValues["startDate"] = updatedFormElementSD;
-  // updatedFormValues["endDate"] = updatedFormElementED;
-  // };
-  // useEffect(() => {
-  //   if (internship) {
-  //     setInitialState((prev) => {
-  //       return {
-  //         ...prev,
-  //         description: {
-  //           ...prev.description,
-  //           value: internship.description,
-  //         },
-  //         location: {
-  //           ...prev.location,
-  //           value: internship.location,
-  //         },
-  //         stipend: {
-  //           ...prev.stipend,
-  //           value: internship.stipend,
-  //         },
-  //       };
-  //     });
-
-  //     setFormValues(initialState);
-  //   }
-  // }, [internship]);
-
-  useEffect(() => {
-    axios({
-      method: "get",
-      url: `http://localhost:5000/employer/get-internship/${postId}`,
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-    })
-      .then((res) => {
-        console.log(res);
-        if (res.data.error) {
-          console.log(res.data.error);
-          // alert(res.data.error);
-          const notify = () => toast(res.data.error);
-          notify();
-        } else {
-          console.log(res.data.internship);
-          setInternship(res.data.internship);
-          console.log(internship);
-          // if (internship) {
-          // console.log(res.data.internship.description);
-          // setInitialValue();
-          // setInitialValue("description", res.data.internship.description);
-          // setInitialValue("location", res.data.internship.location);
-          // setInitialValue("stipend", res.data.internship.stipend);
-          // setInitialValue("lastDate", new Date(res.data.internship.lastDate));
-          // setInitialValue("startDate", new Date(res.data.internship.startDate));
-          // setInitialValue("endDate", res.data.internship.endDate);
-          // setInitialValue("techstack", res.data.internship.techstack);
-          // }
-        }
-      })
-      .catch((err) => {
-        console.log("Error: ", err);
-      });
-  }, []);
 
   const handleChange = (e) => {
     const updatedFormValues = { ...formValues };
@@ -186,34 +94,28 @@ const UpdateInternship = () => {
 
   const submitInternship = (e) => {
     e.preventDefault();
-    console.log(typeof formValues.startDate.value);
-    const duration =
-      new Date(formValues.endDate.value) - new Date(formValues.startDate.value);
-    console.log(duration);
+    console.log("1");
 
     const {
       description,
       location,
-      stipend,
+      salary,
       techstack,
       lastDate,
       startDate,
-      endDate,
     } = formValues;
 
     axios({
       method: "patch",
-      url: "http://localhost:5000/employer/update-internship",
+      url: "http://localhost:5000/employer/update-fresherjob",
       data: {
         postId,
         description: description.value,
         location: location.value,
-        stipend: stipend.value,
+        salary: salary.value,
         techstack: techstack.value,
         lastDate: lastDate.value,
         startDate: startDate.value,
-        endDate: endDate.value,
-        duration: duration,
       },
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -239,12 +141,12 @@ const UpdateInternship = () => {
       });
 
     setFormValues(initialState);
+
   };
 
   return (
     <div style={{ padding: "4vh 0" }}>
       <Toaster />
-      {internship && (
         <Card
           style={{
             width: "40vw",
@@ -265,7 +167,7 @@ const UpdateInternship = () => {
             }}
             as="h5"
           >
-            Update Internship
+            Update Fresher's Job
           </Card.Header>
           <Card.Body>
             <Form onSubmit={(e) => submitInternship(e)}>
@@ -279,7 +181,7 @@ const UpdateInternship = () => {
                   type="text"
                   placeholder="Enter Company Name"
                   name="location"
-                  value={formValues.location.value || internship.location}
+                  value={formValues.location.value}
                   onChange={handleChange}
                 />
                 {formValues.location.errorMessage && (
@@ -301,7 +203,7 @@ const UpdateInternship = () => {
                   type="text"
                   placeholder="Enter description"
                   name="description"
-                  value={formValues.description.value || internship.description}
+                  value={formValues.description.value}
                   onChange={handleChange}
                 />
                 {formValues.description.errorMessage && (
@@ -315,18 +217,18 @@ const UpdateInternship = () => {
                 style={{ textAlign: "left" }}
                 controlId="formBasicEmail"
               >
-                <Form.Label style={{ fontWeight: "bold" }}>Stipend</Form.Label>
+                <Form.Label style={{ fontWeight: "bold" }}>salary</Form.Label>
                 <Form.Control
                   style={{ borderColor: "#ffc107", color: "#000000" }}
                   type="text"
-                  placeholder="Enter stipend"
-                  name="stipend"
-                  value={formValues.stipend.value|| internship.stipend}
+                  placeholder="Enter salary"
+                  name="salary"
+                  value={formValues.salary.value}
                   onChange={handleChange}
                 />
-                {formValues.stipend.errorMessage && (
+                {formValues.salary.errorMessage && (
                   <span className="error">
-                    {formValues.stipend.errorMessage}
+                    {formValues.salary.errorMessage}
                   </span>
                 )}
               </Form.Group>
@@ -343,7 +245,7 @@ const UpdateInternship = () => {
                   type="text"
                   placeholder="Enter techstack"
                   name="techstack"
-                  value={formValues.techstack.value || internship.techstack}
+                  value={formValues.techstack.value}
                   onChange={handleChange}
                 />
                 {formValues.techstack.errorMessage && (
@@ -365,7 +267,7 @@ const UpdateInternship = () => {
                   type="date"
                   placeholder="Enter last date"
                   name="lastDate"
-                  value={formValues.lastDate.value || new Date(internship.lastDate)}
+                  value={formValues.lastDate.value}
                   onChange={handleChange}
                 />
                 {formValues.lastDate.errorMessage && (
@@ -387,7 +289,7 @@ const UpdateInternship = () => {
                   type="month"
                   placeholder="Enter start date"
                   name="startDate"
-                  value={formValues.startDate.value || new Date(internship.startDate)}
+                  value={formValues.startDate.value}
                   onChange={handleChange}
                 />
                 {formValues.startDate.errorMessage && (
@@ -397,27 +299,7 @@ const UpdateInternship = () => {
                 )}
               </Form.Group>
 
-              <Form.Group
-                style={{ textAlign: "left" }}
-                controlId="formBasicEmail"
-              >
-                <Form.Label style={{ fontWeight: "bold" }}>
-                  End Month
-                </Form.Label>
-                <Form.Control
-                  style={{ borderColor: "#ffc107", color: "#000000" }}
-                  type="month"
-                  placeholder="Enter end date"
-                  name="endDate"
-                  value={formValues.endDate.value || new Date(internship.endDate)}
-                  onChange={handleChange}
-                />
-                {formValues.endDate.errorMessage && (
-                  <span className="error">
-                    {formValues.endDate.errorMessage}
-                  </span>
-                )}
-              </Form.Group>
+
 
               {
                 <Button
@@ -432,9 +314,8 @@ const UpdateInternship = () => {
             </Form>
           </Card.Body>
         </Card>
-      )}
     </div>
   );
 };
 
-export default UpdateInternship;
+export default UpdateFresherJob;

@@ -1,12 +1,47 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Card, Col, ListGroup, ListGroupItem, Row } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { Card, Col, Dropdown, ListGroup, ListGroupItem, Row } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
+import { UserContext } from "../../App";
+import * as Icon from "react-bootstrap-icons";
 
 import "../Internships/AllInternships.css";
 
 const AllFreshersJobs = () => {
+  const { state, dispatch } = useContext(UserContext);
   const [freshersJobs, setFreshersJobs] = useState([]);
+
+  const deletePost = (postId) => {
+    axios({
+      method: "delete",
+      url: "http://localhost:5000/employer/delete-freshersjob",
+      data: {
+        postId,
+      },
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data.error) {
+          console.log(res.data.error);
+          // alert(res.data.error);
+          const notify = () => toast(res.data.error);
+          notify();
+        } else {
+          // console.log(res.data.jobs);
+          // setJobs(res.data.jobs);
+          // console.log(jobs);
+          const notify = () => toast(res.data.message);
+          notify();
+        }
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
+  };
 
   useEffect(() => {
     axios({
@@ -67,10 +102,9 @@ const AllFreshersJobs = () => {
     return time;
   };
 
-
   return (
     <div className="internshipsOuterContainer">
-     <Toaster />
+      <Toaster />
       <Row className="justify-content-xl-start justify-content-lg-around justify-content-sm-center">
         {freshersJobs &&
           freshersJobs.map((fresher) => {
@@ -83,6 +117,36 @@ const AllFreshersJobs = () => {
                   <Card.Body>
                     <Card.Title className="titleOfPost">
                       {fresher.companyName}
+                      {state &&
+                        fresher.createdBy &&
+                        state.user._id == fresher.createdBy._id && (
+                          <Dropdown className="postOptions">
+                            <Dropdown.Toggle
+                              className="postOptionsBtn"
+                              variant="success"
+                              id="dropdown-basic"
+                            >
+                              <Icon.ThreeDotsVertical
+                                style={{ fontSize: "1.4rem" }}
+                              />
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu className="optionMenu">
+                              <Dropdown.Item
+                                className="optionItem"
+                                href={`/update-fresher/${fresher._id}`}
+                              >
+                                <Icon.PencilSquare className="optionsMenuIcon" />
+                              </Dropdown.Item>
+                              <Dropdown.Item
+                                onClick={() => deletePost(fresher._id)}
+                                className="optionItem"
+                              >
+                                <Icon.Trash className="optionsMenuIcon" />
+                              </Dropdown.Item>
+                            </Dropdown.Menu>
+                          </Dropdown>
+                        )}
                     </Card.Title>
                     <Card.Subtitle className="subtitleOfPost">
                       {fresher.location}

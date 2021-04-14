@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import {Link} from 'react-router-dom';
+import { Link, useParams } from "react-router-dom";
 import {
   Button,
   Card,
   Col,
+  Dropdown,
+  DropdownButton,
   ListGroup,
   ListGroupItem,
   Modal,
@@ -15,6 +17,7 @@ import * as Icon from "react-bootstrap-icons";
 
 import "./AllInternships.css";
 import { UserContext } from "../../App";
+import { colors } from "@material-ui/core";
 
 const AllInternships = () => {
   const { state, dispatch } = useContext(UserContext);
@@ -85,14 +88,46 @@ const AllInternships = () => {
     console.log(t);
     return t > 1 ? t + " Months" : t + " Month";
   };
+
+  const deletePost = (postId) => {
+    axios({
+      method: "delete",
+      url: "http://localhost:5000/employer/delete-internship",
+      data: {
+        postId,
+      },
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data.error) {
+          console.log(res.data.error);
+          // alert(res.data.error);
+          const notify = () => toast(res.data.error);
+          notify();
+        } else {
+          console.log(res.data.internships);
+          setInternships(res.data.internships);
+          console.log(internships);
+          const notify = () => toast(res.data.message);
+          notify();
+        }
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
+  }
+
   return (
     <div className="internshipsOuterContainer">
-      
       <Toaster />
       <Row className="justify-content-xl-start justify-content-lg-around justify-content-sm-center">
         {internships &&
           internships.map((internship) => {
-            console.log(internship.createdBy._id, state.user._id);
+            // console.log(internship.createdBy._id, state.user._id);
             return (
               <Col
                 key={internship._id}
@@ -102,8 +137,36 @@ const AllInternships = () => {
                   <Card.Body>
                     <Card.Title className="titleOfPost">
                       {internship.companyName}{" "}
-                      {state.user._id == internship.createdBy._id && <Link to={`/update-internship/${internship._id}`}><Icon.PencilSquare style={{ float: "right" }} /></Link> }
-                      
+                      {state &&
+                        internship.createdBy &&
+                        state.user._id == internship.createdBy._id && (
+                          <Dropdown className="postOptions">
+                            <Dropdown.Toggle
+                              className="postOptionsBtn"
+                              variant="success"
+                              id="dropdown-basic"
+                            >
+                              <Icon.ThreeDotsVertical
+                                style={{ fontSize: "1.4rem" }}
+                              />
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu className="optionMenu">
+                              <Dropdown.Item
+                                className="optionItem"
+                                href={`/update-internship/${internship._id}`}
+                              >
+                                <Icon.PencilSquare className="optionsMenuIcon" />
+                              </Dropdown.Item>
+                              <Dropdown.Item
+                                onClick={() => deletePost(internship._id)}
+                                className="optionItem"
+                              >
+                                <Icon.Trash className="optionsMenuIcon" />
+                              </Dropdown.Item>
+                            </Dropdown.Menu>
+                          </Dropdown>
+                        )}
                     </Card.Title>
                     <Card.Subtitle className="subtitleOfPost">
                       {internship.location}

@@ -5,10 +5,11 @@ const {
   signin,
   logout,
   logoutAll,
+  update
 } = require("../controller/employer.auth");
-const { createFreshersJob } = require("../controller/freshersjob");
-const { createInternship, updateInternship } = require("../controller/internships");
-const { createJob } = require("../controller/jobs");
+const { createFreshersJob, updateFreshersJob, deleteFreshersJob } = require("../controller/freshersjob");
+const { createInternship, updateInternship, getInternshipValues, deleteInternship } = require("../controller/internships");
+const { createJob, updateJob, deleteJob } = require("../controller/jobs");
 const auth_employer = require("../middleware/auth_employer");
 
 router.post("/signup", signup);
@@ -19,8 +20,20 @@ router.get("/logoutAll", auth_employer, logoutAll);
 router.post("/create-internship", auth_employer, createInternship);
 router.post("/create-job", auth_employer, createJob);
 router.post("/create-fresherjob", auth_employer, createFreshersJob);
+router.patch("/update", auth_employer, update);
 
 router.patch("/update-internship", auth_employer, updateInternship);
+router.get("/get-internship/:postId", auth_employer, getInternshipValues);
+router.patch("/update-job", auth_employer, updateJob);
+router.patch("/update-fresherjob", auth_employer, updateFreshersJob);
+
+router.delete("/delete-internship", auth_employer, deleteInternship);
+router.delete("/delete-job", auth_employer, deleteJob);
+router.delete("/delete-freshersjob", auth_employer, deleteFreshersJob);
+
+
+
+
 
 
 
