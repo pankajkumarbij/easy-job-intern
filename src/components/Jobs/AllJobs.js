@@ -1,6 +1,13 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { Card, Col, Dropdown, ListGroup, ListGroupItem, Row } from "react-bootstrap";
+import {
+  Card,
+  Col,
+  Dropdown,
+  ListGroup,
+  ListGroupItem,
+  Row,Spinner,Alert
+} from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { UserContext } from "../../App";
 import { Link } from "react-router-dom";
@@ -11,7 +18,7 @@ import "../Internships/AllInternships.css";
 const AllJobs = () => {
   const { state, dispatch } = useContext(UserContext);
   const [jobs, setJobs] = useState([]);
-
+  const [loading,setLoading]=useState(true)
   // useEffect(() => {
   //   axios({
   //     method: "get",
@@ -50,6 +57,7 @@ const AllJobs = () => {
     })
       .then((res) => {
         console.log(res);
+        setLoading(false)
         if (res.data.error) {
           console.log(res.data.error);
           // alert(res.data.error);
@@ -63,6 +71,7 @@ const AllJobs = () => {
         }
       })
       .catch((err) => {
+        setLoading(false)
         console.log("Error: ", err);
       });
   }, [jobs]);
@@ -136,7 +145,23 @@ const AllJobs = () => {
     <div className="internshipsOuterContainer">
       <Toaster />
       <Row className="justify-content-xl-start justify-content-lg-around justify-content-sm-center">
-        {jobs &&
+        {loading ? (
+          <div className="h-100 w-100 d-flex justify-content-center align-items-center">
+            <Spinner
+              animation="border"
+              variant="light"
+              style={{
+                borderColor: "#515b66",
+                borderRightColor: "transparent",
+              }}
+            />
+          </div>
+        ) : jobs && !jobs.length > 0 ? (
+          <Alert variant="danger" className="w-100" style={{backgroundColor:"#343A40",border:"none",color:"#ffc107"}}>
+            No Jobs available right now
+          </Alert>
+        ) : (
+          jobs &&
           jobs.map((job) => {
             return (
               <Col
@@ -145,7 +170,7 @@ const AllJobs = () => {
               >
                 <Card className="cardPost">
                   <Card.Body>
-                  <Card.Title className="titleOfPost">
+                    <Card.Title className="titleOfPost">
                       {job.companyName}{" "}
                       {state &&
                         job.createdBy &&
@@ -212,7 +237,8 @@ const AllJobs = () => {
                 </Card>
               </Col>
             );
-          })}
+          })
+        )}
       </Row>
     </div>
   );
