@@ -1,0 +1,94 @@
+h2{
+    color: white;
+    text-decoration: underline;
+    margin: auto;
+    text-align: center;
+}
+.center{
+    text-align: center;
+}
+
+.edu{
+    margin-right: 115px;
+}
+
+
+h1{
+    
+    color: white;
+    text-decoration: underline;
+}
+h6{
+
+    color:white;
+}
+
+.main-box{
+    background-color: #1f4468;
+    width:55%;
+    margin:auto;
+    border-radius: 30px;
+    
+}
+
+.side ,.byside{
+    display: inline-block;
+    width: 48%;
+}
+
+.education,.experience,.projects,.skills,.achievments,.volunteer,.Other,.projects{
+    text-align: left;
+   padding-left:40px ;
+   margin-top: 4px;
+    
+}
+
+.form-main{
+   text-align: left;
+   padding-left:40px ;
+   margin-top: 4px;
+    
+}
+
+span{
+    color:red;
+}
+
+.label-text{
+    color: white;
+    margin-top: 20px;
+}
+
+input,select{
+    background-color:#A6A6A6;
+    border-radius: 6px;
+    width:30%;
+}
+
+textarea{
+    background-color:#A6A6A6;
+    border-radius: 6px;   
+}
+
+.text-long{
+    background-color:#A6A6A6;
+    border-radius: 6px;
+    width:75%;
+}
+
+::placeholder{
+    color: #000;
+    font-size: 0.8rem;
+}
+
+.add-button{
+    margin-left: 10px;
+}
+
+.side-by-side{
+    display: inline-block;
+}
+
+.long-cal{
+    width:75%;
+}

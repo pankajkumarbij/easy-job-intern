@@ -16,6 +16,7 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 import { initialState, reducer } from "./reducers/userReducer";
 import NewInternship from "./components/CreateNew/CreateInternship";
 import NewJob from "./components/CreateNew/CreateJob";
+import Profile from "./components/student-profile/Profile";
 
 export const UserContext = createContext();
 
@@ -64,6 +65,9 @@ const Routing = () => {
       </Route>
       <Route path="/terms-conditions" exact>
         <TermsCondition />
+      </Route>
+      <Route exact path="/login/student-profile">
+        <Profile/>
       </Route>
       <Route component={Error} />
     </Switch>
