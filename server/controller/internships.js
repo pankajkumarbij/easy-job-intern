@@ -160,3 +160,30 @@ exports.deleteInternship = (req, res) => {
       res.status(500).json({ error: "Something went wrong!" });
     });
 };
+
+exports.searchInternship = async(req, res) => {
+  const match = {createdBy: req.user._id}
+  if (req.query.stipend) {
+    match.stipend = req.query.stipend
+  }
+  if (req.query.techstack) {
+    match.techstack = { $in: req.query.techstack }
+  }
+  if (req.query.duration) {
+    match.duration = req.query.duration 
+  }
+  if (req.query.startDate) {
+    date = new Date(req.query.startDate).toISOString()
+    match.startDate = date
+  }
+  const internships = await Internship.find(match).populate("createdBy", "_id personName").sort("-createdAt")
+  try{
+    if(internships.length===0){
+      return res.status(200).send({message: "No internships found"})
+    }
+    res.status(200).send(internships)
+  }
+  catch(e){
+    res.status(400).send('Something went wrong')
+  }
+}
