@@ -7,9 +7,9 @@ const {
   logoutAll,
   update
 } = require("../controller/employer.auth");
-const { createFreshersJob, updateFreshersJob, deleteFreshersJob } = require("../controller/freshersjob");
+const { createFreshersJob, updateFreshersJob, deleteFreshersJob, searchFresherJob } = require("../controller/freshersjob");
 const { createInternship, updateInternship, getInternshipValues, deleteInternship } = require("../controller/internships");
-const { createJob, updateJob, deleteJob } = require("../controller/jobs");
+const { createJob, updateJob, deleteJob, searchJob } = require("../controller/jobs");
 const auth_employer = require("../middleware/auth_employer");
 
 router.post("/signup", signup);
@@ -34,6 +34,8 @@ router.delete("/delete-freshersjob", auth_employer, deleteFreshersJob);
 
 
 
+router.get('/searchJob', auth_employer, searchJob)
+router.get('/searchFresherJob', auth_employer, searchFresherJob)
 
 
 
