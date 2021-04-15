@@ -10,8 +10,9 @@ import {
   ListGroup,
   ListGroupItem,
   Modal,
-  Row,
+  Row,Spinner,Alert
 } from "react-bootstrap";
+
 import toast, { Toaster } from "react-hot-toast";
 import * as Icon from "react-bootstrap-icons";
 
@@ -22,6 +23,7 @@ import { colors } from "@material-ui/core";
 const AllInternships = () => {
   const { state, dispatch } = useContext(UserContext);
   const [internships, setInternships] = useState([]);
+  const [loading, setLoading] = useState(true);
   console.log(internships);
   console.log(state);
   useEffect(() => {
@@ -34,6 +36,7 @@ const AllInternships = () => {
     })
       .then((res) => {
         console.log(res);
+        setLoading(false);
         if (res.data.error) {
           console.log(res.data.error);
           // alert(res.data.error);
@@ -46,6 +49,7 @@ const AllInternships = () => {
         }
       })
       .catch((err) => {
+        setLoading(false);
         console.log("Error: ", err);
       });
   }, [internships]);
@@ -119,13 +123,29 @@ const AllInternships = () => {
       .catch((err) => {
         console.log("Error: ", err);
       });
-  }
+  };
 
   return (
     <div className="internshipsOuterContainer">
       <Toaster />
       <Row className="justify-content-xl-start justify-content-lg-around justify-content-sm-center">
-        {internships &&
+        {loading ? (
+          <div className="h-100 w-100 d-flex justify-content-center align-items-center">
+            <Spinner
+              animation="border"
+              variant="light"
+              style={{
+                borderColor: "#515b66",
+                borderRightColor: "transparent",
+              }}
+            />
+          </div>
+        ) : internships && !internships.length > 0 ? (
+          <Alert variant="danger" className="w-100 " style={{backgroundColor:"#343A40",border:"none",color:"#ffc107"}}>
+            No internships available right now
+          </Alert>
+        ) : (
+          internships &&
           internships.map((internship) => {
             // console.log(internship.createdBy._id, state.user._id);
             return (
@@ -203,7 +223,8 @@ const AllInternships = () => {
                 </Card>
               </Col>
             );
-          })}
+          })
+        )}
       </Row>
     </div>
   );
