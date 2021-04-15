@@ -8,6 +8,7 @@ const {
   update
 } = require("../controller/employer.auth");
 <<<<<<< HEAD
+<<<<<<< HEAD
 const { createFreshersJob, updateFreshersJob, deleteFreshersJob, getFresherJobValues } = require("../controller/freshersjob");
 const { createInternship, updateInternship, getInternshipValues, deleteInternship } = require("../controller/internships");
 const { createJob, updateJob, deleteJob, getJobValues } = require("../controller/jobs");
@@ -17,6 +18,18 @@ const { createFreshersJob, updateFreshersJob, deleteFreshersJob, searchFresherJo
 const { createInternship, updateInternship, getInternshipValues, deleteInternship, searchInternship } = require("../controller/internships");
 const { createJob, updateJob, deleteJob, searchJob } = require("../controller/jobs");
 >>>>>>> 9d7130a758c8443d143ab91595d52dc16c381bb7
+=======
+
+const { createFreshersJob, updateFreshersJob, deleteFreshersJob, getFresherJobValues } = require("../controller/freshersjob");
+const { createInternship, updateInternship, getInternshipValues, deleteInternship } = require("../controller/internships");
+const { createJob, updateJob, deleteJob, getJobValues } = require("../controller/jobs");
+
+
+const { createFreshersJob, updateFreshersJob, deleteFreshersJob, searchFresherJob } = require("../controller/freshersjob");
+const { createInternship, updateInternship, getInternshipValues, deleteInternship, searchInternship } = require("../controller/internships");
+const { createJob, updateJob, deleteJob, searchJob } = require("../controller/jobs");
+
+>>>>>>> c15d7de6120046cddf07d2d67c8caaa72c238ccf
 const auth_employer = require("../middleware/auth_employer");
 
 router.post("/signup", signup);

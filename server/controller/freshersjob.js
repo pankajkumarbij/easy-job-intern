@@ -130,6 +130,9 @@ exports.deleteFreshersJob = (req, res) => {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c15d7de6120046cddf07d2d67c8caaa72c238ccf
 exports.getFresherJobValues = (req, res) => {
   const { postId } = req.params;
   Freshers.findById(postId)
@@ -144,7 +147,11 @@ exports.getFresherJobValues = (req, res) => {
       res.status(500).json({ error: "Something went wrong!" });
     });
 };
+<<<<<<< HEAD
 =======
+=======
+
+>>>>>>> c15d7de6120046cddf07d2d67c8caaa72c238ccf
 exports.searchFresherJob = async(req, res) => {
   const match = {createdBy: req.user._id}
   if (req.query.id) {
@@ -199,4 +206,8 @@ exports.searchFilterFreshersJobs = async(req, res) => {
     return res.status(400).send('something went wrong')
   }
 }
+<<<<<<< HEAD
 >>>>>>> 9d7130a758c8443d143ab91595d52dc16c381bb7
+=======
+
+>>>>>>> c15d7de6120046cddf07d2d67c8caaa72c238ccf
