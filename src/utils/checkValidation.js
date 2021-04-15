@@ -19,7 +19,7 @@ const checkValidity = (value, rules, currentPassword) => {
     isValid = value.length >= rules.minLength && isValid;
     if (!isValid) {
       errorMessage =
-        "Required field length should be greater than " + rules.minLength;
+        "Required field length should be equal to or greater than" + rules.minLength;
     }
   }
 
