@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { Button, Card, Form, InputGroup } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
@@ -81,7 +81,7 @@ const EmployerSignup = () => {
   const [formValues, setFormValues] = useState(initialState);
   const [signupError, setSignupError] = useState(null);
 
-  const [formIsValid, setFormIsValid] = useState(false);
+  const [ setFormIsValid] = useState(false);
 
   const handleChange = (e) => {
     const updatedFormValues = { ...formValues };
@@ -385,7 +385,7 @@ const EmployerSignup = () => {
               {/* For Existing user */}
               <Form.Group style={{ textAlign: "left", fontSize: "1.5vh" }}>
                 <Link to="/employer-login">
-                  <a style={{ fontWeight: "bold" }}>
+                  <a href="/#" style={{ fontWeight: "bold" }}>
                     Already have an account? Sign in
                   </a>
                 </Link>

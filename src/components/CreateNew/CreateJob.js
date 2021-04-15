@@ -1,9 +1,13 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
-import { Link, useHistory } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import { useHistory } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 
 const NewJob = () => {
+  const history = useHistory();
+
   const initialState = {
     companyName: {
       //value of the input field
@@ -64,10 +68,29 @@ const NewJob = () => {
       valid: false,
       touched: false,
     },
+    startDate: {
+      value: "",
+      validation: {
+        required: true,
+      },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
+    experience: {
+      value: "",
+      validation: {
+        required: true,
+      },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
   };
 
   const [formValues, setFormValues] = useState(initialState);
   const [formIsValid, setFormIsValid] = useState(false);
+  console.log(formValues);
 
   const handleChange = (e) => {
     const updatedFormValues = { ...formValues };
@@ -75,7 +98,7 @@ const NewJob = () => {
     updatedFormElement.value = e.target.value;
     let validOutput = checkValidity(
       updatedFormElement.value,
-      updatedFormElement.validation,
+      updatedFormElement.validation
     );
     updatedFormElement.valid = validOutput[0];
     updatedFormElement.errorMessage = validOutput[1];
@@ -92,10 +115,59 @@ const NewJob = () => {
 
   const submitJob = (e) => {
     e.preventDefault();
-  }
+
+    const {
+      companyName,
+      description,
+      location,
+      salary,
+      techstack,
+      lastDate,
+      startDate,
+      experience
+    } = formValues;
+
+    axios({
+      method: "post",
+      url: "http://localhost:5000/employer/create-job",
+      data: {
+        companyName: companyName.value,
+        description: description.value,
+        location: location.value,
+        salary: salary.value,
+        techstack: techstack.value,
+        lastDate: lastDate.value,
+        startDate: startDate.value,
+        experience: experience.value,
+      },
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data.error) {
+          console.log(res.data.error);
+          // alert(res.data.error);
+          const notify = () => toast(res.data.error);
+          notify();
+        } else {
+          const notify = () => toast("Signin Successfull");
+          notify();
+          history.push("/");
+        }
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
+
+    setFormValues(initialState);
+  };
 
   return (
     <div style={{ padding: "4vh 0" }}>
+      <Toaster />
       <Card
         style={{
           width: "40vw",
@@ -136,7 +208,9 @@ const NewJob = () => {
                 onChange={handleChange}
               />
               {formValues.companyName.errorMessage && (
-                <span className="error">{formValues.companyName.errorMessage}</span>
+                <span className="error">
+                  {formValues.companyName.errorMessage}
+                </span>
               )}
             </Form.Group>
 
@@ -144,9 +218,7 @@ const NewJob = () => {
               style={{ textAlign: "left" }}
               controlId="formBasicEmail"
             >
-              <Form.Label style={{ fontWeight: "bold" }}>
-                Location
-              </Form.Label>
+              <Form.Label style={{ fontWeight: "bold" }}>Location</Form.Label>
               <Form.Control
                 style={{ borderColor: "#ffc107", color: "#000000" }}
                 type="text"
@@ -156,7 +228,9 @@ const NewJob = () => {
                 onChange={handleChange}
               />
               {formValues.location.errorMessage && (
-                <span className="error">{formValues.location.errorMessage}</span>
+                <span className="error">
+                  {formValues.location.errorMessage}
+                </span>
               )}
             </Form.Group>
 
@@ -176,7 +250,9 @@ const NewJob = () => {
                 onChange={handleChange}
               />
               {formValues.description.errorMessage && (
-                <span className="error">{formValues.description.errorMessage}</span>
+                <span className="error">
+                  {formValues.description.errorMessage}
+                </span>
               )}
             </Form.Group>
 
@@ -184,14 +260,12 @@ const NewJob = () => {
               style={{ textAlign: "left" }}
               controlId="formBasicEmail"
             >
-              <Form.Label style={{ fontWeight: "bold" }}>
-                Salaray
-              </Form.Label>
+              <Form.Label style={{ fontWeight: "bold" }}>Salaray</Form.Label>
               <Form.Control
                 style={{ borderColor: "#ffc107", color: "#000000" }}
                 type="text"
-                placeholder="Enter stipend"
-                name="stipend"
+                placeholder="Enter salary"
+                name="salary"
                 value={formValues.salary.value}
                 onChange={handleChange}
               />
@@ -204,9 +278,7 @@ const NewJob = () => {
               style={{ textAlign: "left" }}
               controlId="formBasicEmail"
             >
-              <Form.Label style={{ fontWeight: "bold" }}>
-                TechStack
-              </Form.Label>
+              <Form.Label style={{ fontWeight: "bold" }}>TechStack</Form.Label>
               <Form.Control
                 style={{ borderColor: "#ffc107", color: "#000000" }}
                 type="text"
@@ -216,7 +288,9 @@ const NewJob = () => {
                 onChange={handleChange}
               />
               {formValues.techstack.errorMessage && (
-                <span className="error">{formValues.techstack.errorMessage}</span>
+                <span className="error">
+                  {formValues.techstack.errorMessage}
+                </span>
               )}
             </Form.Group>
 
@@ -224,9 +298,7 @@ const NewJob = () => {
               style={{ textAlign: "left" }}
               controlId="formBasicEmail"
             >
-              <Form.Label style={{ fontWeight: "bold" }}>
-                Last Date 
-              </Form.Label>
+              <Form.Label style={{ fontWeight: "bold" }}>Last Date</Form.Label>
               <Form.Control
                 style={{ borderColor: "#ffc107", color: "#000000" }}
                 type="date"
@@ -236,20 +308,62 @@ const NewJob = () => {
                 onChange={handleChange}
               />
               {formValues.lastDate.errorMessage && (
-                <span className="error">{formValues.lastDate.errorMessage}</span>
+                <span className="error">
+                  {formValues.lastDate.errorMessage}
+                </span>
               )}
             </Form.Group>
 
-            
-
-            {<Button
-              style={{ color: "#ffc107", fontWeight: "bold" }}
-              variant="secondary"
-              type="submit"
-              disabled={!formIsValid}
+            <Form.Group
+              style={{ textAlign: "left" }}
+              controlId="formBasicEmail"
             >
-              Create
-            </Button>}
+              <Form.Label style={{ fontWeight: "bold" }}>Start Month</Form.Label>
+              <Form.Control
+                style={{ borderColor: "#ffc107", color: "#000000" }}
+                type="month"
+                placeholder="Enter start month"
+                name="startDate"
+                value={formValues.startDate.value}
+                onChange={handleChange}
+              />
+              {formValues.startDate.errorMessage && (
+                <span className="error">
+                  {formValues.startDate.errorMessage}
+                </span>
+              )}
+            </Form.Group>
+
+            <Form.Group
+              style={{ textAlign: "left" }}
+              controlId="formBasicEmail"
+            >
+              <Form.Label style={{ fontWeight: "bold" }}>Experience</Form.Label>
+              <Form.Control
+                style={{ borderColor: "#ffc107", color: "#000000" }}
+                type="number"
+                placeholder="Enter number of years of experience"
+                name="experience"
+                value={formValues.experience.value}
+                onChange={handleChange}
+              />
+              {formValues.experience.errorMessage && (
+                <span className="error">
+                  {formValues.experience.errorMessage}
+                </span>
+              )}
+            </Form.Group>
+
+            {
+              <Button
+                style={{ color: "#ffc107", fontWeight: "bold" }}
+                variant="secondary"
+                type="submit"
+                disabled={!formIsValid}
+              >
+                Create
+              </Button>
+            }
           </Form>
         </Card.Body>
       </Card>

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Button, Card, Form, Alert, InputGroup } from "react-bootstrap";
+import { Button, Card, Form, InputGroup } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 import axios from "axios";
@@ -11,7 +11,7 @@ import { UserContext } from "../../App";
 import toast, { Toaster } from 'react-hot-toast';
 
 function LoginForm() {
-  const { state, dispatch } = useContext(UserContext);
+  const { dispatch } = useContext(UserContext);
   const history = useHistory();
 
   //creating a dicitionary for every field of the form
@@ -46,7 +46,7 @@ function LoginForm() {
   };
   const [formValues, setFormValues] = useState(initialState);
 
-  const [formIsValid, setFormIsValid] = useState(false);
+  const [formIsValid ,setFormIsValid] = useState(false);
 
   const handleChange = (e) => {
     const updatedFormValues = { ...formValues };
@@ -88,7 +88,8 @@ function LoginForm() {
         } else {
           localStorage.setItem("jwt", res.data.token);
           localStorage.setItem("user", JSON.stringify(res.data.user));
-          dispatch({ type: "USER", payload: res.data.user });
+          localStorage.setItem("type", JSON.stringify("student"));
+          dispatch({ type: "USER", payload: { user: res.data.user , userType: "student"} });
           console.log(
             "Token: ",
             res.data.token,
@@ -222,7 +223,7 @@ function LoginForm() {
                 }}
               >
                 <Link to="/student-signup">
-                  <a style={{ fontWeight: "bold" }}>
+                  <a href="/#" style={{ fontWeight: "bold" }}>
                     Don't have an account? Sign up
                   </a>
                 </Link>

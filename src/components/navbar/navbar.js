@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import {
   Button,
   Navbar,
@@ -12,27 +12,12 @@ import * as Icon from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../App";
 
+import './navbar.css';
+
 function NavBar() {
-  const { state, dispatch } = useContext(UserContext);
-  console.log(state);
-  //   useEffect(() => {
-  //     const user = isAuth();
-  //   }, []);
-
-  //   const isAuth = () => {
-  //     if (process.browser) {
-  //       const checktoken = localStorage.getItem("jwt");
-  //       if (checktoken) {
-  //         if (localStorage.getItem("user")) {
-  //           const user = localStorage.getItem("user");
-  //           return JSON.parse(user);
-  //         } else {
-  //           return false;
-  //         }
-  //       }
-  //     }
-  //   };
-
+  const { state } = useContext(UserContext);
+  if(state) console.log(state.user.personName);
+  
   return (
     <>
       <Navbar bg="dark" variant="dark" expand="lg">
@@ -44,10 +29,14 @@ function NavBar() {
           <Nav className="mr-auto">
             <Nav.Link>
               <Dropdown>
-                <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                <Dropdown.Toggle variant="dark" id="dropdown-basic" className="navBTN">
                   Internship
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
+                  <Dropdown.Item as={Link} to="/all-internships">
+                    {" "}
+                    All Internship
+                  </Dropdown.Item>
                   <Dropdown.Item as={Link} to="/">
                     {" "}
                     Internship By Industry
@@ -65,10 +54,13 @@ function NavBar() {
             </Nav.Link>
             <Nav.Link>
               <Dropdown>
-                <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                <Dropdown.Toggle variant="dark" id="dropdown-basic" className="navBTN">
                   Jobs
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
+                  <Dropdown.Item as={Link} to="/all-jobs">
+                    All Jobs 
+                  </Dropdown.Item>
                   <Dropdown.Item as={Link} to="/">
                     Jobs By Industry
                   </Dropdown.Item>
@@ -82,11 +74,14 @@ function NavBar() {
               </Dropdown>
             </Nav.Link>
             <Nav.Link>
-              <Dropdown>
-                <Dropdown.Toggle variant="dark" id="dropdown-basic">
+              <Dropdown className="navLINK">
+                <Dropdown.Toggle variant="dark" id="dropdown-basic" className="navBTN">
                   Freshers Jobs
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
+                  <Dropdown.Item as={Link} to="/all-freshersjobs">
+                    All Freshers Jobs 
+                  </Dropdown.Item>
                   <Dropdown.Item as={Link} to="/">
                     Freshers Jobs By Industry
                   </Dropdown.Item>
@@ -108,21 +103,21 @@ function NavBar() {
               Blogs
             </Nav.Link>
           </Nav>
-          <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-1" />
-            <Button>
+          <Form inline class="searchForm">
+            <FormControl type="text" placeholder="Search" className="mr-sm-1 inputSearch" />
+            <Button className="searchBtn">
               <Icon.Search />
             </Button>
           </Form>
           <Nav className="ml-auto">
-            {state ? (
+            {(state && state.user) ? (
               <React.Fragment>
-                <Nav.Link className="my-auto" style={{ color: "#fff" }}>
-                  Welcome {state.personName}
+                <Nav.Link className="my-auto navLINK" style={{ color: "#fff" }}>
+                  Welcome {state.user.personName}
                 </Nav.Link>
-                <Nav.Link className="my-auto">
+                {state.userType === "employee" && <Nav.Link className="my-auto">
                   <Dropdown>
-                    <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                    <Dropdown.Toggle variant="dark" id="dropdown-basic" className="navBTN">
                       Create
                     </Dropdown.Toggle>
 
@@ -133,15 +128,19 @@ function NavBar() {
                       <Dropdown.Item as={Link} to="/create-job">
                         Job
                       </Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/create-freshersjob">
+                        Fresher's Job
+                      </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
-                </Nav.Link>
+                </Nav.Link>}
                 <Nav.Link
                   className="my-auto"
                   style={{ color: "#fff" }}
                   onClick={() => {
                     localStorage.removeItem("jwt");
                     localStorage.removeItem("user");
+                    localStorage.removeItem("type");
                     window.location.reload(false);
                   }}
                 >
