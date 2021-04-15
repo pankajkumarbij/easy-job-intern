@@ -128,3 +128,18 @@ exports.deleteFreshersJob = (req, res) => {
       res.status(500).json({ error: "Something went wrong!" });
     });
 };
+
+exports.getFresherJobValues = (req, res) => {
+  const { postId } = req.params;
+  Freshers.findById(postId)
+    .then((job) => {
+      if (!job) {
+        return res.status(400).json({ error: "Fresher's Job does not exists" });
+      }
+      res.json({ job: job });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Something went wrong!" });
+    });
+};

@@ -138,3 +138,18 @@ exports.deleteJob = (req, res) => {
       res.status(500).json({ error: "Something went wrong!" });
     });
 };
+
+exports.getJobValues = (req, res) => {
+  const { postId } = req.params;
+  Job.findById(postId)
+    .then((job) => {
+      if (!job) {
+        return res.status(400).json({ error: "Job does not exists" });
+      }
+      res.json({ job: job });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Something went wrong!" });
+    });
+};

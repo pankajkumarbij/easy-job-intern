@@ -65,7 +65,7 @@ const Routing = () => {
           <Route path="/update-job/:id" >
             <UpdateJob />
           </Route>
-          <Route path="/update-fresherjob/:id" >
+          <Route path="/update-fresher/:id" >
             <UpdateFresherJob />
           </Route>
           <Route path="/all-internships" exact>
