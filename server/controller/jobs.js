@@ -139,6 +139,7 @@ exports.deleteJob = (req, res) => {
     });
 };
 
+
 exports.searchJob = async(req, res) => {
   const match = {createdBy: req.user._id}
   if (req.query.id) {
@@ -163,5 +164,32 @@ exports.searchJob = async(req, res) => {
   }
   catch(e){
     res.status(400).send('Something went wrong')
+  }
+}
+  
+exports.searchFilterJobs = async(req, res) => {
+  const match = {}
+  if(req.query.location){
+    match.location = req.query.location 
+  }
+  if(req.query.experience){
+    match.experience = req.query.experience 
+  }
+  if(req.query.companyName){
+    match.companyName = req.query.companyName 
+  }
+  if(req.query.techstack){
+    match.techstack = { $in: req.query.techstack }
+  }
+  if(req.query.startDate){
+    date = new Date(req.query.startDate).toISOString()
+    match.startDate = date
+  }
+  const jobs = await Job.find(match)
+  try{
+    res.status(200).send({ jobs: jobs });
+  }
+  catch(e){
+    return res.status(400).send('something went wrong')
   }
 }

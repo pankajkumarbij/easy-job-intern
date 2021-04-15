@@ -155,3 +155,31 @@ exports.searchFresherJob = async(req, res) => {
     res.status(400).send('Something went wrong')
   }
 }
+
+exports.searchFilterFreshersJobs = async(req, res) => {
+  const match = {}
+  if(req.query.location){
+    match.location = req.query.location 
+  }
+  if(req.query.lastDate){
+    date = new Date(req.query.lastDate).toISOString()
+    match.lastDate = date
+  }
+  if(req.query.companyName){
+    match.companyName = req.query.companyName 
+  }
+  if(req.query.techstack){
+    match.techstack = { $in: req.query.techstack }
+  }
+  if(req.query.startDate){
+    date = new Date(req.query.startDate).toISOString()
+    match.startDate = date
+  }
+  const jobs = await Freshers.find(match)
+  try{
+    res.status(200).send({jobs});
+  }
+  catch(e){
+    return res.status(400).send('something went wrong')
+  }
+}
