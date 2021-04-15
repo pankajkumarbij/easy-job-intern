@@ -176,7 +176,7 @@ exports.searchFilterInternships = async(req, res) => {
     match.techstack = { $in: req.query.techstack }
   }
   if(req.query.startDate){
-    date = new Date(req.query.startDate).toISOString()
+    const date = new Date(req.query.startDate).toISOString()
     match.startDate = date
   }
   const internships = await Internship.find(match)
@@ -202,7 +202,7 @@ exports.searchInternship = async(req, res) => {
     match.duration = req.query.duration 
   }
   if (req.query.startDate) {
-    date = new Date(req.query.startDate).toISOString()
+    const date = new Date(req.query.startDate).toISOString()
     match.startDate = date
   }
   const internships = await Internship.find(match).populate("createdBy", "_id personName").sort("-createdAt")

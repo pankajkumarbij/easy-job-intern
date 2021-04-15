@@ -129,10 +129,6 @@ exports.deleteFreshersJob = (req, res) => {
     });
 };
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> c15d7de6120046cddf07d2d67c8caaa72c238ccf
 exports.getFresherJobValues = (req, res) => {
   const { postId } = req.params;
   Freshers.findById(postId)
@@ -147,11 +143,6 @@ exports.getFresherJobValues = (req, res) => {
       res.status(500).json({ error: "Something went wrong!" });
     });
 };
-<<<<<<< HEAD
-=======
-=======
-
->>>>>>> c15d7de6120046cddf07d2d67c8caaa72c238ccf
 exports.searchFresherJob = async(req, res) => {
   const match = {createdBy: req.user._id}
   if (req.query.id) {
@@ -164,7 +155,7 @@ exports.searchFresherJob = async(req, res) => {
     match.salary = req.query.salary 
   }
   if (req.query.startDate) {
-    date = new Date(req.query.startDate).toISOString()
+    const date = new Date(req.query.startDate).toISOString()
     match.startDate = date
   }
   const fresherJobs = await Freshers.find(match).populate("createdBy", "_id personName").sort("-createdAt")
@@ -185,7 +176,7 @@ exports.searchFilterFreshersJobs = async(req, res) => {
     match.location = req.query.location 
   }
   if(req.query.lastDate){
-    date = new Date(req.query.lastDate).toISOString()
+    const date = new Date(req.query.lastDate).toISOString()
     match.lastDate = date
   }
   if(req.query.companyName){
@@ -195,7 +186,7 @@ exports.searchFilterFreshersJobs = async(req, res) => {
     match.techstack = { $in: req.query.techstack }
   }
   if(req.query.startDate){
-    date = new Date(req.query.startDate).toISOString()
+    const date = new Date(req.query.startDate).toISOString()
     match.startDate = date
   }
   const jobs = await Freshers.find(match)
@@ -206,8 +197,3 @@ exports.searchFilterFreshersJobs = async(req, res) => {
     return res.status(400).send('something went wrong')
   }
 }
-<<<<<<< HEAD
->>>>>>> 9d7130a758c8443d143ab91595d52dc16c381bb7
-=======
-
->>>>>>> c15d7de6120046cddf07d2d67c8caaa72c238ccf
