@@ -129,6 +129,20 @@ exports.deleteFreshersJob = (req, res) => {
     });
 };
 
+exports.getFresherJobValues = (req, res) => {
+  const { postId } = req.params;
+  Freshers.findById(postId)
+    .then((job) => {
+      if (!job) {
+        return res.status(400).json({ error: "Fresher's Job does not exists" });
+      }
+      res.json({ job: job });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Something went wrong!" });
+    });
+};
 exports.searchFresherJob = async(req, res) => {
   const match = {createdBy: req.user._id}
   if (req.query.id) {
@@ -141,7 +155,7 @@ exports.searchFresherJob = async(req, res) => {
     match.salary = req.query.salary 
   }
   if (req.query.startDate) {
-    date = new Date(req.query.startDate).toISOString()
+    const date = new Date(req.query.startDate).toISOString()
     match.startDate = date
   }
   const fresherJobs = await Freshers.find(match).populate("createdBy", "_id personName").sort("-createdAt")
@@ -162,7 +176,7 @@ exports.searchFilterFreshersJobs = async(req, res) => {
     match.location = req.query.location 
   }
   if(req.query.lastDate){
-    date = new Date(req.query.lastDate).toISOString()
+    const date = new Date(req.query.lastDate).toISOString()
     match.lastDate = date
   }
   if(req.query.companyName){
@@ -172,7 +186,7 @@ exports.searchFilterFreshersJobs = async(req, res) => {
     match.techstack = { $in: req.query.techstack }
   }
   if(req.query.startDate){
-    date = new Date(req.query.startDate).toISOString()
+    const date = new Date(req.query.startDate).toISOString()
     match.startDate = date
   }
   const jobs = await Freshers.find(match)

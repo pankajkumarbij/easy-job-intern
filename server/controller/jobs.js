@@ -139,6 +139,21 @@ exports.deleteJob = (req, res) => {
     });
 };
 
+exports.getJobValues = (req, res) => {
+  const { postId } = req.params;
+  Job.findById(postId)
+    .then((job) => {
+      if (!job) {
+        return res.status(400).json({ error: "Job does not exists" });
+      }
+      res.json({ job: job });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Something went wrong!" });
+    });
+};
+
 
 exports.searchJob = async(req, res) => {
   const match = {createdBy: req.user._id}
@@ -152,7 +167,7 @@ exports.searchJob = async(req, res) => {
     match.salary = req.query.salary 
   }
   if (req.query.startDate) {
-    date = new Date(req.query.startDate).toISOString()
+    const date = new Date(req.query.startDate).toISOString()
     match.startDate = date
   }
   const jobs = await Job.find(match).populate("createdBy", "_id personName").sort("-createdAt")
@@ -182,7 +197,7 @@ exports.searchFilterJobs = async(req, res) => {
     match.techstack = { $in: req.query.techstack }
   }
   if(req.query.startDate){
-    date = new Date(req.query.startDate).toISOString()
+    const date = new Date(req.query.startDate).toISOString()
     match.startDate = date
   }
   const jobs = await Job.find(match)
@@ -193,3 +208,4 @@ exports.searchFilterJobs = async(req, res) => {
     return res.status(400).send('something went wrong')
   }
 }
+
