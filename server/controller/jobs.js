@@ -139,10 +139,6 @@ exports.deleteJob = (req, res) => {
     });
 };
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c15d7de6120046cddf07d2d67c8caaa72c238ccf
 exports.getJobValues = (req, res) => {
   const { postId } = req.params;
   Job.findById(postId)
@@ -157,10 +153,7 @@ exports.getJobValues = (req, res) => {
       res.status(500).json({ error: "Something went wrong!" });
     });
 };
-<<<<<<< HEAD
-=======
 
->>>>>>> c15d7de6120046cddf07d2d67c8caaa72c238ccf
 
 exports.searchJob = async(req, res) => {
   const match = {createdBy: req.user._id}
@@ -215,7 +208,4 @@ exports.searchFilterJobs = async(req, res) => {
     return res.status(400).send('something went wrong')
   }
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> c15d7de6120046cddf07d2d67c8caaa72c238ccf
