@@ -14,7 +14,7 @@ exports.signup = async (req, res) => {
     passwordConfirmation,
   } = req.body;
   if (password !== passwordConfirmation) {
-    return res.json({ error: "Password dosen't match" });
+    return res.json({ error: "passwordConfirmation field is missing or Password dosen't match" });
   }
   if (
     !companyName ||
