@@ -9,6 +9,8 @@ exports.createFreshersJob = (req, res) => {
     techstack,
     lastDate,
     startDate,
+    role,
+    vacancies
   } = req.body;
   const user = req.user;
 
@@ -19,7 +21,9 @@ exports.createFreshersJob = (req, res) => {
     !salary ||
     !techstack ||
     !lastDate ||
-    !startDate
+    !startDate ||
+    !role ||
+    !vacancies
   ) {
     return res.json({ error: "Please add all fields" });
   }
@@ -35,6 +39,8 @@ exports.createFreshersJob = (req, res) => {
     startDate,
     techstack: techStackArray,
     createdBy: user,
+    role,
+    vacancies
   });
 
   freshersjob
@@ -71,6 +77,8 @@ exports.updateFreshersJob = (req, res) => {
     duration,
     lastDate,
     startDate,
+    role,
+    vacancies
   } = req.body;
 
   Freshers.findById(postId)
@@ -97,6 +105,12 @@ exports.updateFreshersJob = (req, res) => {
       }
       if (startDate) {
         job.startDate = startDate;
+      }
+      if(role){
+        job.role = job.role 
+      }
+      if(vacancies){
+        job.vacancies = job.vacancies 
       }
 
       job
@@ -158,6 +172,12 @@ exports.searchFresherJob = async(req, res) => {
     const date = new Date(req.query.startDate).toISOString()
     match.startDate = date
   }
+  if(req.query.role){
+    match.role = req.query.role 
+  }
+  if(req.query.vacancies){
+    match.vacancies = req.query.vacancies 
+  }
   const fresherJobs = await Freshers.find(match).populate("createdBy", "_id personName").sort("-createdAt")
   try{
     if(fresherJobs.length===0){
@@ -188,6 +208,12 @@ exports.searchFilterFreshersJobs = async(req, res) => {
   if(req.query.startDate){
     const date = new Date(req.query.startDate).toISOString()
     match.startDate = date
+  }
+  if(req.query.role){
+    match.role = req.query.role 
+  }
+  if(req.query.vacancies){
+    match.vacancies = req.query.vacancies 
   }
   const jobs = await Freshers.find(match)
   try{

@@ -11,6 +11,8 @@ exports.createInternship = (req, res) => {
     lastDate,
     startDate,
     endDate,
+    role,
+    vacancies
   } = req.body;
   const user = req.user;
 
@@ -23,7 +25,9 @@ exports.createInternship = (req, res) => {
     !lastDate ||
     !startDate ||
     !endDate ||
-    !duration
+    !duration ||
+    !role ||
+    !vacancies
   ) {
     return res.json({ error: "Please add all fields" });
   }
@@ -48,6 +52,8 @@ exports.createInternship = (req, res) => {
     endDate,
     techstack: techStackArray,
     createdBy: user,
+    role,
+    vacancies
   });
 
   // console.log(internship);
@@ -86,6 +92,8 @@ exports.updateInternship = (req, res) => {
     lastDate,
     startDate,
     endDate,
+    role,
+    vacancies
   } = req.body;
 
   Internship.findById(postId)
@@ -115,6 +123,12 @@ exports.updateInternship = (req, res) => {
       }
       if (endDate) {
         internship.endDate = endDate;
+      }
+      if (role) {
+        internship.role = role;
+      }
+      if(vacancies){
+        internship.vacancies = vacancies;
       }
 
       internship
@@ -179,6 +193,12 @@ exports.searchFilterInternships = async(req, res) => {
     const date = new Date(req.query.startDate).toISOString()
     match.startDate = date
   }
+  if(req.query.role){
+    match.role = req.query.role 
+  }
+  if(req.query.vacancies){
+    match.vacancies = req.query.vacancies 
+  }
   const internships = await Internship.find(match)
   try{
     res.status(200).send({ internships: internships });
@@ -204,6 +224,12 @@ exports.searchInternship = async(req, res) => {
   if (req.query.startDate) {
     const date = new Date(req.query.startDate).toISOString()
     match.startDate = date
+  }
+  if(req.query.role){
+    match.role = req.query.role 
+  }
+  if(req.query.vacancies){
+    match.vacancies = req.query.vacancies 
   }
   const internships = await Internship.find(match).populate("createdBy", "_id personName").sort("-createdAt")
   try{
