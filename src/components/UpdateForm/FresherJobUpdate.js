@@ -1,66 +1,75 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { useHistory, useParams } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 
-
 const UpdateFresherJob = () => {
   const history = useHistory();
   const postId = useParams().id;
+  const [job, setJob] = useState();
 
   const initialState = {
     description: {
-      value: "",
-    //   validation: {
-    //     required: true,
-    //   },
+      value: null,
+      //   validation: {
+      //     required: true,
+      //   },
       errorMessage: "",
       valid: false,
       touched: false,
     },
     location: {
-      value: "",
-    //   validation: {
-    //     required: true,
-    //   },
+      value: null,
+      //   validation: {
+      //     required: true,
+      //   },
       errorMessage: "",
       valid: false,
       touched: false,
     },
     salary: {
-      value: "",
-    //   validation: {
-    //     required: true,
-    //   },
+      value: null,
+      //   validation: {
+      //     required: true,
+      //   },
       errorMessage: "",
       valid: false,
       touched: false,
     },
     techstack: {
-      value: "",
-    //   validation: {
-    //     required: true,
-    //   },
+      value: null,
+      //   validation: {
+      //     required: true,
+      //   },
       errorMessage: "",
       valid: false,
       touched: false,
     },
     lastDate: {
-      value: "",
-    //   validation: {
-    //     required: true,
-    //   },
+      value: null,
+      //   validation: {
+      //     required: true,
+      //   },
       errorMessage: "",
       valid: false,
       touched: false,
     },
     startDate: {
-      value: "",
-    //   validation: {
-    //     required: true,
-    //   },
+      value: null,
+      //   validation: {
+      //     required: true,
+      //   },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
+    experience: {
+      value: null,
+      //   validation: {
+      //     required: true,
+      //   },
       errorMessage: "",
       valid: false,
       touched: false,
@@ -70,6 +79,31 @@ const UpdateFresherJob = () => {
   const [formValues, setFormValues] = useState(initialState);
   const [formIsValid, setFormIsValid] = useState(false);
 
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `http://localhost:5000/employer/get-freshersjob/${postId}`,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data.error) {
+          console.log(res.data.error);
+          // alert(res.data.error);
+          const notify = () => toast(res.data.error);
+          notify();
+        } else {
+          console.log(res.data.job);
+          setJob(res.data.job);
+          console.log(job);
+        }
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
+  }, []);
 
   const handleChange = (e) => {
     const updatedFormValues = { ...formValues };
@@ -94,7 +128,6 @@ const UpdateFresherJob = () => {
 
   const submitInternship = (e) => {
     e.preventDefault();
-    console.log("1");
 
     const {
       description,
@@ -141,12 +174,12 @@ const UpdateFresherJob = () => {
       });
 
     setFormValues(initialState);
-
   };
 
   return (
     <div style={{ padding: "4vh 0" }}>
       <Toaster />
+      {job && (
         <Card
           style={{
             width: "40vw",
@@ -181,7 +214,7 @@ const UpdateFresherJob = () => {
                   type="text"
                   placeholder="Enter Company Name"
                   name="location"
-                  value={formValues.location.value}
+                  value={formValues.location.value || job.location}
                   onChange={handleChange}
                 />
                 {formValues.location.errorMessage && (
@@ -203,7 +236,7 @@ const UpdateFresherJob = () => {
                   type="text"
                   placeholder="Enter description"
                   name="description"
-                  value={formValues.description.value}
+                  value={formValues.description.value || job.description}
                   onChange={handleChange}
                 />
                 {formValues.description.errorMessage && (
@@ -223,7 +256,7 @@ const UpdateFresherJob = () => {
                   type="text"
                   placeholder="Enter salary"
                   name="salary"
-                  value={formValues.salary.value}
+                  value={formValues.salary.value || job.salary}
                   onChange={handleChange}
                 />
                 {formValues.salary.errorMessage && (
@@ -245,7 +278,7 @@ const UpdateFresherJob = () => {
                   type="text"
                   placeholder="Enter techstack"
                   name="techstack"
-                  value={formValues.techstack.value}
+                  value={formValues.techstack.value || job.techstack}
                   onChange={handleChange}
                 />
                 {formValues.techstack.errorMessage && (
@@ -267,7 +300,7 @@ const UpdateFresherJob = () => {
                   type="date"
                   placeholder="Enter last date"
                   name="lastDate"
-                  value={formValues.lastDate.value}
+                  value={formValues.lastDate.value || job.lastDate}
                   onChange={handleChange}
                 />
                 {formValues.lastDate.errorMessage && (
@@ -289,7 +322,7 @@ const UpdateFresherJob = () => {
                   type="month"
                   placeholder="Enter start date"
                   name="startDate"
-                  value={formValues.startDate.value}
+                  value={formValues.startDate.value || job.startDate}
                   onChange={handleChange}
                 />
                 {formValues.startDate.errorMessage && (
@@ -298,8 +331,6 @@ const UpdateFresherJob = () => {
                   </span>
                 )}
               </Form.Group>
-
-
 
               {
                 <Button
@@ -314,6 +345,7 @@ const UpdateFresherJob = () => {
             </Form>
           </Card.Body>
         </Card>
+      )}
     </div>
   );
 };

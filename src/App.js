@@ -17,6 +17,9 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 import { initialState, reducer } from "./reducers/userReducer";
 import NewInternship from "./components/CreateNew/CreateInternship";
 import NewJob from "./components/CreateNew/CreateJob";
+
+import Profile from "./components/student-profile/Profile";
+
 import AllInternships from "./components/Internships/AllInternships";
 import AllJobs from "./components/Jobs/AllJobs";
 import NewFreshersJob from "./components/CreateNew/CreatFreshersJob";
@@ -24,6 +27,7 @@ import AllFreshersJobs from "./components/FreshersJob/AllFresherJob";
 import UpdateInternship from "./components/UpdateForm/InternshipUpdate";
 import UpdateJob from "./components/UpdateForm/JobUpdate";
 import UpdateFresherJob from "./components/UpdateForm/FresherJobUpdate";
+
 
 export const UserContext = createContext();
 
@@ -40,6 +44,49 @@ const Routing = () => {
       dispatch({ type: "USER", payload: { user: user, userType: type } });
     }
   }, [dispatch]);
+
+
+  return (
+    <Switch>
+      <Route path="/" exact compo>
+        <Home />
+      </Route>
+      <Route path="/student-login" exact>
+        <Login />
+      </Route>
+      <Route path="/student-signup" exact>
+        <SignUp />
+      </Route>
+      <Route path="/employer-signup" exact>
+        <EmployerSignup />
+      </Route>
+      <Route path="/employer-login" exact>
+        <EmployerSignin />
+      </Route>
+      <Route path="/create-internship" exact>
+        <NewInternship />
+      </Route>
+      <Route path="/create-job" exact>
+        <NewJob />
+      </Route>
+      <Route path="/about-us" exact>
+        <AboutUs />
+      </Route>
+      <Route path="/contact-us" exact>
+        <ContactUs />
+      </Route>
+      <Route path="/privacy-policy" exact>
+        <PrivacyPolicy />
+      </Route>
+      <Route path="/terms-conditions" exact>
+        <TermsCondition />
+      </Route>
+      <Route exact path="/login/student-profile">
+        <Profile/>
+      </Route>
+      <Route component={Error} />
+    </Switch>
+  );
 
   console.log(state);
 
@@ -65,7 +112,7 @@ const Routing = () => {
           <Route path="/update-job/:id" >
             <UpdateJob />
           </Route>
-          <Route path="/update-fresherjob/:id" >
+          <Route path="/update-fresher/:id" >
             <UpdateFresherJob />
           </Route>
           <Route path="/all-internships" exact>
@@ -159,6 +206,7 @@ const Routing = () => {
   }
 
   return routes;
+
 };
 
 function App() {
