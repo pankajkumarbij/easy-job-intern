@@ -31,7 +31,15 @@ const employerSchema = new Schema({
             type:String,
             required:true
         }
-    }]
+    }],
+    status: {
+        type: String,
+        enum: ['Pending', 'Active'],
+        default: 'Pending',
+    },
+    confirmationCode: { 
+        type: String, 
+        unique: true }
 });
 
 const Employer = mongoose.model('Employer',employerSchema);

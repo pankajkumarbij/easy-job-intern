@@ -3,9 +3,9 @@ const bcrypt = require("bcryptjs");
 const {JWT_SECRET} = require('../keys');
 const auth_student = require('../middleware/auth_student.js');
 const Student = require("../models/student");
+const {signupEmailFunc} = require("../utils/signup-email");
 
-
-exports.signup = (req, res) => {
+exports.signup =  (req, res) => {
     const {institutionName,personName,email,contact,password,passwordConfirmation,branch,year,degree} = req.body
     if(password !== passwordConfirmation){
         return res.json({error:"Password dosen't match"})
@@ -14,10 +14,11 @@ exports.signup = (req, res) => {
         return res.json({error:"Please add all fields"});
     }
    Student.findOne({email})
-    .then((savedUser)=>{
+    .then(async (savedUser)=>{
         if(savedUser){
             return res.json({error:"User already exsist"})
         }
+        const token =  await jwt.sign({email: email}, JWT_SECRET );
         bcrypt.hash(password,10)
         .then(async hashedpassword => {
             const student = new Student({
@@ -28,12 +29,15 @@ exports.signup = (req, res) => {
                 branch,
                 year,
                 degree,
-                password:hashedpassword
+                password:hashedpassword ,
+                status : 'Pending',
+                confirmationCode : token
             })
-            //await email(name, email, mobile);
-            student.save()
-            .then(user=>{
-                res.json({message:"Saved Succcessfully",user:user})
+            await student.save(
+                signupEmailFunc(student.personName ,student.email , student.confirmationCode   )                
+            )
+            .then( user=>{
+                res.json({message:"Saved Succcessfully !! Check your email",user:user})
             }).catch(err=>{
                 console.log(err);
             })
@@ -41,7 +45,27 @@ exports.signup = (req, res) => {
       
     })
 }
-   
+  
+exports.signupConfirm = (req,res,next) => {
+    Student.findOne( {confirmationCode : req.params.confirmationCode} )
+        .then( async (user) => {
+           if(!user)
+           {
+            return res.status(404).send({ message: "User Not found." });
+           }
+           user.status = 'Active';
+         await  user.save((err) => {
+               if(err)  res.status(500).send({ message: err });
+               return ;
+           } )
+        } )
+        .catch(
+            (err) => {
+                console.log(err);
+                return res.send(err);
+            }
+        )
+}
 
 // SignIn       post      /auth/signin
 
@@ -55,6 +79,9 @@ exports.signin = (req, res) => {
     .then(savedUser => {
         if(!savedUser){
             return res.json({error:"Invalid email or password"})
+        }
+        else if( savedUser.status != 'Active' ){
+            return res.json({error:"Pending Account. Please Verify Your Email!"})
         }
         else{
         bcrypt.compare(password,savedUser.password)

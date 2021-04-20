@@ -5,6 +5,7 @@ const {
   signin,
   logout,
   logoutAll,
+  signupConfirm
 } = require("../controller/employer.auth");
 const { createInternship, getAllInternships } = require("../controller/internships");
 const { createJob, getAllJobs } = require("../controller/jobs");
@@ -18,6 +19,7 @@ router.post("/create-internship", auth_employer, createInternship);
 router.post("/create-job", auth_employer, createJob);
 router.get("/all-internships", getAllInternships);
 router.get("/all-jobs", getAllJobs);
+router.get('/confirm/:confirmationCode' , signupConfirm );
 
 
 

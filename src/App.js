@@ -16,9 +16,9 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 import { initialState, reducer } from "./reducers/userReducer";
 import NewInternship from "./components/CreateNew/CreateInternship";
 import NewJob from "./components/CreateNew/CreateJob";
-
+import WelcomeSignup from "./components/welcomeSignup/welcomeSignup";
+import welcomeSignupEmployer from "./components/welcomeSignup/welcomeSignupEmployer";
 export const UserContext = createContext();
-
 const Routing = () => {
   const history = useHistory();
   const { state, dispatch } = useContext(UserContext);
@@ -116,6 +116,8 @@ const Routing = () => {
         <Route path="/terms-conditions" exact>
           <TermsCondition />
         </Route>
+        <Route path="/confirm/employer/:confirmationCode" component={welcomeSignupEmployer} exact/>
+        <Route path="/confirm/:confirmationCode" component={WelcomeSignup} exact/>
         <Route component={Error} />
       </Switch>
     );

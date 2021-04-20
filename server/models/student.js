@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
 const studentSchema = new Schema({
     personName:{
         type: String,
@@ -43,7 +42,16 @@ const studentSchema = new Schema({
             type:String,
             required:true
         }
-    }]
+    }],
+    status: {
+        type: String,
+        enum: ['Pending', 'Active'],
+        default: 'Pending',
+    },
+    confirmationCode: { 
+        type: String, 
+        unique: true 
+    }
 
 });
 
