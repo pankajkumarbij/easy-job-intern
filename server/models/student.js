@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require("bcryptjs");
+const {JWT_SECRET} = require('../keys');
+const jwt = require("jsonwebtoken");
+
 const studentSchema = new Schema({
     personName:{
         type: String,
@@ -54,6 +58,39 @@ const studentSchema = new Schema({
     }
 
 });
+
+
+
+studentSchema.methods.generateAuthToken = async function(){ 
+    const student = this
+    const token = jwt.sign({_id: student._id}, JWT_SECRET) 
+    student.tokens = student.tokens.concat({token:token})
+    await student.save() 
+    return token
+}
+
+studentSchema.statics.findByCredentials = async(email, password) =>{
+    const student = await Student.findOne({email: email}) 
+    if(!student){
+        throw new Error('Invalid email or password')
+    }
+    const isMatch = await bcrypt.compare(password, student.password)  
+
+    if(!isMatch){
+        throw new Error('Invalid email or password')
+    }
+
+    return student
+}
+
+studentSchema.pre('save',async function (next){
+    const student = this 
+    if(student.isModified('password')){
+        student.password = await bcrypt.hash(student.password, 10)
+    }
+    next() 
+
+}) 
 
 const Student = mongoose.model('Student',studentSchema);
 

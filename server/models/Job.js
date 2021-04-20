@@ -27,6 +27,14 @@ const JobSchema = new Schema({
     type: Date,
     required: true,
   },
+  startDate: {
+    type: Date,
+    required: true,
+  },
+  experience: {
+    type: Number,
+    required: true,
+  },
   createdBy: {
     type: ObjectId,
     ref: "Employer",

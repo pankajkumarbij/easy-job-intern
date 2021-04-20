@@ -5,7 +5,7 @@ const { JWT_SECRET } = require("../keys");
 const Employer = require("../models/employer");
 const {signupEmailFunc} = require("../utils/signupEmployer-email");
 
-exports.signup = (req, res) => {
+exports.signup = async (req, res) => {
   const {
     companyName,
     personName,
@@ -15,7 +15,7 @@ exports.signup = (req, res) => {
     passwordConfirmation,
   } = req.body;
   if (password !== passwordConfirmation) {
-    return res.json({ error: "Password dosen't match" });
+    return res.json({ error: "passwordConfirmation field is missing or Password dosen't match" });
   }
   if (
     !companyName ||
@@ -78,49 +78,27 @@ exports.signupConfirm = (req,res,next) => {
 
 // SignIn       post      /auth/signin
 
-exports.signin = (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
-    return res.json({ error: "Please Add Email or Password" });
+exports.signin = async(req, res) => {
+  try{
+    if(!req.body.email || !req.body.password){
+        return res.json({error:"Please Add Email or Password"})
+    }
+    try{
+        savedUser = await Employer.findByCredentials(req.body.email, req.body.password)
+    }
+    catch(e){
+        return res.json({error:"Invalid email or password"})
+    }
+    if( savedUser.status != 'Active' ){
+      return res.json({message:"Pending Account. Please Verify Your Email!"})
+  }
+    const { _id, personName, email, contact, companyName} = savedUser
+    const token = await savedUser.generateAuthToken()
+    return res.status(200).json( {token,user:{ _id, personName, email, contact, companyName}})                    
+  } catch(e){
+      return res.json({error:"Something Went Wrong"})
   }
 
-  Employer.findOne({ email })
-    .then((savedUser) => {
-      if (!savedUser) {
-        return res.json({ error: "Invalid email or password" });
-      } 
-      else if( savedUser.status != 'Active' ){
-        return res.json({error:"Pending Account. Please Verify Your Email!"})
-    } else {
-        bcrypt
-          .compare(password, savedUser.password)
-          .then((doMatch) => {
-            if (doMatch) {
-              //return res.json({message:"SignIn successfull"})
-              const token = jwt.sign({ _id: savedUser._id }, JWT_SECRET);
-              const {
-                _id,
-                personName,
-                email,
-                contact,
-                companyName,
-              } = savedUser;
-              return res.json({
-                token,
-                user: { _id, personName, email, contact, companyName },
-              });
-            } else {
-              return res.json({ error: "Invalid Email or Password" });
-            }
-          })
-          .catch((err) => {
-            return res.json({ error: "Something Went Wrong" });
-          });
-      }
-    })
-    .catch((err) => {
-      return res.json({ error: "Something Went Wrong" });
-    });
 };
 
 exports.logout = async (req, res) => {
@@ -144,3 +122,27 @@ exports.logoutAll = async (req, res) => {
     res.status(500).send(e);
   }
 };
+
+exports.update = async(req, res) => {
+  const updates = Object.keys(req.body)
+  const allowedUpdates = ['personName', 'email','contact', 'password', 'companyName']
+  const isValid = updates.every((update)=>{
+      return allowedUpdates.includes(update)
+  })
+  if(!isValid){
+      res.status(400).send({error: 'Invalid Updates!'})
+  }
+  try{    
+      updates.forEach(update => {
+          req.user[update] = req.body[update]
+      })
+      
+      await req.user.save()
+      const {_id, personName, email, contact, companyName} = req.user
+      return res.status(200).json({user:{_id, personName, email, contact, companyName}})
+
+  }
+  catch(e){
+      res.status(400).send({error: 'something went werong!'})
+  }
+}

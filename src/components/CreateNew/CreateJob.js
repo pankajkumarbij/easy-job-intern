@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import checkValidity from "../../utils/checkValidation";
 
 const NewJob = () => {
@@ -68,6 +68,24 @@ const NewJob = () => {
       valid: false,
       touched: false,
     },
+    startDate: {
+      value: "",
+      validation: {
+        required: true,
+      },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
+    experience: {
+      value: "",
+      validation: {
+        required: true,
+      },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
   };
 
   const [formValues, setFormValues] = useState(initialState);
@@ -105,6 +123,8 @@ const NewJob = () => {
       salary,
       techstack,
       lastDate,
+      startDate,
+      experience
     } = formValues;
 
     axios({
@@ -117,6 +137,8 @@ const NewJob = () => {
         salary: salary.value,
         techstack: techstack.value,
         lastDate: lastDate.value,
+        startDate: startDate.value,
+        experience: experience.value,
       },
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -288,6 +310,46 @@ const NewJob = () => {
               {formValues.lastDate.errorMessage && (
                 <span className="error">
                   {formValues.lastDate.errorMessage}
+                </span>
+              )}
+            </Form.Group>
+
+            <Form.Group
+              style={{ textAlign: "left" }}
+              controlId="formBasicEmail"
+            >
+              <Form.Label style={{ fontWeight: "bold" }}>Start Month</Form.Label>
+              <Form.Control
+                style={{ borderColor: "#ffc107", color: "#000000" }}
+                type="month"
+                placeholder="Enter start month"
+                name="startDate"
+                value={formValues.startDate.value}
+                onChange={handleChange}
+              />
+              {formValues.startDate.errorMessage && (
+                <span className="error">
+                  {formValues.startDate.errorMessage}
+                </span>
+              )}
+            </Form.Group>
+
+            <Form.Group
+              style={{ textAlign: "left" }}
+              controlId="formBasicEmail"
+            >
+              <Form.Label style={{ fontWeight: "bold" }}>Experience</Form.Label>
+              <Form.Control
+                style={{ borderColor: "#ffc107", color: "#000000" }}
+                type="number"
+                placeholder="Enter number of years of experience"
+                name="experience"
+                value={formValues.experience.value}
+                onChange={handleChange}
+              />
+              {formValues.experience.errorMessage && (
+                <span className="error">
+                  {formValues.experience.errorMessage}
                 </span>
               )}
             </Form.Group>
