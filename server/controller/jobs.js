@@ -9,7 +9,9 @@ exports.createJob = (req, res) => {
     techstack,
     lastDate,
     startDate,
-    experience
+    experience,
+    role,
+    vacancies,
   } = req.body;
   const user = req.user;
 
@@ -21,7 +23,9 @@ exports.createJob = (req, res) => {
     !techstack ||
     !lastDate ||
     !startDate ||
-    !experience
+    !experience ||
+    !role ||
+    !vacancies
   ) {
     return res.json({ error: "Please add all fields" });
   }
@@ -40,6 +44,8 @@ exports.createJob = (req, res) => {
     experience,
     techstack: techStackArray,
     createdBy: user,
+    role,
+    vacancies,
   });
 
   // console.log(internship);
@@ -78,6 +84,8 @@ exports.updateJob = (req, res) => {
     lastDate,
     startDate,
     experience,
+    role,
+    vacancies
   } = req.body;
 
   Job.findById(postId)
@@ -107,6 +115,12 @@ exports.updateJob = (req, res) => {
       }
       if (experience) {
         job.experience = experience;
+      }
+      if (role) {
+        job.role = role;
+      }
+      if (vacancies) {
+        job.vacancies = vacancies;
       }
 
       job
@@ -170,6 +184,12 @@ exports.searchJob = async(req, res) => {
     const date = new Date(req.query.startDate).toISOString()
     match.startDate = date
   }
+  if(req.query.role){
+    match.role = req.query.role 
+  }
+  if(req.query.vacancies){
+    match.vacancies = req.query.vacancies 
+  }
   const jobs = await Job.find(match).populate("createdBy", "_id personName").sort("-createdAt")
   try{
     if(jobs.length===0){
@@ -199,6 +219,12 @@ exports.searchFilterJobs = async(req, res) => {
   if(req.query.startDate){
     const date = new Date(req.query.startDate).toISOString()
     match.startDate = date
+  }
+  if(req.query.role){
+    match.role = req.query.role 
+  }
+  if(req.query.vacancies){
+    match.vacancies = req.query.vacancies 
   }
   const jobs = await Job.find(match)
   try{

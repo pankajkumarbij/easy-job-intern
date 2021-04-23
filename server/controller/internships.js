@@ -11,6 +11,8 @@ exports.createInternship = (req, res) => {
     lastDate,
     startDate,
     endDate,
+    role,
+    vacancies
   } = req.body;
   const user = req.user;
 
@@ -23,7 +25,9 @@ exports.createInternship = (req, res) => {
     !lastDate ||
     !startDate ||
     !endDate ||
-    !duration
+    !duration ||
+    !role ||
+    !vacancies
   ) {
     return res.json({ error: "Please add all fields" });
   }
@@ -48,6 +52,8 @@ exports.createInternship = (req, res) => {
     endDate,
     techstack: techStackArray,
     createdBy: user,
+    role,
+    vacancies
   });
 
   // console.log(internship);
@@ -86,6 +92,8 @@ exports.updateInternship = (req, res) => {
     lastDate,
     startDate,
     endDate,
+    role,
+    vacancies
   } = req.body;
 
   Internship.findById(postId)
@@ -115,6 +123,12 @@ exports.updateInternship = (req, res) => {
       }
       if (endDate) {
         internship.endDate = endDate;
+      }
+      if (role) {
+        internship.role = role;
+      }
+      if(vacancies){
+        internship.vacancies = vacancies;
       }
 
       internship
@@ -179,8 +193,14 @@ exports.searchFilterInternships = async (req, res) => {
     const date = new Date(req.query.startDate).toISOString();
     match.startDate = date;
   }
-  const internships = await Internship.find(match);
-  try {
+  if(req.query.role){
+    match.role = req.query.role 
+  }
+  if(req.query.vacancies){
+    match.vacancies = req.query.vacancies 
+  }
+  try{
+    const internships = await Internship.find(match);
     res.status(200).send({ internships: internships });
   } catch (e) {
     return res.status(400).send("something went wrong");
@@ -203,15 +223,20 @@ exports.searchInternship = async (req, res) => {
     const date = new Date(req.query.startDate).toISOString();
     match.startDate = date;
   }
-  const internships = await Internship.find(match)
-    .populate("createdBy", "_id personName")
-    .sort("-createdAt");
-  try {
-    if (internships.length === 0) {
-      return res.status(200).send({ message: "No internships found" });
+  if(req.query.role){
+    match.role = req.query.role 
+  }
+  if(req.query.vacancies){
+    match.vacancies = req.query.vacancies 
+  }
+  
+  try{
+    const internships = await Internship.find(match).populate("createdBy", "_id personName").sort("-createdAt")
+    if(internships.length===0){
+      return res.status(200).send({message: "No internships found"})
     }
     res.status(200).send(internships);
-  } catch (e) {
+    } catch (e) {
     res.status(400).send("Something went wrong");
   }
 };
