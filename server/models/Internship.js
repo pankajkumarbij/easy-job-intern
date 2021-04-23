@@ -50,6 +50,14 @@ const internshipSchema = new Schema({
     createdBy: {
         type: ObjectId,
         ref: "Employer"
+    },
+    role: {
+        type: String,
+        required: true
+    },
+    vacancies: {
+        type: Number,
+        required: true
     }
 }, {timestamps: true})
 

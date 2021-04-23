@@ -87,6 +87,7 @@ const NewInternship = () => {
       touched: false,
     },
     industry: {
+    role: {
       value: "",
       validation: {
         required: true,
@@ -96,6 +97,15 @@ const NewInternship = () => {
       touched: false,
     },
     stream: {
+      value: "",
+      validation: {
+        required: true,
+      },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
+    vacancies: {
       value: "",
       validation: {
         required: true,
@@ -148,6 +158,8 @@ const NewInternship = () => {
       endDate,
       industry,
       stream
+      role,
+      vacancies
     } = formValues;
 
     axios({
@@ -165,7 +177,8 @@ const NewInternship = () => {
         industry: industry.value,
         stream: stream.value,
         duration: duration,
-        
+        duration: duration,
+        role: role.value,
       },
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -257,6 +270,26 @@ const NewInternship = () => {
               {formValues.location.errorMessage && (
                 <span className="error">
                   {formValues.location.errorMessage}
+                </span>
+              )}
+            </Form.Group>
+            
+            <Form.Group
+              style={{ textAlign: "left" }}
+              controlId="formBasicEmail"
+            >
+              <Form.Label style={{ fontWeight: "bold" }}>Role</Form.Label>
+              <Form.Control
+                style={{ borderColor: "#ffc107", color: "#000000" }}
+                type="text"
+                placeholder="Enter Internship role"
+                name="role"
+                value={formValues.role.value}
+                onChange={handleChange}
+              />
+              {formValues.role.errorMessage && (
+                <span className="error">
+                  {formValues.role.errorMessage}
                 </span>
               )}
             </Form.Group>
@@ -431,7 +464,25 @@ const NewInternship = () => {
                 <span className="error">{formValues.endDate.errorMessage}</span>
               )}
             </Form.Group>
-
+            
+            <Form.Group 
+              style={{ textAlign: "left" }}
+              controlId="formBasicEmail"
+            >
+              <Form.Label style={{ fontWeight: "bold" }}>Vacancies</Form.Label>
+              <Form.Control
+                style={{ borderColor: "#ffc107", color: "#000000" }}
+                type="text"
+                placeholder="Enter number of vacancies"
+                name="vacancies"
+                value={formValues.vacancies.value}
+                onChange={handleChange}
+              />
+              {formValues.vacancies.errorMessage && (
+                <span className="error">{formValues.vacancies.errorMessage}</span>
+              )}
+            </Form.Group>
+            
             {
               <Button
                 style={{ color: "#ffc107", fontWeight: "bold" }}

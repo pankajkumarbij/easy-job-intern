@@ -35,6 +35,14 @@ const FreshersJobSchema = new Schema({
     type: ObjectId,
     ref: "Employer",
   },
+  role: {
+    type: String,
+    required: true
+  },
+  vacancies: {
+    type: Number,
+    required: true
+  }
 }, {timestamps: true});
 
 const FreshersJob = mongoose.model("FreshersJob", FreshersJobSchema);
