@@ -102,44 +102,44 @@ const Home = () => {
                   Internship By Location
                 </h4>
                 <ListGroup>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/location-internship/Mumbai">
                     <ListGroup.Item variant="primary">Mumbai</ListGroup.Item>
                   </a>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/location-internship/Pune">
                     <ListGroup.Item action variant="secondary">
                       Pune
                     </ListGroup.Item>
                   </a>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/location-internship/Bangalore">
                     {" "}
                     <ListGroup.Item action variant="success">
                       Bangalore
                     </ListGroup.Item>
                   </a>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/location-internship/Chennai">
                     {" "}
                     <ListGroup.Item action variant="danger">
                       Chennai
                     </ListGroup.Item>
                   </a>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/location-internship/Kolkata">
                     {" "}
                     <ListGroup.Item action variant="warning">
                       Kolkata
                     </ListGroup.Item>{" "}
                   </a>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/location-internship/Gugaon">
                     {" "}
                     <ListGroup.Item action variant="info">
                       Gugaon
                     </ListGroup.Item>{" "}
                   </a>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/location-internship/Delhi">
                     <ListGroup.Item action variant="success">
                       Delhi
                     </ListGroup.Item>
                   </a>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/location-internship/India">
                     {" "}
                     <ListGroup.Item action variant="dark">
                       India
