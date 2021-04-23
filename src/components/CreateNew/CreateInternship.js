@@ -87,6 +87,14 @@ const NewInternship = () => {
       touched: false,
     },
     industry: {
+      value: "",
+      validation: {
+        required: true,
+      },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
     role: {
       value: "",
       validation: {
@@ -157,7 +165,7 @@ const NewInternship = () => {
       startDate,
       endDate,
       industry,
-      stream
+      stream,
       role,
       vacancies
     } = formValues;
@@ -177,8 +185,8 @@ const NewInternship = () => {
         industry: industry.value,
         stream: stream.value,
         duration: duration,
-        duration: duration,
         role: role.value,
+        vacancies: vacancies.value,
       },
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
