@@ -25,7 +25,17 @@ body, html{
     font-style: oblique;
     color: #ccc;
     text-align: left;
+    padding: 5px 0 12px 0;
+    font-size: 20px;
+}
+.subsubtitleOfPost{
+    font-weight: 600;
+    font-style: oblique;
+    color: #ddd;
+    text-align: left;
     padding-bottom: 20px;
+    font-size: 17px;
+
 }
 .textPost{
     padding-top: 10px;

@@ -15,6 +15,14 @@ const internshipSchema = new Schema({
         type: String,
         required:true,
     },
+    industry:{
+        type: String,
+        required:true,
+    },
+    stream:{
+        type: String,
+        required:true,
+    },
     stipend:{
         type: String,
         required:true,

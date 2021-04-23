@@ -202,6 +202,11 @@ const InternshipsByLocation = () => {
                     <Card.Subtitle className="subtitleOfPost">
                       {internship.location}
                     </Card.Subtitle>
+                    <Card.Subtitle className="subsubtitleOfPost">
+                      {internship.industry}{" "}
+                      {internship.industry && internship.stream && ","}{" "}
+                      {internship.stream}
+                    </Card.Subtitle>
                     <Card.Text className="textPost">
                       {internship.description}
                     </Card.Text>

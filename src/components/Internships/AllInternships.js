@@ -18,7 +18,6 @@ import * as Icon from "react-bootstrap-icons";
 
 import "./AllInternships.css";
 import { UserContext } from "../../App";
-import { colors } from "@material-ui/core";
 
 const AllInternships = () => {
   const { state, dispatch } = useContext(UserContext);
@@ -190,6 +189,9 @@ const AllInternships = () => {
                     </Card.Title>
                     <Card.Subtitle className="subtitleOfPost">
                       {internship.location}
+                    </Card.Subtitle>
+                    <Card.Subtitle className="subsubtitleOfPost">
+                      {internship.industry} {internship.industry && internship.stream && ","} {internship.stream}
                     </Card.Subtitle>
                     <Card.Text className="textPost">
                       {internship.description}

@@ -11,6 +11,8 @@ exports.createInternship = (req, res) => {
     lastDate,
     startDate,
     endDate,
+    industry,
+    stream,
   } = req.body;
   const user = req.user;
 
@@ -23,7 +25,9 @@ exports.createInternship = (req, res) => {
     !lastDate ||
     !startDate ||
     !endDate ||
-    !duration
+    !duration ||
+    !industry ||
+    !stream
   ) {
     return res.json({ error: "Please add all fields" });
   }
@@ -46,6 +50,8 @@ exports.createInternship = (req, res) => {
     duration,
     startDate,
     endDate,
+    industry,
+    stream,
     techstack: techStackArray,
     createdBy: user,
   });
@@ -86,6 +92,8 @@ exports.updateInternship = (req, res) => {
     lastDate,
     startDate,
     endDate,
+    industry,
+    stream,
   } = req.body;
 
   Internship.findById(postId)
@@ -115,6 +123,12 @@ exports.updateInternship = (req, res) => {
       }
       if (endDate) {
         internship.endDate = endDate;
+      }
+      if (industry) {
+        internship.industry = industry;
+      }
+      if (stream) {
+        internship.stream = stream;
       }
 
       internship
@@ -223,7 +237,10 @@ exports.getInternshipsByLocation = (req, res) => {
     res.status(422).json({ error: "Please fill loction" });
   }
 
-  Internship.find({ location: location }).then((internships) => {
-    res.json({ internships: internships });
-  });
+  Internship.find({ location: location })
+    .populate("createdBy", "_id personName")
+    .sort("-createdAt")
+    .then((internships) => {
+      res.json({ internships: internships });
+    });
 };
