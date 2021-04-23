@@ -39,6 +39,14 @@ const JobSchema = new Schema({
     type: ObjectId,
     ref: "Employer",
   },
+  role: {
+    type: String,
+    required: true
+  },
+  vacancies: {
+    type: Number,
+    required: true
+  }
 }, {timestamps: true});
 
 const Job = mongoose.model("Job", JobSchema);
