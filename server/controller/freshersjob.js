@@ -223,3 +223,29 @@ exports.searchFilterFreshersJobs = async(req, res) => {
     return res.status(400).send('something went wrong')
   }
 }
+
+exports.bookmarkFresherJob = async(req, res) => {
+  try{
+    const bool = (req.body.bookmark === "true")
+    const fresherJob = await Freshers.findById(req.params.id)
+    if(bool){
+      if(!fresherJob.bookmarkedBy.includes(req.user._id)){  //making sure that a user doesn't get appended to the list more than once
+        fresherJob.bookmarkedBy.push(req.user._id)
+        await fresherJob.save()
+      }
+      return res.status(200).send({message: "bookmarked!"})
+    }
+    else{
+      const i = fresherJob.bookmarkedBy.indexOf(req.user._id)
+      if(i<0){    //if user was not present in the bookmarkedBy list of fresherJob
+        return res.status(200).send({message: "job not found!"})
+      }
+      fresherJob.bookmarkedBy.splice(i, 1)
+      await fresherJob.save()   
+      return res.status(200).send({message: "the job is not included in your bookmarked list anymore!"})   
+    }
+  }
+  catch(e){
+    return res.status(400).send({message:"something went wrong"})
+  }
+}
