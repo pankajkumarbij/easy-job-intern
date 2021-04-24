@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const {JWT_SECRET} = require('../keys');
 const auth_student = require('../middleware/auth_student.js');
 const Student = require("../models/student");
+const {signupEmailFunc} = require("../utils/signup-email");
 
 
 exports.signup = async (req, res) => {
@@ -26,18 +27,41 @@ exports.signup = async (req, res) => {
             branch,
             year,
             degree,
-            password
+            password,
+            status : 'Pending',
         })
-        const token = await user.generateAuthToken()
-        await user.save()
-        
-        res.json({message:"Saved Succcessfully",user:user, token:token})
+        const token = await user.generateAuthToken();
+        user.confirmationCode = token;
+        await user.save(
+            signupEmailFunc(user.personName ,user.email , user.confirmationCode   )                
+        )
+        res.json({message:"Saved Succcessfully !! Check your email",user:user, token:token})
     }
     catch(e){
         console.log(e)
     }
 }
-   
+  
+exports.signupConfirm = (req,res,next) => {
+    Student.findOne( {confirmationCode : req.params.confirmationCode} )
+        .then( async (user) => {
+           if(!user)
+           {
+            return res.status(404).send({ message: "User Not found." });
+           }
+           user.status = 'Active';
+         await  user.save((err) => {
+               if(err)  res.status(500).send({ message: err });
+               return ;
+           } )
+        } )
+        .catch(
+            (err) => {
+                console.log(err);
+                return res.send(err);
+            }
+        )
+}
 
 // SignIn       post      /auth/signin
 
@@ -52,6 +76,9 @@ exports.signin = async (req, res) => {
         }
         catch(e){
             return res.json({error:"Invalid email or password"})
+        }
+        if( savedUser.status != 'Active' ){
+            return res.json({message:"Pending Account. Please Verify Your Email!"})
         }
         const {_id,personName,email,contact,branch,year,degree} = savedUser
         const token = await savedUser.generateAuthToken()

@@ -27,7 +27,10 @@ import AllFreshersJobs from "./components/FreshersJob/AllFresherJob";
 import UpdateInternship from "./components/UpdateForm/InternshipUpdate";
 import UpdateJob from "./components/UpdateForm/JobUpdate";
 import UpdateFresherJob from "./components/UpdateForm/FresherJobUpdate";
+import welcomeSignup from "./components/welcomeSignup/welcomeSignup";
+import welcomeSignupEmployer from "./components/welcomeSignup/welcomeSignupEmployer";
 import InternshipsByLocation from "./components/Internships/InternshipByLocation";
+
 
 export const UserContext = createContext();
 
@@ -205,6 +208,8 @@ const Routing = () => {
         <Route path="/terms-conditions" exact>
           <TermsCondition />
         </Route>
+      <Route path="/confirm/employer/:confirmationCode" component={welcomeSignupEmployer} exact/>
+      <Route path="/confirm/:confirmationCode" component={welcomeSignup} exact/>
         <Route component={Error} />
       </Switch>
     );

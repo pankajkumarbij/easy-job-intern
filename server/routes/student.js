@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { signup, signin, update, logout, logoutAll } = require("../controller/student.auth");
+const { signup, signin, update, logout, logoutAll , signupConfirm } = require("../controller/student.auth");
 const auth_student = require('../middleware/auth_student');
 const {searchFilterInternships} = require("../controller/internships")
 const {searchFilterJobs} = require("../controller/jobs")
@@ -15,5 +15,5 @@ router.get('/logoutAll', auth_student, logoutAll);
 router.get('/searchFilterInternships', auth_student, searchFilterInternships);
 router.get('/searchFilterJobs', auth_student, searchFilterJobs);
 router.get('/searchFilterFreshersJobs', auth_student, searchFilterFreshersJobs);
-
+router.get('/confirm/:confirmationCode' , signupConfirm );
 module.exports = router
