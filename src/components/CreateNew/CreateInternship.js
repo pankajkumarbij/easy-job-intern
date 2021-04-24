@@ -86,7 +86,25 @@ const NewInternship = () => {
       valid: false,
       touched: false,
     },
+    industry: {
+      value: "",
+      validation: {
+        required: true,
+      },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
     role: {
+      value: "",
+      validation: {
+        required: true,
+      },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
+    stream: {
       value: "",
       validation: {
         required: true,
@@ -103,7 +121,7 @@ const NewInternship = () => {
       errorMessage: "",
       valid: false,
       touched: false,
-    }
+    },
   };
 
   const [formValues, setFormValues] = useState(initialState);
@@ -130,12 +148,11 @@ const NewInternship = () => {
     setFormIsValid(formValid);
   };
 
-
-
   const submitInternship = (e) => {
     e.preventDefault();
-    console.log(typeof(formValues.startDate.value));
-    const duration = new Date(formValues.endDate.value)-new Date(formValues.startDate.value);
+    console.log(typeof formValues.startDate.value);
+    const duration =
+      new Date(formValues.endDate.value) - new Date(formValues.startDate.value);
     console.log(duration);
 
     const {
@@ -147,6 +164,8 @@ const NewInternship = () => {
       lastDate,
       startDate,
       endDate,
+      industry,
+      stream,
       role,
       vacancies
     } = formValues;
@@ -163,9 +182,11 @@ const NewInternship = () => {
         lastDate: lastDate.value,
         startDate: startDate.value,
         endDate: endDate.value,
+        industry: industry.value,
+        stream: stream.value,
         duration: duration,
         role: role.value,
-        vacancies: vacancies.value
+        vacancies: vacancies.value,
       },
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -305,6 +326,57 @@ const NewInternship = () => {
 
             <Form.Group
               style={{ textAlign: "left" }}
+              controlId="exampleForm.ControlSelect1"
+            >
+              <Form.Label style={{ fontWeight: "bold" }}>
+                Industry
+              </Form.Label>
+              <Form.Control
+                as="select"
+                style={{ borderColor: "#ffc107", color: "#000000" }}
+                name="industry"
+                value={formValues.industry.value}
+                onChange={handleChange}
+              >
+                <option>Select Industry</option>
+                <option value="IT">IT</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Design">Design</option>
+                <option value="MBA">MBA</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Media">Media</option>
+                <option value="Teaching">Teaching</option>
+                <option value="Finance">Finance</option>
+              </Form.Control>
+            </Form.Group>
+
+            <Form.Group
+              style={{ textAlign: "left" }}
+            >
+              <Form.Label style={{ fontWeight: "bold" }}>
+                Stream
+              </Form.Label>
+              <Form.Control
+                as="select"
+                style={{ borderColor: "#ffc107", color: "#000000" }}
+                name="stream"
+                value={formValues.stream.value}
+                onChange={handleChange}
+              >
+                <option>Select Stream</option>
+                <option value="Management">Management</option>
+                <option value="Manufacturing">Manufacturing</option>
+                <option value="Accounts">Accounts</option>
+                <option value="Architecture">Architecture</option>
+                <option value="Machine Learning">Machine Learning</option>
+                <option value="Data Science">Data Science</option>
+                <option value="Development">Development</option>
+                <option value="Design">Design</option>
+              </Form.Control>
+            </Form.Group>
+
+            <Form.Group
+              style={{ textAlign: "left" }}
               controlId="formBasicEmail"
             >
               <Form.Label style={{ fontWeight: "bold" }}>Stipend</Form.Label>
@@ -365,7 +437,9 @@ const NewInternship = () => {
               style={{ textAlign: "left" }}
               controlId="formBasicEmail"
             >
-              <Form.Label style={{ fontWeight: "bold" }}>Start Month</Form.Label>
+              <Form.Label style={{ fontWeight: "bold" }}>
+                Start Month
+              </Form.Label>
               <Form.Control
                 style={{ borderColor: "#ffc107", color: "#000000" }}
                 type="month"

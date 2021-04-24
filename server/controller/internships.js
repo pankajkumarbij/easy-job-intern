@@ -11,6 +11,8 @@ exports.createInternship = (req, res) => {
     lastDate,
     startDate,
     endDate,
+    industry,
+    stream,
     role,
     vacancies
   } = req.body;
@@ -26,6 +28,9 @@ exports.createInternship = (req, res) => {
     !startDate ||
     !endDate ||
     !duration ||
+    !industry ||
+    !stream
+=======
     !role ||
     !vacancies
   ) {
@@ -50,6 +55,8 @@ exports.createInternship = (req, res) => {
     duration,
     startDate,
     endDate,
+    industry,
+    stream,
     techstack: techStackArray,
     createdBy: user,
     role,
@@ -92,6 +99,9 @@ exports.updateInternship = (req, res) => {
     lastDate,
     startDate,
     endDate,
+    industry,
+    stream,
+=======
     role,
     vacancies
   } = req.body;
@@ -124,6 +134,11 @@ exports.updateInternship = (req, res) => {
       if (endDate) {
         internship.endDate = endDate;
       }
+      if (industry) {
+        internship.industry = industry;
+      }
+      if (stream) {
+        internship.stream = stream;
       if (role) {
         internship.role = role;
       }
@@ -248,7 +263,10 @@ exports.getInternshipsByLocation = (req, res) => {
     res.status(422).json({ error: "Please fill loction" });
   }
 
-  Internship.find({ location: location }).then((internships) => {
-    res.json({ internships: internships });
-  });
+  Internship.find({ location: location })
+    .populate("createdBy", "_id personName")
+    .sort("-createdAt")
+    .then((internships) => {
+      res.json({ internships: internships });
+    });
 };
