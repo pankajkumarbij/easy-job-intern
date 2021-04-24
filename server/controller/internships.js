@@ -329,3 +329,39 @@ exports.bookmarkInternship = async(req, res) => {
     return res.status(400).send({message:"something went wrong"})
   }
 }
+
+exports.getBookmarkedInternships = async(req, res) => {
+  try{
+    const internships = await Internship.find({bookmarkedBy:req.user._id})
+    const _internships = []
+    internships.forEach((internship) => {
+      const {techstack,
+        _id,
+        companyName,
+        description,
+        location,
+        stipend, 
+        lastDate,
+        duration, 
+        startDate, 
+        endDate, 
+        createdBy} = internship
+      const obj = {techstack,
+        _id,
+        companyName,
+        description,
+        location,
+        stipend, 
+        lastDate,
+        duration, 
+        startDate, 
+        endDate, 
+        createdBy} 
+      _internships.push(obj) 
+    })
+    return res.status(200).send(_internships)
+  }
+  catch(e){
+    res.status(400).send('something went wrong!')
+  }
+}
