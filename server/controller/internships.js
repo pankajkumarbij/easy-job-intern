@@ -29,8 +29,7 @@ exports.createInternship = (req, res) => {
     !endDate ||
     !duration ||
     !industry ||
-    !stream
-=======
+    !stream ||
     !role ||
     !vacancies
   ) {
@@ -101,7 +100,6 @@ exports.updateInternship = (req, res) => {
     endDate,
     industry,
     stream,
-=======
     role,
     vacancies
   } = req.body;
@@ -139,6 +137,7 @@ exports.updateInternship = (req, res) => {
       }
       if (stream) {
         internship.stream = stream;
+      }
       if (role) {
         internship.role = role;
       }
@@ -269,4 +268,21 @@ exports.getInternshipsByLocation = (req, res) => {
     .then((internships) => {
       res.json({ internships: internships });
     });
+};
+
+exports.getInternshipsByIdustry = (req, res) => {
+  const { industry } = req.params;
+
+  if (!industry) {
+    res.status(422).json({ error: "Please fill loction" });
+  }
+
+  Internship.find({ industry: industry })
+    .populate("createdBy", "_id personName")
+    .sort("-createdAt")
+    .then((internships) => {
+      console.log(internships);
+      res.json({ internships: internships });
+    });
+
 };
