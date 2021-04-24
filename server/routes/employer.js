@@ -5,6 +5,7 @@ const {
   signin,
   logout,
   logoutAll,
+  signupConfirm,
   update
 } = require("../controller/employer.auth");
 
@@ -40,6 +41,7 @@ router.get('/searchInternship', auth_employer, searchInternship)
 
 router.get('/searchJob', auth_employer, searchJob)
 router.get('/searchFresherJob', auth_employer, searchFresherJob)
+router.get('/confirm/:confirmationCode' , signupConfirm );
 
 
 
