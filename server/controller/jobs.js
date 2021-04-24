@@ -235,3 +235,28 @@ exports.searchFilterJobs = async(req, res) => {
   }
 }
 
+exports.bookmarkJob = async(req, res) => {
+  try{
+    const bool = (req.body.bookmark === "true")
+    const job = await Job.findById(req.params.id)
+    if(bool){
+      if(!job.bookmarkedBy.includes(req.user._id)){  //making sure that a user doesn't get appended to the list more than once
+        job.bookmarkedBy.push(req.user._id)
+        await job.save()
+      }
+      return res.status(200).send({message: "bookmarked!"})
+    }
+    else{
+      const i = job.bookmarkedBy.indexOf(req.user._id)
+      if(i<0){    //if user was not present in the bookmarkedBy list of job
+        return res.status(200).send({message: "job not found!"})
+      }
+      job.bookmarkedBy.splice(i, 1)
+      await job.save()   
+      return res.status(200).send({message: "the job is not included in your bookmarked list anymore!"})   
+    }
+  }
+  catch(e){
+    return res.status(400).send({message:"something went wrong"})
+  }
+}

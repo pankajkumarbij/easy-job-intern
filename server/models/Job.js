@@ -46,7 +46,11 @@ const JobSchema = new Schema({
   vacancies: {
     type: Number,
     required: true
-  }
+  },
+  bookmarkedBy: [{
+      type: ObjectId,  
+      ref: 'Student' 
+  }]
 }, {timestamps: true});
 
 const Job = mongoose.model("Job", JobSchema);

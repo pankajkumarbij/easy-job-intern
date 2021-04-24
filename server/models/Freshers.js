@@ -42,7 +42,11 @@ const FreshersJobSchema = new Schema({
   vacancies: {
     type: Number,
     required: true
-  }
+  },
+  bookmarkedBy: [{
+      type: ObjectId,  
+      ref: 'Student' 
+  }]
 }, {timestamps: true});
 
 const FreshersJob = mongoose.model("FreshersJob", FreshersJobSchema);
