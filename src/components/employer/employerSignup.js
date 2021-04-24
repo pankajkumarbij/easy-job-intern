@@ -81,7 +81,7 @@ const EmployerSignup = () => {
   const [formValues, setFormValues] = useState(initialState);
   const [signupError, setSignupError] = useState(null);
 
-  const [ setFormIsValid] = useState(false);
+  const [formIsValid ,setFormIsValid] = useState(false);
 
   const handleChange = (e) => {
     const updatedFormValues = { ...formValues };

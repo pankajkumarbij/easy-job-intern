@@ -1,16 +1,25 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { Card, Col, Dropdown, ListGroup, ListGroupItem, Row } from "react-bootstrap";
+import {
+  Card,
+  Col,
+  Dropdown,
+  ListGroup,
+  ListGroupItem,
+  Row,
+  Spinner,Alert
+} from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { UserContext } from "../../App";
 import * as Icon from "react-bootstrap-icons";
 
 import "../Internships/AllInternships.css";
+// import { Alert } from "bootstrap";
 
 const AllFreshersJobs = () => {
   const { state, dispatch } = useContext(UserContext);
   const [freshersJobs, setFreshersJobs] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   const deletePost = (postId) => {
     axios({
       method: "delete",
@@ -53,6 +62,7 @@ const AllFreshersJobs = () => {
     })
       .then((res) => {
         console.log(res);
+        setLoading(false);
         if (res.data.error) {
           console.log(res.data.error);
           // alert(res.data.error);
@@ -65,6 +75,7 @@ const AllFreshersJobs = () => {
         }
       })
       .catch((err) => {
+        setLoading(false);
         console.log("Error: ", err);
       });
   }, [freshersJobs]);
@@ -106,7 +117,21 @@ const AllFreshersJobs = () => {
     <div className="internshipsOuterContainer">
       <Toaster />
       <Row className="justify-content-xl-start justify-content-lg-around justify-content-sm-center">
-        {freshersJobs &&
+        {loading ? (
+          <div className="h-100 w-100 d-flex justify-content-center align-items-center">
+            <Spinner
+              animation="border"
+              variant="light"
+              style={{
+                borderColor: "#515b66",
+                borderRightColor: "transparent",
+              }}
+            />
+          </div>
+        ) : freshersJobs && !freshersJobs.length > 0 ? (
+          <Alert variant="danger" className='w-100' style={{backgroundColor:"#343A40",border:"none",color:"#ffc107"}}>No Fresher Jobs available right now</Alert>
+        ) : (
+          freshersJobs &&
           freshersJobs.map((fresher) => {
             return (
               <Col
@@ -177,7 +202,8 @@ const AllFreshersJobs = () => {
                 </Card>
               </Col>
             );
-          })}
+          })
+        )}
       </Row>
     </div>
   );

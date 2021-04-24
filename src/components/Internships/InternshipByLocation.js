@@ -10,7 +10,9 @@ import {
   ListGroup,
   ListGroupItem,
   Modal,
-  Row,Spinner,Alert
+  Row,
+  Spinner,
+  Alert,
 } from "react-bootstrap";
 
 import toast, { Toaster } from "react-hot-toast";
@@ -19,16 +21,18 @@ import * as Icon from "react-bootstrap-icons";
 import "./AllInternships.css";
 import { UserContext } from "../../App";
 
-const AllInternships = () => {
+const InternshipsByLocation = () => {
   const { state, dispatch } = useContext(UserContext);
   const [internships, setInternships] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { location } = useParams();
+
   console.log(internships);
   console.log(state);
   useEffect(() => {
     axios({
       method: "get",
-      url: "http://localhost:5000/user/all-internships",
+      url: `http://localhost:5000/user/location-internship/${location}`,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -140,7 +144,15 @@ const AllInternships = () => {
             />
           </div>
         ) : internships && !internships.length > 0 ? (
-          <Alert variant="danger" className="w-100 " style={{backgroundColor:"#343A40",border:"none",color:"#ffc107"}}>
+          <Alert
+            variant="danger"
+            className="w-100 "
+            style={{
+              backgroundColor: "#343A40",
+              border: "none",
+              color: "#ffc107",
+            }}
+          >
             No internships available right now
           </Alert>
         ) : (
@@ -191,7 +203,9 @@ const AllInternships = () => {
                       {internship.location}
                     </Card.Subtitle>
                     <Card.Subtitle className="subsubtitleOfPost">
-                      {internship.industry} {internship.industry && internship.stream && ","} {internship.stream}
+                      {internship.industry}{" "}
+                      {internship.industry && internship.stream && ","}{" "}
+                      {internship.stream}
                     </Card.Subtitle>
                     <Card.Text className="textPost">
                       {internship.description}
@@ -231,4 +245,4 @@ const AllInternships = () => {
     </div>
   );
 };
-export default AllInternships;
+export default InternshipsByLocation;

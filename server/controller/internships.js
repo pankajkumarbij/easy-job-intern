@@ -11,6 +11,10 @@ exports.createInternship = (req, res) => {
     lastDate,
     startDate,
     endDate,
+    industry,
+    stream,
+    role,
+    vacancies
   } = req.body;
   const user = req.user;
 
@@ -23,7 +27,11 @@ exports.createInternship = (req, res) => {
     !lastDate ||
     !startDate ||
     !endDate ||
-    !duration
+    !duration ||
+    !industry ||
+    !stream ||
+    !role ||
+    !vacancies
   ) {
     return res.json({ error: "Please add all fields" });
   }
@@ -46,8 +54,12 @@ exports.createInternship = (req, res) => {
     duration,
     startDate,
     endDate,
+    industry,
+    stream,
     techstack: techStackArray,
     createdBy: user,
+    role,
+    vacancies
   });
 
   // console.log(internship);
@@ -86,6 +98,10 @@ exports.updateInternship = (req, res) => {
     lastDate,
     startDate,
     endDate,
+    industry,
+    stream,
+    role,
+    vacancies
   } = req.body;
 
   Internship.findById(postId)
@@ -115,6 +131,18 @@ exports.updateInternship = (req, res) => {
       }
       if (endDate) {
         internship.endDate = endDate;
+      }
+      if (industry) {
+        internship.industry = industry;
+      }
+      if (stream) {
+        internship.stream = stream;
+      }
+      if (role) {
+        internship.role = role;
+      }
+      if(vacancies){
+        internship.vacancies = vacancies;
       }
 
       internship
@@ -159,4 +187,119 @@ exports.deleteInternship = (req, res) => {
       console.log(err);
       res.status(500).json({ error: "Something went wrong!" });
     });
+};
+
+exports.searchFilterInternships = async (req, res) => {
+  const match = {};
+  if (req.query.location) {
+    match.location = req.query.location;
+  }
+  if (req.query.duration) {
+    match.duration = req.query.duration;
+  }
+  if (req.query.companyName) {
+    match.companyName = req.query.companyName;
+  }
+  if (req.query.techstack) {
+    match.techstack = { $in: req.query.techstack };
+  }
+  if (req.query.startDate) {
+    const date = new Date(req.query.startDate).toISOString();
+    match.startDate = date;
+  }
+  if(req.query.role){
+    match.role = req.query.role 
+  }
+  if(req.query.vacancies){
+    match.vacancies = req.query.vacancies 
+  }
+  try{
+    const internships = await Internship.find(match);
+    res.status(200).send({ internships: internships });
+  } catch (e) {
+    return res.status(400).send("something went wrong");
+  }
+  // const internship = await Internship.find({ techstack: { $in: match.techstack }, 'location': 'l2'})
+};
+
+exports.searchInternship = async (req, res) => {
+  const match = { createdBy: req.user._id };
+  if (req.query.stipend) {
+    match.stipend = req.query.stipend;
+  }
+  if (req.query.techstack) {
+    match.techstack = { $in: req.query.techstack };
+  }
+  if (req.query.duration) {
+    match.duration = req.query.duration;
+  }
+  if (req.query.startDate) {
+    const date = new Date(req.query.startDate).toISOString();
+    match.startDate = date;
+  }
+  if(req.query.role){
+    match.role = req.query.role 
+  }
+  if(req.query.vacancies){
+    match.vacancies = req.query.vacancies 
+  }
+  
+  try{
+    const internships = await Internship.find(match).populate("createdBy", "_id personName").sort("-createdAt")
+    if(internships.length===0){
+      return res.status(200).send({message: "No internships found"})
+    }
+    res.status(200).send(internships);
+    } catch (e) {
+    res.status(400).send("Something went wrong");
+  }
+};
+
+exports.getInternshipsByLocation = (req, res) => {
+  const { location } = req.params;
+
+  if (!location) {
+    res.status(422).json({ error: "Please fill loction" });
+  }
+
+  Internship.find({ location: location })
+    .populate("createdBy", "_id personName")
+    .sort("-createdAt")
+    .then((internships) => {
+      res.json({ internships: internships });
+    });
+};
+
+exports.getInternshipsByIndustry = (req, res) => {
+  const { industry } = req.params;
+
+  if (!industry) {
+    res.status(422).json({ error: "Please fill loction" });
+  }
+
+  Internship.find({ industry: industry })
+    .populate("createdBy", "_id personName")
+    .sort("-createdAt")
+    .then((internships) => {
+      console.log(internships);
+      res.json({ internships: internships });
+    });
+
+};
+
+exports.getInternshipsByStream = (req, res) => {
+  const { stream } = req.params;
+
+  if (!stream) {
+    res.status(422).json({ error: "Please fill loction" });
+  }
+
+  Internship.find({ stream: stream })
+    .populate("createdBy", "_id personName")
+    .sort("-createdAt")
+    .then((internships) => {
+      console.log(internships);
+      res.json({ internships: internships });
+    });
+
 };

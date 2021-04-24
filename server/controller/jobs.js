@@ -9,7 +9,9 @@ exports.createJob = (req, res) => {
     techstack,
     lastDate,
     startDate,
-    experience
+    experience,
+    role,
+    vacancies,
   } = req.body;
   const user = req.user;
 
@@ -21,7 +23,9 @@ exports.createJob = (req, res) => {
     !techstack ||
     !lastDate ||
     !startDate ||
-    !experience
+    !experience ||
+    !role ||
+    !vacancies
   ) {
     return res.json({ error: "Please add all fields" });
   }
@@ -40,6 +44,8 @@ exports.createJob = (req, res) => {
     experience,
     techstack: techStackArray,
     createdBy: user,
+    role,
+    vacancies,
   });
 
   // console.log(internship);
@@ -78,6 +84,8 @@ exports.updateJob = (req, res) => {
     lastDate,
     startDate,
     experience,
+    role,
+    vacancies
   } = req.body;
 
   Job.findById(postId)
@@ -107,6 +115,12 @@ exports.updateJob = (req, res) => {
       }
       if (experience) {
         job.experience = experience;
+      }
+      if (role) {
+        job.role = role;
+      }
+      if (vacancies) {
+        job.vacancies = vacancies;
       }
 
       job
@@ -138,3 +152,86 @@ exports.deleteJob = (req, res) => {
       res.status(500).json({ error: "Something went wrong!" });
     });
 };
+
+exports.getJobValues = (req, res) => {
+  const { postId } = req.params;
+  Job.findById(postId)
+    .then((job) => {
+      if (!job) {
+        return res.status(400).json({ error: "Job does not exists" });
+      }
+      res.json({ job: job });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Something went wrong!" });
+    });
+};
+
+
+exports.searchJob = async(req, res) => {
+  const match = {createdBy: req.user._id}
+  if (req.query.id) {
+    match._id = req.query.id
+  }
+  if (req.query.techstack) {
+    match.techstack = { $in: req.query.techstack }
+  }
+  if (req.query.salary) {
+    match.salary = req.query.salary 
+  }
+  if (req.query.startDate) {
+    const date = new Date(req.query.startDate).toISOString()
+    match.startDate = date
+  }
+  if(req.query.role){
+    match.role = req.query.role 
+  }
+  if(req.query.vacancies){
+    match.vacancies = req.query.vacancies 
+  }
+  const jobs = await Job.find(match).populate("createdBy", "_id personName").sort("-createdAt")
+  try{
+    if(jobs.length===0){
+      return res.status(200).send({message: "No jobs found"})
+    }
+    res.status(200).send(jobs)
+  }
+  catch(e){
+    res.status(400).send('Something went wrong')
+  }
+}
+  
+exports.searchFilterJobs = async(req, res) => {
+  const match = {}
+  if(req.query.location){
+    match.location = req.query.location 
+  }
+  if(req.query.experience){
+    match.experience = req.query.experience 
+  }
+  if(req.query.companyName){
+    match.companyName = req.query.companyName 
+  }
+  if(req.query.techstack){
+    match.techstack = { $in: req.query.techstack }
+  }
+  if(req.query.startDate){
+    const date = new Date(req.query.startDate).toISOString()
+    match.startDate = date
+  }
+  if(req.query.role){
+    match.role = req.query.role 
+  }
+  if(req.query.vacancies){
+    match.vacancies = req.query.vacancies 
+  }
+  const jobs = await Job.find(match)
+  try{
+    res.status(200).send({ jobs: jobs });
+  }
+  catch(e){
+    return res.status(400).send('something went wrong')
+  }
+}
+

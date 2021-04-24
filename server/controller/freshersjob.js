@@ -9,6 +9,8 @@ exports.createFreshersJob = (req, res) => {
     techstack,
     lastDate,
     startDate,
+    role,
+    vacancies
   } = req.body;
   const user = req.user;
 
@@ -19,7 +21,9 @@ exports.createFreshersJob = (req, res) => {
     !salary ||
     !techstack ||
     !lastDate ||
-    !startDate
+    !startDate ||
+    !role ||
+    !vacancies
   ) {
     return res.json({ error: "Please add all fields" });
   }
@@ -35,6 +39,8 @@ exports.createFreshersJob = (req, res) => {
     startDate,
     techstack: techStackArray,
     createdBy: user,
+    role,
+    vacancies
   });
 
   freshersjob
@@ -71,6 +77,8 @@ exports.updateFreshersJob = (req, res) => {
     duration,
     lastDate,
     startDate,
+    role,
+    vacancies
   } = req.body;
 
   Freshers.findById(postId)
@@ -97,6 +105,12 @@ exports.updateFreshersJob = (req, res) => {
       }
       if (startDate) {
         job.startDate = startDate;
+      }
+      if(role){
+        job.role = job.role 
+      }
+      if(vacancies){
+        job.vacancies = job.vacancies 
       }
 
       job
@@ -128,3 +142,84 @@ exports.deleteFreshersJob = (req, res) => {
       res.status(500).json({ error: "Something went wrong!" });
     });
 };
+
+exports.getFresherJobValues = (req, res) => {
+  const { postId } = req.params;
+  Freshers.findById(postId)
+    .then((job) => {
+      if (!job) {
+        return res.status(400).json({ error: "Fresher's Job does not exists" });
+      }
+      res.json({ job: job });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Something went wrong!" });
+    });
+};
+exports.searchFresherJob = async(req, res) => {
+  const match = {createdBy: req.user._id}
+  if (req.query.id) {
+    match._id = req.query.id
+  }
+  if (req.query.techstack) {
+    match.techstack = { $in: req.query.techstack }
+  }
+  if (req.query.salary) {
+    match.salary = req.query.salary 
+  }
+  if (req.query.startDate) {
+    const date = new Date(req.query.startDate).toISOString()
+    match.startDate = date
+  }
+  if(req.query.role){
+    match.role = req.query.role 
+  }
+  if(req.query.vacancies){
+    match.vacancies = req.query.vacancies 
+  }
+  const fresherJobs = await Freshers.find(match).populate("createdBy", "_id personName").sort("-createdAt")
+  try{
+    if(fresherJobs.length===0){
+      return res.status(200).send({message: "No Fresher jobs found"})
+    }
+    res.status(200).send(fresherJobs)
+  }
+  catch(e){
+    res.status(400).send('Something went wrong')
+  }
+}
+
+exports.searchFilterFreshersJobs = async(req, res) => {
+  const match = {}
+  if(req.query.location){
+    match.location = req.query.location 
+  }
+  if(req.query.lastDate){
+    const date = new Date(req.query.lastDate).toISOString()
+    match.lastDate = date
+  }
+  if(req.query.companyName){
+    match.companyName = req.query.companyName 
+  }
+  if(req.query.techstack){
+    match.techstack = { $in: req.query.techstack }
+  }
+  if(req.query.startDate){
+    const date = new Date(req.query.startDate).toISOString()
+    match.startDate = date
+  }
+  if(req.query.role){
+    match.role = req.query.role 
+  }
+  if(req.query.vacancies){
+    match.vacancies = req.query.vacancies 
+  }
+  const jobs = await Freshers.find(match)
+  try{
+    res.status(200).send({jobs});
+  }
+  catch(e){
+    return res.status(400).send('something went wrong')
+  }
+}
