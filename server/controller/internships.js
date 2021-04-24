@@ -270,7 +270,7 @@ exports.getInternshipsByLocation = (req, res) => {
     });
 };
 
-exports.getInternshipsByIdustry = (req, res) => {
+exports.getInternshipsByIndustry = (req, res) => {
   const { industry } = req.params;
 
   if (!industry) {
@@ -278,6 +278,23 @@ exports.getInternshipsByIdustry = (req, res) => {
   }
 
   Internship.find({ industry: industry })
+    .populate("createdBy", "_id personName")
+    .sort("-createdAt")
+    .then((internships) => {
+      console.log(internships);
+      res.json({ internships: internships });
+    });
+
+};
+
+exports.getInternshipsByStream = (req, res) => {
+  const { stream } = req.params;
+
+  if (!stream) {
+    res.status(422).json({ error: "Please fill loction" });
+  }
+
+  Internship.find({ stream: stream })
     .populate("createdBy", "_id personName")
     .sort("-createdAt")
     .then((internships) => {
