@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { signup, signin, update, logout, logoutAll , signupConfirm } = require("../controller/student.auth");
 const auth_student = require('../middleware/auth_student');
-const {searchFilterInternships, bookmarkInternship} = require("../controller/internships")
+const {searchFilterInternships, bookmarkInternship, getBookmarkedInternships} = require("../controller/internships")
 const {searchFilterJobs, bookmarkJob} = require("../controller/jobs")
 const {searchFilterFreshersJobs, bookmarkFresherJob} = require("../controller/freshersjob")
 
@@ -19,4 +19,5 @@ router.get('/confirm/:confirmationCode' , signupConfirm );
 router.post('/bookmarkInternship/:id', auth_student, bookmarkInternship)
 router.post('/bookmarkJob', auth_student, bookmarkJob)
 router.post('/bookmarkFresherJob', auth_student, bookmarkFresherJob)
+router.post('/getBookmarkedInternships', auth_student, getBookmarkedInternships)
 module.exports = router
