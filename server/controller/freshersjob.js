@@ -249,3 +249,39 @@ exports.bookmarkFresherJob = async(req, res) => {
     return res.status(400).send({message:"something went wrong"})
   }
 }
+
+exports.getBookmarkedFresherJobs = async(req, res) => {
+  try{
+    const fresherJobs = await Freshers.find({bookmarkedBy:req.user._id})
+    const _fresherJobs = []
+    fresherJobs.forEach((fresherJob) => {
+      const {techstack,
+        _id,
+        companyName,
+        description,
+        location,
+        salary,
+        role, 
+        vacancies,
+        startDate, 
+        lastDate, 
+        createdBy} = fresherJob
+      const obj = {techstack,
+        _id,
+        companyName,
+        description,
+        location,
+        salary,
+        role, 
+        vacancies,
+        startDate, 
+        lastDate, 
+        createdBy} 
+      _fresherJobs.push(obj) 
+    })
+    return res.status(200).send(_fresherJobs)
+  }
+  catch(e){
+    res.status(400).send({message: 'something went wrong!'})
+  }
+}
