@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import Button from "react-bootstrap/Button";
 import * as Icon from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
@@ -86,6 +87,19 @@ function Footer() {
         </div>
 
           {/* Footer Bottom */}
+          <div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-4 col-sm-12 col-xs-12">
+            <div class="card p-3 p-md-4 text-white"> <span><i class="fa fa-envelope-open-o fa-2x" aria-hidden="true"></i></span>
+                <h6 class="my-3"> Subscribe to the newsletter </h6>
+                <div class="row d-flex my-2 pr-2 pr-md-5 div1">
+                    <div class="col-9"> <input type="email" class="form-control py-3" id="inp1" placeholder="Enter email address"/> </div>
+                    <div class="col-3 px-0"> <button class="btn-newsletter text-white px-4 py-2"> OK </button> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
           <div className="row  mx-auto">
             <div className="col-sm-12 mt-md-2  my-2">
               <p style={{ fontSize: "15px", marginBottom: "5px" }}>
