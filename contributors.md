@@ -115,17 +115,4 @@
    <td></td>
    <td>50</td>
 </tr>
-
-<tr>
-   <td><a href='https://github.com/Vishruta-Patil'>Vishruta-Patil</a></td>
-   <td>
-        <ul>
-            <li><a href='https://github.com/pankajkumarbij/easy-job-intern/pull/287'>#287</a></li>
-        </ul>
-   </td>
-   <td></td>
-   <td></td>
-   <td></td>
-   <td>100</td>
-</tr>
 </table>
