@@ -31,6 +31,7 @@ import welcomeSignup from "./components/welcomeSignup/welcomeSignup";
 import welcomeSignupEmployer from "./components/welcomeSignup/welcomeSignupEmployer";
 import InternshipsByLocation from "./components/Internships/InternshipByLocation";
 import InternshipsByIndustry from "./components/Internships/InternshipByIndustry";
+import InternshipsByStream from "./components/Internships/InternshipByStream";
 
 export const UserContext = createContext();
 
@@ -129,8 +130,11 @@ const Routing = () => {
           <Route path="/location-internship/:location">
             <InternshipsByLocation />
           </Route>
-          <Route path="/location-internship/:location">
-            <InternshipsByLocation />
+          <Route path="/industry-internship/:industry">
+            <InternshipsByIndustry />
+          </Route>
+          <Route path="/stream-internship/:stream">
+            <InternshipsByStream />
           </Route>
           <Route path="/about-us" exact>
             <AboutUs />
@@ -181,7 +185,10 @@ const Routing = () => {
             <InternshipsByLocation />
           </Route>
           <Route path="/industry-internship/:industry">
-            <InternshipsByLocation />
+            <InternshipsByIndustry />
+          </Route>
+          <Route path="/stream-internship/:stream">
+            <InternshipsByStream />
           </Route>
           <Route component={Error} />
         </Switch>
@@ -222,6 +229,9 @@ const Routing = () => {
         </Route>
         <Route path="/industry-internship/:industry">
           <InternshipsByIndustry />
+        </Route>
+        <Route path="/stream-internship/:stream">
+          <InternshipsByStream />
         </Route>
         <Route
           path="/confirm/employer/:confirmationCode"

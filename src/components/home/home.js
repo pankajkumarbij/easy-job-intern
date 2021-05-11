@@ -153,46 +153,46 @@ const Home = () => {
                   Internship By Stream
                 </h4>
                 <ListGroup>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/stream-internship/Management">
                     <ListGroup.Item variant="primary">
                       Management
                     </ListGroup.Item>
                   </a>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/stream-internship/Manufacturing">
                     <ListGroup.Item action variant="secondary">
                       Manufacturing
                     </ListGroup.Item>
                   </a>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/stream-internship/Accounts">
                     {" "}
                     <ListGroup.Item action variant="success">
                       Accounts
                     </ListGroup.Item>
                   </a>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/stream-internship/Architecture">
                     {" "}
                     <ListGroup.Item action variant="danger">
                       Architecture
                     </ListGroup.Item>
                   </a>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/stream-internship/Machine Learning">
                     {" "}
                     <ListGroup.Item action variant="warning">
                       Machine Learning
                     </ListGroup.Item>{" "}
                   </a>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/stream-internship/Data Science">
                     {" "}
                     <ListGroup.Item action variant="info">
                       Data Science
                     </ListGroup.Item>{" "}
                   </a>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/stream-internship/Development">
                     <ListGroup.Item action variant="success">
                       Development
                     </ListGroup.Item>
                   </a>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/stream-internship/Design">
                     {" "}
                     <ListGroup.Item action variant="dark">
                       Design
