@@ -50,44 +50,44 @@ const Home = () => {
                   Internship By Industry
                 </h4>
                 <ListGroup>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/industry-internship/IT">
                     <ListGroup.Item variant="primary">IT</ListGroup.Item>
                   </a>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/industry-internship/Marketing">
                     <ListGroup.Item action variant="secondary">
                       Marketing
                     </ListGroup.Item>
                   </a>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/industry-internship/Design">
                     {" "}
                     <ListGroup.Item action variant="success">
                       Design
                     </ListGroup.Item>
                   </a>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/industry-internship/MBA">
                     {" "}
                     <ListGroup.Item action variant="danger">
                       MBA
                     </ListGroup.Item>
                   </a>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/industry-internship/Engineering">
                     {" "}
                     <ListGroup.Item action variant="warning">
                       Engineering
                     </ListGroup.Item>{" "}
                   </a>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/industry-internship/Media">
                     {" "}
                     <ListGroup.Item action variant="info">
                       Media
                     </ListGroup.Item>{" "}
                   </a>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/industry-internship/Teaching">
                     <ListGroup.Item action variant="success">
                       Teaching
                     </ListGroup.Item>
                   </a>
-                  <a className="itemLink" href="/#">
+                  <a className="itemLink" href="/industry-internship/Finance">
                     {" "}
                     <ListGroup.Item action variant="dark">
                       Finance

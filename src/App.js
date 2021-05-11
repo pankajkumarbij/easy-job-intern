@@ -30,7 +30,7 @@ import UpdateFresherJob from "./components/UpdateForm/FresherJobUpdate";
 import welcomeSignup from "./components/welcomeSignup/welcomeSignup";
 import welcomeSignupEmployer from "./components/welcomeSignup/welcomeSignupEmployer";
 import InternshipsByLocation from "./components/Internships/InternshipByLocation";
-
+import InternshipsByIndustry from "./components/Internships/InternshipByIndustry";
 
 export const UserContext = createContext();
 
@@ -126,7 +126,10 @@ const Routing = () => {
           <Route path="/all-freshersjobs" exact>
             <AllFreshersJobs />
           </Route>
-          <Route path="/location-internship/:location" >
+          <Route path="/location-internship/:location">
+            <InternshipsByLocation />
+          </Route>
+          <Route path="/location-internship/:location">
             <InternshipsByLocation />
           </Route>
           <Route path="/about-us" exact>
@@ -174,6 +177,12 @@ const Routing = () => {
           <Route path="/all-freshersjobs" exact>
             <AllFreshersJobs />
           </Route>
+          <Route path="/location-internship/:location">
+            <InternshipsByLocation />
+          </Route>
+          <Route path="/industry-internship/:industry">
+            <InternshipsByLocation />
+          </Route>
           <Route component={Error} />
         </Switch>
       );
@@ -208,8 +217,22 @@ const Routing = () => {
         <Route path="/terms-conditions" exact>
           <TermsCondition />
         </Route>
-      <Route path="/confirm/employer/:confirmationCode" component={welcomeSignupEmployer} exact/>
-      <Route path="/confirm/:confirmationCode" component={welcomeSignup} exact/>
+        <Route path="/location-internship/:location">
+          <InternshipsByLocation />
+        </Route>
+        <Route path="/industry-internship/:industry">
+          <InternshipsByIndustry />
+        </Route>
+        <Route
+          path="/confirm/employer/:confirmationCode"
+          component={welcomeSignupEmployer}
+          exact
+        />
+        <Route
+          path="/confirm/:confirmationCode"
+          component={welcomeSignup}
+          exact
+        />
         <Route component={Error} />
       </Switch>
     );
