@@ -80,9 +80,9 @@ exports.signin = async (req, res) => {
         catch(e){
             return res.json({error:"Invalid email or password"})
         }
-        if( savedUser.status != 'Active' ){
+        /*if( savedUser.status != 'Active' ){
             return res.json({message:"Pending Account. Please Verify Your Email!"})
-        }
+        }*/
         const {_id,personName,email,contact,branch,year,degree} = savedUser
         const token = await savedUser.generateAuthToken()
         return res.status(200).json( {message: 'SignIn successful', token,user:{_id,email,personName,contact,branch,year,degree}})                    
