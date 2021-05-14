@@ -83,6 +83,7 @@ function EmployerSignin() {
           console.log(res.data.error);
           // alert(res.data.error);
           // toast(res.data.error);
+          console.log(res.data.error);
           const notify = () => toast(res.data.error);
           notify();
         } else {

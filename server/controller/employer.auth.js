@@ -83,15 +83,16 @@ exports.signin = async(req, res) => {
     if(!req.body.email || !req.body.password){
         return res.json({error:"Please Add Email or Password"})
     }
+    let savedUser;
     try{
         savedUser = await Employer.findByCredentials(req.body.email, req.body.password)
     }
     catch(e){
         return res.json({error:"Invalid email or password"})
     }
-    if( savedUser.status != 'Active' ){
+    /*if( savedUser.status != 'Active' ){
       return res.json({message:"Pending Account. Please Verify Your Email!"})
-  }
+  }*/
     const { _id, personName, email, contact, companyName} = savedUser
     const token = await savedUser.generateAuthToken()
     return res.status(200).json( {token,user:{ _id, personName, email, contact, companyName}})                    

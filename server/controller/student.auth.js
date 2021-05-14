@@ -4,6 +4,9 @@ const {JWT_SECRET} = require('../keys');
 const auth_student = require('../middleware/auth_student.js');
 const Student = require("../models/student");
 const {signupEmailFunc} = require("../utils/signup-email");
+const Internship = require('../models/Internship')
+const Job = require('../models/Job')
+const fresherJob = require('../models/Freshers')
 
 
 exports.signup = async (req, res) => {
@@ -77,9 +80,9 @@ exports.signin = async (req, res) => {
         catch(e){
             return res.json({error:"Invalid email or password"})
         }
-        if( savedUser.status != 'Active' ){
+        /*if( savedUser.status != 'Active' ){
             return res.json({message:"Pending Account. Please Verify Your Email!"})
-        }
+        }*/
         const {_id,personName,email,contact,branch,year,degree} = savedUser
         const token = await savedUser.generateAuthToken()
         return res.status(200).json( {message: 'SignIn successful', token,user:{_id,email,personName,contact,branch,year,degree}})                    
@@ -135,5 +138,48 @@ exports.logoutAll = async( req, res ) => {
     }
     catch(e){
         res.status(500).send(e)
+    }
+}
+
+exports.deleteStudent = async(req, res) => {
+    try{
+        jobs = await Job.find({bookmarkedBy: req.user._id})
+        internships = await Internship.find({bookmarkedBy: req.user._id})
+        fresherJobs = await fresherJob.find({bookmarkedBy: req.user._id})
+        if(jobs){
+            jobs.forEach( async (job)=>{
+                const i = job.bookmarkedBy.indexOf(req.user._id)
+                if(i<0){   
+                    return res.status(200).send({message: "something went wrong!"})
+                }
+                job.bookmarkedBy.splice(i, 1)
+                await job.save()
+            }) 
+        }
+        if(internships){
+            internships.forEach( async (internship)=>{
+                const i = internship.bookmarkedBy.indexOf(req.user._id)
+                if(i<0){   
+                    return res.status(200).send({message: "something went wrong!"})
+                }
+                internship.bookmarkedBy.splice(i, 1)
+                await internship.save()
+            })
+        }
+        if(fresherJobs){
+            fresherJobs.forEach( async (fresherJob)=>{
+                const i = fresherJob.bookmarkedBy.indexOf(req.user._id)
+                if(i<0){   
+                    return res.status(200).send({message: "something went wrong!"})
+                }
+                fresherJob.bookmarkedBy.splice(i, 1)
+                await fresherJob.save()
+            })
+        }
+        await req.user.remove()
+        res.send({message: "student profile deleted!"})
+    }
+    catch(e){
+        res.send({message: "something went wrong!"})
     }
 }

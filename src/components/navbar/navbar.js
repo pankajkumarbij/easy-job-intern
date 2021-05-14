@@ -16,7 +16,8 @@ import './navbar.css';
 
 function NavBar() {
   const { state } = useContext(UserContext);
-  if(state) console.log(state.user.personName);
+  // if(state) console.log(state.user.personName);
+  console.log(state);
   
   return (
     <>
