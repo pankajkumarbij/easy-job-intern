@@ -4,6 +4,9 @@ const auth_employer = require("../middleware/auth_employer");
 const { JWT_SECRET } = require("../keys");
 const Employer = require("../models/employer");
 const {signupEmailFunc} = require("../utils/signupEmployer-email");
+const Job = require("../models/Job")
+const Internship = require("../models/Internship")
+const fresherJob = require("../models/Freshers")
 
 exports.signup = async (req, res) => {
   const {
@@ -32,16 +35,15 @@ exports.signup = async (req, res) => {
       return res.json({ message: "User already exist" });
     }
     const token =  await jwt.sign({email: email}, JWT_SECRET );
-    bcrypt.hash(password, 10).then(async (hashedpassword) => {
-      const employer = new Employer({
-        companyName,
-        personName,
-        email,
-        contact,
-        password: hashedpassword,
-        status : 'Pending',
-        confirmationCode : token
-      });
+    const employer = new Employer({
+      companyName,
+      personName,
+      email,
+      contact,
+      password,
+      status : 'Pending',
+      confirmationCode : token
+    });
       //await email(name, email, mobile);
      await employer
         .save(signupEmailFunc(employer.personName ,employer.email , employer.confirmationCode   ) )
@@ -51,7 +53,6 @@ exports.signup = async (req, res) => {
         .catch((err) => {
           console.log(err);
         });
-    });
   });
 };
 
@@ -145,5 +146,36 @@ exports.update = async(req, res) => {
   }
   catch(e){
       res.status(400).send({error: 'something went werong!'})
+  }
+}
+
+exports.deleteEmployer = async(req, res) => {
+  try{
+      jobs = await Job.find({createdBy: req.user._id})
+      internships = await Internship.find({createdBy: req.user._id})
+      fresherJobs = await fresherJob.find({createdBy: req.user._id})
+      if(jobs){
+          console.log(jobs)
+          jobs.forEach( async (job)=>{
+              await job.remove()
+          }) 
+      }
+      if(internships){
+          console.log(internships)
+          internships.forEach( async (internship)=>{
+              await internship.remove()        
+          })
+      }
+      if(fresherJobs){
+          console.log(fresherJobs)
+          fresherJobs.forEach( async (fresherJob)=>{
+            await fresherJob.remove()  
+          })
+      }
+      await req.user.remove()
+      res.send({message: "employer profile deleted!"})
+  }
+  catch(e){
+      res.send({message: "something went wrong!"})
   }
 }
