@@ -5,7 +5,7 @@ const {
   getInternshipsByLocation,
   getInternshipsByIndustry,
   getInternshipsByStream,
-  getInternhsipsByIndutsries,
+  getInternshipsByLocations,
 } = require("../controller/internships");
 const { getAllJobs } = require("../controller/jobs");
 const { getAllFreshersJobs } = require("../controller/freshersjob");
@@ -19,6 +19,6 @@ router.get("/location-internship/:location", getInternshipsByLocation);
 router.get("/industry-internship/:industry", getInternshipsByIndustry);
 router.get("/stream-internship/:stream", getInternshipsByStream);
 
-router.get("/internship/industry", getInternhsipsByIndutsries);
+router.get("/internship/location", getInternshipsByLocations);
 
 module.exports = router;

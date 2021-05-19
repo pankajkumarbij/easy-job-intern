@@ -372,7 +372,7 @@ exports.getBookmarkedInternships = async (req, res) => {
   }
 };
 
-exports.getInternhsipsByIndutsries = (req, res) => {
+exports.getInternhsipsByLocations = (req, res) => {
   Internship.aggregate([
     {
       $group: {
