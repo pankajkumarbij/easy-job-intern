@@ -6,7 +6,9 @@ import {
   Dropdown,
   ListGroup,
   ListGroupItem,
-  Row,Spinner,Alert
+  Row,
+  Spinner,
+  Alert,
 } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { UserContext } from "../../App";
@@ -18,7 +20,7 @@ import "../Internships/AllInternships.css";
 const AllJobs = () => {
   const { state, dispatch } = useContext(UserContext);
   const [jobs, setJobs] = useState([]);
-  const [loading,setLoading]=useState(true)
+  const [loading, setLoading] = useState(true);
   // useEffect(() => {
   //   axios({
   //     method: "get",
@@ -57,7 +59,7 @@ const AllJobs = () => {
     })
       .then((res) => {
         console.log(res);
-        setLoading(false)
+        setLoading(false);
         if (res.data.error) {
           console.log(res.data.error);
           // alert(res.data.error);
@@ -71,7 +73,7 @@ const AllJobs = () => {
         }
       })
       .catch((err) => {
-        setLoading(false)
+        setLoading(false);
         console.log("Error: ", err);
       });
   }, [jobs]);
@@ -157,7 +159,15 @@ const AllJobs = () => {
             />
           </div>
         ) : jobs && !jobs.length > 0 ? (
-          <Alert variant="danger" className="w-100" style={{backgroundColor:"#343A40",border:"none",color:"#ffc107"}}>
+          <Alert
+            variant="danger"
+            className="w-100"
+            style={{
+              backgroundColor: "#343A40",
+              border: "none",
+              color: "#ffc107",
+            }}
+          >
             No Jobs available right now
           </Alert>
         ) : (
@@ -205,6 +215,11 @@ const AllJobs = () => {
                     </Card.Title>
                     <Card.Subtitle className="subtitleOfPost">
                       {job.location}
+                    </Card.Subtitle>
+                    <Card.Subtitle className="subsubtitleOfPost">
+                      {job.industry}{" "}
+                      {job.industry && job.stream && ","}{" "}
+                      {job.stream}
                     </Card.Subtitle>
                     <Card.Text className="textPost">
                       {job.description}
