@@ -3,8 +3,8 @@ const router = express.Router();
 const { signup, signin, update, logout, logoutAll , signupConfirm, deleteStudent } = require("../controller/student.auth");
 const auth_student = require('../middleware/auth_student');
 const {searchFilterInternships, bookmarkInternship, getBookmarkedInternships} = require("../controller/internships")
-const {searchFilterJobs, bookmarkJob, getBookmarkedJobs} = require("../controller/jobs")
-const {searchFilterFreshersJobs, bookmarkFresherJob, getBookmarkedFresherJobs} = require("../controller/freshersjob")
+const {searchFilterJobs, bookmarkJob, getBookmarkedJobs, searchBookmarkedJob} = require("../controller/jobs")
+const {searchFilterFreshersJobs, bookmarkFresherJob, getBookmarkedFresherJobs, searchBookmarkedFresherJob} = require("../controller/freshersjob")
 
 
 router.post("/signup", signup);
@@ -23,4 +23,6 @@ router.post('/getBookmarkedInternships', auth_student, getBookmarkedInternships)
 router.post('/getBookmarkedJobs', auth_student, getBookmarkedJobs)
 router.post('/getBookmarkedFresherJobs', auth_student, getBookmarkedFresherJobs)
 router.delete('/deleteStudent', auth_student, deleteStudent)
+router.get('/searchBookmarkedJob', auth_student, searchBookmarkedJob)
+router.get('/searchBookmarkedFresherJob', auth_student, searchBookmarkedFresherJob)
 module.exports = router
