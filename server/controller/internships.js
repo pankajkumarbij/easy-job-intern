@@ -388,3 +388,20 @@ exports.getInternhsipsByLocations = (req, res) => {
     res.json({ internships: internships });
   });
 };
+
+exports.getInternhsipsByStreams = (req, res) => {
+  Internship.aggregate([
+    {
+      $group: {
+        _id: "$stream",
+        internshisps: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $sort: { location: 1, createdAt: -1 },
+    },
+  ]).then((internships) => {
+    console.log(internships);
+    res.json({ internships: internships });
+  });
+};
