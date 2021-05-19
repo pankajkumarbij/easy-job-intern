@@ -398,7 +398,24 @@ exports.getInternhsipsByStreams = (req, res) => {
       },
     },
     {
-      $sort: { location: 1, createdAt: -1 },
+      $sort: { stream: 1, createdAt: -1 },
+    },
+  ]).then((internships) => {
+    console.log(internships);
+    res.json({ internships: internships });
+  });
+};
+
+exports.getInternhsipsByIndustries = (req, res) => {
+  Internship.aggregate([
+    {
+      $group: {
+        _id: "$industry",
+        internshisps: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $sort: { industry: 1, createdAt: -1 },
     },
   ]).then((internships) => {
     console.log(internships);
