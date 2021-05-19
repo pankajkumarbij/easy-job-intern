@@ -14,7 +14,7 @@ exports.createInternship = (req, res) => {
     industry,
     stream,
     role,
-    vacancies
+    vacancies,
   } = req.body;
   const user = req.user;
 
@@ -59,7 +59,7 @@ exports.createInternship = (req, res) => {
     techstack: techStackArray,
     createdBy: user,
     role,
-    vacancies
+    vacancies,
   });
 
   // console.log(internship);
@@ -101,7 +101,7 @@ exports.updateInternship = (req, res) => {
     industry,
     stream,
     role,
-    vacancies
+    vacancies,
   } = req.body;
 
   Internship.findById(postId)
@@ -141,7 +141,7 @@ exports.updateInternship = (req, res) => {
       if (role) {
         internship.role = role;
       }
-      if(vacancies){
+      if (vacancies) {
         internship.vacancies = vacancies;
       }
 
@@ -207,13 +207,13 @@ exports.searchFilterInternships = async (req, res) => {
     const date = new Date(req.query.startDate).toISOString();
     match.startDate = date;
   }
-  if(req.query.role){
-    match.role = req.query.role 
+  if (req.query.role) {
+    match.role = req.query.role;
   }
-  if(req.query.vacancies){
-    match.vacancies = req.query.vacancies 
+  if (req.query.vacancies) {
+    match.vacancies = req.query.vacancies;
   }
-  try{
+  try {
     const internships = await Internship.find(match);
     res.status(200).send({ internships: internships });
   } catch (e) {
@@ -237,20 +237,22 @@ exports.searchInternship = async (req, res) => {
     const date = new Date(req.query.startDate).toISOString();
     match.startDate = date;
   }
-  if(req.query.role){
-    match.role = req.query.role 
+  if (req.query.role) {
+    match.role = req.query.role;
   }
-  if(req.query.vacancies){
-    match.vacancies = req.query.vacancies 
+  if (req.query.vacancies) {
+    match.vacancies = req.query.vacancies;
   }
-  
-  try{
-    const internships = await Internship.find(match).populate("createdBy", "_id personName").sort("-createdAt")
-    if(internships.length===0){
-      return res.status(200).send({message: "No internships found"})
+
+  try {
+    const internships = await Internship.find(match)
+      .populate("createdBy", "_id personName")
+      .sort("-createdAt");
+    if (internships.length === 0) {
+      return res.status(200).send({ message: "No internships found" });
     }
     res.status(200).send(internships);
-    } catch (e) {
+  } catch (e) {
     res.status(400).send("Something went wrong");
   }
 };
@@ -284,7 +286,6 @@ exports.getInternshipsByIndustry = (req, res) => {
       console.log(internships);
       res.json({ internships: internships });
     });
-
 };
 
 exports.getInternshipsByStream = (req, res) => {
@@ -301,67 +302,89 @@ exports.getInternshipsByStream = (req, res) => {
       console.log(internships);
       res.json({ internships: internships });
     });
-
 };
 
-exports.bookmarkInternship = async(req, res) => {
-  try{
-    const bool = (req.body.bookmark === "true")
-    const internship = await Internship.findById(req.params.id)
-    if(bool){
-      if(!internship.bookmarkedBy.includes(req.user._id)){  //making sure that a user doesn't get appended to the list more than once
-        internship.bookmarkedBy.push(req.user._id)
-        await internship.save()
+exports.bookmarkInternship = async (req, res) => {
+  try {
+    const bool = req.body.bookmark === "true";
+    const internship = await Internship.findById(req.params.id);
+    if (bool) {
+      if (!internship.bookmarkedBy.includes(req.user._id)) {
+        //making sure that a user doesn't get appended to the list more than once
+        internship.bookmarkedBy.push(req.user._id);
+        await internship.save();
       }
-      return res.status(200).send({message: "bookmarked!"})
-    }
-    else{
-      const i = internship.bookmarkedBy.indexOf(req.user._id)
-      if(i<0){    //if user was not present in the bookmarkedBy list of internship
-        return res.status(200).send({message: "internship not found!"})
+      return res.status(200).send({ message: "bookmarked!" });
+    } else {
+      const i = internship.bookmarkedBy.indexOf(req.user._id);
+      if (i < 0) {
+        //if user was not present in the bookmarkedBy list of internship
+        return res.status(200).send({ message: "internship not found!" });
       }
-      internship.bookmarkedBy.splice(i, 1)
-      await internship.save()   
-      return res.status(200).send({message: "the internship is not included in your bookmarked list anymore!"})   
+      internship.bookmarkedBy.splice(i, 1);
+      await internship.save();
+      return res.status(200).send({
+        message:
+          "the internship is not included in your bookmarked list anymore!",
+      });
     }
+  } catch (e) {
+    return res.status(400).send({ message: "something went wrong" });
   }
-  catch(e){
-    return res.status(400).send({message:"something went wrong"})
-  }
-}
+};
 
-exports.getBookmarkedInternships = async(req, res) => {
-  try{
-    const internships = await Internship.find({bookmarkedBy:req.user._id})
-    const _internships = []
+exports.getBookmarkedInternships = async (req, res) => {
+  try {
+    const internships = await Internship.find({ bookmarkedBy: req.user._id });
+    const _internships = [];
     internships.forEach((internship) => {
-      const {techstack,
+      const {
+        techstack,
         _id,
         companyName,
         description,
         location,
-        stipend, 
+        stipend,
         lastDate,
-        duration, 
-        startDate, 
-        endDate, 
-        createdBy} = internship
-      const obj = {techstack,
+        duration,
+        startDate,
+        endDate,
+        createdBy,
+      } = internship;
+      const obj = {
+        techstack,
         _id,
         companyName,
         description,
         location,
-        stipend, 
+        stipend,
         lastDate,
-        duration, 
-        startDate, 
-        endDate, 
-        createdBy} 
-      _internships.push(obj) 
-    })
-    return res.status(200).send(_internships)
+        duration,
+        startDate,
+        endDate,
+        createdBy,
+      };
+      _internships.push(obj);
+    });
+    return res.status(200).send(_internships);
+  } catch (e) {
+    res.status(400).send("something went wrong!");
   }
-  catch(e){
-    res.status(400).send('something went wrong!')
-  }
-}
+};
+
+exports.getInternhsipsByIndutsries = (req, res) => {
+  Internship.aggregate([
+    {
+      $group: {
+        _id: "$location",
+        internshisps: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $sort: { location: 1, createdAt: -1 },
+    },
+  ]).then((internships) => {
+    console.log(internships);
+    res.json({ internships: internships });
+  });
+};
