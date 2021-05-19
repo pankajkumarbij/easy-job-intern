@@ -41,6 +41,24 @@ const NewFreshersJob = () => {
       valid: false,
       touched: false,
     },
+    stream: {
+      value: "",
+      validation: {
+        required: true,
+      },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
+    industry: {
+      value: "",
+      validation: {
+        required: true,
+      },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
     salary: {
       value: "",
       validation: {
@@ -94,7 +112,7 @@ const NewFreshersJob = () => {
       errorMessage: "",
       valid: false,
       touched: false,
-    }
+    },
   };
 
   const [formValues, setFormValues] = useState(initialState);
@@ -134,7 +152,9 @@ const NewFreshersJob = () => {
       lastDate,
       startDate,
       role,
-      vacancies
+      vacancies,
+      stream,
+      industry,
     } = formValues;
 
     axios({
@@ -150,6 +170,8 @@ const NewFreshersJob = () => {
         startDate: startDate.value,
         role: role.value,
         vacancies: vacancies.value,
+        stream: stream.value,
+        industry: industry.value,
       },
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -233,7 +255,7 @@ const NewFreshersJob = () => {
               <Form.Control
                 style={{ borderColor: "#ffc107", color: "#000000" }}
                 type="text"
-                placeholder="Enter Company Name"
+                placeholder="Enter Location"
                 name="location"
                 value={formValues.location.value}
                 onChange={handleChange}
@@ -241,6 +263,44 @@ const NewFreshersJob = () => {
               {formValues.location.errorMessage && (
                 <span className="error">
                   {formValues.location.errorMessage}
+                </span>
+              )}
+            </Form.Group>
+
+            <Form.Group
+              style={{ textAlign: "left" }}
+              controlId="formBasicEmail"
+            >
+              <Form.Label style={{ fontWeight: "bold" }}>Stream</Form.Label>
+              <Form.Control
+                style={{ borderColor: "#ffc107", color: "#000000" }}
+                type="text"
+                placeholder="Enter Stream"
+                name="stream"
+                value={formValues.stream.value}
+                onChange={handleChange}
+              />
+              {formValues.stream.errorMessage && (
+                <span className="error">{formValues.stream.errorMessage}</span>
+              )}
+            </Form.Group>
+
+            <Form.Group
+              style={{ textAlign: "left" }}
+              controlId="formBasicEmail"
+            >
+              <Form.Label style={{ fontWeight: "bold" }}>Industry</Form.Label>
+              <Form.Control
+                style={{ borderColor: "#ffc107", color: "#000000" }}
+                type="text"
+                placeholder="Enter Industry"
+                name="industry"
+                value={formValues.industry.value}
+                onChange={handleChange}
+              />
+              {formValues.industry.errorMessage && (
+                <span className="error">
+                  {formValues.industry.errorMessage}
                 </span>
               )}
             </Form.Group>
@@ -259,9 +319,7 @@ const NewFreshersJob = () => {
                 onChange={handleChange}
               />
               {formValues.role.errorMessage && (
-                <span className="error">
-                  {formValues.role.errorMessage}
-                </span>
+                <span className="error">{formValues.role.errorMessage}</span>
               )}
             </Form.Group>
 
@@ -367,7 +425,7 @@ const NewFreshersJob = () => {
               )}
             </Form.Group>
 
-            <Form.Group 
+            <Form.Group
               style={{ textAlign: "left" }}
               controlId="formBasicEmail"
             >
@@ -381,7 +439,9 @@ const NewFreshersJob = () => {
                 onChange={handleChange}
               />
               {formValues.vacancies.errorMessage && (
-                <span className="error">{formValues.vacancies.errorMessage}</span>
+                <span className="error">
+                  {formValues.vacancies.errorMessage}
+                </span>
               )}
             </Form.Group>
 
