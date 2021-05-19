@@ -5,3 +5,57 @@
     transform: translateY(-2px);
     transition:0.3s;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600&display=swap');
+
+html,
+body {
+    height: 100%
+}
+
+* {
+    padding: 0px;
+    margin: 0px
+}
+
+body {
+    background-color: #dde3fb;
+    display: grid;
+    place-items: center
+}
+
+.card {
+    background-color: #222222;
+    border-radius: 10px;
+    font-family: 'Manrope', sans-serif
+}
+
+.fa {
+    color: #d9d5d5
+}
+
+#inp1 {
+    background-color: #222222;
+    border: 1px solid #636161;
+    font-size: 0.75rem
+}
+
+#inp1:focus {
+    outline: none;
+    box-shadow: none
+}
+
+.btn-newsletter {
+    background-color: #5c72d8;
+    font-size: 0.78rem;
+    border: 0px
+}
+
+.btn-newsletter:focus {
+    outline: none;
+    box-shadow: none
+}
+
+*:focus {
+    outline: none
+}

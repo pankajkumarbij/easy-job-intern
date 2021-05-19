@@ -6,7 +6,8 @@ const {
   logout,
   logoutAll,
   signupConfirm,
-  update
+  update,
+  deleteEmployer
 } = require("../controller/employer.auth");
 
 const { createFreshersJob, updateFreshersJob, deleteFreshersJob, searchFresherJob, getFresherJobValues } = require("../controller/freshersjob");
@@ -42,7 +43,7 @@ router.get('/searchInternship', auth_employer, searchInternship)
 router.get('/searchJob', auth_employer, searchJob)
 router.get('/searchFresherJob', auth_employer, searchFresherJob)
 router.get('/confirm/:confirmationCode' , signupConfirm );
-
+router.delete('/deleteEmployer', auth_employer, deleteEmployer)
 
 
 

@@ -29,6 +29,24 @@ const UpdateJob = () => {
       valid: false,
       touched: false,
     },
+    stream: {
+      value: null,
+      //   validation: {
+      //     required: true,
+      //   },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
+    industry: {
+      value: null,
+      //   validation: {
+      //     required: true,
+      //   },
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
     salary: {
       value: null,
       //   validation: {
@@ -137,6 +155,8 @@ const UpdateJob = () => {
       lastDate,
       startDate,
       experience,
+      stream,
+      industry,
     } = formValues;
 
     axios({
@@ -151,6 +171,8 @@ const UpdateJob = () => {
         lastDate: lastDate.value,
         startDate: startDate.value,
         experience: experience.value,
+        stream: stream.value,
+        industry: industry.value,
       },
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -222,6 +244,44 @@ const UpdateJob = () => {
                 {formValues.location.errorMessage && (
                   <span className="error">
                     {formValues.location.errorMessage}
+                  </span>
+                )}
+              </Form.Group>
+              <Form.Group
+                style={{ textAlign: "left" }}
+                controlId="formBasicEmail"
+              >
+                <Form.Label style={{ fontWeight: "bold" }}>Stream</Form.Label>
+                <Form.Control
+                  style={{ borderColor: "#ffc107", color: "#000000" }}
+                  type="text"
+                  placeholder="Enter Stream"
+                  name="stream"
+                  value={formValues.stream.value || job.stream}
+                  onChange={handleChange}
+                />
+                {formValues.stream.errorMessage && (
+                  <span className="error">
+                    {formValues.stream.errorMessage}
+                  </span>
+                )}
+              </Form.Group>
+              <Form.Group
+                style={{ textAlign: "left" }}
+                controlId="formBasicEmail"
+              >
+                <Form.Label style={{ fontWeight: "bold" }}>Industry</Form.Label>
+                <Form.Control
+                  style={{ borderColor: "#ffc107", color: "#000000" }}
+                  type="text"
+                  placeholder="Enter Industry"
+                  name="industry"
+                  value={formValues.industry.value || job.industry}
+                  onChange={handleChange}
+                />
+                {formValues.industry.errorMessage && (
+                  <span className="error">
+                    {formValues.industry.errorMessage}
                   </span>
                 )}
               </Form.Group>
