@@ -7,7 +7,8 @@ import {
   ListGroup,
   ListGroupItem,
   Row,
-  Spinner,Alert
+  Spinner,
+  Alert,
 } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { UserContext } from "../../App";
@@ -129,7 +130,17 @@ const AllFreshersJobs = () => {
             />
           </div>
         ) : freshersJobs && !freshersJobs.length > 0 ? (
-          <Alert variant="danger" className='w-100' style={{backgroundColor:"#343A40",border:"none",color:"#ffc107"}}>No Fresher Jobs available right now</Alert>
+          <Alert
+            variant="danger"
+            className="w-100"
+            style={{
+              backgroundColor: "#343A40",
+              border: "none",
+              color: "#ffc107",
+            }}
+          >
+            No Fresher Jobs available right now
+          </Alert>
         ) : (
           freshersJobs &&
           freshersJobs.map((fresher) => {
@@ -175,6 +186,11 @@ const AllFreshersJobs = () => {
                     </Card.Title>
                     <Card.Subtitle className="subtitleOfPost">
                       {fresher.location}
+                    </Card.Subtitle>
+                    <Card.Subtitle className="subsubtitleOfPost">
+                      {fresher.industry}{" "}
+                      {fresher.industry && fresher.stream && ","}{" "}
+                      {fresher.stream}
                     </Card.Subtitle>
                     <Card.Text className="textPost">
                       {fresher.description}
