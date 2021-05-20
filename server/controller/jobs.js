@@ -348,3 +348,20 @@ exports.getJobsByStreams = (req, res) => {
     res.json({ jobs: jobs });
   });
 };
+
+exports.getJobsByIndustries = (req, res) => {
+  Job.aggregate([
+    {
+      $group: {
+        _id: "$industry",
+        jobs: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $sort: { industry: 1, createdAt: -1 },
+    },
+  ]).then((jobs) => {
+    console.log(jobs);
+    res.json({ jobs: jobs });
+  });
+};
