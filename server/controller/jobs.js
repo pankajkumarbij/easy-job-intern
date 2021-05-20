@@ -267,11 +267,9 @@ exports.bookmarkJob = async (req, res) => {
       }
       job.bookmarkedBy.splice(i, 1);
       await job.save();
-      return res
-        .status(200)
-        .send({
-          message: "the job is not included in your bookmarked list anymore!",
-        });
+      return res.status(200).send({
+        message: "the job is not included in your bookmarked list anymore!",
+      });
     }
   } catch (e) {
     return res.status(400).send({ message: "something went wrong" });
@@ -315,4 +313,21 @@ exports.getBookmarkedJobs = async (req, res) => {
   } catch (e) {
     res.status(400).send({ message: "something went wrong!" });
   }
+};
+
+exports.getJobsByLocations = (req, res) => {
+  Job.aggregate([
+    {
+      $group: {
+        _id: "$location",
+        jobs: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $sort: { location: 1, createdAt: -1 },
+    },
+  ]).then((jobs) => {
+    console.log(jobs);
+    res.json({ jobs: jobs });
+  });
 };

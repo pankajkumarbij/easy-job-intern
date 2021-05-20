@@ -9,7 +9,7 @@ const {
   getInternhsipsByStreams,
   getInternhsipsByIndustries,
 } = require("../controller/internships");
-const { getAllJobs } = require("../controller/jobs");
+const { getAllJobs, getJobsByLocations } = require("../controller/jobs");
 const { getAllFreshersJobs } = require("../controller/freshersjob");
 const auth_employer = require("../middleware/auth_employer");
 
@@ -24,5 +24,7 @@ router.get("/stream-internship/:stream", getInternshipsByStream);
 router.get("/internship/location", getInternhsipsByLocations);
 router.get("/internship/stream", getInternhsipsByStreams);
 router.get("/internship/industry", getInternhsipsByIndustries);
+
+router.get("/job/location", getJobsByLocations);
 
 module.exports = router;
