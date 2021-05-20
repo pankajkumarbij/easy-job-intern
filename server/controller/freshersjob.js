@@ -306,3 +306,21 @@ exports.getBookmarkedFresherJobs = async (req, res) => {
     res.status(400).send({ message: "something went wrong!" });
   }
 };
+
+
+exports.getFreshersJobsByLocations = (req, res) => {
+  Freshers.aggregate([
+    {
+      $group: {
+        _id: "$location",
+        freshersJobs: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $sort: { location: 1, createdAt: -1 },
+    },
+  ]).then((freshersJobs) => {
+    console.log(freshersJobs);
+    res.json({ freshersJobs: freshersJobs });
+  });
+};
