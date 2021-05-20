@@ -341,3 +341,20 @@ exports.getFreshersJobsByStreams = (req, res) => {
     res.json({ freshersjobs: freshersjobs });
   });
 };
+
+exports.getFreshersJobsByIndustries = (req, res) => {
+  Freshers.aggregate([
+    {
+      $group: {
+        _id: "$industry",
+        freshersjobs: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $sort: { industry: 1, createdAt: -1 },
+    },
+  ]).then((freshersjobs) => {
+    console.log(freshersjobs);
+    res.json({ freshersjobs: freshersjobs });
+  });
+};
