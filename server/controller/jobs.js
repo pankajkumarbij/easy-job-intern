@@ -331,3 +331,20 @@ exports.getJobsByLocations = (req, res) => {
     res.json({ jobs: jobs });
   });
 };
+
+exports.getJobsByStreams = (req, res) => {
+  Job.aggregate([
+    {
+      $group: {
+        _id: "$stream",
+        jobs: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $sort: { stream: 1, createdAt: -1 },
+    },
+  ]).then((jobs) => {
+    console.log(jobs);
+    res.json({ jobs: jobs });
+  });
+};
