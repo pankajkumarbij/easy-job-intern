@@ -42,7 +42,7 @@ function NavBar() {
                     {" "}
                     Internship By Industry
                   </Dropdown.Item>
-                  <Dropdown.Item as={Link} to="/">
+                  <Dropdown.Item as={Link} to="/internship/location">
                     {" "}
                     Internship By Location
                   </Dropdown.Item>

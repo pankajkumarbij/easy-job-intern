@@ -32,6 +32,7 @@ import welcomeSignupEmployer from "./components/welcomeSignup/welcomeSignupEmplo
 import InternshipsByLocation from "./components/Internships/InternshipByLocation";
 import InternshipsByIndustry from "./components/Internships/InternshipByIndustry";
 import InternshipsByStream from "./components/Internships/InternshipByStream";
+import InternshipsGroupedByLocation from "./components/Internships/InternshipsGroupedByLoction";
 
 export const UserContext = createContext();
 
@@ -126,6 +127,9 @@ const Routing = () => {
           </Route>
           <Route path="/all-freshersjobs" exact>
             <AllFreshersJobs />
+          </Route>
+          <Route path="/internship/location">
+            <InternshipsGroupedByLocation />
           </Route>
           <Route path="/location-internship/:location">
             <InternshipsByLocation />
