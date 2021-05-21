@@ -422,3 +422,35 @@ exports.getInternhsipsByIndustries = (req, res) => {
     res.json({ internships: internships });
   });
 };
+
+
+exports.searchBookmarkedInternship = async (req, res) => {
+  const match = {};
+  match.bookmarkedBy = req.user._id;
+  if (req.query.techstack) {
+    match.techstack = { $in: req.query.techstack };
+  }
+  if (req.query.duration) {
+    match.duration = req.query.duration;
+  }
+  if (req.query.startDate) {
+    const date = new Date(req.query.startDate).toISOString();
+    match.startDate = date;
+  }
+  if(req.query.role){
+    match.role = req.query.role 
+  }
+  if(req.query.vacancies){
+    match.vacancies = req.query.vacancies 
+  }
+  
+  try{
+    const internships = await Internship.find(match).populate("createdBy", "_id personName").sort("-createdAt")
+    if(internships.length===0){
+      return res.status(200).send({message: "No internships found"})
+    }
+    res.status(200).send(internships);
+    } catch (e) {
+    res.status(400).send("Something went wrong");
+  }
+};

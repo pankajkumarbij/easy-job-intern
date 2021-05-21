@@ -307,6 +307,7 @@ exports.getBookmarkedFresherJobs = async (req, res) => {
   }
 };
 
+
 exports.searchBookmarkedFresherJob = async (req, res) => {
   const match = {};
   match.bookmarkedBy = req.user._id;
@@ -336,4 +337,55 @@ exports.searchBookmarkedFresherJob = async (req, res) => {
     } catch (e) {
     res.status(400).send({message:"Something went wrong"});
   }
+};
+
+exports.getFreshersJobsByLocations = (req, res) => {
+  Freshers.aggregate([
+    {
+      $group: {
+        _id: "$location",
+        freshersJobs: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $sort: { location: 1, createdAt: -1 },
+    },
+  ]).then((freshersJobs) => {
+    console.log(freshersJobs);
+    res.json({ freshersJobs: freshersJobs });
+  });
+};
+
+exports.getFreshersJobsByStreams = (req, res) => {
+  Freshers.aggregate([
+    {
+      $group: {
+        _id: "$stream",
+        freshersjobs: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $sort: { stream: 1, createdAt: -1 },
+    },
+  ]).then((freshersjobs) => {
+    console.log(freshersjobs);
+    res.json({ freshersjobs: freshersjobs });
+  });
+};
+
+exports.getFreshersJobsByIndustries = (req, res) => {
+  Freshers.aggregate([
+    {
+      $group: {
+        _id: "$industry",
+        freshersjobs: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $sort: { industry: 1, createdAt: -1 },
+    },
+  ]).then((freshersjobs) => {
+    console.log(freshersjobs);
+    res.json({ freshersjobs: freshersjobs });
+  });
 };
