@@ -34,6 +34,7 @@ import InternshipsByIndustry from "./components/Internships/InternshipByIndustry
 import InternshipsByStream from "./components/Internships/InternshipByStream";
 import InternshipsGroupedByLocation from "./components/Internships/InternshipsGroupedByLoction";
 import InternshipsGroupedByStream from "./components/Internships/InternshipGroupedByStream";
+import InternshipsGroupedByIndustry from "./components/Internships/InternshipsGroupedByIndustry";
 
 export const UserContext = createContext();
 
@@ -134,6 +135,9 @@ const Routing = () => {
           </Route>
           <Route path="/internship/stream">
             <InternshipsGroupedByStream />
+          </Route>
+          <Route path="/internship/industry">
+            <InternshipsGroupedByIndustry />
           </Route>
           <Route path="/location-internship/:location">
             <InternshipsByLocation />
