@@ -377,11 +377,11 @@ exports.getInternhsipsByLocations = (req, res) => {
     {
       $group: {
         _id: "$location",
-        internshisps: { $push: "$$ROOT" },
+        internships: { $push: "$$ROOT" },
       },
     },
     {
-      $sort: { location: 1, createdAt: -1 },
+      $sort: { _id: 1 },
     },
   ]).then((internships) => {
     console.log(internships);
@@ -394,11 +394,11 @@ exports.getInternhsipsByStreams = (req, res) => {
     {
       $group: {
         _id: "$stream",
-        internshisps: { $push: "$$ROOT" },
+        internships: { $push: "$$ROOT" },
       },
     },
     {
-      $sort: { stream: 1, createdAt: -1 },
+      $sort: { _id: 1 },
     },
   ]).then((internships) => {
     console.log(internships);
@@ -411,11 +411,11 @@ exports.getInternhsipsByIndustries = (req, res) => {
     {
       $group: {
         _id: "$industry",
-        internshisps: { $push: "$$ROOT" },
+        internships: { $push: "$$ROOT" },
       },
     },
     {
-      $sort: { industry: 1, createdAt: -1 },
+      $sort: { _id: 1 },
     },
   ]).then((internships) => {
     console.log(internships);

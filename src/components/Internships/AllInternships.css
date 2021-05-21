@@ -98,3 +98,16 @@ body, html{
 .optionsMenuIcon{
     color: #fff !important;
 }
+.parameter{
+    color: white;
+    width: 100%;
+    background: #d6c20a;
+    border-radius: 10px;
+    text-decoration: none !important;
+    padding: 10px;
+    font-size: 2.5rem;
+    margin: 30px 0 !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #595661
+}
