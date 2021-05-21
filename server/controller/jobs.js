@@ -267,11 +267,9 @@ exports.bookmarkJob = async (req, res) => {
       }
       job.bookmarkedBy.splice(i, 1);
       await job.save();
-      return res
-        .status(200)
-        .send({
-          message: "the job is not included in your bookmarked list anymore!",
-        });
+      return res.status(200).send({
+        message: "the job is not included in your bookmarked list anymore!",
+      });
     }
   } catch (e) {
     return res.status(400).send({ message: "something went wrong" });
@@ -315,4 +313,87 @@ exports.getBookmarkedJobs = async (req, res) => {
   } catch (e) {
     res.status(400).send({ message: "something went wrong!" });
   }
+};
+
+
+exports.searchBookmarkedJob = async (req, res) => {
+  const match = {};
+  match.bookmarkedBy = req.user._id;
+  if (req.query.techstack) {
+    match.techstack = { $in: req.query.techstack };
+  }
+  if (req.query.duration) {
+    match.duration = req.query.duration;
+  }
+  if (req.query.salary) {
+    const date = new Date(req.query.startDate).toISOString();
+    match.startDate = date;
+  }
+  if(req.query.role){
+    match.role = req.query.role 
+  }
+  if(req.query.vacancies){
+    match.vacancies = req.query.vacancies 
+  }
+  
+  try{
+    const jobs = await Job.find(match).populate("createdBy", "_id personName").sort("-createdAt")
+    if(jobs.length===0){
+      return res.status(200).send({message: "No jobs found"})
+    }
+    res.status(200).send(jobs);
+    } catch (e) {
+    res.status(400).send({message:"Something went wrong"});
+  }
+};
+
+exports.getJobsByLocations = (req, res) => {
+  Job.aggregate([
+    {
+      $group: {
+        _id: "$location",
+        jobs: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $sort: { location: 1, createdAt: -1 },
+    },
+  ]).then((jobs) => {
+    console.log(jobs);
+    res.json({ jobs: jobs });
+  });
+};
+
+exports.getJobsByStreams = (req, res) => {
+  Job.aggregate([
+    {
+      $group: {
+        _id: "$stream",
+        jobs: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $sort: { stream: 1, createdAt: -1 },
+    },
+  ]).then((jobs) => {
+    console.log(jobs);
+    res.json({ jobs: jobs });
+  });
+};
+
+exports.getJobsByIndustries = (req, res) => {
+  Job.aggregate([
+    {
+      $group: {
+        _id: "$industry",
+        jobs: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $sort: { industry: 1, createdAt: -1 },
+    },
+  ]).then((jobs) => {
+    console.log(jobs);
+    res.json({ jobs: jobs });
+  });
 };

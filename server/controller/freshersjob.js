@@ -306,3 +306,86 @@ exports.getBookmarkedFresherJobs = async (req, res) => {
     res.status(400).send({ message: "something went wrong!" });
   }
 };
+
+
+exports.searchBookmarkedFresherJob = async (req, res) => {
+  const match = {};
+  match.bookmarkedBy = req.user._id;
+  if (req.query.techstack) {
+    match.techstack = { $in: req.query.techstack };
+  }
+  if (req.query.duration) {
+    match.duration = req.query.duration;
+  }
+  if (req.query.salary) {
+    const date = new Date(req.query.startDate).toISOString();
+    match.startDate = date;
+  }
+  if(req.query.role){
+    match.role = req.query.role 
+  }
+  if(req.query.vacancies){
+    match.vacancies = req.query.vacancies 
+  }
+  
+  try{
+    const fresherJobs = await Freshers.find(match).populate("createdBy", "_id personName").sort("-createdAt")
+    if(fresherJobs.length===0){
+      return res.status(200).send({message: "No fresher jobs found"})
+    }
+    res.status(200).send(fresherJobs);
+    } catch (e) {
+    res.status(400).send({message:"Something went wrong"});
+  }
+};
+
+exports.getFreshersJobsByLocations = (req, res) => {
+  Freshers.aggregate([
+    {
+      $group: {
+        _id: "$location",
+        freshersJobs: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $sort: { location: 1, createdAt: -1 },
+    },
+  ]).then((freshersJobs) => {
+    console.log(freshersJobs);
+    res.json({ freshersJobs: freshersJobs });
+  });
+};
+
+exports.getFreshersJobsByStreams = (req, res) => {
+  Freshers.aggregate([
+    {
+      $group: {
+        _id: "$stream",
+        freshersjobs: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $sort: { stream: 1, createdAt: -1 },
+    },
+  ]).then((freshersjobs) => {
+    console.log(freshersjobs);
+    res.json({ freshersjobs: freshersjobs });
+  });
+};
+
+exports.getFreshersJobsByIndustries = (req, res) => {
+  Freshers.aggregate([
+    {
+      $group: {
+        _id: "$industry",
+        freshersjobs: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $sort: { industry: 1, createdAt: -1 },
+    },
+  ]).then((freshersjobs) => {
+    console.log(freshersjobs);
+    res.json({ freshersjobs: freshersjobs });
+  });
+};

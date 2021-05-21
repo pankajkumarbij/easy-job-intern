@@ -38,15 +38,15 @@ function NavBar() {
                     {" "}
                     All Internship
                   </Dropdown.Item>
-                  <Dropdown.Item as={Link} to="/">
+                  <Dropdown.Item as={Link} to="/internship/industry">
                     {" "}
                     Internship By Industry
                   </Dropdown.Item>
-                  <Dropdown.Item as={Link} to="/">
+                  <Dropdown.Item as={Link} to="/internship/location">
                     {" "}
                     Internship By Location
                   </Dropdown.Item>
-                  <Dropdown.Item as={Link} to="/">
+                  <Dropdown.Item as={Link} to="/internship/stream">
                     {" "}
                     Internship By Stream
                   </Dropdown.Item>

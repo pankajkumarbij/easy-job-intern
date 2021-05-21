@@ -377,11 +377,11 @@ exports.getInternhsipsByLocations = (req, res) => {
     {
       $group: {
         _id: "$location",
-        internshisps: { $push: "$$ROOT" },
+        internships: { $push: "$$ROOT" },
       },
     },
     {
-      $sort: { location: 1, createdAt: -1 },
+      $sort: { _id: 1 },
     },
   ]).then((internships) => {
     console.log(internships);
@@ -394,11 +394,11 @@ exports.getInternhsipsByStreams = (req, res) => {
     {
       $group: {
         _id: "$stream",
-        internshisps: { $push: "$$ROOT" },
+        internships: { $push: "$$ROOT" },
       },
     },
     {
-      $sort: { stream: 1, createdAt: -1 },
+      $sort: { _id: 1 },
     },
   ]).then((internships) => {
     console.log(internships);
@@ -411,14 +411,46 @@ exports.getInternhsipsByIndustries = (req, res) => {
     {
       $group: {
         _id: "$industry",
-        internshisps: { $push: "$$ROOT" },
+        internships: { $push: "$$ROOT" },
       },
     },
     {
-      $sort: { industry: 1, createdAt: -1 },
+      $sort: { _id: 1 },
     },
   ]).then((internships) => {
     console.log(internships);
     res.json({ internships: internships });
   });
+};
+
+
+exports.searchBookmarkedInternship = async (req, res) => {
+  const match = {};
+  match.bookmarkedBy = req.user._id;
+  if (req.query.techstack) {
+    match.techstack = { $in: req.query.techstack };
+  }
+  if (req.query.duration) {
+    match.duration = req.query.duration;
+  }
+  if (req.query.startDate) {
+    const date = new Date(req.query.startDate).toISOString();
+    match.startDate = date;
+  }
+  if(req.query.role){
+    match.role = req.query.role 
+  }
+  if(req.query.vacancies){
+    match.vacancies = req.query.vacancies 
+  }
+  
+  try{
+    const internships = await Internship.find(match).populate("createdBy", "_id personName").sort("-createdAt")
+    if(internships.length===0){
+      return res.status(200).send({message: "No internships found"})
+    }
+    res.status(200).send(internships);
+    } catch (e) {
+    res.status(400).send("Something went wrong");
+  }
 };
