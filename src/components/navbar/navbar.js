@@ -62,7 +62,7 @@ function NavBar() {
                   <Dropdown.Item as={Link} to="/all-jobs">
                     All Jobs 
                   </Dropdown.Item>
-                  <Dropdown.Item as={Link} to="/">
+                  <Dropdown.Item as={Link} to="/jobs/industry">
                     Jobs By Industry
                   </Dropdown.Item>
                   <Dropdown.Item as={Link} to="/">
@@ -83,7 +83,7 @@ function NavBar() {
                   <Dropdown.Item as={Link} to="/all-freshersjobs">
                     All Freshers Jobs 
                   </Dropdown.Item>
-                  <Dropdown.Item as={Link} to="/">
+                  <Dropdown.Item as={Link} to="/freshersjobs/industry">
                     Freshers Jobs By Industry
                   </Dropdown.Item>
                   <Dropdown.Item as={Link} to="/">

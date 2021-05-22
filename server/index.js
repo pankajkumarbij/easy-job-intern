@@ -4,7 +4,6 @@ const cors = require("cors");
 const PORT = 5000;
 var url = "mongodb://localhost:27017/eji"
 
-
 mongoose.connect(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
