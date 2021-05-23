@@ -69,3 +69,19 @@ exports.apply = async (req, res) => {
 }
 
 
+exports.student_getPendingApplications = async(req, res) => {
+    try{
+        const applications = await Application.find({status: "pending", applicantId: req.user._id})
+                                    .sort("-createdAt")
+        if(!applications || applications.length===0){
+            return res.status(200).send({message: "no pending applications"})
+        }
+        return res.status(200).send(applications)
+
+    }
+    catch(e){
+
+    }
+}
+
+
