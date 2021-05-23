@@ -68,7 +68,77 @@ exports.apply = async (req, res) => {
     }
 }
 
+exports.approve = async (req, res) => {
+    try{
+        const application = await Application.findById(req.params.id)
+        if(application.employer.toString() === req.user._id.toString()){
+            application.status = "approved"
+            application.applicantReceiveNote = "you have been shortlisted for the elementary-test round!"
+            await application.save()
+            return res.status(200).send({message: "application has been approved"})
+        }
+        else{
+            return res.status(200).send({message: "you cannot approve the application, you did not create the job/ internship!"})
+        }
+    }
+    catch(e){
+        return res.status(400).send({message: "something went wrong!"})
+    }
+}
 
+exports.reject = async (req, res) => {
+    try{
+        const application = await Application.findById(req.params.id)
+        if(application.employer.toString() === req.user._id.toString()){
+            application.status = "rejected"
+            application.applicantReceiveNote = "sorry, you have not been shortlisted for the elementary-test round!"
+            await application.save()
+            return res.status(200).send({message: "application has been rejected!"})
+        }
+        else{
+            return res.status(200).send({message: "you cannot approve the application, you did not create the job/ internship!"})
+        }
+    }
+    catch(e){
+        console.log(e)
+        return res.status(400).send({message: "something went wrong!"})
+    }
+}
+
+
+exports.student_getPendingApplications = async(req, res) => {
+    try{
+        const applications = await Application.find({status: "pending", applicantId: req.user._id})
+                                    .sort("-createdAt")
+        if(!applications || applications.length===0){
+            return res.status(200).send({message: "no pending applications"})
+        }
+        return res.status(200).send(applications)
+
+    }
+    catch(e){
+
+    }
+}
+
+
+exports.employer_getPendingInternships = async(req, res) => {
+    try{
+        const applications = await Application.find({employer: req.user._id, status: 'pending', applyingFor: "internship"})
+                                    .sort("-createdAt")
+        if(!applications || applications.length===0){
+            return res.status(200).send({message: "no pending internship applications"})
+        }
+        return res.status(200).send(applications)
+        
+    }
+
+    catch(e){
+        console.log(e)
+        return res.status(400).send({message: "something went wrong!"})
+    }
+
+}
 
 exports.student_getApprovedApplications = async(req, res) => {
     try{
@@ -84,4 +154,5 @@ exports.student_getApprovedApplications = async(req, res) => {
 
     }
 }
+
 

@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { signup, signin, update, logout, logoutAll , signupConfirm, deleteStudent } = require("../controller/student.auth");
+const { signup, signin, update, logout, logoutAll ,signupConfirm, deleteStudent } = require("../controller/student.auth");
 const auth_student = require('../middleware/auth_student');
 
 const {searchFilterInternships, bookmarkInternship, getBookmarkedInternships, searchBookmarkedInternship} = require("../controller/internships")
 const {searchFilterJobs, bookmarkJob, getBookmarkedJobs, searchBookmarkedJob} = require("../controller/jobs")
 const {searchFilterFreshersJobs, bookmarkFresherJob, getBookmarkedFresherJobs, searchBookmarkedFresherJob} = require("../controller/freshersjob")
-const {apply, student_getApprovedApplications} = require('../controller/applications')
+
+const {apply, student_getPendingApplications, student_getApprovedApplications} = require('../controller/applications')
 
 
 router.post("/signup", signup);
@@ -30,5 +31,7 @@ router.get('/searchBookmarkedFresherJob', auth_student, searchBookmarkedFresherJ
 router.get('/searchBookmarkedInternship', auth_student, searchBookmarkedInternship)
 
 router.post('/apply', auth_student, apply)
+
+router.get('/getPendingApplications', auth_student, student_getPendingApplications)
 router.get('/getApprovedApplications', auth_student, student_getApprovedApplications)
 module.exports = router
