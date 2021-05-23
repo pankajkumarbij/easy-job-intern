@@ -13,6 +13,7 @@ const {
 const { createFreshersJob, updateFreshersJob, deleteFreshersJob, searchFresherJob, getFresherJobValues } = require("../controller/freshersjob");
 const { createInternship, updateInternship, getInternshipValues, deleteInternship, searchInternship } = require("../controller/internships");
 const { createJob, updateJob, deleteJob, searchJob, getJobValues } = require("../controller/jobs");
+const {approve, reject  } = require("../controller/applications")
 const auth_employer = require("../middleware/auth_employer");
 
 router.post("/signup", signup);
@@ -35,6 +36,8 @@ router.get("/get-freshersjob/:postId", auth_employer, getFresherJobValues);
 router.delete("/delete-internship", auth_employer, deleteInternship);
 router.delete("/delete-job", auth_employer, deleteJob);
 router.delete("/delete-freshersjob", auth_employer, deleteFreshersJob);
+router.get("/approve/:id", auth_employer, approve)
+router.get("/reject/:id", auth_employer, reject)
 
 router.get('/searchInternship', auth_employer, searchInternship)
 

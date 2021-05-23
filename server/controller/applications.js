@@ -68,4 +68,41 @@ exports.apply = async (req, res) => {
     }
 }
 
+exports.approve = async (req, res) => {
+    try{
+        const application = await Application.findById(req.params.id)
+        if(application.employer.toString() === req.user._id.toString()){
+            application.status = "approved"
+            application.applicantReceiveNote = "you have been shortlisted for the elementary-test round!"
+            await application.save()
+            return res.status(200).send({message: "application has been approved"})
+        }
+        else{
+            return res.status(200).send({message: "you cannot approve the application, you did not create the job/ internship!"})
+        }
+    }
+    catch(e){
+        return res.status(400).send({message: "something went wrong!"})
+    }
+}
+
+exports.reject = async (req, res) => {
+    try{
+        const application = await Application.findById(req.params.id)
+        if(application.employer.toString() === req.user._id.toString()){
+            application.status = "rejected"
+            application.applicantReceiveNote = "sorry, you have not been shortlisted for the elementary-test round!"
+            await application.save()
+            return res.status(200).send({message: "application has been rejected!"})
+        }
+        else{
+            return res.status(200).send({message: "you cannot approve the application, you did not create the job/ internship!"})
+        }
+    }
+    catch(e){
+        console.log(e)
+        return res.status(400).send({message: "something went wrong!"})
+    }
+}
+
 
