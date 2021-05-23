@@ -69,3 +69,21 @@ exports.apply = async (req, res) => {
 }
 
 
+exports.employer_getPendingJobs = async(req, res) => {
+    try{
+        const applications = await Application.find({employer: req.user._id, status: 'pending', applyingFor: "job"})
+                                        .sort("-createdAt")
+        if(!applications || applications.length===0){
+            return res.status(200).send({message: "no pending job applications"})
+        }
+        return res.status(200).send(applications)
+        
+    }
+
+    catch(e){
+        console.log(e)
+        return res.status(400).send({message: "something went wrong!"})
+    }
+
+}
+
