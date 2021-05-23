@@ -5,22 +5,24 @@ const {ObjectId} = mongoose.Schema.Types;
 const applicationSchema = new Schema({
     applyingFor:{
         type: String,
+        enum: ['job', 'internship', 'fresherjob'],
         required:true,
+        trim: true
     },
     employer: {
         type: ObjectId,
         ref: "Employer",
         required: true
     },
-    appliedJob: {
+    applied_job: {
         type: ObjectId,
         ref: "Job",
     },
-    appliedFresherJob: {
+    applied_fresherjob: {
         type: ObjectId,
         ref: "FreshersJob",
     },
-    appliedInternship: {
+    applied_internship: {
         type: ObjectId,
         ref: "Internship",
     },
@@ -31,19 +33,18 @@ const applicationSchema = new Schema({
     },
     applicantSendNote: {
         type: String,
-        required: true
     },
     status: {
         type: String,
+        enum: ['pending', 'approved', 'rejected'],
         required: true
     },
     applicantReceiveNote: {
         type: String,
-        required: true
     }
 }, {timestamps: true})
 
-const Application = mongoose.model('Internship',applicationSchema);
+const Application = mongoose.model('Application',applicationSchema);
 
 module.exports = Application;
 
