@@ -138,6 +138,21 @@ exports.employer_getPendingInternships = async(req, res) => {
         return res.status(400).send({message: "something went wrong!"})
     }
 
+
+
+exports.student_getRejectedApplications = async(req, res) => {
+    try{
+        const applications = await Application.find({status: "rejected", applicantId: req.user._id})
+                                    .sort("-createdAt")
+        if(!applications || applications.length===0){
+            return res.status(200).send({message: "no rejected applications"})
+        }
+        return res.status(200).send(applications)
+    }
+    catch(e){
+        console.log(e)
+        return res.status(400).send({message: "something went wrong!"})
+    }
 }
 
 exports.student_getApprovedApplications = async(req, res) => {
@@ -148,11 +163,11 @@ exports.student_getApprovedApplications = async(req, res) => {
             return res.status(200).send({message: "no approved applications"})
         }
         return res.status(200).send(applications)
-
     }
     catch(e){
-
-    }
+          console.log(e)
+          return res.status(400).send({message: "something went wrong!"})
+      }
 }
 
 

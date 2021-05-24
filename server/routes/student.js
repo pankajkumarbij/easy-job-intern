@@ -7,7 +7,9 @@ const {searchFilterInternships, bookmarkInternship, getBookmarkedInternships, se
 const {searchFilterJobs, bookmarkJob, getBookmarkedJobs, searchBookmarkedJob} = require("../controller/jobs")
 const {searchFilterFreshersJobs, bookmarkFresherJob, getBookmarkedFresherJobs, searchBookmarkedFresherJob} = require("../controller/freshersjob")
 
-const {apply, student_getPendingApplications, student_getApprovedApplications} = require('../controller/applications')
+
+const {apply, student_getPendingApplications, student_getApprovedApplications, student_getRejectedApplications} = require('../controller/applications')
+
 
 
 router.post("/signup", signup);
@@ -34,4 +36,6 @@ router.post('/apply', auth_student, apply)
 
 router.get('/getPendingApplications', auth_student, student_getPendingApplications)
 router.get('/getApprovedApplications', auth_student, student_getApprovedApplications)
+router.get('/getRejectedApplications', auth_student, student_getRejectedApplications)
+
 module.exports = router
