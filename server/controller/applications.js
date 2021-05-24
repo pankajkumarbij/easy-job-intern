@@ -138,6 +138,24 @@ exports.employer_getPendingInternships = async(req, res) => {
         return res.status(400).send({message: "something went wrong!"})
     }
 
+}
+
+exports.employer_getPendingJobs = async(req, res) => {
+    try{
+        const applications = await Application.find({employer: req.user._id, status: 'pending', applyingFor: "job"})
+                                        .sort("-createdAt")
+        if(!applications || applications.length===0){
+            return res.status(200).send({message: "no pending job applications"})
+        }
+        return res.status(200).send(applications)
+        
+    }
+    catch(e){
+        console.log(e)
+        return res.status(400).send({message: "something went wrong!"})
+    }
+
+}
 
 
 exports.student_getRejectedApplications = async(req, res) => {
@@ -153,6 +171,25 @@ exports.student_getRejectedApplications = async(req, res) => {
         console.log(e)
         return res.status(400).send({message: "something went wrong!"})
     }
+
+}
+
+exports.employer_getPendingFresherJobs = async(req, res) => {
+    try{
+        const applications = await Application.find({employer: req.user._id, status: 'pending', applyingFor: "fresherjob"})
+                                        .sort("-createdAt")
+        if(!applications || applications.length===0){
+            return res.status(200).send({message: "no pending fresher job applications"})
+        }
+        return res.status(200).send(applications)
+        
+    }
+
+    catch(e){
+        console.log(e)
+        return res.status(400).send({message: "something went wrong!"})
+    }
+
 }
 
 exports.student_getApprovedApplications = async(req, res) => {
@@ -167,7 +204,7 @@ exports.student_getApprovedApplications = async(req, res) => {
     catch(e){
           console.log(e)
           return res.status(400).send({message: "something went wrong!"})
-      }
+     }
 }
 
 

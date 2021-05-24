@@ -13,7 +13,8 @@ const {
 const { createFreshersJob, updateFreshersJob, deleteFreshersJob, searchFresherJob, getFresherJobValues } = require("../controller/freshersjob");
 const { createInternship, updateInternship, getInternshipValues, deleteInternship, searchInternship } = require("../controller/internships");
 const { createJob, updateJob, deleteJob, searchJob, getJobValues } = require("../controller/jobs");
-const {approve, reject  } = require("../controller/applications")
+
+const {approve, reject, employer_getPendingJobs, employer_getPendingFresherJobs} = require("../controller/applications")
 const auth_employer = require("../middleware/auth_employer");
 const {employer_getPendingInternships} = require('../controller/applications')
 
@@ -43,13 +44,14 @@ router.get("/reject/:id", auth_employer, reject)
 
 router.get('/searchInternship', auth_employer, searchInternship)
 
-router.get('/getPendingInternships', auth_employer, employer_getPendingInternships)
 
 router.get('/searchJob', auth_employer, searchJob)
 router.get('/searchFresherJob', auth_employer, searchFresherJob)
 router.get('/confirm/:confirmationCode' , signupConfirm );
 router.delete('/deleteEmployer', auth_employer, deleteEmployer)
 
-
+router.get('/getPendingJobs', auth_employer, employer_getPendingJobs)
+router.get('/getPendingFresherJobs', auth_employer, employer_getPendingFresherJobs)
+router.get('/getPendingInternships', auth_employer, employer_getPendingInternships)
 
 module.exports = router;
