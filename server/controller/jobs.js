@@ -315,6 +315,38 @@ exports.getBookmarkedJobs = async (req, res) => {
   }
 };
 
+
+exports.searchBookmarkedJob = async (req, res) => {
+  const match = {};
+  match.bookmarkedBy = req.user._id;
+  if (req.query.techstack) {
+    match.techstack = { $in: req.query.techstack };
+  }
+  if (req.query.duration) {
+    match.duration = req.query.duration;
+  }
+  if (req.query.salary) {
+    const date = new Date(req.query.startDate).toISOString();
+    match.startDate = date;
+  }
+  if(req.query.role){
+    match.role = req.query.role 
+  }
+  if(req.query.vacancies){
+    match.vacancies = req.query.vacancies 
+  }
+  
+  try{
+    const jobs = await Job.find(match).populate("createdBy", "_id personName").sort("-createdAt")
+    if(jobs.length===0){
+      return res.status(200).send({message: "No jobs found"})
+    }
+    res.status(200).send(jobs);
+    } catch (e) {
+    res.status(400).send({message:"Something went wrong"});
+  }
+};
+
 exports.getJobsByLocations = (req, res) => {
   Job.aggregate([
     {

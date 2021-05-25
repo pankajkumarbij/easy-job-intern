@@ -1,54 +1,79 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
 import {
-  Button,
   Card,
   Col,
   Dropdown,
-  DropdownButton,
   ListGroup,
   ListGroupItem,
-  Modal,
   Row,
   Spinner,
   Alert,
 } from "react-bootstrap";
-
 import toast, { Toaster } from "react-hot-toast";
+import { UserContext } from "../../App";
 import * as Icon from "react-bootstrap-icons";
 
-import "./AllInternships.css";
-import { UserContext } from "../../App";
+import "../Internships/AllInternships.css";
+// import { Alert } from "bootstrap";
 
-const InternshipsGroupedByIndustry = () => {
+const FresherJobsGroupedByIndustry = () => {
   const { state, dispatch } = useContext(UserContext);
-  const [internships, setInternships] = useState([]);
+  const [freshersJobs, setFreshersJobs] = useState([]);
   const [loading, setLoading] = useState(true);
-  //   const { location } = useParams();
+  const deletePost = (postId) => {
+    axios({
+      method: "delete",
+      url: "http://localhost:5000/employer/delete-freshersjob",
+      data: {
+        postId,
+      },
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data.error) {
+          console.log(res.data.error);
+          // alert(res.data.error);
+          const notify = () => toast(res.data.error);
+          notify();
+        } else {
+          // console.log(res.data.jobs);
+          // setJobs(res.data.jobs);
+          // console.log(jobs);
+          window.location.reload(false);
+          const notify = () => toast(res.data.message);
+          notify();
+        }
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
+  };
 
-  //   console.log(internships);
-  //   console.log(state);
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://localhost:5000/user/internship/industry`,
+      url: "http://localhost:5000/user/freshersjob/industry",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
     })
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         setLoading(false);
         if (res.data.error) {
-          //   console.log(res.data.error);
+          console.log(res.data.error);
           // alert(res.data.error);
           const notify = () => toast(res.data.error);
           notify();
         } else {
-          //   console.log(res.data.internships);
-          setInternships(res.data.internships);
-          console.log(internships);
+          console.log(res.data.freshersjobs);
+          setFreshersJobs(res.data.freshersjobs);
+          console.log(freshersJobs);
         }
       })
       .catch((err) => {
@@ -57,13 +82,10 @@ const InternshipsGroupedByIndustry = () => {
       });
   }, []);
 
-  //   console.log(internships);
-  console.log(internships[0]);
-
-  if (internships && internships[4]) {
-    // console.log(internships[4]);
-    const t = new Date(internships[4].startDate).toString("YYYY-MM-DD");
-    // console.log(t);
+  if (freshersJobs && freshersJobs[4]) {
+    console.log(freshersJobs[4]);
+    const t = new Date(freshersJobs[4].startDate).toString("YYYY-MM-DD");
+    console.log(t);
   }
 
   const GettingMonth = (date) => {
@@ -93,49 +115,9 @@ const InternshipsGroupedByIndustry = () => {
     return time;
   };
 
-  const GettingDuration = (time) => {
-    const t = Math.floor(Number(time) / (3600 * 1000 * 24 * 30));
-    // console.log(t);
-    return t > 1 ? t + " Months" : t + " Month";
-  };
-
-  const deletePost = (postId) => {
-    axios({
-      method: "delete",
-      url: "http://localhost:5000/employer/delete-internship",
-      data: {
-        postId,
-      },
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        // console.log(res);
-        if (res.data.error) {
-          console.log(res.data.error);
-          // alert(res.data.error);
-          const notify = () => toast(res.data.error);
-          notify();
-        } else {
-          // console.log(res.data.internships);
-          // setInternships(res.data.internships);
-          // console.log(internships);
-          const notify = () => toast(res.data.message);
-          notify();
-          window.location.reload(false);
-        }
-      })
-      .catch((err) => {
-        console.log("Error: ", err);
-      });
-  };
-
   return (
     <div className="internshipsOuterContainer">
       <Toaster />
-
       {loading ? (
         <div className="h-100 w-100 d-flex justify-content-center align-items-center">
           <Spinner
@@ -147,40 +129,39 @@ const InternshipsGroupedByIndustry = () => {
             }}
           />
         </div>
-      ) : internships && !internships.length > 0 ? (
+      ) : freshersJobs && !freshersJobs.length > 0 ? (
         <Alert
           variant="danger"
-          className="w-100 "
+          className="w-100"
           style={{
             backgroundColor: "#343A40",
             border: "none",
             color: "#ffc107",
           }}
         >
-          No internships available right now
+          No Fresher Jobs available right now
         </Alert>
       ) : (
-        internships &&
-        internships.map((intern) => (
-          <div key={intern._id}>
-            <h1 className="parameter">{intern._id}</h1>
+        freshersJobs &&
+        freshersJobs.map((catefresher) => (
+          <div key={catefresher._id}>
+            <h1 className="parameter">{catefresher._id}</h1>
             <Row className="justify-content-xl-start justify-content-lg-around justify-content-sm-center">
-              {intern.internships &&
-                intern.internships.map((internship) => {
+              {catefresher.freshersjobs &&
+                catefresher.freshersjobs.map((fresher) => {
                   // console.log(internship.createdBy._id, state.user._id);
                   return (
                     <Col
-                      key={internship._id}
+                      key={fresher._id}
                       className="col-xl-4 col-lg-5 col-md-6 col-sm-11 col-12 colPost"
                     >
-                      {/* {internship.companyName} */}
                       <Card className="cardPost">
                         <Card.Body>
                           <Card.Title className="titleOfPost">
-                            {internship.companyName}{" "}
+                            {fresher.companyName}
                             {state &&
-                              internship.createdBy &&
-                              state.user._id == internship.createdBy && (
+                              fresher.createdBy &&
+                              state.user._id == fresher.createdBy && (
                                 <Dropdown className="postOptions">
                                   <Dropdown.Toggle
                                     className="postOptionsBtn"
@@ -195,12 +176,12 @@ const InternshipsGroupedByIndustry = () => {
                                   <Dropdown.Menu className="optionMenu">
                                     <Dropdown.Item
                                       className="optionItem"
-                                      href={`/update-internship/${internship._id}`}
+                                      href={`/update-fresher/${fresher._id}`}
                                     >
                                       <Icon.PencilSquare className="optionsMenuIcon" />
                                     </Dropdown.Item>
                                     <Dropdown.Item
-                                      onClick={() => deletePost(internship._id)}
+                                      onClick={() => deletePost(fresher._id)}
                                       className="optionItem"
                                     >
                                       <Icon.Trash className="optionsMenuIcon" />
@@ -210,37 +191,31 @@ const InternshipsGroupedByIndustry = () => {
                               )}
                           </Card.Title>
                           <Card.Subtitle className="subtitleOfPost">
-                            {internship.location}
+                            {fresher.location}
                           </Card.Subtitle>
                           <Card.Subtitle className="subsubtitleOfPost">
-                            {internship.industry}{" "}
-                            {internship.industry && internship.stream && ","}{" "}
-                            {internship.stream}
+                            {fresher.industry}{" "}
+                            {fresher.industry && fresher.stream && ","}{" "}
+                            {fresher.stream}
                           </Card.Subtitle>
                           <Card.Text className="textPost">
-                            {internship.description}
+                            {fresher.description}
                           </Card.Text>
                           <ListGroup>
                             <ListGroupItem className="itemPost">
-                              Stipend: {internship.stipend}
+                              Salary: {fresher.salary}
                             </ListGroupItem>
                             <ListGroupItem className="itemPost">
-                              Duration: {GettingDuration(internship.duration)}
-                            </ListGroupItem>
-                            <ListGroupItem className="itemPost">
-                              Start Date: {GettingMonth(internship.startDate)}
-                            </ListGroupItem>
-                            <ListGroupItem className="itemPost">
-                              End Date: {GettingMonth(internship.endDate)}
+                              Start Date: {GettingMonth(fresher.startDate)}
                             </ListGroupItem>
                             <ListGroupItem className="itemPost last">
                               Last Date to Apply:{" "}
-                              {GettingDate(internship.lastDate)}
+                              {GettingDate(fresher.lastDate)}
                             </ListGroupItem>
                           </ListGroup>
                           <div className="tech">
-                            {internship.techstack &&
-                              internship.techstack.map((skill, i) => (
+                            {fresher.techstack &&
+                              fresher.techstack.map((skill, i) => (
                                 <Card.Link key={i} className="TechStack">
                                   {skill}
                                 </Card.Link>
@@ -251,7 +226,6 @@ const InternshipsGroupedByIndustry = () => {
                     </Col>
                   );
                 })}
-              {/* )} */}
             </Row>
           </div>
         ))
@@ -259,4 +233,4 @@ const InternshipsGroupedByIndustry = () => {
     </div>
   );
 };
-export default InternshipsGroupedByIndustry;
+export default FresherJobsGroupedByIndustry;
