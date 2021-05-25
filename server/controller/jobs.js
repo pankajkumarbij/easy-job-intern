@@ -356,7 +356,7 @@ exports.getJobsByLocations = (req, res) => {
       },
     },
     {
-      $sort: { location: 1, createdAt: -1 },
+      $sort: { _id: 1 },
     },
   ]).then((jobs) => {
     console.log(jobs);
@@ -373,7 +373,7 @@ exports.getJobsByStreams = (req, res) => {
       },
     },
     {
-      $sort: { stream: 1, createdAt: -1 },
+      $sort: { _id: 1 },
     },
   ]).then((jobs) => {
     console.log(jobs);
@@ -390,7 +390,7 @@ exports.getJobsByIndustries = (req, res) => {
       },
     },
     {
-      $sort: { industry: 1, createdAt: -1 },
+      $sort: { _id: 1 },
     },
   ]).then((jobs) => {
     console.log(jobs);
