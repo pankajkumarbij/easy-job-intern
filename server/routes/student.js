@@ -1,10 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const { signup, signin, update, logout, logoutAll , signupConfirm, deleteStudent } = require("../controller/student.auth");
+const { signup, signin, update, logout, logoutAll ,signupConfirm, deleteStudent } = require("../controller/student.auth");
 const auth_student = require('../middleware/auth_student');
-const {searchFilterInternships, bookmarkInternship, getBookmarkedInternships} = require("../controller/internships")
-const {searchFilterJobs, bookmarkJob, getBookmarkedJobs} = require("../controller/jobs")
-const {searchFilterFreshersJobs, bookmarkFresherJob, getBookmarkedFresherJobs} = require("../controller/freshersjob")
+
+const {searchFilterInternships, bookmarkInternship, getBookmarkedInternships, searchBookmarkedInternship} = require("../controller/internships")
+const {searchFilterJobs, bookmarkJob, getBookmarkedJobs, searchBookmarkedJob} = require("../controller/jobs")
+const {searchFilterFreshersJobs, bookmarkFresherJob, getBookmarkedFresherJobs, searchBookmarkedFresherJob} = require("../controller/freshersjob")
+
+
+const {apply, student_getPendingApplications, student_getApprovedApplications, student_getRejectedApplications} = require('../controller/applications')
+
 
 
 router.post("/signup", signup);
@@ -23,4 +28,14 @@ router.post('/getBookmarkedInternships', auth_student, getBookmarkedInternships)
 router.post('/getBookmarkedJobs', auth_student, getBookmarkedJobs)
 router.post('/getBookmarkedFresherJobs', auth_student, getBookmarkedFresherJobs)
 router.delete('/deleteStudent', auth_student, deleteStudent)
+router.get('/searchBookmarkedJob', auth_student, searchBookmarkedJob)
+router.get('/searchBookmarkedFresherJob', auth_student, searchBookmarkedFresherJob)
+router.get('/searchBookmarkedInternship', auth_student, searchBookmarkedInternship)
+
+router.post('/apply', auth_student, apply)
+
+router.get('/getPendingApplications', auth_student, student_getPendingApplications)
+router.get('/getApprovedApplications', auth_student, student_getApprovedApplications)
+router.get('/getRejectedApplications', auth_student, student_getRejectedApplications)
+
 module.exports = router
