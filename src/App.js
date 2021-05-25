@@ -150,6 +150,7 @@ const Routing = () => {
           <Route path="/job/stream">
             <JobsGroupedByStream />
           </Route>
+
           <Route path="/location-internship/:location">
             <InternshipsByLocation />
           </Route>
