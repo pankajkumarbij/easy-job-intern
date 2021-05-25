@@ -20,7 +20,7 @@ const Home = () => {
         >
           {!state && <Card
             style={{
-              width: "75vh",
+              width: "100%",
               marginTop: "6%",
               opacity: "0.8",
               background: "black",
@@ -44,7 +44,7 @@ const Home = () => {
           <Container>
           
             <Row>
-              <Col className="col-lg-3 col-md-6 col-sm-12" id="offer-range">
+              <Col className="col-12 col-md-6" id="offer-range">
                 <img src="images/industry.png" alt=""></img>
                 <h4 style={{ marginTop: 15, marginBottom: 15 }}>
                   Internship By Industry
@@ -95,7 +95,7 @@ const Home = () => {
                   </a>
                 </ListGroup>
               </Col>
-              <Col className="col-lg-3 col-md-6 col-sm-12" id="offer-range">
+              <Col className="col-12 col-md-6" id="offer-range">
                 <img src="images/location.png" alt=""></img>
                 <h4 style={{ marginTop: 15, marginBottom: 15 }}>
                   {" "}
@@ -147,7 +147,7 @@ const Home = () => {
                   </a>
                 </ListGroup>
               </Col>
-              <Col className="col-lg-3 col-md-6 col-sm-12" id="offer-range">
+              <Col className="col-12 col-md-6" id="offer-range">
                 <img src="images/stream.png" alt=""></img>
                 <h4 style={{ marginTop: 15, marginBottom: 15 }}>
                   Internship By Stream
@@ -200,7 +200,7 @@ const Home = () => {
                   </a>
                 </ListGroup>
               </Col>
-              <Col className="col-lg-3 col-md-6 col-sm-12" id="offer-range">
+              <Col className="col-12 col-md-6" id="offer-range">
                 <img src="images/ot2.png" alt=""></img>
                 <h4 style={{ marginTop: 15, marginBottom: 15 }}>
                   Online Trainings by Us
