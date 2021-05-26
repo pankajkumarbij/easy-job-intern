@@ -10,7 +10,7 @@ const {
   getInternhsipsByIndustries,
   getInternshipsByCompanyName,
 } = require("../controller/internships");
-const { getAllJobs, getJobsByLocations, getJobsByStreams, getJobsByIndustries } = require("../controller/jobs");
+const { getAllJobs, getJobsByLocations, getJobsByStreams, getJobsByIndustries, getJobsByCompanyName } = require("../controller/jobs");
 const { getAllFreshersJobs, getFreshersJobsByLocations, getFreshersJobsByStreams, getFreshersJobsByIndustries, getFreshersJobsByCompanyName } = require("../controller/freshersjob");
 
 const auth_employer = require("../middleware/auth_employer");

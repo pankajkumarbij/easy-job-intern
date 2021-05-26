@@ -32,6 +32,7 @@ exports.signup = async (req, res) => {
             degree,
             password,
             status : 'Pending',
+            savedCompanies: []
         })
         const token = await user.generateAuthToken();
         user.confirmationCode = token;
@@ -181,5 +182,34 @@ exports.deleteStudent = async(req, res) => {
     }
     catch(e){
         res.send({message: "something went wrong!"})
+    }
+}
+
+
+exports.saveCompany = async(req, res) => {
+    try{
+        const employers = await Employer.find({})
+        const companies = []
+        const user = await Student.findById(req.user._id)
+        employers.forEach(employer => {
+            if(!companies.includes(employer.companyName.toUpperCase().replace(/\s/g, ''))){
+                companies.push(employer.companyName.toUpperCase().replace(/\s/g, ''))
+            }
+        })
+        
+        //console.log(companies)
+        if(!companies.includes(req.body.companyName.toUpperCase().replace(/\s/g, ''))){
+            return res.status(400).send({message: "invalid company name!"})
+        }
+        
+        if(!user.savedCompanies.includes(req.body.companyName.toUpperCase().replace(/\s/g, ''))){ //no duplicate entries
+            user.savedCompanies.push(req.body.companyName.toUpperCase().replace(/\s/g, '')) // save strings in a specific way do uniformity is maintained
+        }
+        await user.save()
+        return res.status(200).send({message: "saved!"})
+    }
+    catch(e){
+        console.log(e)
+        res.status(400).send({message: "something went wrong!"})
     }
 }

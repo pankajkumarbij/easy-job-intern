@@ -55,7 +55,12 @@ const studentSchema = new Schema({
     confirmationCode: { 
         type: String, 
         unique: true 
-    }
+    },
+    savedCompanies: [
+        {
+            typr: String
+        }
+    ]
 
 });
 
