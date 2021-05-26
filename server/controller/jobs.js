@@ -397,3 +397,20 @@ exports.getJobsByIndustries = (req, res) => {
     res.json({ jobs: jobs });
   });
 };
+
+exports.getJobsByCompanyName = (req, res) => {
+  Job.aggregate([
+    {
+      $group: {
+        _id: "$companyName",
+        jobs: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $sort: { _id: 1 },
+    },
+  ]).then((jobs) => {
+    console.log(jobs);
+    res.json({ jobs: jobs });
+  });
+};
