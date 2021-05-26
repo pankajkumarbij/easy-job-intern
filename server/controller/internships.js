@@ -304,6 +304,21 @@ exports.getInternshipsByStream = (req, res) => {
     });
 };
 
+exports.getInternshipsByCompanyName = (req, res) => {
+  const { companyName } = req.params;
+
+  if (!companyName) {
+    res.status(422).json({ error: "Please fill loction" });
+  }
+
+  Internship.find({ companyName: companyName })
+    .populate("createdBy", "_id personName")
+    .sort("-createdAt")
+    .then((internships) => {
+      res.json({ internships: internships });
+    });
+};
+
 exports.bookmarkInternship = async (req, res) => {
   try {
     const bool = req.body.bookmark === "true";
