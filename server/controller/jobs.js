@@ -399,18 +399,16 @@ exports.getJobsByIndustries = (req, res) => {
 };
 
 exports.getJobsByCompanyName = (req, res) => {
-  Job.aggregate([
-    {
-      $group: {
-        _id: "$companyName",
-        jobs: { $push: "$$ROOT" },
-      },
-    },
-    {
-      $sort: { _id: 1 },
-    },
-  ]).then((jobs) => {
-    console.log(jobs);
-    res.json({ jobs: jobs });
-  });
+  const { companyName } = req.params;
+
+  if (!companyName) {
+    res.status(422).json({ error: "Please fill loction" });
+  }
+
+  Job.find({ companyName: companyName })
+    .populate("createdBy", "_id personName")
+    .sort("-createdAt")
+    .then((Jobs) => {
+      res.json({ Jobs: Jobs });
+    });
 };
