@@ -38,6 +38,6 @@ router.get('/getPendingApplications', auth_student, student_getPendingApplicatio
 router.get('/getApprovedApplications', auth_student, student_getApprovedApplications)
 router.get('/getRejectedApplications', auth_student, student_getRejectedApplications)
 
-router.get('/saveCompany', auth_student, saveCompany)
+router.post('/saveCompany', auth_student, saveCompany)
 
 module.exports = router
