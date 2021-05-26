@@ -8,6 +8,7 @@ const {
   getInternhsipsByLocations,
   getInternhsipsByStreams,
   getInternhsipsByIndustries,
+  getInternshipsByCompanyName,
 } = require("../controller/internships");
 const { getAllJobs, getJobsByLocations, getJobsByStreams, getJobsByIndustries, getJobsByCompanyName } = require("../controller/jobs");
 const { getAllFreshersJobs, getFreshersJobsByLocations, getFreshersJobsByStreams, getFreshersJobsByIndustries } = require("../controller/freshersjob");
@@ -20,6 +21,7 @@ router.get("/all-freshersjobs", getAllFreshersJobs);
 router.get("/location-internship/:location", getInternshipsByLocation);
 router.get("/industry-internship/:industry", getInternshipsByIndustry);
 router.get("/stream-internship/:stream", getInternshipsByStream);
+router.get("/companyName-internship/:companyName", getInternshipsByCompanyName);
 
 router.get("/internship/location", getInternhsipsByLocations);
 router.get("/internship/stream", getInternhsipsByStreams);
