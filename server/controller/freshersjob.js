@@ -389,3 +389,18 @@ exports.getFreshersJobsByIndustries = (req, res) => {
     res.json({ freshersjobs: freshersjobs });
   });
 };
+
+exports.getFreshersJobsByCompanyName = (req, res) => {
+  const { companyName } = req.params;
+
+  if (!companyName) {
+    res.status(422).json({ error: "Please fill loction" });
+  }
+
+  Freshers.find({ companyName: companyName })
+    .populate("createdBy", "_id personName")
+    .sort("-createdAt")
+    .then((FreshersJobs) => {
+      res.json({ FreshersJobs: FreshersJobs });
+    });
+};
