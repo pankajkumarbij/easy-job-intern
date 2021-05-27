@@ -1,6 +1,8 @@
 const Freshers = require("../models/Freshers");
+const Student = require("../models/student")
+const StudentNotification = require("../models/student_notification")
 
-exports.createFreshersJob = (req, res) => {
+exports.createFreshersJob = async (req, res) => {
   const {
     companyName,
     description,
@@ -48,6 +50,26 @@ exports.createFreshersJob = (req, res) => {
     industry,
     vacancies,
   });
+
+
+  try {
+    const students = await Student.find({ savedCompanies: companyName.toUpperCase().replace(/\s/g, '') }) 
+    if(students || students.length>0){
+      students.forEach( async(student) => {
+        const notification = new StudentNotification({
+          notificationFor: student._id,
+          notificationBy: req.user._id,
+          notificationTitle: `the company you starmarked, ${companyName} has a new fresher job opening`,
+          fresherJobOpeningNotification: freshersjob._id,
+          status: "unread"
+        })
+        await notification.save()  
+      })
+    }
+  }
+  catch(e){
+    console.log(e)
+  }
 
   freshersjob
     .save()
