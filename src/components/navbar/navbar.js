@@ -104,7 +104,7 @@ function NavBar() {
               Blogs
             </Nav.Link>
           </Nav>
-          <Form inline class="searchForm">
+          <Form inline class="searchForm " className="d-flex justify-content-center">
             <FormControl type="text" placeholder="Search" className="mr-sm-1 inputSearch" />
             <Button className="searchBtn">
               <Icon.Search />

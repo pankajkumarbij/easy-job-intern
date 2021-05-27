@@ -3,7 +3,7 @@
     width: fit-content;
 }
 .inputSearch{
-    width: 75% !important;
+    width: 65% !important;
 }
 .searchBtn{
     width: 50px;
@@ -19,8 +19,6 @@
     .searchForm{
         display: flex;
         width: fit-content;
-        margin: 10px auto;
-
     }
     .navLINK{
         border-bottom: 1px solid #888;
