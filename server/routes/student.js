@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { signup, signin, update, logout, logoutAll ,signupConfirm, deleteStudent } = require("../controller/student.auth");
+const { signup, signin, update, logout, logoutAll ,signupConfirm, deleteStudent, saveCompany } = require("../controller/student.auth");
 const auth_student = require('../middleware/auth_student');
 
 const {searchFilterInternships, bookmarkInternship, getBookmarkedInternships, searchBookmarkedInternship} = require("../controller/internships")
@@ -37,5 +37,7 @@ router.post('/apply', auth_student, apply)
 router.get('/getPendingApplications', auth_student, student_getPendingApplications)
 router.get('/getApprovedApplications', auth_student, student_getApprovedApplications)
 router.get('/getRejectedApplications', auth_student, student_getRejectedApplications)
+
+router.post('/saveCompany', auth_student, saveCompany)
 
 module.exports = router
