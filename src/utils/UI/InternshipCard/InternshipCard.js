@@ -42,8 +42,8 @@ const InternshipCard = ({ internship, deletePost, userId }) => {
         {internship.role && (
           <div className="primary-info-role">{internship.role}</div>
         )}
-        {internship.company && (
-          <div className="primary-info-company">{internship.company}</div>
+        {internship.companyName && (
+          <div className="primary-info-company">{internship.companyName}</div>
         )}
         {(internship.industry || internship.stream) && (
           <div className="primary-info-indus-stream">
