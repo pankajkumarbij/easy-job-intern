@@ -9,7 +9,7 @@ const {searchFilterFreshersJobs, bookmarkFresherJob, getBookmarkedFresherJobs, s
 
 
 const {apply, student_getPendingApplications, student_getApprovedApplications, student_getRejectedApplications} = require('../controller/applications');
-const { getNotifications } = require("../controller/student_notification");
+const { getNotifications, getNotification } = require("../controller/student_notification");
 
 
 
@@ -41,5 +41,6 @@ router.get('/getRejectedApplications', auth_student, student_getRejectedApplicat
 
 router.post('/saveCompany', auth_student, saveCompany)
 router.get('/getNotifications', auth_student, getNotifications)
+router.get('/getNotification/:id', auth_student, getNotification)
 
 module.exports = router

@@ -26,5 +26,35 @@ exports.getNotifications = async(req, res) => {
 
 }
 
+exports.getNotification = async(req, res) => {
+    try{
+        const notification = await Notification.findOne({_id: req.params.id})
+        if(!ObjectID.isValid(req.params.id)){
+            return res
+            .status(400)
+            .send({message: "invalid notification id"});
+        }
+        if(!notification){
+            return res
+            .status(400)
+            .send({message: "notification does not exist!"});
+        }
+
+        if(notification.status === 'unread'){
+            console.log("in")
+            notification.status = 'read'
+            notification.save()
+        }
+
+        return res.status(200).send(notification)
+        
+    }
+    catch(e){
+        console.log(e)
+        return res.status(400).send({message: "something went wrong!"})
+    }
+
+}
+
 
 
