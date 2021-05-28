@@ -1,21 +1,11 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import {
-  Card,
-  Col,
-  Dropdown,
-  ListGroup,
-  ListGroupItem,
-  Row,
-  Spinner,
-  Alert,
-} from "react-bootstrap";
+import { Col, Row, Spinner, Alert } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { UserContext } from "../../App";
-import { Link } from "react-router-dom";
-import * as Icon from "react-bootstrap-icons";
 
 import "../Internships/AllInternships.css";
+import JobsCard from "../../utils/UI/JobsCard/JobsCard";
 
 const JobsGroupedByLocation = () => {
   const { state, dispatch } = useContext(UserContext);
@@ -83,33 +73,6 @@ const JobsGroupedByLocation = () => {
     const t = new Date(jobs[4].startDate).toString("YYYY-MM-DD");
     console.log(t);
   }
-
-  const GettingMonth = (date) => {
-    const monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    const time =
-      monthNames[new Date(date).getMonth()] +
-      ", " +
-      new Date(date).getFullYear();
-    return time;
-  };
-
-  const GettingDate = (date) => {
-    const time = new Date(date).getDate() + " " + GettingMonth(date);
-    return time;
-  };
 
   const deletePost = (postId) => {
     axios({
@@ -184,77 +147,12 @@ const JobsGroupedByLocation = () => {
                       className="col-xl-4 col-lg-5 col-md-6 col-sm-11 col-12 colPost"
                     >
                       {/* {job.companyName} */}
-                      <Card className="cardPost">
-                        <Card.Body>
-                          <Card.Title className="titleOfPost">
-                            {job.companyName}{" "}
-                            {state &&
-                              job.createdBy &&
-                              state.user._id == job.createdBy._id && (
-                                <Dropdown className="postOptions">
-                                  <Dropdown.Toggle
-                                    className="postOptionsBtn"
-                                    variant="success"
-                                    id="dropdown-basic"
-                                  >
-                                    <Icon.ThreeDotsVertical
-                                      style={{ fontSize: "1.4rem" }}
-                                    />
-                                  </Dropdown.Toggle>
-
-                                  <Dropdown.Menu className="optionMenu">
-                                    <Dropdown.Item
-                                      className="optionItem"
-                                      href={`/update-job/${job._id}`}
-                                    >
-                                      <Icon.PencilSquare className="optionsMenuIcon" />
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                      onClick={() => deletePost(job._id)}
-                                      className="optionItem"
-                                    >
-                                      <Icon.Trash className="optionsMenuIcon" />
-                                    </Dropdown.Item>
-                                  </Dropdown.Menu>
-                                </Dropdown>
-                              )}
-                          </Card.Title>
-                          <Card.Subtitle className="subtitleOfPost">
-                            {job.location}
-                          </Card.Subtitle>
-                          <Card.Subtitle className="subsubtitleOfPost">
-                            {job.industry} {job.industry && job.stream && ","}{" "}
-                            {job.stream}
-                          </Card.Subtitle>
-                          <Card.Text className="textPost">
-                            {job.description}
-                          </Card.Text>
-                          <ListGroup>
-                            <ListGroupItem className="itemPost">
-                              Salary: {job.salary}
-                            </ListGroupItem>
-                            <ListGroupItem className="itemPost">
-                              Work Experience: {job.experience && "Atleast"}{" "}
-                              {job.experience} {job.experience === 1 && "year"}{" "}
-                              {job.experience > 1 && "years"}
-                            </ListGroupItem>
-                            <ListGroupItem className="itemPost">
-                              Start Date: {GettingMonth(job.startDate)}
-                            </ListGroupItem>
-                            <ListGroupItem className="itemPost last">
-                              Last Date to Apply: {GettingDate(job.lastDate)}
-                            </ListGroupItem>
-                          </ListGroup>
-                          <div className="tech">
-                            {job.techstack &&
-                              job.techstack.map((skill, i) => (
-                                <Card.Link key={i} className="TechStack">
-                                  {skill}
-                                </Card.Link>
-                              ))}
-                          </div>
-                        </Card.Body>
-                      </Card>
+                      <JobsCard
+                        job={job}
+                        deletePost={deletePost}
+                        key={job._id}
+                        userId={state.user._id}
+                      />
                     </Col>
                   );
                 })}

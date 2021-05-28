@@ -1,20 +1,16 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import {
-  Card,
   Col,
-  Dropdown,
-  ListGroup,
-  ListGroupItem,
   Row,
   Spinner,
   Alert,
 } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { UserContext } from "../../App";
-import * as Icon from "react-bootstrap-icons";
 
 import "../Internships/AllInternships.css";
+import FresherJobCard from "../../utils/UI/FresherJobCard/FresherJobCard";
 // import { Alert } from "bootstrap";
 
 const AllFreshersJobs = () => {
@@ -62,17 +58,17 @@ const AllFreshersJobs = () => {
       },
     })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setLoading(false);
         if (res.data.error) {
-          console.log(res.data.error);
+          // console.log(res.data.error);
           // alert(res.data.error);
           const notify = () => toast(res.data.error);
           notify();
         } else {
-          console.log(res.data.freshersjobs);
+          // console.log(res.data.freshersjobs);
           setFreshersJobs(res.data.freshersjobs);
-          console.log(freshersJobs);
+          // console.log(freshersJobs);
         }
       })
       .catch((err) => {
@@ -87,32 +83,7 @@ const AllFreshersJobs = () => {
     console.log(t);
   }
 
-  const GettingMonth = (date) => {
-    const monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    const time =
-      monthNames[new Date(date).getMonth()] +
-      ", " +
-      new Date(date).getFullYear();
-    return time;
-  };
-
-  const GettingDate = (date) => {
-    const time = new Date(date).getDate() + " " + GettingMonth(date);
-    return time;
-  };
+  
 
   return (
     <div className="internshipsOuterContainer">
@@ -149,73 +120,11 @@ const AllFreshersJobs = () => {
                 key={fresher._id}
                 className="col-xl-4 col-lg-5 col-md-6 col-sm-11 col-12 colPost"
               >
-                <Card className="cardPost">
-                  <Card.Body>
-                    <Card.Title className="titleOfPost">
-                      {fresher.companyName}
-                      {state &&
-                        fresher.createdBy &&
-                        state.user._id == fresher.createdBy._id && (
-                          <Dropdown className="postOptions">
-                            <Dropdown.Toggle
-                              className="postOptionsBtn"
-                              variant="success"
-                              id="dropdown-basic"
-                            >
-                              <Icon.ThreeDotsVertical
-                                style={{ fontSize: "1.4rem" }}
-                              />
-                            </Dropdown.Toggle>
-
-                            <Dropdown.Menu className="optionMenu">
-                              <Dropdown.Item
-                                className="optionItem"
-                                href={`/update-fresher/${fresher._id}`}
-                              >
-                                <Icon.PencilSquare className="optionsMenuIcon" />
-                              </Dropdown.Item>
-                              <Dropdown.Item
-                                onClick={() => deletePost(fresher._id)}
-                                className="optionItem"
-                              >
-                                <Icon.Trash className="optionsMenuIcon" />
-                              </Dropdown.Item>
-                            </Dropdown.Menu>
-                          </Dropdown>
-                        )}
-                    </Card.Title>
-                    <Card.Subtitle className="subtitleOfPost">
-                      {fresher.location}
-                    </Card.Subtitle>
-                    <Card.Subtitle className="subsubtitleOfPost">
-                      {fresher.industry}{" "}
-                      {fresher.industry && fresher.stream && ","}{" "}
-                      {fresher.stream}
-                    </Card.Subtitle>
-                    <Card.Text className="textPost">
-                      {fresher.description}
-                    </Card.Text>
-                    <ListGroup>
-                      <ListGroupItem className="itemPost">
-                        Salary: {fresher.salary}
-                      </ListGroupItem>
-                      <ListGroupItem className="itemPost">
-                        Start Date: {GettingMonth(fresher.startDate)}
-                      </ListGroupItem>
-                      <ListGroupItem className="itemPost last">
-                        Last Date to Apply: {GettingDate(fresher.lastDate)}
-                      </ListGroupItem>
-                    </ListGroup>
-                    <div className="tech">
-                      {fresher.techstack &&
-                        fresher.techstack.map((skill, i) => (
-                          <Card.Link key={i} className="TechStack">
-                            {skill}
-                          </Card.Link>
-                        ))}
-                    </div>
-                  </Card.Body>
-                </Card>
+                <FresherJobCard
+                  fresherjob={fresher}
+                  deletePost={deletePost}
+                  userId={state.user._id}
+                />
               </Col>
             );
           })

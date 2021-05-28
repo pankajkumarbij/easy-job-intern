@@ -144,10 +144,10 @@ const Routing = () => {
           <Route path="/internship/industry">
             <InternshipsGroupedByIndustry />
           </Route>
-          <Route path="/job/location">
+          <Route path="/jobs/location">
             <JobsGroupedByLocation />
           </Route>
-          <Route path="/job/stream">
+          <Route path="/jobs/stream">
             <JobsGroupedByStream />
           </Route>
 

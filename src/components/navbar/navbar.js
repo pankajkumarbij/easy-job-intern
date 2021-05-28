@@ -65,10 +65,10 @@ function NavBar() {
                   <Dropdown.Item as={Link} to="/jobs/industry">
                     Jobs By Industry
                   </Dropdown.Item>
-                  <Dropdown.Item as={Link} to="/">
+                  <Dropdown.Item as={Link} to="/jobs/location">
                     Jobs By Location
                   </Dropdown.Item>
-                  <Dropdown.Item as={Link} to="/">
+                  <Dropdown.Item as={Link} to="/jobs/stream">
                     Jobs By Stream
                   </Dropdown.Item>
                 </Dropdown.Menu>
