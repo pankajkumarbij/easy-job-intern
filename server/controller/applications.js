@@ -113,6 +113,25 @@ exports.reject = async (req, res) => {
         if(application.employer.toString() === req.user._id.toString()){
             application.status = "rejected"
             application.applicantReceiveNote = "sorry, you have not been shortlisted for the elementary-test round!"
+            
+            try {
+                const student = await Student.findById(application.applicantId)
+                if(student){
+                    const notification = new StudentNotification({
+                        notificationFor: student._id,
+                        notificationBy: req.user._id,
+                        notificationTitle: `Sorry to inform your application has been rejected! your application has been approved, application id ${application._id}`,
+                        applicationNotification: application._id,
+                        status: "unread"
+                    })
+                    await notification.save() 
+                }
+                  
+            }
+            catch(e){
+              console.log(e)
+            }
+
             await application.save()
             return res.status(200).send({message: "application has been rejected!"})
         }
