@@ -2,6 +2,8 @@ const Internship = require("../models/Internship");
 const Job = require('../models/Job')
 const FresherJob = require('../models/Freshers')
 const Application = require("../models/application");
+const Student = require("../models/student")
+const StudentNotification = require("../models/student_notification")
 
 exports.apply = async (req, res) => {
     const {applyingFor, appliedRoleId, applicantSendNote} = req.body
@@ -75,6 +77,25 @@ exports.approve = async (req, res) => {
             application.status = "approved"
             application.applicantReceiveNote = "you have been shortlisted for the elementary-test round!"
             await application.save()
+
+            try {
+                const student = await Student.findById(application.applicantId)
+                if(student){
+                    const notification = new StudentNotification({
+                        notificationFor: student._id,
+                        notificationBy: req.user._id,
+                        notificationTitle: `Congratulations! your application has been approved, application id ${application._id}`,
+                        applicationNotification: application._id,
+                        status: "unread"
+                    })
+                    await notification.save() 
+                }
+                  
+            }
+            catch(e){
+              console.log(e)
+            }
+
             return res.status(200).send({message: "application has been approved"})
         }
         else{
@@ -92,6 +113,25 @@ exports.reject = async (req, res) => {
         if(application.employer.toString() === req.user._id.toString()){
             application.status = "rejected"
             application.applicantReceiveNote = "sorry, you have not been shortlisted for the elementary-test round!"
+            
+            try {
+                const student = await Student.findById(application.applicantId)
+                if(student){
+                    const notification = new StudentNotification({
+                        notificationFor: student._id,
+                        notificationBy: req.user._id,
+                        notificationTitle: `Sorry to inform your application has been rejected! your application has been approved, application id ${application._id}`,
+                        applicationNotification: application._id,
+                        status: "unread"
+                    })
+                    await notification.save() 
+                }
+                  
+            }
+            catch(e){
+              console.log(e)
+            }
+
             await application.save()
             return res.status(200).send({message: "application has been rejected!"})
         }
