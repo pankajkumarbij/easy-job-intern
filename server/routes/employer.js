@@ -17,7 +17,7 @@ const { createJob, updateJob, deleteJob, searchJob, getJobValues } = require("..
 const {approve, reject, employer_getPendingJobs, employer_getPendingFresherJobs} = require("../controller/applications")
 const auth_employer = require("../middleware/auth_employer");
 const {employer_getPendingInternships} = require('../controller/applications');
-const { getNotifications } = require("../controller/employer_notification");
+const {getNotifications, getNotification} = require("../controller/employer_notification")
 
 
 router.post("/signup", signup);
