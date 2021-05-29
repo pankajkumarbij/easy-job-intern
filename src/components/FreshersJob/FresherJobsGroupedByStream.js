@@ -8,7 +8,7 @@ import "../Internships/AllInternships.css";
 import FresherJobCard from "../../utils/UI/FresherJobCard/FresherJobCard";
 // import { Alert } from "bootstrap";
 
-const FresherJobsGroupedByLocation = () => {
+const FresherJobsGroupedByStream = () => {
   const { state, dispatch } = useContext(UserContext);
   const [freshersJobs, setFreshersJobs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -134,4 +134,4 @@ const FresherJobsGroupedByLocation = () => {
     </div>
   );
 };
-export default FresherJobsGroupedByLocation;
+export default FresherJobsGroupedByStream;
