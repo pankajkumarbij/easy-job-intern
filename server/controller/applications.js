@@ -4,10 +4,12 @@ const FresherJob = require('../models/Freshers')
 const Application = require("../models/application");
 const Student = require("../models/student")
 const StudentNotification = require("../models/student_notification")
+const EmployerNotification = require("../models/employer_notification")
 
 exports.apply = async (req, res) => {
     const {applyingFor, appliedRoleId, applicantSendNote} = req.body
     try{
+        const user = Student.findById(req.user._id)
         if(applyingFor.toLowerCase()==='job'){
             const job = await Job.findById(appliedRoleId)
             if(!job){
@@ -23,6 +25,16 @@ exports.apply = async (req, res) => {
                     status: "pending"
                 })
                 await application.save()
+
+                const emp_notification = new EmployerNotification({
+                    notificationFor: job.createdBy,
+                    notificationBy: req.user._id,
+                    notificationTitle: `${user.personName} has applied for a job that you had created (id ${job._id})`,
+                    jobApplicationNotification: job._id,
+                    status: "unread"
+                })
+                await emp_notification.save()
+
                 return res.status(200).send({message: 'application sent!', status: "Pending!", applicationId: application._id})
             }
         }
@@ -59,6 +71,16 @@ exports.apply = async (req, res) => {
                     applicantSendNote,
                     status: "pending"
                 })
+
+                const emp_notification = new EmployerNotification({
+                    notificationFor: fresherjob.createdBy,
+                    notificationBy: req.user._id,
+                    notificationTitle: `${user.personName} has applied for a fresher job that you had created (id ${fresherjob._id})`,
+                    fresherJobApplicationNotification: fresherjob._id,
+                    status: "unread"
+                })
+                await emp_notification.save()
+
                 await _application.save()
                 return res.status(200).send({message: 'application sent!', status: "Pending!", applicationId: _application._id})
             }
