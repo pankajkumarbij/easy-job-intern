@@ -1,113 +1,136 @@
-body, html{
-    overflow-x: hidden;
+body,
+html {
+  overflow-x: hidden;
 }
-.internshipsOuterContainer{
-    width: 90%;
-    margin: auto;
-    padding: 30px 10px;
+.internshipsOuterContainer {
+  width: 90%;
+  margin: auto;
+  padding: 30px 10px;
 }
-.colPost{
-    margin-bottom: 30px;
+.colPost {
+  margin-bottom: 30px;
 }
-.cardPost{
-    background-color: #52176D85;
-    color: white;
-    border-radius: 10px;
-    height:  100%;
+.cardPost {
+  background-color: #52176d85;
+  color: white;
+  border-radius: 10px;
+  height: 100%;
 }
-.titleOfPost{
-    font-size: 1.7rem;
-    font-weight: 900;
-    text-align: left;
+.titleOfPost {
+  font-size: 1.7rem;
+  font-weight: 900;
+  text-align: left;
 }
-.subtitleOfPost{
-    font-weight: 300;
-    font-style: oblique;
-    color: #ccc;
-    text-align: left;
-    padding: 5px 0 12px 0;
-    font-size: 20px;
+.subtitleOfPost {
+  font-weight: 300;
+  font-style: oblique;
+  color: #ccc;
+  text-align: left;
+  padding: 5px 0 12px 0;
+  font-size: 20px;
 }
-.subsubtitleOfPost{
-    font-weight: 600;
-    font-style: oblique;
-    color: #ddd;
-    text-align: left;
-    padding-bottom: 20px;
-    font-size: 17px;
+.subsubtitleOfPost {
+  font-weight: 600;
+  font-style: oblique;
+  color: #ddd;
+  text-align: left;
+  padding-bottom: 20px;
+  font-size: 17px;
+}
+.textPost {
+  padding-top: 10px;
+  font-weight: 300px;
+  font-size: 15px;
+  text-align: justify;
+}
+.itemPost {
+  font-size: 14px;
+  padding: 8px;
+  background-color: inherit;
+  border-color: #888;
+}
+.last {
+  color: red;
+  margin-bottom: 20px;
+}
+.tech {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.TechStack {
+  background-color: #7f56f0;
+  /* border: 1px solid #88f; */
+  padding: 10px;
+  color: white;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+.TechStack:hover {
+  color: white;
+}
+.postOptions {
+  float: right;
+  padding: 0;
+  color: #fff !important;
+}
+.postOptionsBtn {
+  background-color: inherit !important;
+  border: none;
+  padding: 0;
+}
+.postOptionsBtn::after {
+  content: none;
+}
+.postOptionsBtn:focus {
+  box-shadow: none !important;
+}
+.optionMenu {
+  min-width: fit-content !important;
+  font-size: 1.4rem;
+  background-color: #222;
+  color: #fff !important;
+}
+.optionItem:hover,
+.optionItem:focus {
+  background-color: #444 !important;
+}
+.optionsMenuIcon {
+  color: #fff !important;
+}
+.parameter {
+  color: white;
+  width: 100%;
+  background: #d6c20a;
+  border-radius: 10px;
+  text-decoration: none !important;
+  padding: 10px;
+  font-size: 2.5rem;
+  margin: 30px 0 !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #595661;
+}
+.companyHeading{
+    font-size: 3rem;
+    padding: 25px 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-decoration: none;
+    font-weight: 800;
+}
 
+.COMPANYNAME {
+  /* background: #888; */
+  color: #d6c20a;
+  margin: 20px 0;
+  font-size: 2rem;
 }
-.textPost{
-    padding-top: 10px;
-    font-weight: 300px;
-    font-size: 15px;
-    text-align: justify;
-}
-.itemPost{
-    font-size: 14px;
-    padding: 8px;
-    background-color: inherit;
-    border-color: #888;
-}
-.last{
-    color: red;
-    margin-bottom: 20px;
-}
-.tech{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
-.TechStack{
-    background-color: #7f56f0;
-    /* border: 1px solid #88f; */
-    padding: 10px;
-    color: white;
-    border-radius: 10px;
-    margin: 10px 0;
-}
-.TechStack:hover{
-    color: white;
-}
-.postOptions{
-    float: right;
-    padding: 0;
-    color: #fff !important;
-}
-.postOptionsBtn{
-    background-color: inherit !important;
-    border: none;
-    padding: 0;
-
-}
-.postOptionsBtn::after{
-    content: none;
-}
-.postOptionsBtn:focus{
-    box-shadow: none !important;
-}
-.optionMenu{
-    min-width: fit-content !important;
-    font-size: 1.4rem;
-    background-color: #222;
-    color: #fff !important;
-}
-.optionItem:hover,.optionItem:focus {
-    background-color: #444 !important;
-}
-.optionsMenuIcon{
-    color: #fff !important;
-}
-.parameter{
-    color: white;
-    width: 100%;
-    background: #d6c20a;
-    border-radius: 10px;
-    text-decoration: none !important;
-    padding: 10px;
-    font-size: 2.5rem;
-    margin: 30px 0 !important;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #595661
+.NAME-company {
+  width: 80%;
+  /* background-color: rgb(34, 34, 34); */
+  margin: auto;
+  border-radius: 10px;
+  border: 2px solid #d6c20a;
+  box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 }
