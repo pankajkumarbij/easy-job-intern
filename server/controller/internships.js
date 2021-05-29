@@ -1,6 +1,6 @@
 const Internship = require("../models/Internship");
-const Student = require("../models/student")
-const StudentNotification = require("../models/student_notification")
+const Student = require("../models/student");
+const StudentNotification = require("../models/student_notification");
 
 exports.createInternship = async (req, res) => {
   const {
@@ -66,25 +66,24 @@ exports.createInternship = async (req, res) => {
 
   // console.log(internship);
 
-
   try {
-    const students = await Student.find({ savedCompanies: companyName.toUpperCase().replace(/\s/g, '') }) 
-    if(students || students.length>0){
-      students.forEach( async (student) => {
+    const students = await Student.find({
+      savedCompanies: companyName.toUpperCase().replace(/\s/g, ""),
+    });
+    if (students || students.length > 0) {
+      students.forEach(async (student) => {
         const notification = new StudentNotification({
           notificationFor: student._id,
           notificationBy: req.user._id,
           notificationTitle: `the company you starmarked, ${companyName} has a new internship opening`,
           internshipOpeningNotification: internship._id,
-          status: "unread"
-        })
-        await notification.save()  
-      })
-
+          status: "unread",
+        });
+        await notification.save();
+      });
     }
-  }
-  catch(e){
-    console.log(e)
+  } catch (e) {
+    console.log(e);
   }
 
   internship
@@ -461,7 +460,6 @@ exports.getInternhsipsByIndustries = (req, res) => {
   });
 };
 
-
 exports.searchBookmarkedInternship = async (req, res) => {
   const match = {};
   match.bookmarkedBy = req.user._id;
@@ -475,20 +473,39 @@ exports.searchBookmarkedInternship = async (req, res) => {
     const date = new Date(req.query.startDate).toISOString();
     match.startDate = date;
   }
-  if(req.query.role){
-    match.role = req.query.role 
+  if (req.query.role) {
+    match.role = req.query.role;
   }
-  if(req.query.vacancies){
-    match.vacancies = req.query.vacancies 
+  if (req.query.vacancies) {
+    match.vacancies = req.query.vacancies;
   }
-  
-  try{
-    const internships = await Internship.find(match).populate("createdBy", "_id personName").sort("-createdAt")
-    if(internships.length===0){
-      return res.status(200).send({message: "No internships found"})
+
+  try {
+    const internships = await Internship.find(match)
+      .populate("createdBy", "_id personName")
+      .sort("-createdAt");
+    if (internships.length === 0) {
+      return res.status(200).send({ message: "No internships found" });
     }
     res.status(200).send(internships);
-    } catch (e) {
+  } catch (e) {
     res.status(400).send("Something went wrong");
   }
+};
+
+exports.getInternshipCompanyNames = (req, res) => {
+  Internship.aggregate([
+    {
+      $group: {
+        _id: "$companyName",
+        total: { $sum: 1 },
+      },
+    },
+    {
+      $sort: { total: -1 },
+    },
+  ]).then((internships) => {
+    console.log(internships);
+    res.json({ internships: internships });
+  });
 };
