@@ -63,10 +63,16 @@ const studentSchema = new Schema({
       typr: String,
     },
   ],
-  bookmarked: [
+  bookmarkedInternship: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Internship",
+    },
+  ],
+  bookmarkedJob: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Job",
     },
   ],
 });
