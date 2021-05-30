@@ -44,6 +44,7 @@ import JobsByCompanyName from "./components/Jobs/JobsByCompanyName";
 import FresherJobsGroupedByLocation from "./components/FreshersJob/FresherJobsGroupedByLocation";
 import FresherJobsGroupedByStream from "./components/FreshersJob/FresherJobsGroupedByStream";
 import FreshersJobByCompanyName from "./components/FreshersJob/FreshersJobByCompanyName";
+import InternshipCompanyName from "./components/Internships/InternshipCompanyNames";
 
 
 
@@ -173,6 +174,9 @@ const Routing = () => {
           </Route>
           <Route path="/freshers/companyName/:companyName">
             <FreshersJobByCompanyName />
+          </Route>
+          <Route path="/internship/companyName">
+            <InternshipCompanyName />
           </Route>
           <Route path="/job/companyName/:companyName">
             <JobsByCompanyName />
