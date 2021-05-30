@@ -8,6 +8,7 @@ const EmployerNotification = require("../models/employer_notification")
 
 exports.apply = async (req, res) => {
     const {applyingFor, appliedRoleId, applicantSendNote} = req.body
+    
     try{
         const user = Student.findById(req.user._id)
         if(applyingFor.toLowerCase()==='job'){
@@ -54,6 +55,16 @@ exports.apply = async (req, res) => {
                     status: "pending"
                 })
                 await application_.save()
+
+                const emp_notification = new EmployerNotification({
+                    notificationFor: internship.createdBy,
+                    notificationBy: req.user._id,
+                    notificationTitle: `${user.personName} has applied for a internship that you had created (id ${internship._id})`,
+                    internshipApplicationNotification: internship._id,
+                    status: "unread"
+                })
+                await emp_notification.save()
+
                 return res.status(200).send({message: 'application sent!', status: "Pending!", applicationId: application_._id})
             }
         } 
@@ -135,7 +146,6 @@ exports.reject = async (req, res) => {
         if(application.employer.toString() === req.user._id.toString()){
             application.status = "rejected"
             application.applicantReceiveNote = "sorry, you have not been shortlisted for the elementary-test round!"
-            
             try {
                 const student = await Student.findById(application.applicantId)
                 if(student){
