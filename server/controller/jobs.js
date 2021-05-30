@@ -1,6 +1,6 @@
 const Job = require("../models/Job");
-const Student = require("../models/student")
-const StudentNotification = require("../models/student_notification")
+const Student = require("../models/student");
+const StudentNotification = require("../models/student_notification");
 
 exports.createJob = async (req, res) => {
   const {
@@ -58,23 +58,24 @@ exports.createJob = async (req, res) => {
 
   // console.log(internship);
 
-try {
-    const students = await Student.find({ savedCompanies: companyName.toUpperCase().replace(/\s/g, '') }) 
-    if(students || students.length>0){
-      students.forEach( async(student) => {
+  try {
+    const students = await Student.find({
+      savedCompanies: companyName.toUpperCase().replace(/\s/g, ""),
+    });
+    if (students || students.length > 0) {
+      students.forEach(async (student) => {
         const notification = new StudentNotification({
           notificationFor: student._id,
           notificationBy: req.user._id,
           notificationTitle: `the company you starmarked, ${companyName} has a new job opening`,
           jobOpeningNotification: job._id,
-          status: "unread"
-        })
-        await notification.save()  
-      })
+          status: "unread",
+        });
+        await notification.save();
+      });
     }
-  }
-  catch(e){
-    console.log(e)
+  } catch (e) {
+    console.log(e);
   }
 
   job
@@ -270,30 +271,32 @@ exports.searchFilterJobs = async (req, res) => {
 };
 
 exports.bookmarkJob = async (req, res) => {
+  let job;
   try {
-    const bool = req.body.bookmark === "true";
-    const job = await Job.findById(req.params.id);
-    if (bool) {
-      if (!job.bookmarkedBy.includes(req.user._id)) {
-        //making sure that a user doesn't get appended to the list more than once
-        job.bookmarkedBy.push(req.user._id);
-        await job.save();
-      }
-      return res.status(200).send({ message: "bookmarked!" });
-    } else {
-      const i = job.bookmarkedBy.indexOf(req.user._id);
-      if (i < 0) {
-        //if user was not present in the bookmarkedBy list of job
-        return res.status(200).send({ message: "job not found!" });
-      }
-      job.bookmarkedBy.splice(i, 1);
-      await job.save();
-      return res.status(200).send({
-        message: "the job is not included in your bookmarked list anymore!",
-      });
-    }
-  } catch (e) {
-    return res.status(400).send({ message: "something went wrong" });
+    job = await Job.findById(req.params.id);
+  } catch (err) {
+    return res.status(500).send({ message: "Job not found!" });
+  }
+
+  let USER;
+  try {
+    USER = await Student.findById(req.user._id);
+  } catch (err) {
+    return res.status(500).send({ message: "User not found!" });
+  }
+
+  // if (bool) {
+  if (!USER.bookmarkedJob.includes(req.params.id)) {
+    //making sure that a user doesn't get appended to the list more than once
+    USER.bookmarkedJob.push(req.params.id);
+    await USER.save();
+    return res.status(200).send({ message: "Job added to bookmark!" });
+  } else {
+    USER.bookmarkedJob = USER.bookmarkedJob.filter(
+      (i) => i._id != req.params.id
+    );
+    await USER.save();
+    return res.status(200).send({ message: "Bookmark Removed!" });
   }
 };
 
@@ -336,7 +339,6 @@ exports.getBookmarkedJobs = async (req, res) => {
   }
 };
 
-
 exports.searchBookmarkedJob = async (req, res) => {
   const match = {};
   match.bookmarkedBy = req.user._id;
@@ -350,21 +352,23 @@ exports.searchBookmarkedJob = async (req, res) => {
     const date = new Date(req.query.startDate).toISOString();
     match.startDate = date;
   }
-  if(req.query.role){
-    match.role = req.query.role 
+  if (req.query.role) {
+    match.role = req.query.role;
   }
-  if(req.query.vacancies){
-    match.vacancies = req.query.vacancies 
+  if (req.query.vacancies) {
+    match.vacancies = req.query.vacancies;
   }
-  
-  try{
-    const jobs = await Job.find(match).populate("createdBy", "_id personName").sort("-createdAt")
-    if(jobs.length===0){
-      return res.status(200).send({message: "No jobs found"})
+
+  try {
+    const jobs = await Job.find(match)
+      .populate("createdBy", "_id personName")
+      .sort("-createdAt");
+    if (jobs.length === 0) {
+      return res.status(200).send({ message: "No jobs found" });
     }
     res.status(200).send(jobs);
-    } catch (e) {
-    res.status(400).send({message:"Something went wrong"});
+  } catch (e) {
+    res.status(400).send({ message: "Something went wrong" });
   }
 };
 
