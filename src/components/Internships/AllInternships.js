@@ -1,9 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import {
-  Col,
-  Row,Spinner,Alert
-} from "react-bootstrap";
+import { Col, Row, Spinner, Alert } from "react-bootstrap";
 
 import toast, { Toaster } from "react-hot-toast";
 
@@ -51,7 +48,6 @@ const AllInternships = () => {
     console.log(t);
   }
 
- 
   const deletePost = (postId) => {
     axios({
       method: "delete",
@@ -72,7 +68,35 @@ const AllInternships = () => {
           notify();
         } else {
           setInternships(res.data.internships);
-          window.location.reload(false)
+          window.location.reload(false);
+          const notify = () => toast(res.data.message);
+          notify();
+        }
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
+  };
+
+  const bookMarkPost = (postId) => {
+    axios({
+      method: "post",
+      url: `http://localhost:5000/student/bookmarkInternship/${postId}`,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data.error) {
+          // console.log(res.data.error);
+          const notify = () => toast(res.data.error);
+          notify();
+        } else {
+          // setInternships(res.data.internships);
+          // window.location.reload(false);
+          console.log(res.data.message);
           const notify = () => toast(res.data.message);
           notify();
         }
@@ -98,7 +122,15 @@ const AllInternships = () => {
             />
           </div>
         ) : internships && !internships.length > 0 ? (
-          <Alert variant="danger" className="w-100 " style={{backgroundColor:"#343A40",border:"none",color:"#ffc107"}}>
+          <Alert
+            variant="danger"
+            className="w-100 "
+            style={{
+              backgroundColor: "#343A40",
+              border: "none",
+              color: "#ffc107",
+            }}
+          >
             No internships available right now
           </Alert>
         ) : (
@@ -110,10 +142,12 @@ const AllInternships = () => {
                 key={internship._id}
                 className="col-xl-4 col-lg-5 col-md-6 col-sm-11 col-12 colPost"
               >
-              
-                <InternshipCard internship={internship} userId={state.user._id}
-                 deletePost={deletePost}/>
-            
+                <InternshipCard
+                  internship={internship}
+                  userId={state.user._id}
+                  deletePost={deletePost}
+                  bookMarkPost={bookMarkPost}
+                />
               </Col>
             );
           })
