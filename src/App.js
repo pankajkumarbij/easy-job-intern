@@ -48,8 +48,6 @@ import InternshipCompanyName from "./components/Internships/InternshipCompanyNam
 import JobCompanyName from "./components/Jobs/JobCompanyName";
 import FreshersJobCompanyName from "./components/FreshersJob/FreshersJobCompanyName";
 
-
-
 export const UserContext = createContext();
 
 const Routing = () => {
@@ -186,7 +184,7 @@ const Routing = () => {
           <Route path="/companyName/freshersjob">
             <FreshersJobCompanyName />
           </Route>
-          <Route path="/job/companyName/:companyName">
+          <Route path="/companyName-job/:companyName">
             <JobsByCompanyName />
           </Route>
           <Route path="/freshersjobs/industry">
@@ -236,6 +234,51 @@ const Routing = () => {
           </Route>
           <Route path="/all-jobs" exact>
             <AllJobs />
+          </Route>
+          <Route path="/internship/location">
+            <InternshipsGroupedByLocation />
+          </Route>
+          <Route path="/internship/stream">
+            <InternshipsGroupedByStream />
+          </Route>
+          <Route path="/internship/industry">
+            <InternshipsGroupedByIndustry />
+          </Route>
+          <Route path="/jobs/location">
+            <JobsGroupedByLocation />
+          </Route>
+          <Route path="/jobs/stream">
+            <JobsGroupedByStream />
+          </Route>
+          <Route path="/jobs/industry">
+            <JobsGroupedByIndustry />
+          </Route>
+          <Route path="/freshersjobs/industry">
+            <FresherJobsGroupedByIndustry />
+          </Route>
+          <Route path="/freshersjobs/location">
+            <FresherJobsGroupedByLocation />
+          </Route>
+          <Route path="/freshersjobs/stream">
+            <FresherJobsGroupedByStream />
+          </Route>
+          <Route path="/internship/companyName">
+            <InternshipCompanyName />
+          </Route>
+          <Route path="/job/companyName">
+            <JobCompanyName />
+          </Route>
+          <Route path="/companyName/freshersjob">
+            <FreshersJobCompanyName />
+          </Route>
+          <Route path="/companyName-internship/:companyName">
+            <InternshipsByCompany />
+          </Route>
+          <Route path="/companyName-job/:companyName">
+            <JobsByCompanyName />
+          </Route>
+          <Route path="/freshers/companyName/:companyName">
+            <FreshersJobByCompanyName />
           </Route>
           <Route exact path="/login/student-profile">
             <Profile />
