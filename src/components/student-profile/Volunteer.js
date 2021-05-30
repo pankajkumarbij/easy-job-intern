@@ -45,7 +45,7 @@ const Volunteer=()=>
 
       return (
         <form className="volunteer">
-        <h2>Volunteer Experience</h2>
+        <h2 className="subHeading">Volunteer Experience</h2>
         <Label value="Volunteer Experience"/><br/>
         { inputFields.map(inputField => (
     <div key={inputField.id}>

@@ -45,7 +45,7 @@ const Other=()=>
 
       return (
         <form className="Other">
-        <h2>Other</h2>
+        <h2 className="subHeading">Other</h2>
         <Label value="Other"/><br/>
         { inputFields.map(inputField => (
     <div key={inputField.id}>

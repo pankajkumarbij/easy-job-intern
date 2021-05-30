@@ -1,94 +1,120 @@
-h2{
-    color: white;
-    text-decoration: underline;
-    margin: auto;
-    text-align: center;
+h2 {
+  color: white;
+  text-decoration: underline;
+  margin: auto;
+  text-align: center;
 }
-.center{
-    text-align: center;
-}
-
-.edu{
-    margin-right: 115px;
+.center {
+  text-align: center;
 }
 
-
-h1{
-    
-    color: white;
-    text-decoration: underline;
-}
-h6{
-
-    color:white;
+.edu {
+  /* margin-right: 115px; */
 }
 
-.main-box{
-    background-color: #1f4468;
-    width:55%;
-    margin:auto;
-    border-radius: 30px;
-    
+h1 {
+  color: white;
+  text-decoration: underline;
+}
+h6 {
+  color: white;
 }
 
-.side ,.byside{
-    display: inline-block;
-    width: 48%;
+.main-box {
+  /* background-color: #1f4468; */
+  width: 55%;
+  margin: auto;
+  border-radius: 30px;
+  border: 2px solid #d6c20a;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
+}
+.ProfileBuilderheading {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  text-decoration: none;
+  font-size: 3rem;
+  font-weight: 500;
+}
+.inst {
+  color: #aaa;
 }
 
-.education,.experience,.projects,.skills,.achievments,.volunteer,.Other,.projects{
-    text-align: left;
-   padding-left:40px ;
-   margin-top: 4px;
-    
+.side,
+.byside {
+  display: inline-block;
+  width: 45%;
 }
 
-.form-main{
-   text-align: left;
-   padding-left:40px ;
-   margin-top: 4px;
-    
+.education,
+.experience,
+.projects,
+.skills,
+.achievments,
+.volunteer,
+.Other,
+.projects {
+  text-align: left;
+  padding: 0 30px;
+  margin-top: 4px;
 }
 
-span{
-    color:red;
+.form-main {
+  text-align: left;
+  padding: 0 30px;
+  margin-top: 4px;
 }
 
-.label-text{
-    color: white;
-    margin-top: 20px;
+span {
+  color: red;
+  padding-left: 5px;
+  font-size: 1.2rem;
 }
 
-input,select{
-    background-color:#A6A6A6;
-    border-radius: 6px;
-    width:30%;
+.label-text {
+  color: white;
+  margin-top: 20px;
 }
 
-textarea{
-    background-color:#A6A6A6;
-    border-radius: 6px;   
+input,
+select {
+  background-color: #a6a6a6;
+  border-radius: 6px;
+  width: 30%;
 }
 
-.text-long{
-    background-color:#A6A6A6;
-    border-radius: 6px;
-    width:75%;
+textarea {
+  background-color: #a6a6a6;
+  border-radius: 6px;
 }
 
-::placeholder{
-    color: #000;
-    font-size: 0.8rem;
+.text-long {
+  background-color: #a6a6a6;
+  border-radius: 6px;
+  width: 100%;
+  padding: 5px 10px;
 }
 
-.add-button{
-    margin-left: 10px;
+::placeholder {
+  color: #000;
+  font-size: 0.8rem;
 }
 
-.side-by-side{
-    display: inline-block;
+.add-button {
+  margin-left: 10px;
 }
 
-.long-cal{
-    width:75%;
+.side-by-side {
+  display: inline-block;
+}
+
+.long-cal {
+  width: 75%;
+}
+
+.subHeading{
+  font-size: 2.5rem;
+  text-align: center;
+  padding-top: 30px;
+  text-decoration: none;
+  font-family:'Times New Roman', Times, serif;
+  font-weight: 800;
 }

@@ -45,7 +45,7 @@ const Achievments=()=>
 
       return (
         <form className="skills">
-        <h2>Achievments</h2>
+        <h2 className="subHeading">Achievments</h2>
         <Label value="Achievments"/><br/>
         { inputFields.map(inputField => (
     <div key={inputField.id}>
