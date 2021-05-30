@@ -52,6 +52,18 @@ const FreshersJobSchema = new Schema(
       type: Number,
       required: true,
     },
+    workFromHome: { 
+        type: Boolean, 
+        required: true 
+    },
+    partTimeAllowed: { 
+        type: Boolean, 
+        required: true 
+    },
+    prerequisites:{
+        type: [String],
+        required:true,
+    }
     // bookmarkedBy: [
     //   {
     //     type: ObjectId,

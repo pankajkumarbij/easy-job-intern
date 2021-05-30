@@ -59,6 +59,21 @@ const internshipSchema = new Schema({
         type: Number,
         required: true
     },
+    workFromHome: { 
+        type: Boolean, 
+        required: true 
+    },
+    partTimeAllowed: { 
+        type: Boolean, 
+        required: true 
+    },
+    withJobOffer: { 
+        type: Boolean,
+    },
+    prerequisites:{
+        type: [String],
+        required:true,
+    }
     // bookmarkedBy: [{
     //     type: ObjectId,  
     //     ref: 'Student' 
