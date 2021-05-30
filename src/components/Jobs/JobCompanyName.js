@@ -9,7 +9,7 @@ const JobCompanyName = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://localhost:5000/user/companyName-job`,
+      url: `http://localhost:5000/user/companyName-Job`,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -22,8 +22,8 @@ const JobCompanyName = () => {
           //   const notify = () => toast(res.data.error);
           //   notify();
         } else {
-          console.log(res.data.internships);
-          setNames(res.data.internships);
+          console.log(res.data.Jobs);
+          setNames(res.data.Jobs);
           console.log(names);
         }
       })
@@ -36,7 +36,7 @@ const JobCompanyName = () => {
   console.log(names);
   return (
     <div>
-      <h1 className="companyHeading">Internships</h1>
+      <h1 className="companyHeading">Jobs</h1>
       <Row>
         {names &&
           names.map((name) => (
