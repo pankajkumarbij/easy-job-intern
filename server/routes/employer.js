@@ -16,8 +16,11 @@ const { createJob, updateJob, deleteJob, searchJob, getJobValues } = require("..
 
 const {approve, reject, employer_getPendingJobs, employer_getPendingFresherJobs} = require("../controller/applications")
 const auth_employer = require("../middleware/auth_employer");
-const {employer_getPendingInternships} = require('../controller/applications')
+
+const {employer_getPendingInternships} = require('../controller/applications');
 const {getNotifications, getNotification} = require("../controller/employer_notification")
+
+
 
 router.post("/signup", signup);
 router.post("/signin", signin);
@@ -55,7 +58,9 @@ router.get('/getPendingFresherJobs', auth_employer, employer_getPendingFresherJo
 router.get('/getPendingInternships', auth_employer, employer_getPendingInternships)
 
 
-
 router.get('/getNotification/:id', auth_employer, getNotification)
+
+router.get('/getNotifications', auth_employer, getNotifications)
+
 
 module.exports = router;
