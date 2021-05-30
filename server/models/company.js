@@ -10,10 +10,11 @@ const companySchema = new Schema({
     companySize:{
         enum: ['1-10', '11-50', '51-200', '201-500', '210-500', '501-1000', '1001-5000', '5000+'],
         type: String,
+        required:true,
     },
     overview: {
         type: String,
-        required: true
+        required: true,
     },
     locations:[{
         type: String,
@@ -21,6 +22,7 @@ const companySchema = new Schema({
     }],
     tags:[{
         type: String,
+        required:true,
     }],
     tagline:{
         type: String,
@@ -28,6 +30,7 @@ const companySchema = new Schema({
     },
     investmentStage:{
         type: String,
+        required:true,
     },
     markets:[{
         type: String,
@@ -35,7 +38,8 @@ const companySchema = new Schema({
     }],
     createdBy: {
         type: ObjectId,
-        ref: "Employer"
+        ref: "Employer",
+        required:true,
     },
 
 }, {timestamps: true})
