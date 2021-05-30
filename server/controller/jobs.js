@@ -433,3 +433,20 @@ exports.getJobsByCompanyName = (req, res) => {
       res.json({ Jobs: Jobs });
     });
 };
+
+exports.getJobsCompanyNames = (req, res) => {
+  Job.aggregate([
+    {
+      $group: {
+        _id: "$companyName",
+        total: { $sum: 1 },
+      },
+    },
+    {
+      $sort: { total: -1 },
+    },
+  ]).then((Jobs) => {
+    console.log(Jobs);
+    res.json({ Jobs: Jobs });
+  });
+};
