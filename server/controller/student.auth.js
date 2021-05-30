@@ -142,6 +142,24 @@ exports.logoutAll = async( req, res ) => {
     }
 }
 
+exports.findStudentById = async (req, res) => {
+    try {
+      var student = await Student.findById(req.params.id)
+        .select("-password")
+        .select("-tokens")
+        .populate("bookmarkedInternship")
+        .populate("bookmarkedJob")
+        .populate("bookmarkedFresherJob");
+      if (!student) {
+        return res.send({ message: "Student Not Found" });
+      }
+      return res.json(student);
+    } catch (e) {
+      res.status(401).send(e);
+    }
+  };
+
+
 exports.deleteStudent = async(req, res) => {
     try{
         jobs = await Job.find({bookmarkedBy: req.user._id})

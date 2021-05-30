@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { signup, signin, update, logout, logoutAll ,signupConfirm, deleteStudent, saveCompany } = require("../controller/student.auth");
+const { signup, signin, update, logout, logoutAll ,signupConfirm, deleteStudent, saveCompany,findStudentById } = require("../controller/student.auth");
 const auth_student = require('../middleware/auth_student');
 
 const {searchFilterInternships, bookmarkInternship, getBookmarkedInternships, searchBookmarkedInternship} = require("../controller/internships")
@@ -22,6 +22,7 @@ router.get('/searchFilterInternships', auth_student, searchFilterInternships);
 router.get('/searchFilterJobs', auth_student, searchFilterJobs);
 router.get('/searchFilterFreshersJobs', auth_student, searchFilterFreshersJobs);
 router.get('/confirm/:confirmationCode' , signupConfirm );
+router.get('/studentfetch/:id' , findStudentById);
 router.post('/bookmarkInternship/:id', auth_student, bookmarkInternship)
 router.post('/bookmarkJob/:id', auth_student, bookmarkJob)
 router.post('/bookmarkFresherJob/:id', auth_student, bookmarkFresherJob)

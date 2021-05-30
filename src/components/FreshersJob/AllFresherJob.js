@@ -1,11 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import {
-  Col,
-  Row,
-  Spinner,
-  Alert,
-} from "react-bootstrap";
+import { Col, Row, Spinner, Alert } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { UserContext } from "../../App";
 
@@ -49,6 +44,35 @@ const AllFreshersJobs = () => {
       });
   };
 
+  const bookMarkPost = (postId) => {
+    console.log(1);
+    axios({
+      method: "post",
+      url: `http://localhost:5000/student/bookmarkFresherJob/${postId}`,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data.error) {
+          // console.log(res.data.error);
+          const notify = () => toast(res.data.error);
+          notify();
+        } else {
+          // setInternships(res.data.internships);
+          // window.location.reload(false);
+          console.log(res.data.message);
+          const notify = () => toast(res.data.message);
+          notify();
+        }
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
+  };
+
   useEffect(() => {
     axios({
       method: "get",
@@ -82,8 +106,6 @@ const AllFreshersJobs = () => {
     const t = new Date(freshersJobs[4].startDate).toString("YYYY-MM-DD");
     console.log(t);
   }
-
-  
 
   return (
     <div className="internshipsOuterContainer">
@@ -123,6 +145,7 @@ const AllFreshersJobs = () => {
                 <FresherJobCard
                   fresherjob={fresher}
                   deletePost={deletePost}
+                  bookMarkPost={bookMarkPost}
                   userId={state.user._id}
                 />
               </Col>
