@@ -1,3 +1,7 @@
+const Internship = require("../models/Internship");
+const Job = require('../models/Job')
+const FresherJob = require('../models/Freshers')
+const Application = require("../models/application");
 const Notification = require("../models/employer_notification")
 
 const ObjectID = require('mongodb').ObjectID;

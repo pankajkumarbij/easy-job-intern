@@ -426,3 +426,20 @@ exports.getFreshersJobsByCompanyName = (req, res) => {
       res.json({ FreshersJobs: FreshersJobs });
     });
 };
+
+exports.getFreshersJobsCompanyNames = (req, res) => {
+  Freshers.aggregate([
+    {
+      $group: {
+        _id: "$companyName",
+        total: { $sum: 1 },
+      },
+    },
+    {
+      $sort: { total: -1 },
+    },
+  ]).then((FreshersJobs) => {
+    console.log(FreshersJobs);
+    res.json({ FreshersJobs: FreshersJobs });
+  });
+};
