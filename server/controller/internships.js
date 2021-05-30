@@ -370,42 +370,21 @@ exports.bookmarkInternship = async (req, res) => {
 };
 
 exports.getBookmarkedInternships = async (req, res) => {
+  let USER;
   try {
-    const internships = await Internship.find({ bookmarkedBy: req.user._id });
-    const _internships = [];
-    internships.forEach((internship) => {
-      const {
-        techstack,
-        _id,
-        companyName,
-        description,
-        location,
-        stipend,
-        lastDate,
-        duration,
-        startDate,
-        endDate,
-        createdBy,
-      } = internship;
-      const obj = {
-        techstack,
-        _id,
-        companyName,
-        description,
-        location,
-        stipend,
-        lastDate,
-        duration,
-        startDate,
-        endDate,
-        createdBy,
-      };
-      _internships.push(obj);
-    });
-    return res.status(200).send(_internships);
-  } catch (e) {
-    res.status(400).send("something went wrong!");
+    USER = await Student.findById(req.user._id);
+  } catch (err) {
+    res.status(500).send({ message: "something went wrong!" });
   }
+
+  let internship;
+  try {
+    internship = await Internship.find({ _id: { $in: USER.bookmarkedInternship } });
+  } catch (err) {
+    res.status(500).send({ message: "something went wrong!" });
+  }
+
+  res.status(200).json({ internship: internship });
 };
 
 exports.getInternhsipsByLocations = (req, res) => {

@@ -304,7 +304,7 @@ exports.getBookmarkedFresherJobs = async (req, res) => {
 
   let fresherJobs;
   try {
-    fresherJobs = await Freshers.find({ _id: { $in: USER.FreshersJob } });
+    fresherJobs = await Freshers.find({ _id: { $in: USER.bookmarkedFresherJob } });
   } catch (err) {
     res.status(500).send({ message: "something went wrong!" });
   }
