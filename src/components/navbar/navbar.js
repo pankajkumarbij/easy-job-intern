@@ -50,6 +50,10 @@ function NavBar() {
                     {" "}
                     Internship By Stream
                   </Dropdown.Item>
+                  <Dropdown.Item as={Link} to="/internship/companyName">
+                    {" "}
+                    Internship By Company
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </Nav.Link>
@@ -71,6 +75,9 @@ function NavBar() {
                   <Dropdown.Item as={Link} to="/jobs/stream">
                     Jobs By Stream
                   </Dropdown.Item>
+                  <Dropdown.Item as={Link} to="/job/companyName">
+                    Jobs By Company
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </Nav.Link>
@@ -91,6 +98,9 @@ function NavBar() {
                   </Dropdown.Item>
                   <Dropdown.Item as={Link} to="/freshersjobs/stream">
                     Freshers Jobs By Stream
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to="/companyName/freshersjob">
+                    Freshers Jobs By Company
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
