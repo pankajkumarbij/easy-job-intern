@@ -301,42 +301,23 @@ exports.bookmarkJob = async (req, res) => {
 };
 
 exports.getBookmarkedJobs = async (req, res) => {
+  let USER;
   try {
-    const jobs = await Job.find({ bookmarkedBy: req.user._id });
-    const _jobs = [];
-    jobs.forEach((job) => {
-      const {
-        techstack,
-        _id,
-        companyName,
-        description,
-        location,
-        salary,
-        role,
-        vacancies,
-        startDate,
-        lastDate,
-        createdBy,
-      } = job;
-      const obj = {
-        techstack,
-        _id,
-        companyName,
-        description,
-        location,
-        salary,
-        role,
-        vacancies,
-        startDate,
-        lastDate,
-        createdBy,
-      };
-      _jobs.push(obj);
-    });
-    return res.status(200).send(_jobs);
-  } catch (e) {
-    res.status(400).send({ message: "something went wrong!" });
+    USER = await Student.findById(req.user._id);
+  } catch (err) {
+    res.status(500).send({ message: "something went wrong!" });
   }
+
+  let job;
+  try {
+    job = await Job.find({
+      _id: { $in: USER.bookmarkedJob },
+    });
+  } catch (err) {
+    res.status(500).send({ message: "something went wrong!" });
+  }
+
+  res.status(200).json({ job: job });
 };
 
 exports.searchBookmarkedJob = async (req, res) => {
