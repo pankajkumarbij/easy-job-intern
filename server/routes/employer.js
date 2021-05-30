@@ -8,7 +8,8 @@ const {
   signupConfirm,
   update,
   deleteEmployer,
-  findEmployerById
+  findEmployerById,
+  addCompany
 } = require("../controller/employer.auth");
 
 const { createFreshersJob, updateFreshersJob, deleteFreshersJob, searchFresherJob, getFresherJobValues } = require("../controller/freshersjob");
@@ -64,5 +65,5 @@ router.get('/getNotification/:id', auth_employer, getNotification)
 
 router.get('/getNotifications', auth_employer, getNotifications)
 
-
+router.post('/addCompany', auth_employer, addCompany)
 module.exports = router;
