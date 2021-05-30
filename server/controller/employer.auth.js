@@ -149,6 +149,23 @@ exports.update = async(req, res) => {
   }
 }
 
+exports.findEmployerById = async (req, res) => {
+  try {
+    const employer = await Employer.findById(req.params.id)
+      .select("-password")
+      .select("-tokens -confirmationCode")
+    if (employer) {
+      res.json(employer);
+    }else{
+      res.status(404).send({ message: "Employer Not Found" });
+    }
+  } catch (e) {
+    res.status(404).send(e);
+  }
+};
+
+
+
 exports.deleteEmployer = async(req, res) => {
   try{
       jobs = await Job.find({createdBy: req.user._id})
