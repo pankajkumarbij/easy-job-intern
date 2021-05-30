@@ -75,6 +75,12 @@ const studentSchema = new Schema({
       ref: "Job",
     },
   ],
+  bookmarkedFresherJob: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "FreshersJob",
+    },
+  ],
 });
 
 studentSchema.methods.generateAuthToken = async function () {
