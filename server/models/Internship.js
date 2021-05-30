@@ -59,10 +59,10 @@ const internshipSchema = new Schema({
         type: Number,
         required: true
     },
-    bookmarkedBy: [{
-        type: ObjectId,  
-        ref: 'Student' 
-    }]
+    // bookmarkedBy: [{
+    //     type: ObjectId,  
+    //     ref: 'Student' 
+    // }]
 }, {timestamps: true})
 
 const Internship = mongoose.model('Internship',internshipSchema);

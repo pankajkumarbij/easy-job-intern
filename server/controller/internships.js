@@ -342,32 +342,49 @@ exports.getInternshipsByCompanyName = (req, res) => {
 };
 
 exports.bookmarkInternship = async (req, res) => {
-  try {
-    const bool = req.body.bookmark === "true";
-    const internship = await Internship.findById(req.params.id);
-    if (bool) {
-      if (!internship.bookmarkedBy.includes(req.user._id)) {
-        //making sure that a user doesn't get appended to the list more than once
-        internship.bookmarkedBy.push(req.user._id);
-        await internship.save();
-      }
-      return res.status(200).send({ message: "bookmarked!" });
-    } else {
-      const i = internship.bookmarkedBy.indexOf(req.user._id);
-      if (i < 0) {
-        //if user was not present in the bookmarkedBy list of internship
-        return res.status(200).send({ message: "internship not found!" });
-      }
-      internship.bookmarkedBy.splice(i, 1);
-      await internship.save();
-      return res.status(200).send({
-        message:
-          "the internship is not included in your bookmarked list anymore!",
-      });
+  // try {
+    // const bool = req.body.bookmark === "true";
+    let internship;
+    try{
+       internship = await Internship.findById(req.params.id);
+    } catch(err){
+      return res.status(500).send({ message: "Internship not found!" });
     }
-  } catch (e) {
-    return res.status(400).send({ message: "something went wrong" });
-  }
+
+    let USER;
+    try{
+      USER = await Student.findById(req.user._id);
+    } catch(err){
+      return res.status(500).send({ message: "User not found!" });
+    }
+ 
+    // if (bool) {
+      if (!USER.bookmarked.includes(req.params.id)) {
+        //making sure that a user doesn't get appended to the list more than once
+        USER.bookmarked.push(req.params.id);
+        await USER.save();
+        return res.status(200).send({ message: "bookmarked!" });
+      } else {
+        USER.bookmarked = USER.bookmarked.filter(i => i._id != req.params.id);
+        await USER.save();
+        return res.status(200).send({ message: "Bookmark Removed!" });
+      }
+    //  else {
+    //   const i = internship.bookmarkedBy.indexOf(req.user._id);
+    //   if (i < 0) {
+    //     //if user was not present in the bookmarkedBy list of internship
+    //     return res.status(200).send({ message: "internship not found!" });
+    //   }
+    //   internship.bookmarkedBy.splice(i, 1);
+    //   await internship.save();
+    //   return res.status(200).send({
+    //     message:
+    //       "the internship is not included in your bookmarked list anymore!",
+    //   });
+    // }
+  // } catch (e) {
+  //   return res.status(400).send({ message: "something went wrong" });
+  // }
 };
 
 exports.getBookmarkedInternships = async (req, res) => {
