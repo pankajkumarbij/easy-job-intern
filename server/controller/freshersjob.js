@@ -295,42 +295,21 @@ exports.bookmarkFresherJob = async (req, res) => {
 };
 
 exports.getBookmarkedFresherJobs = async (req, res) => {
+  let USER;
   try {
-    const fresherJobs = await Freshers.find({ bookmarkedBy: req.user._id });
-    const _fresherJobs = [];
-    fresherJobs.forEach((fresherJob) => {
-      const {
-        techstack,
-        _id,
-        companyName,
-        description,
-        location,
-        salary,
-        role,
-        vacancies,
-        startDate,
-        lastDate,
-        createdBy,
-      } = fresherJob;
-      const obj = {
-        techstack,
-        _id,
-        companyName,
-        description,
-        location,
-        salary,
-        role,
-        vacancies,
-        startDate,
-        lastDate,
-        createdBy,
-      };
-      _fresherJobs.push(obj);
-    });
-    return res.status(200).send(_fresherJobs);
-  } catch (e) {
-    res.status(400).send({ message: "something went wrong!" });
+    USER = await Student.findById(req.user._id);
+  } catch (err) {
+    res.status(500).send({ message: "something went wrong!" });
   }
+
+  let fresherJobs;
+  try {
+    fresherJobs = await Freshers.find({ _id: { $in: USER.FreshersJob } });
+  } catch (err) {
+    res.status(500).send({ message: "something went wrong!" });
+  }
+
+  res.status(200).json({ fresherjobs: fresherJobs });
 };
 
 exports.searchBookmarkedFresherJob = async (req, res) => {
