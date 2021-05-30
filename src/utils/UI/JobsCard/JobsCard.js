@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../InternshipCard/InternshipCard.css";
 import * as Icon from "react-bootstrap-icons";
 import { Dropdown } from "react-bootstrap";
+import { UserContext } from "../../../App";
 
-const JobsCard = ({ job, deletePost, userId }) => {
+const JobsCard = ({ job, deletePost, bookMarkPost, userId }) => {
+  const { state, dispatch } = useContext(UserContext);
   const GettingMonth = (date) => {
     const monthNames = [
       "January",
@@ -111,6 +113,31 @@ const JobsCard = ({ job, deletePost, userId }) => {
                   className="optionItem"
                 >
                   <Icon.Trash className="optionsMenuIcon" />
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
+        )}
+        {state && state.userType === "student" && (
+          <div className="dropdown-container">
+            <Dropdown className="postOptions">
+              <Dropdown.Toggle
+                className="postOptionsBtn"
+                variant="success"
+                id="dropdown-basic"
+              >
+                <Icon.ThreeDotsVertical style={{ fontSize: "1.4rem" }} />
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu className="optionMenu">
+                <Dropdown.Item
+                  onClick={() => {
+                    bookMarkPost(job._id);
+                    console.log(job._id);
+                  }}
+                  className="optionItem"
+                >
+                  <Icon.Bookmark className="optionsMenuIcon" />
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
