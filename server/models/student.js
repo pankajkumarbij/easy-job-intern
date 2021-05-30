@@ -86,7 +86,7 @@ const studentSchema = new Schema({
     required: true,
   },
   skills: {
-    [type: String],
+    type: [String],
     required: true,
   },
   currentRole: {
@@ -94,7 +94,7 @@ const studentSchema = new Schema({
     required: true,
   },
   openToRoles: {
-    [type: String],
+    type: [String],
     required: true,
   },
   workExperience: {
