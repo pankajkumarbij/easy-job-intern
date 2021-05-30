@@ -6,7 +6,9 @@ const Employer = require("../models/employer");
 const {signupEmailFunc} = require("../utils/signupEmployer-email");
 const Job = require("../models/Job")
 const Internship = require("../models/Internship")
-const fresherJob = require("../models/Freshers")
+const fresherJob = require("../models/Freshers");
+const Student = require("../models/student");
+const ObjectID = require('mongodb').ObjectID;
 
 exports.signup = async (req, res) => {
   const {
@@ -194,5 +196,25 @@ exports.deleteEmployer = async(req, res) => {
   }
   catch(e){
       res.send({message: "something went wrong!"})
+  }
+}
+
+exports.viewStudent = async(req, res) => {
+  try{
+    if(!ObjectID.isValid(req.params.id)){
+      return res
+      .status(400)
+      .send({message: "invalid id!"})
+    }
+    const student = await Student.findById(req.params.id)
+    if(student.length<0 || !student){
+      return res.status(400).send({message: "invalid student id!"})
+    }
+    const {institutionName,personName,email,branch,year,degree, location, skills, currentRole, openToRoles, workExperience, experience_noOfYears, description} = student
+    return res.status(400).send({student: {institutionName,personName,email,branch,year,degree, location, skills, currentRole, openToRoles, workExperience, experience_noOfYears, description}})
+  }
+  catch(e){
+    console.log(e)
+    return res.status(400).send({message: "something went wrong!"})
   }
 }
