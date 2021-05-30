@@ -263,35 +263,35 @@ exports.searchFilterFreshersJobs = async (req, res) => {
 };
 
 exports.bookmarkFresherJob = async (req, res) => {
-  exports.bookmarkJob = async (req, res) => {
-    let fresher;
-    try {
-      fresher = await Freshers.findById(req.params.id);
-    } catch (err) {
-      return res.status(500).send({ message: "Fresher's Job not found!" });
-    }
+  let fresher;
+  try {
+    fresher = await Freshers.findById(req.params.id);
+  } catch (err) {
+    return res.status(500).send({ message: "Fresher's Job not found!" });
+  }
 
-    let USER;
-    try {
-      USER = await Student.findById(req.user._id);
-    } catch (err) {
-      return res.status(500).send({ message: "User not found!" });
-    }
+  let USER;
+  try {
+    USER = await Student.findById(req.user._id);
+  } catch (err) {
+    return res.status(500).send({ message: "User not found!" });
+  }
 
-    // if (bool) {
-    if (!USER.bookmarkedFresherJob.includes(req.params.id)) {
-      //making sure that a user doesn't get appended to the list more than once
-      USER.bookmarkedFresherJob.push(req.params.id);
-      await USER.save();
-      return res.status(200).send({ message: "Fresher's Job added to bookmark!" });
-    } else {
-      USER.bookmarkedFresherJob = USER.bookmarkedFresherJob.filter(
-        (i) => i._id != req.params.id
-      );
-      await USER.save();
-      return res.status(200).send({ message: "Bookmark Removed!" });
-    }
-  };
+  // if (bool) {
+  if (!USER.bookmarkedFresherJob.includes(req.params.id)) {
+    //making sure that a user doesn't get appended to the list more than once
+    USER.bookmarkedFresherJob.push(req.params.id);
+    await USER.save();
+    return res
+      .status(200)
+      .send({ message: "Fresher's Job added to bookmark!" });
+  } else {
+    USER.bookmarkedFresherJob = USER.bookmarkedFresherJob.filter(
+      (i) => i._id != req.params.id
+    );
+    await USER.save();
+    return res.status(200).send({ message: "Bookmark Removed!" });
+  }
 };
 
 exports.getBookmarkedFresherJobs = async (req, res) => {
