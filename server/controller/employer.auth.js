@@ -374,3 +374,18 @@ exports.updateCompany = async(req, res) => {
       res.status(400).send({error: 'something went werong!'})
   }
 }
+
+exports.viewMyCompany = async (req, res) => {
+  try {
+
+      const company = await Company.find({createdBy: req.user._id}) 
+      if(!company || company.length===0){
+        return res.status(400).send({message: "company does not exist"})
+      }
+      return res.status(200).send({company})
+  }
+  catch(e){
+      console.log(e)
+      return res.status(400).send({message: "something went wrong!"})
+  }
+}
