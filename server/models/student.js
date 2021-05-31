@@ -104,14 +104,123 @@ const studentSchema = new Schema({
     required: true,
   },
   experience_noOfYears: {
-      type: Number,
-      required: true
+    type: Number,
+    required: true,
   },
-  description:{
+  description: {
     type: String,
     required: true,
   },
-
+  Profile: {
+    General: {
+      FirstName: {
+        type: String,
+      },
+      LastName: {
+        type: String,
+      },
+      Address: {
+        type: String,
+      },
+      GithubLink: {
+        type: String,
+      },
+      LinkedInLink: {
+        type: String,
+      },
+      OtherProfileLink: [
+        {
+          type: String,
+        },
+      ],
+    },
+    Education: [
+      {
+        School: {
+          type: String,
+        },
+        Degree: {
+          type: String,
+        },
+        FieldOfStudy: {
+          type: String,
+        },
+        StartDate: {
+          type: Date,
+        },
+        LastDate: {
+          type: Date,
+        },
+        Grade: {
+          type: String,
+        },
+        Description: {
+          type: String,
+        },
+      },
+    ],
+    Experience: [
+      {
+        Company: {
+          type: String,
+        },
+        Title: {
+          type: String,
+        },
+        StartDate: {
+          type: Date,
+        },
+        LastDate: {
+          type: Date,
+        },
+        Location: {
+          type: String,
+        },
+        Description: {
+          type: String,
+        },
+      },
+    ],
+    Project: [
+      {
+        ProjectLink: {
+          type: String,
+        },
+        ProjectTitle: {
+          type: String,
+        },
+        StartDate: {
+          type: Date,
+        },
+        LastDate: {
+          type: Date,
+        },
+        Description: {
+          type: String,
+        },
+      },
+    ],
+    Skills: [
+      {
+        type: String,
+      },
+    ],
+    Achievments: [
+      {
+        type: String,
+      },
+    ],
+    Other: [
+      {
+        type: String,
+      },
+    ],
+    VolunteerExperience: [
+      {
+        type: String,
+      },
+    ],
+  },
 });
 
 studentSchema.methods.generateAuthToken = async function () {
@@ -147,4 +256,3 @@ studentSchema.pre("save", async function (next) {
 const Student = mongoose.model("Student", studentSchema);
 
 module.exports = Student;
-
