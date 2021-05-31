@@ -52,6 +52,7 @@ import BookmarkJobs from "./components/Jobs/BookmarkJob";
 import BookmarkFreshersJobs from "./components/FreshersJob/BookmarkFresherJob";
 import StudentUpdateForm from "./components/student/StudentUpdateForm";
 import EmployerUpdateForm from "./components/employer/EmployerUpdateForm";
+import ProfileView from "./components/student-profile/StudentProfile/ProfileView";
 import EmployerProfileScreen from "./components/employer/EmployerProfileScreen";
 
 export const UserContext = createContext();
@@ -306,6 +307,9 @@ const Routing = () => {
           </Route>
           <Route exact path="/login/student-profile">
             <Profile />
+          </Route>
+          <Route exact path="/profile/student">
+            <ProfileView />
           </Route>
           <Route path="/all-freshersjobs" exact>
             <AllFreshersJobs />

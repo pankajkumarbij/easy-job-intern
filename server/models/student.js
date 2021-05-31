@@ -128,7 +128,7 @@ const studentSchema = new Schema({
       },
       OtherProfileLink: [
         {
-          type: String,
+          ProfileLink: { type: String },
         },
       ],
     },
