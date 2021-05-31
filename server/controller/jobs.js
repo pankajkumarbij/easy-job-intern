@@ -321,8 +321,14 @@ exports.getBookmarkedJobs = async (req, res) => {
 };
 
 exports.searchBookmarkedJob = async (req, res) => {
+  let USER;
+  try {
+    USER = await Student.findById(req.user._id);
+  } catch (err) {
+    return res.status(500).send({ message: "User not found!" });
+  }
   const match = {};
-  match.bookmarkedBy = req.user._id;
+  match._id = { $in: USER.bookmarkedInternship };
   if (req.query.techstack) {
     match.techstack = { $in: req.query.techstack };
   }
