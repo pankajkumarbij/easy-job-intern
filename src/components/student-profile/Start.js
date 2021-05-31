@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./profile.css";
 import { useState } from "react";
 import Button from "@material-ui/core/Button";
@@ -11,9 +11,15 @@ import Skills from "./Skills";
 import Input from "./Input";
 import { Col, Row } from "react-bootstrap";
 
-const Start = ({ General, handleChange }) => {
+const Start = ({ General, handleChange,changeOtherLinksValue }) => {
   const [inputFields, setInputFields] = useState([{ profileLink: "" }]);
   console.log(inputFields);
+
+  useEffect(() => {
+    changeOtherLinksValue(inputFields);
+  },[inputFields])
+
+  console.log(General);
 
   const handleSubmit = (e) => {
     e.preventDefault();
