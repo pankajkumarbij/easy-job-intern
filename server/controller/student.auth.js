@@ -8,6 +8,8 @@ const Internship = require("../models/Internship");
 const Job = require("../models/Job");
 const Employer = require("../models/employer");
 const fresherJob = require("../models/Freshers");
+const Company = require("../models/company");
+const ObjectID = require('mongodb').ObjectID;
 
 exports.signup = async (req, res) => {
   const {
@@ -294,3 +296,26 @@ exports.saveCompany = async (req, res) => {
     res.status(400).send({ message: "something went wrong!" });
   }
 };
+
+exports.viewCompany = async (req, res) => {
+    try {
+
+        if(!ObjectID.isValid(req.params.id)){
+            return res
+            .status(400)
+            .send({message: "invalid id!"})
+        }
+
+        const id = req.params.id
+        const company = await Company.findById(id) 
+        
+        if(!company || company.length < 0){
+            return res.status(400).send({message: "invalid company id"})
+        }
+        return res.status(200).send({company})
+    }
+    catch(e){
+        console.log(e)
+        return res.status(400).send({message: "something went wrong!"})
+    }
+}
