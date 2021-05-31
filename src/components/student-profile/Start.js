@@ -21,18 +21,23 @@ const Start = ({ General, handleChange }) => {
   };
 
   const handleChangeInput = (id, event) => {
-    const newInputFields = inputFields.map((i) => {
-      if (id === i.id) {
+    const newInputFields = inputFields.map((i,j) => {
+      console.log(i);
+
+      if (id === j) {
+        // console.log(i[j]);
         i[event.target.name] = event.target.value;
       }
       return i;
+
+      // setInputFields()
     });
 
     setInputFields(newInputFields);
   };
 
   const handleAddFields = () => {
-    setInputFields([...inputFields, { profileLink: "" }]);
+    setInputFields((prevInput) => [...prevInput, { profileLink: "" }]);
   };
 
   const handleRemoveFields = (id) => {
@@ -129,8 +134,8 @@ const Start = ({ General, handleChange }) => {
         <br />
         {/* <input type="text" className="text-long" placeholder="Enter your other profile link"></input> */}
 
-        {inputFields.map((inputField) => (
-          <Row key={inputField.id} className="justify-content-between">
+        {inputFields.map((inputField, i) => (
+          <Row key={i} className="justify-content-between">
             <Col className="col-md-10 col-12">
               <input
                 name="profileLink"
@@ -138,13 +143,13 @@ const Start = ({ General, handleChange }) => {
                 value={inputField.profileLink}
                 className="text-long"
                 placeholder="Enter your other profile link"
-                onChange={(event) => handleChangeInput(inputField.id, event)}
+                onChange={(event) => handleChangeInput(i, event)}
               ></input>
             </Col>
             <Col className="col-md-2 d-flex col-12">
               <IconButton
                 disabled={inputFields.length === 1}
-                onClick={() => handleRemoveFields(inputField.id)}
+                onClick={() => handleRemoveFields(i)}
               >
                 <RemoveIcon />
               </IconButton>
