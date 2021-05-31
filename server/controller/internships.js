@@ -210,8 +210,24 @@ exports.getInternshipValues = (req, res) => {
     });
 };
 
-exports.deleteInternship = (req, res) => {
+exports.deleteInternship = async (req, res) => {
   const { postId } = req.body;
+
+  try{
+    const students = await Student.find({bookmarkedInternship: postId})
+    students.forEach(async (student) => {
+      const index = student.bookmarkedInternship.indexOf(postId);
+      if (index > -1) {
+        student.bookmarkedInternship.splice(index, 1);
+      }
+      await student.save()
+      console.log(student)
+    })
+  }
+  catch(e){
+    console.log(e)
+    return res.status(400).send({message: "something went wrong!"})
+  }
 
   Internship.findByIdAndDelete(postId)
     .then((deletedPost) => {
