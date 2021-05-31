@@ -85,6 +85,7 @@ const studentSchema = new Schema({
     type: String,
     required: true,
   },
+
   skills: {
     type: [String],
     required: true,
@@ -93,6 +94,7 @@ const studentSchema = new Schema({
     type: String,
     required: true,
   },
+
   openToRoles: {
     type: [String],
     required: true,
@@ -145,3 +147,4 @@ studentSchema.pre("save", async function (next) {
 const Student = mongoose.model("Student", studentSchema);
 
 module.exports = Student;
+
