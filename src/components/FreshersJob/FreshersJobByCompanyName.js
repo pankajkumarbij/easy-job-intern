@@ -1,11 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import {
-  Col,
-  Row,
-  Spinner,
-  Alert,
-} from "react-bootstrap";
+import { Col, Row, Spinner, Alert } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { UserContext } from "../../App";
 
@@ -20,37 +15,6 @@ const FreshersJobByCompanyName = () => {
   const [freshersJobs, setFreshersJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const { companyName } = useParams();
-  const deletePost = (postId) => {
-    axios({
-      method: "delete",
-      url: "http://localhost:5000/employer/delete-freshersjob",
-      data: {
-        postId,
-      },
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        console.log(res);
-        if (res.data.error) {
-          console.log(res.data.error);
-          // alert(res.data.error);
-          const notify = () => toast(res.data.error);
-          notify();
-        } else {
-          // console.log(res.data.jobs);
-          // setJobs(res.data.jobs);
-          // console.log(jobs);
-          const notify = () => toast(res.data.message);
-          notify();
-        }
-      })
-      .catch((err) => {
-        console.log("Error: ", err);
-      });
-  };
 
   useEffect(() => {
     axios({
@@ -85,8 +49,6 @@ const FreshersJobByCompanyName = () => {
     const t = new Date(freshersJobs[4].startDate).toString("YYYY-MM-DD");
     console.log(t);
   }
-
-  
 
   return (
     <div className="internshipsOuterContainer">
@@ -123,11 +85,7 @@ const FreshersJobByCompanyName = () => {
                 key={fresher._id}
                 className="col-xl-4 col-lg-5 col-md-6 col-sm-11 col-12 colPost"
               >
-                <FresherJobCard
-                  fresherjob={fresher}
-                  deletePost={deletePost}
-                  userId={state.user._id}
-                />
+                <FresherJobCard fresherjob={fresher} userId={state.user._id} />
               </Col>
             );
           })
