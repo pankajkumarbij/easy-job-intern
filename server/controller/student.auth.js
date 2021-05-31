@@ -20,6 +20,13 @@ exports.signup = async (req, res) => {
     branch,
     year,
     degree,
+    location,
+    skills,
+    currentRole,
+    openToRoles,
+    workExperience,
+    experience_noOfYears,
+    description,
   } = req.body;
   if (password !== passwordConfirmation) {
     return res.json({ error: "Password dosen't match" });
@@ -33,7 +40,14 @@ exports.signup = async (req, res) => {
     !passwordConfirmation ||
     !branch ||
     !year ||
-    !degree
+    !degree ||
+    !location ||
+    !skills ||
+    !currentRole ||
+    !openToRoles ||
+    !workExperience ||
+    !experience_noOfYears ||
+    !description
   ) {
     return res.json({ error: "Please add all fields" });
   }
@@ -53,6 +67,13 @@ exports.signup = async (req, res) => {
       password,
       status: "Pending",
       savedCompanies: [],
+      location,
+      skills: skills.split(","),
+      currentRole,
+      openToRoles: openToRoles.split(","),
+      workExperience,
+      experience_noOfYears,
+      description,
     });
     const token = await user.generateAuthToken();
     user.confirmationCode = token;

@@ -16,6 +16,9 @@ exports.createJob = async (req, res) => {
     vacancies,
     stream,
     industry,
+    workFromHome,
+    partTimeAllowed,
+    prerequisites
   } = req.body;
   const user = req.user;
 
@@ -31,7 +34,10 @@ exports.createJob = async (req, res) => {
     !role ||
     !stream ||
     !industry ||
-    !vacancies
+    !vacancies||
+    !partTimeAllowed ||
+    !prerequisites ||
+    !workFromHome
   ) {
     return res.json({ error: "Please add all fields" });
   }
@@ -54,6 +60,9 @@ exports.createJob = async (req, res) => {
     vacancies,
     stream,
     industry,
+    workFromHome,
+    partTimeAllowed,
+    prerequisites: prerequisites.split(",")
   });
 
   // console.log(internship);
