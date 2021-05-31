@@ -41,7 +41,8 @@ const employerSchema = new Schema({
     },
     confirmationCode: { 
         type: String, 
-        unique: true }
+        unique: true 
+    }
 });
 
 

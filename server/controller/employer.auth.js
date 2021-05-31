@@ -8,6 +8,7 @@ const Job = require("../models/Job")
 const Internship = require("../models/Internship")
 const fresherJob = require("../models/Freshers")
 const Employer = require("../models/employer") 
+const Company = require("../models/company")
 
 exports.signup = async (req, res) => {
   const {
@@ -18,6 +19,14 @@ exports.signup = async (req, res) => {
     password,
     passwordConfirmation,
   } = req.body;
+
+  const company = await Company.find({
+    companyName: companyName.toUpperCase().replace(/\s/g, ""),
+  })
+  if(company.length>0){
+    return res.status(400).send({message: "company name already exists!"})
+  }
+  
   if (password !== passwordConfirmation) {
     return res.json({ error: "passwordConfirmation field is missing or Password dosen't match" });
   }

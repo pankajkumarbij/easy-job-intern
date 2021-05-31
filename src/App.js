@@ -265,7 +265,7 @@ const Routing = () => {
           <Route path="/internship/companyName">
             <InternshipCompanyName />
           </Route>
-          <Route path="/job/companyName">
+          <Route path="/job/companyName" exact>
             <JobCompanyName />
           </Route>
           <Route path="/companyName/freshersjob">
