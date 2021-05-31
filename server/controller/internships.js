@@ -1,10 +1,10 @@
 const Internship = require("../models/Internship");
 const Student = require("../models/student");
 const StudentNotification = require("../models/student_notification");
+const Employer = require("../models/employer")
 
 exports.createInternship = async (req, res) => {
   const {
-    companyName,
     description,
     location,
     stipend,
@@ -22,10 +22,9 @@ exports.createInternship = async (req, res) => {
     prerequisites,
     withJobOffer
   } = req.body;
-  const user = req.user;
+  const user = await Employer.findById(req.user._id);
 
   if (
-    !companyName ||
     !description ||
     !location ||
     !stipend ||
@@ -56,7 +55,7 @@ exports.createInternship = async (req, res) => {
   // int x = stringToDate(endDate,'/')
 
   const internship = new Internship({
-    companyName,
+    companyName: user.companyName,
     description,
     location,
     stipend,

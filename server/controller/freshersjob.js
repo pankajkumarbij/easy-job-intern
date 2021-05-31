@@ -1,10 +1,10 @@
 const Freshers = require("../models/Freshers");
 const Student = require("../models/student");
 const StudentNotification = require("../models/student_notification");
+const Employer = require("../models/employer")
 
 exports.createFreshersJob = async (req, res) => {
   const {
-    companyName,
     description,
     location,
     salary,
@@ -19,10 +19,9 @@ exports.createFreshersJob = async (req, res) => {
     partTimeAllowed,
     prerequisites
   } = req.body;
-  const user = req.user;
+  const user = await Employer.findById(req.user._id);
 
   if (
-    !companyName ||
     !description ||
     !location ||
     !salary ||
@@ -41,9 +40,9 @@ exports.createFreshersJob = async (req, res) => {
   }
 
   const techStackArray = techstack.split(",");
-
+   
   const freshersjob = new Freshers({
-    companyName,
+    companyName: user.companyName,
     description,
     location,
     salary,
