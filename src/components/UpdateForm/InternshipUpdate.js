@@ -97,53 +97,6 @@ const UpdateInternship = () => {
   const [formValues, setFormValues] = useState(initialState);
   const [formIsValid, setFormIsValid] = useState(false);
 
-  // const setInitialValue = () => {
-  // const updatedFormElementD = { ...updatedFormValues["description"] };
-  // const updatedFormElementL = { ...updatedFormValues["location"] };
-  // const updatedFormElementS = { ...updatedFormValues["stipend"] };
-  // const updatedFormElementTS = { ...updatedFormValues["techstack"] };
-  // const updatedFormElementLD = { ...updatedFormValues["lastDate"] };
-  // const updatedFormElementSD = { ...updatedFormValues["startDate"] };
-  // const updatedFormElementED = { ...updatedFormValues["endDate"] };
-  // updatedFormElementD.value =nullnternship.description;
-  // updatedFormElementL.value = internship.location;
-  // updatedFormElementS.value = internship.stipend;
-  // updatedFormElementTS.value = internship.techstack;
-  // updatedFormElementLD.value = internship.lastDate;
-  // updatedFormElementSD.value = internship.startDate;
-  // updatedFormElementED.value = internship.endDate;
-  // updatedFormValues["description"] = updatedFormElementD;
-  // updatedFormValues["location"] = updatedFormElementL;
-  // updatedFormValues["stipend"] = updatedFormElementS;
-  // updatedFormValues["techstack"] = updatedFormElementTS;
-  // updatedFormValues["lastDate"] = updatedFormElementLD;
-  // updatedFormValues["startDate"] = updatedFormElementSD;
-  // updatedFormValues["endDate"] = updatedFormElementED;
-  // };
-  // useEffect(() => {
-  //   if (internship) {
-  //     setInitialState((prev) => {
-  //       return {
-  //         ...prev,
-  //         description: {
-  //           ...prev.description,
-  //           value: internship.description,
-  //         },
-  //         location: {
-  //           ...prev.location,
-  //           value: internship.location,
-  //         },
-  //         stipend: {
-  //           ...prev.stipend,
-  //           value: internship.stipend,
-  //         },
-  //       };
-  //     });
-
-  //     setFormValues(initialState);
-  //   }
-  // }, [internship]);
-
   useEffect(() => {
     axios({
       method: "get",
@@ -218,7 +171,7 @@ const UpdateInternship = () => {
       startDate,
       endDate,
       industry,
-      stream
+      stream,
     } = formValues;
 
     axios({
