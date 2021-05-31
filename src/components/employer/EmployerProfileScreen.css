@@ -1,0 +1,25 @@
+.employer-main-profile {
+  background-color: #151c25;
+  height: 100%;
+}
+
+.employer-secondary-profile ul li {
+  list-style: none;
+  margin: 1rem;
+  color: whitesmoke;
+  font-size: 1.2rem;
+}
+
+.employer-secondary-profile ul li span {
+  color: yellow;
+  font-size: 1.1rem;
+  display: block;
+}
+
+.employer-profile-heading {
+  color: white;
+  text-decoration: none;
+  border-bottom: 5px solid yellow;
+  padding-bottom: 10px;
+  border-radius: 10px;
+}

@@ -166,16 +166,25 @@ exports.findEmployerById = async (req, res) => {
   try {
     const employer = await Employer.findById(req.params.id)
       .select("-password")
-      .select("-tokens -confirmationCode")
+      .select("-tokens -confirmationCode");
+    const jobs = await Job.find({ createdBy: req.params.id }).limit(5);
+    const internships = await Internship.find({
+      createdBy: req.params.id,
+    }).limit(5);
+    const fresherJobs = await fresherJob
+      .find({ createdBy: req.params.id })
+      .limit(5);
+
     if (employer) {
-      res.json(employer);
-    }else{
+      res.json({ employer, jobs, internships, fresherJobs });
+    } else {
       res.status(404).send({ message: "Employer Not Found" });
     }
   } catch (e) {
     res.status(404).send(e);
   }
 };
+
 
 
 
