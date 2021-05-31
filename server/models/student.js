@@ -82,33 +82,33 @@ const studentSchema = new Schema({
   ],
   location: {
     type: String,
-    required: true,
+    // required: true,
   },
 
   skills: {
     type: [String],
-    required: true,
+    // required: true,
   },
   currentRole: {
     type: String,
-    required: true,
+    // required: true,
   },
 
   openToRoles: {
     type: [String],
-    required: true,
+    // required: true,
   },
   workExperience: {
     type: String,
-    required: true,
+    // required: true,
   },
   experience_noOfYears: {
     type: Number,
-    required: true,
+    // required: true,
   },
   description: {
     type: String,
-    required: true,
+    // required: true,
   },
   Profile: {
     General: {
