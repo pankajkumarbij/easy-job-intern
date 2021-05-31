@@ -42,7 +42,7 @@ const {
   getNotifications,
   getNotification,
 } = require("../controller/student_notification");
-const { addProfileBuilder } = require("../controller/studentProfile");
+const { addProfileBuilder, getProfileStudent } = require("../controller/studentProfile");
 
 router.post("/signup", signup);
 router.post("/signin", signin);
@@ -104,5 +104,6 @@ router.get("/getNotifications", auth_student, getNotifications);
 router.get("/getNotification/:id", auth_student, getNotification);
 
 router.post("/buildprofile", auth_student, addProfileBuilder);
+router.get("/buildprofile/get", auth_student, getProfileStudent);
 
 module.exports = router;

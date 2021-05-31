@@ -28,3 +28,16 @@ exports.addProfileBuilder = async (req, res) => {
       res.status(500).send({ message: "something went wrong!" });
     });
 };
+
+exports.getProfileStudent = (req, res) => {
+  Student.findById(req.user._id)
+    .then((student) => {
+      if (student) {
+        res.status(200).json({ profile: student.Profile });
+      }
+      res.status(400).send({ message: "student not found" });
+    })
+    .catch((err) => {
+      res.status(500).send({ message: "something went wrong!" });
+    });
+};
