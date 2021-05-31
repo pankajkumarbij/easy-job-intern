@@ -10,7 +10,7 @@ const Internship = require("../models/Internship")
 const fresherJob = require("../models/Freshers");
 const Student = require("../models/student");
 const ObjectID = require('mongodb').ObjectID;
-const Company = require("../models/company")
+const Company = require("../models/company");
 
 
 exports.signup = async (req, res) => {
@@ -140,7 +140,7 @@ exports.logoutAll = async (req, res) => {
 
 exports.update = async(req, res) => {
   const updates = Object.keys(req.body)
-  const allowedUpdates = ['personName', 'email','contact', 'password', 'companyName']
+  const allowedUpdates = ['personName', 'email','contact', 'companyName']
   const isValid = updates.every((update)=>{
       return allowedUpdates.includes(update)
   })
@@ -158,7 +158,7 @@ exports.update = async(req, res) => {
 
   }
   catch(e){
-      res.status(400).send({error: 'something went werong!'})
+      res.status(400).send({error: 'something went wrong!'})
   }
 }
 
@@ -233,7 +233,7 @@ exports.viewStudent = async(req, res) => {
 
 exports.addCompany = async(req, res) => {
   try{
-    const employer = await Employer.findById(req.user._id)
+    const employer = await Employer.findById(req.user._id) 
     
     const {companyName, companySize, overview, locations, tags, tagline, investmentStage, markets} = req.body
     console.log(employer)
@@ -261,5 +261,107 @@ exports.addCompany = async(req, res) => {
   catch(e){
     console.log(e)
     return res.send(400).send({message: "something went wrong"})
+  }
+}
+
+exports.updateCompany = async(req, res) => {
+  if(!ObjectID.isValid(req.params.id)){
+    return res
+    .status(400)
+    .send({message: "invalid id!"})  //if the id is not an object id
+  }
+
+  let company = await Company.findById(req.params.id)
+
+  if(company.length<0 || !company){
+    return res.status(400).send({message: "invalid company id!"}) //if company with that id is not present
+  }
+
+  if(company.createdBy.toString() !== req.user._id.toString()){
+    return res.status(400).send({message: "you do not have edit rights!"}) //if a random person tries to update company details
+  }
+
+  const updates = Object.keys(req.body)
+
+  const allowedUpdates = ['companyName', 'companySize', 'overview', 'locations', 'tags', 'tagline', 'investmentStage', 'markets']
+  
+  const isValid = updates.every((update)=>{
+      return allowedUpdates.includes(update)
+  })
+  if(!isValid){
+      return res.status(400).send({error: 'Invalid Updates!'})
+  }
+  if(updates.includes("companyName")){
+    const existing = await Company.findOne({companyName: req.body.companyName.toUpperCase().replace(/\s/g, "")}) //if company with same name exists
+    if(existing && existing._id){
+      if((company._id.toString() !== existing._id.toString())){
+        return res.status(400).send({message: "company name already exists!"})
+      }
+    }
+  }
+  try
+  {    
+    updates.forEach(async (update) => {
+      if(update === 'tags' || update === 'locations' || update === 'markets'){  //converting these entries to array of strings
+        company[update] = req.body[update].split(",") 
+
+      }
+      if(update === 'companyName'){   //update only if companyName is a part of req body
+        
+        const old = company[update]
+        const changed = req.body[update].toUpperCase().replace(/\s/g, "")
+        company[update] = req.body[update].toUpperCase().replace(/\s/g, "")
+
+        const jobs = await Job.find({companyName: old})
+
+        const internships = await Internship.find({companyName: old})
+
+        const fresherJobs = await fresherJob.find({companyName: old})
+
+        if(jobs || jobs.length > 0){   //changing the companyName field for all the jobs that were created
+
+          jobs.forEach(async (job) => {  
+            job.companyName = changed
+            await job.save()
+          })
+          
+        }
+
+        if(internships || internships.length > 0){   //changing the companyName field for all the internships that were created
+
+          internships.forEach(async (internship) => {
+            internship.companyName = changed
+            await internship.save()
+          })
+          
+        }
+
+        if(fresherJobs || fresherJobs.length > 0){   //changing the companyName field for all the fresher jobs that were created
+
+          fresherJobs.forEach(async (fresherJob) => {
+            fresherJob.companyName = changed
+            await fresherJob.save()
+          })
+
+        }
+
+        const employer = await Employer.findById(company.createdBy) //modify employer details
+        employer.companyName = changed
+        await employer.save()
+        
+      }
+      if(update === 'companySize' || update === 'overview' || update === 'tagline' || update === 'investmentStage'){
+        company[update] = req.body[update]
+      }
+        
+    })
+    await company.save()
+    return res.status(200).send(company)
+    
+
+  }
+  catch(e){
+    console.log(e)
+      res.status(400).send({error: 'something went werong!'})
   }
 }
