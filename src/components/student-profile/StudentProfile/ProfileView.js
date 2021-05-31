@@ -13,6 +13,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useHistory } from "react-router";
 import { Col, Row } from "react-bootstrap";
 import General from "./components/General";
+import Education from "./components/Education";
 
 const ProfileView = () => {
   const [profile, setProfile] = useState();
@@ -57,7 +58,8 @@ const ProfileView = () => {
       {profile && (
         <div className="main-box py-4 profile-box">
           <h1 className="ProfileBuilderheading">Student Profile</h1>
-          <General general={profile.General} />
+          {profile.General && <General general={profile.General} />}
+          {profile.Education && <Education Education={profile.Education} />}
         </div>
       )}
     </div>

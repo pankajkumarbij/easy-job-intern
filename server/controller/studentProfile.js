@@ -33,6 +33,7 @@ exports.addProfileBuilder = async (req, res) => {
 };
 
 exports.getProfileStudent = (req, res) => {
+  console.log(req.user._id);
   Student.findById(req.user._id)
     .then((student) => {
       if (student) {
@@ -41,6 +42,7 @@ exports.getProfileStudent = (req, res) => {
       res.status(400).json({ message: "student not found" });
     })
     .catch((err) => {
+      console.log(err);
       res.status(500).json({ message: "something went wrong!" });
     });
 };
