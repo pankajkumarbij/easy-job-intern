@@ -306,7 +306,7 @@ exports.updateCompany = async(req, res) => {
         company[update] = req.body[update].split(",") 
 
       }
-      if(update === 'companyName'){   //update only if company name is not already existing
+      if(update === 'companyName'){   //update only if companyName is a part of req body
         
         const old = company[update]
         const changed = req.body[update].toUpperCase().replace(/\s/g, "")
