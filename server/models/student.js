@@ -58,11 +58,10 @@ const studentSchema = new Schema({
     type: String,
     unique: true,
   },
-  savedCompanies: [
+  savedCompanies: 
     {
-      typr: String,
+      type: [String],
     },
-  ],
   bookmarkedInternship: [
     {
       type: mongoose.Schema.Types.ObjectId,
