@@ -123,6 +123,25 @@ textarea {
   font-family: "Times New Roman", Times, serif;
   font-weight: 800;
 }
+.buttonProfileDiv{
+  padding: 0 30px 30px ;
+}
+
+.buttonProfileDiv .buttonProfile{
+  font-size: 1.2rem;
+  width: 100%;
+  color: aqua !important;
+  /* margin: 10px 30px !important; */
+  /* box-sizing: border-box; */
+  padding: 10px 30px;
+  background-color: #d6c20a !important;
+  border-radius: 10px;
+}
+
+.btnprofile{
+  color: #222;
+  font-weight: 600;
+}
 
 @media only screen and (max-width: 800px) {
   .main-box {

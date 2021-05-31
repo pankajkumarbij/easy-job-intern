@@ -11,14 +11,21 @@ import "./profile.css";
 import Label from "./Label";
 import { Row } from "react-bootstrap";
 
-function Project({Project, changeValue}) {
+function Project({ Project, changeValue }) {
   const [inputFields, setInputFields] = useState([
-    { id: uuidv4(), ProjectName: "", ProjectTitle: "", StartDate: "", LastDate: "", Description: "" },
+    {
+      id: uuidv4(),
+      ProjectTitle: "",
+      ProjectLink: "",
+      StartDate: "",
+      LastDate: "",
+      Description: "",
+    },
   ]);
 
   useEffect(() => {
     changeValue(inputFields, "Project");
-  },[inputFields])
+  }, [inputFields]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,7 +46,14 @@ function Project({Project, changeValue}) {
   const handleAddFields = () => {
     setInputFields([
       ...inputFields,
-      { id: uuidv4(), ProjectName: "", ProjectTitle: "", StartDate: "", LastDate: "", Description: "" },
+      {
+        id: uuidv4(),
+        ProjectTitle: "",
+        ProjectLink: "",
+        StartDate: "",
+        LastDate: "",
+        Description: "",
+      },
     ]);
   };
 
@@ -61,11 +75,11 @@ function Project({Project, changeValue}) {
             <Label value="Project-Title" />
             <br />
             <input
-              name="ProjectName"
+              name="ProjectTitle"
               label="Project Name"
               placeholder="Enter Project Title"
               className="text-long"
-              value={Project.ProjectName}
+              value={Project.ProjectTitle}
               onChange={(event) => handleChangeInput(inputField.id, event)}
             />
             <br />
@@ -76,7 +90,7 @@ function Project({Project, changeValue}) {
               label="Project Name"
               placeholder="Enter Project Title"
               className="text-long"
-              value={Project.ProjectTitle}
+              value={Project.ProjectLink}
               onChange={(event) => handleChangeInput(inputField.id, event)}
             />
             <br />

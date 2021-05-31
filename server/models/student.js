@@ -58,10 +58,9 @@ const studentSchema = new Schema({
     type: String,
     unique: true,
   },
-  savedCompanies: 
-    {
-      type: [String],
-    },
+  savedCompanies: {
+    type: [String],
+  },
   bookmarkedInternship: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -201,22 +200,22 @@ const studentSchema = new Schema({
     ],
     Skills: [
       {
-        type: String,
+        Skill: { type: String },
       },
     ],
     Achievments: [
       {
-        type: String,
+        Achievment: { type: String },
       },
     ],
     Other: [
       {
-        type: String,
+        Other: { type: String },
       },
     ],
     VolunteerExperience: [
       {
-        type: String,
+        Volunteer: { type: String },
       },
     ],
   },

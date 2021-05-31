@@ -2,16 +2,18 @@ const Student = require("../models/student");
 
 exports.addProfileBuilder = async (req, res) => {
   const { Profile } = req.body;
+  console.log(Profile);
 
   let USER;
   try {
     USER = await Student(req.user._id);
   } catch (err) {
-    res.status(500).send({ message: "something went wrong!" });
+    console.log(err);
+    res.status(500).json({ message: "something went wrong!" });
   }
 
   if (!USER) {
-    res.status(400).send({ message: "user not found" });
+    res.json({ message: "user not found" });
   }
 
   Student.findByIdAndUpdate(
@@ -25,7 +27,8 @@ exports.addProfileBuilder = async (req, res) => {
       res.status(200).json({ student: student });
     })
     .catch((err) => {
-      res.status(500).send({ message: "something went wrong!" });
+      console.log(err);
+      res.status(500).json({ message: "something went wrong!" });
     });
 };
 
@@ -35,9 +38,9 @@ exports.getProfileStudent = (req, res) => {
       if (student) {
         res.status(200).json({ profile: student.Profile });
       }
-      res.status(400).send({ message: "student not found" });
+      res.status(400).json({ message: "student not found" });
     })
     .catch((err) => {
-      res.status(500).send({ message: "something went wrong!" });
+      res.status(500).json({ message: "something went wrong!" });
     });
 };
