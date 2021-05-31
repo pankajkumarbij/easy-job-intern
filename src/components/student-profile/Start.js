@@ -11,8 +11,9 @@ import Skills from "./Skills";
 import Input from "./Input";
 import { Col, Row } from "react-bootstrap";
 
-const Start = () => {
+const Start = ({ General, handleChange }) => {
   const [inputFields, setInputFields] = useState([{ profileLink: "" }]);
+  console.log(inputFields);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,6 +57,9 @@ const Start = () => {
               type="text"
               placeholder="Enter your first name"
               className="text-long"
+              onChange={(e) => handleChange(e)}
+              value={General.FirstName.value}
+              name="FirstName"
             ></input>
             <br />
           </div>
@@ -69,6 +73,9 @@ const Start = () => {
               type="text"
               placeholder="Enter your last name"
               className="text-long"
+              onChange={(e) => handleChange(e)}
+              value={General.LastName.value}
+              name="LastName"
             ></input>
             <br />
           </div>
@@ -82,6 +89,9 @@ const Start = () => {
           type="text"
           className="text-long"
           placeholder="Enter your student address"
+          onChange={(e) => handleChange(e)}
+          value={General.Address.value}
+          name="Address"
         ></input>
         <br />
 
@@ -93,6 +103,9 @@ const Start = () => {
           type="text"
           className="text-long"
           placeholder="Enter your github link"
+          onChange={(e) => handleChange(e)}
+          value={General.GithubLink.value}
+          name="GithubLink"
         ></input>
         <br />
 
@@ -104,6 +117,9 @@ const Start = () => {
           type="text"
           className="text-long"
           placeholder="Enter your linkedinlink"
+          onChange={(e) => handleChange(e)}
+          value={General.LinkedinLink.value}
+          name="LinkedinLink"
         ></input>
         <br />
 
@@ -113,31 +129,31 @@ const Start = () => {
         <br />
         {/* <input type="text" className="text-long" placeholder="Enter your other profile link"></input> */}
 
-          {inputFields.map((inputField) => (
-            <Row key={inputField.id} className="justify-content-between">
-              <Col className="col-md-10 col-12">
-                <input
-                  name="profileLink"
-                  label="Profile Link"
-                  value={inputField.profileLink}
-                  className="text-long"
-                  placeholder="Enter your other profile link"
-                  onChange={(event) => handleChangeInput(inputField.id, event)}
-                ></input>
-              </Col>
-              <Col className="col-md-2 d-flex col-12">
-                <IconButton
-                  disabled={inputFields.length === 1}
-                  onClick={() => handleRemoveFields(inputField.id)}
-                >
-                  <RemoveIcon />
-                </IconButton>
-                <IconButton onClick={handleAddFields}>
-                  <AddIcon />
-                </IconButton>
-              </Col>
-            </Row>
-          ))}
+        {inputFields.map((inputField) => (
+          <Row key={inputField.id} className="justify-content-between">
+            <Col className="col-md-10 col-12">
+              <input
+                name="profileLink"
+                label="Profile Link"
+                value={inputField.profileLink}
+                className="text-long"
+                placeholder="Enter your other profile link"
+                onChange={(event) => handleChangeInput(inputField.id, event)}
+              ></input>
+            </Col>
+            <Col className="col-md-2 d-flex col-12">
+              <IconButton
+                disabled={inputFields.length === 1}
+                onClick={() => handleRemoveFields(inputField.id)}
+              >
+                <RemoveIcon />
+              </IconButton>
+              <IconButton onClick={handleAddFields}>
+                <AddIcon />
+              </IconButton>
+            </Col>
+          </Row>
+        ))}
         {/* </Row> */}
       </form>
       <hr></hr>
