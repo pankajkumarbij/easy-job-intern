@@ -149,7 +149,6 @@ exports.update = async (req, res) => {
     "personName",
     "email",
     "contact",
-    "password",
     "institutionName",
     "degree",
     "year",
