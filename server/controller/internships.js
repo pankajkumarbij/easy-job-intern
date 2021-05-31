@@ -375,7 +375,9 @@ exports.bookmarkInternship = async (req, res) => {
     await USER.save();
     return res.status(200).send({ message: "bookmarked!" });
   } else {
-    USER.bookmarkedInternship = USER.bookmarkedInternship.filter((i) => i._id != req.params.id);
+    USER.bookmarkedInternship = USER.bookmarkedInternship.filter(
+      (i) => i._id != req.params.id
+    );
     await USER.save();
     return res.status(200).send({ message: "Bookmark Removed!" });
   }
@@ -391,7 +393,9 @@ exports.getBookmarkedInternships = async (req, res) => {
 
   let internship;
   try {
-    internship = await Internship.find({ _id: { $in: USER.bookmarkedInternship } });
+    internship = await Internship.find({
+      _id: { $in: USER.bookmarkedInternship },
+    });
   } catch (err) {
     res.status(500).send({ message: "something went wrong!" });
   }
@@ -451,23 +455,29 @@ exports.getInternhsipsByIndustries = (req, res) => {
 };
 
 exports.searchBookmarkedInternship = async (req, res) => {
+  let USER;
+  try {
+    USER = await Student.findById(req.user._id);
+  } catch (err) {
+    return res.status(500).send({ message: "User not found!" });
+  }
   const match = {};
-  match.bookmarkedBy = req.user._id;
-  if (req.query.techstack) {
-    match.techstack = { $in: req.query.techstack };
+  match._id = { $in: USER.bookmarkedInternship };
+  if (req.body.techstack) {
+    match.techstack = { $in: req.body.techstack };
   }
-  if (req.query.duration) {
-    match.duration = req.query.duration;
+  if (req.body.duration) {
+    match.duration = req.body.duration;
   }
-  if (req.query.startDate) {
-    const date = new Date(req.query.startDate).toISOString();
+  if (req.body.startDate) {
+    const date = new Date(req.body.startDate).toISOString();
     match.startDate = date;
   }
-  if (req.query.role) {
-    match.role = req.query.role;
+  if (req.body.role) {
+    match.role = req.body.role;
   }
-  if (req.query.vacancies) {
-    match.vacancies = req.query.vacancies;
+  if (req.body.vacancies) {
+    match.vacancies = req.body.vacancies;
   }
 
   try {
