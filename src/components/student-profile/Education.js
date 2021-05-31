@@ -83,7 +83,7 @@ function Education({changeValue, Education}) {
               label="School Name"
               placeholder="Ex:Boston University"
               className="text-long"
-              value={inputField.firstName}
+              value={Education.School}
               onChange={(event) => handleChangeInput(inputField.id, event)}
             />
             <br />
@@ -94,18 +94,18 @@ function Education({changeValue, Education}) {
               label="Degree"
               placeholder="Ex:Bachelors"
               className="text-long"
-              value={inputField.firstName}
+              value={Education.Degree}
               onChange={(event) => handleChangeInput(inputField.id, event)}
             />
             <br />
             <Label value="Field of Study" />
             <br />
             <input
-              name="study"
+              name="FieldOfStudy"
               label="Study "
               placeholder="Ex:Business"
               className="text-long"
-              value={inputField.firstName}
+              value={Education.FieldOfStudy}
               onChange={(event) => handleChangeInput(inputField.id, event)}
             />
             <br />
@@ -119,7 +119,7 @@ function Education({changeValue, Education}) {
                   label="Star Date"
                   placeholder="Enter Start Date"
                   className="text-long"
-                  value={inputField.firstName}
+                  value={Education.StartDate}
                   onChange={(event) => handleChangeInput(inputField.id, event)}
                 />
                 <br />
@@ -133,7 +133,7 @@ function Education({changeValue, Education}) {
                   label="Last Date"
                   placeholder="Enter Last Date"
                   className="text-long"
-                  value={inputField.firstName}
+                  value={Education.LastDate}
                   onChange={(event) => handleChangeInput(inputField.id, event)}
                 />
                 <br />

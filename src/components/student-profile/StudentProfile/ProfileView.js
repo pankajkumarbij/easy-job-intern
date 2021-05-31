@@ -14,6 +14,7 @@ import { useHistory } from "react-router";
 import { Col, Row } from "react-bootstrap";
 import General from "./components/General";
 import Education from "./components/Education";
+import Experience from "./components/Experience";
 
 const ProfileView = () => {
   const [profile, setProfile] = useState();
@@ -60,6 +61,7 @@ const ProfileView = () => {
           <h1 className="ProfileBuilderheading">Student Profile</h1>
           {profile.General && <General general={profile.General} />}
           {profile.Education && <Education Education={profile.Education} />}
+          {profile.Experience && <Experience Experience={profile.Education} />}
         </div>
       )}
     </div>
