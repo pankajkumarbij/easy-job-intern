@@ -220,7 +220,7 @@ const Profile = () => {
           <Start
             General={formValues}
             handleChange={handleChange}
-            changeOtherLinksValue={changeValue}
+            changeValue={changeValue}
           />
           <Education
             Education={formValues.Education}

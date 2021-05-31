@@ -11,12 +11,12 @@ import Skills from "./Skills";
 import Input from "./Input";
 import { Col, Row } from "react-bootstrap";
 
-const Start = ({ General, handleChange,changeOtherLinksValue }) => {
-  const [inputFields, setInputFields] = useState([{ profileLink: "" }]);
+const Start = ({ General, handleChange,changeValue }) => {
+  const [inputFields, setInputFields] = useState([{ ProfileLink: "" }]);
   console.log(inputFields);
 
   useEffect(() => {
-    changeOtherLinksValue(inputFields, "Experience");
+    changeValue(inputFields, "OtherLinks");
   },[inputFields])
 
   console.log(General);
@@ -43,7 +43,7 @@ const Start = ({ General, handleChange,changeOtherLinksValue }) => {
   };
 
   const handleAddFields = () => {
-    setInputFields((prevInput) => [...prevInput, { profileLink: "" }]);
+    setInputFields((prevInput) => [...prevInput, { ProfileLink: "" }]);
   };
 
   const handleRemoveFields = (id) => {
@@ -144,9 +144,9 @@ const Start = ({ General, handleChange,changeOtherLinksValue }) => {
           <Row key={i} className="justify-content-between">
             <Col className="col-md-10 col-12">
               <input
-                name="profileLink"
+                name="ProfileLink"
                 label="Profile Link"
-                value={inputField.profileLink}
+                value={inputField.ProfileLink}
                 className="text-long"
                 placeholder="Enter your other profile link"
                 onChange={(event) => handleChangeInput(i, event)}

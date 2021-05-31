@@ -27,6 +27,10 @@ h6 {
   border-radius: 30px;
   border: 2px solid #d6c20a;
   box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
+  color: white;
+}
+.profile-box{
+  text-align: justify;
 }
 .ProfileBuilderheading {
   font-family: Georgia, "Times New Roman", Times, serif;
@@ -34,6 +38,7 @@ h6 {
   font-size: 3rem;
   font-weight: 500;
   padding: 0 30px;
+  text-align: center;
 }
 .inst {
   color: #aaa;
@@ -69,6 +74,19 @@ span {
   color: red;
   padding-left: 5px;
   font-size: 1.2rem;
+}
+.div-1, .div-2{
+  color: white;
+  display: inline;
+}
+.div-1{
+  font-weight: 900;
+  font-size: 1.3rem;
+}
+.div-2{
+  /* font-weight: 00; */
+  font-style: italic;
+  font-size: 1.1rem;
 }
 
 .label-text {
