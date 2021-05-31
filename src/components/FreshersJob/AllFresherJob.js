@@ -17,37 +17,6 @@ const AllFreshersJobs = () => {
   const { state, dispatch } = useContext(UserContext);
   const [freshersJobs, setFreshersJobs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const deletePost = (postId) => {
-    axios({
-      method: "delete",
-      url: "http://localhost:5000/employer/delete-freshersjob",
-      data: {
-        postId,
-      },
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        console.log(res);
-        if (res.data.error) {
-          console.log(res.data.error);
-          // alert(res.data.error);
-          const notify = () => toast(res.data.error);
-          notify();
-        } else {
-          // console.log(res.data.jobs);
-          // setJobs(res.data.jobs);
-          // console.log(jobs);
-          const notify = () => toast(res.data.message);
-          notify();
-        }
-      })
-      .catch((err) => {
-        console.log("Error: ", err);
-      });
-  };
 
 
 
@@ -125,7 +94,6 @@ const AllFreshersJobs = () => {
               >
                 <FresherJobCard
                   fresherjob={fresher}
-                  deletePost={deletePost}
                   userId={state.user._id}
                 />
               </Col>
