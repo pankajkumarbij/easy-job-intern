@@ -8,7 +8,7 @@ import "./AllInternships.css";
 import { UserContext } from "../../App";
 import InternshipCard from "../../utils/UI/InternshipCard/InternshipCard";
 
-const AllInternships = () => {
+const BookmarkedInternships = () => {
   const { state, dispatch } = useContext(UserContext);
   const [internships, setInternships] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,8 +16,8 @@ const AllInternships = () => {
   // console.log(state);
   useEffect(() => {
     axios({
-      method: "get",
-      url: "http://localhost:5000/user/all-internships",
+      method: "post",
+      url: "http://localhost:5000/student/getBookmarkedInternships",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -31,8 +31,8 @@ const AllInternships = () => {
           const notify = () => toast(res.data.error);
           notify();
         } else {
-          console.log(res.data.internships);
-          setInternships(res.data.internships);
+          console.log(res.data.internship);
+          setInternships(res.data.internship);
           console.log(internships);
         }
       })
@@ -127,4 +127,4 @@ const AllInternships = () => {
     </div>
   );
 };
-export default AllInternships;
+export default BookmarkedInternships;
