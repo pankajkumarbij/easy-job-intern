@@ -50,6 +50,8 @@ import FreshersJobCompanyName from "./components/FreshersJob/FreshersJobCompanyN
 import BookmarkedInternships from "./components/Internships/BookmarkInternhsip";
 import BookmarkJobs from "./components/Jobs/BookmarkJob";
 import BookmarkFreshersJobs from "./components/FreshersJob/BookmarkFresherJob";
+import StudentUpdateForm from "./components/student/StudentUpdateForm";
+import EmployerUpdateForm from "./components/employer/EmployerUpdateForm";
 
 export const UserContext = createContext();
 
@@ -117,6 +119,9 @@ const Routing = () => {
         <Switch>
           <Route path="/" exact compo>
             <Home />
+          </Route>
+          <Route path="/employer-update" exact>
+            <EmployerUpdateForm />
           </Route>
           <Route path="/create-internship" exact>
             <NewInternship />
@@ -237,6 +242,9 @@ const Routing = () => {
           </Route>
           <Route path="/all-jobs" exact>
             <AllJobs />
+          </Route>
+          <Route path="/student-update" exact>
+            <StudentUpdateForm />
           </Route>
           <Route path="/internship/location">
             <InternshipsGroupedByLocation />

@@ -10,6 +10,7 @@ const {
   deleteStudent,
   saveCompany,
   findStudentById,
+  viewCompany,
 } = require("../controller/student.auth");
 const auth_student = require("../middleware/auth_student");
 
@@ -105,5 +106,6 @@ router.get("/getNotification/:id", auth_student, getNotification);
 
 router.post("/buildprofile", auth_student, addProfileBuilder);
 router.get("/buildprofile/get", auth_student, getProfileStudent);
+router.get("/viewCompany/:id", auth_student,viewCompany )
 
 module.exports = router;

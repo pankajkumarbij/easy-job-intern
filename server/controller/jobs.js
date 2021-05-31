@@ -184,8 +184,24 @@ exports.updateJob = (req, res) => {
     });
 };
 
-exports.deleteJob = (req, res) => {
+exports.deleteJob = async (req, res) => {
   const { postId } = req.body;
+
+  try{
+    const students = await Student.find({bookmarkedJob: postId})
+    students.forEach(async (student) => {
+      const index = student.bookmarkedJob.indexOf(postId);
+      if (index > -1) {
+        student.bookmarkedJob.splice(index, 1);
+      }
+      await student.save()
+      console.log(student)
+    })
+  }
+  catch(e){
+    console.log(e)
+    return res.status(400).send({message: "something went wrong!"})
+  }
 
   Job.findByIdAndDelete(postId)
     .then((deletedPost) => {
