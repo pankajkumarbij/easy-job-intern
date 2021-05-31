@@ -10,11 +10,11 @@ const fresherJob = require('../models/Freshers')
 
 
 exports.signup = async (req, res) => {
-    const {institutionName,personName,email,contact,password,passwordConfirmation,branch,year,degree} = req.body
+    const {institutionName,personName,email,contact,password,passwordConfirmation,branch,year,degree, location, skills, currentRole, openToRoles, workExperience, experience_noOfYears, description} = req.body
     if(password !== passwordConfirmation){
         return res.json({error:"Password dosen't match"})
     }
-    if(!institutionName || !personName || !email || !contact || !password || !passwordConfirmation || !branch || !year || !degree  ){
+    if(!institutionName || !personName || !email || !contact || !password || !passwordConfirmation || !branch || !year || !degree || !location || !skills || !currentRole || !openToRoles || !workExperience || !experience_noOfYears || !description){
         return res.json({error:"Please add all fields"});
     }
     try{
@@ -32,7 +32,14 @@ exports.signup = async (req, res) => {
             degree,
             password,
             status : 'Pending',
-            savedCompanies: []
+            savedCompanies: [],
+            location,
+            skills: skills.split(","),
+            currentRole, 
+            openToRoles: openToRoles.split(","), 
+            workExperience, 
+            experience_noOfYears, 
+            description
         })
         const token = await user.generateAuthToken();
         user.confirmationCode = token;

@@ -81,6 +81,35 @@ const studentSchema = new Schema({
       ref: "FreshersJob",
     },
   ],
+  location: {
+    type: String,
+    required: true,
+  },
+  skills: {
+    type: [String],
+    required: true,
+  },
+  currentRole: {
+    type: String,
+    required: true,
+  },
+  openToRoles: {
+    type: [String],
+    required: true,
+  },
+  workExperience: {
+    type: String,
+    required: true,
+  },
+  experience_noOfYears: {
+      type: Number,
+      required: true
+  },
+  description:{
+    type: String,
+    required: true,
+  },
+
 });
 
 studentSchema.methods.generateAuthToken = async function () {
