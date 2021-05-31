@@ -52,6 +52,7 @@ import BookmarkJobs from "./components/Jobs/BookmarkJob";
 import BookmarkFreshersJobs from "./components/FreshersJob/BookmarkFresherJob";
 import StudentUpdateForm from "./components/student/StudentUpdateForm";
 import EmployerUpdateForm from "./components/employer/EmployerUpdateForm";
+import EmployerProfileScreen from "./components/employer/EmployerProfileScreen";
 
 export const UserContext = createContext();
 
@@ -119,6 +120,9 @@ const Routing = () => {
         <Switch>
           <Route path="/" exact compo>
             <Home />
+          </Route>
+          <Route path="/myemployerprofile" exact>
+            <EmployerProfileScreen />
           </Route>
           <Route path="/employer-update" exact>
             <EmployerUpdateForm />

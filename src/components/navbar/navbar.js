@@ -123,7 +123,7 @@ function NavBar() {
           <Nav className="ml-auto">
             {(state && state.user) ? (
               <React.Fragment>
-                <Nav.Link className="my-auto navLINK" style={{ color: "#fff" }}>
+                <Nav.Link className="my-auto navLINK" style={{ color: "#fff" }} as={Link} to='/myemployerprofile'>
                   Welcome {state.user.personName}
                 </Nav.Link>
                 {state.userType === "employee" && <Nav.Link className="my-auto">
