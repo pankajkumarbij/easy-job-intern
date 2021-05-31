@@ -44,7 +44,7 @@ const JobCompanyName = () => {
               <div
                 className="NAME-company"
                 onClick={() =>
-                  history.push(`/job/companyName/${name._id}`)
+                  history.push(`/companyName-job/${name._id}`)
                 }
               >
                 {name._id}

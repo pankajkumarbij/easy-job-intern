@@ -3,9 +3,40 @@ import "../InternshipCard/InternshipCard.css";
 import * as Icon from "react-bootstrap-icons";
 import { Dropdown } from "react-bootstrap";
 import { UserContext } from "../../../App";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
-const FresherJobCard = ({ fresherjob, deletePost, bookMarkPost, userId }) => {
+const FresherJobCard = ({ fresherjob, deletePost, userId }) => {
   const { state, dispatch } = useContext(UserContext);
+
+  const bookMarkPost = (postId) => {
+    axios({
+      method: "post",
+      url: `http://localhost:5000/student/bookmarkFresherJob/${postId}`,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data.error) {
+          // console.log(res.data.error);
+          const notify = () => toast(res.data.error);
+          notify();
+        } else {
+          // setInternships(res.data.internships);
+          // window.location.reload(false);
+          console.log(res.data.message);
+          const notify = () => toast(res.data.message);
+          notify();
+        }
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
+  };
+
   const GettingMonth = (date) => {
     const monthNames = [
       "January",
@@ -36,7 +67,9 @@ const FresherJobCard = ({ fresherjob, deletePost, bookMarkPost, userId }) => {
   return (
     <div className="card-custom mx-auto">
       <div className="primary-info">
-        {fresherjob.role && <div className="primary-info-role">{fresherjob.role}</div>}
+        {fresherjob.role && (
+          <div className="primary-info-role">{fresherjob.role}</div>
+        )}
         {fresherjob.companyName && (
           <div className="primary-info-company">{fresherjob.companyName}</div>
         )}
