@@ -10,7 +10,8 @@ const {
   deleteEmployer,
   findEmployerById,
   viewStudent,
-  addCompany
+  addCompany,
+  updateCompany
 } = require("../controller/employer.auth");
 
 const { createFreshersJob, updateFreshersJob, deleteFreshersJob, searchFresherJob, getFresherJobValues } = require("../controller/freshersjob");
@@ -70,5 +71,7 @@ router.get('/getNotifications', auth_employer, getNotifications)
 router.get('/viewStudent/:id', auth_employer, viewStudent)
 
 router.post('/addCompany', auth_employer, addCompany)
+
+router.patch('/updateCompany/:id', auth_employer, updateCompany)
 
 module.exports = router;
