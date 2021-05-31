@@ -22,7 +22,7 @@ h6 {
 
 .main-box {
   /* background-color: #1f4468; */
-  width: 55%;
+  width: 750px;
   margin: auto;
   border-radius: 30px;
   border: 2px solid #d6c20a;
@@ -33,9 +33,11 @@ h6 {
   text-decoration: none;
   font-size: 3rem;
   font-weight: 500;
+  padding: 0 30px;
 }
 .inst {
   color: #aaa;
+  padding: 0 30px;
 }
 
 .side,
@@ -85,6 +87,9 @@ textarea {
   background-color: #a6a6a6;
   border-radius: 6px;
 }
+.textbox {
+  width: 100%;
+}
 
 .text-long {
   background-color: #a6a6a6;
@@ -110,11 +115,68 @@ textarea {
   width: 75%;
 }
 
-.subHeading{
+.subHeading {
   font-size: 2.5rem;
   text-align: center;
   padding-top: 30px;
   text-decoration: none;
-  font-family:'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   font-weight: 800;
+}
+
+@media only screen and (max-width: 800px) {
+  .main-box {
+    width: 600px;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .main-box {
+    width: 500px;
+  }
+  .side,
+  .byside {
+    /* display: inline-block; */
+    width: 100%;
+  }
+  .ProfileBuilderheading {
+    font-size: 2.5rem;
+  }
+  .subHeading {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width: 510px) {
+  .main-box {
+    width: 450px;
+  }
+  .inst {
+    font-size: 1rem;
+  }
+}
+@media only screen and (max-width: 460px) {
+  .main-box {
+    width: 400px;
+  }
+  .ProfileBuilderheading {
+    font-size: 2.1rem;
+  }
+  .subHeading {
+    font-size: 1.7rem;
+  }
+}
+@media only screen and (max-width: 420px) {
+  .main-box {
+    width: 350px;
+  }
+}
+@media only screen and (max-width: 360px) {
+  .main-box {
+    width: 300px;
+  }
+}
+@media only screen and (max-width: 30px) {
+  .main-box {
+    width: 250px;
+  }
 }

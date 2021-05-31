@@ -149,6 +149,7 @@ function Education() {
             <Label value="Description" />
             <br />
             <textarea
+              className="textbox"
               name="desc"
               rows="3"
               cols="82"
