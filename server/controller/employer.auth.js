@@ -140,7 +140,7 @@ exports.logoutAll = async (req, res) => {
 
 exports.update = async(req, res) => {
   const updates = Object.keys(req.body)
-  const allowedUpdates = ['personName', 'email','contact', 'password', 'companyName']
+  const allowedUpdates = ['personName', 'email','contact', 'companyName']
   const isValid = updates.every((update)=>{
       return allowedUpdates.includes(update)
   })
@@ -158,7 +158,7 @@ exports.update = async(req, res) => {
 
   }
   catch(e){
-      res.status(400).send({error: 'something went werong!'})
+      res.status(400).send({error: 'something went wrong!'})
   }
 }
 
