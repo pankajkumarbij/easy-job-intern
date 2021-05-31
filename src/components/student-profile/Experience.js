@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -11,18 +11,22 @@ import "./profile.css";
 import Label from "./Label";
 import { Row } from "react-bootstrap";
 
-function Experience() {
+function Experience({Experience, changeValue}) {
   const [inputFields, setInputFields] = useState([
     {
       id: uuidv4(),
-      company: "",
-      title: "",
-      sd: "",
-      ld: "",
-      location: "",
-      desc: "",
+      Company: "",
+      Title: "",
+      StartDate: "",
+      LastDate: "",
+      Location: "",
+      Description: "",
     },
   ]);
+
+  useEffect(() => {
+    changeValue(inputFields, "Experience");
+  },[inputFields])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,12 +49,12 @@ function Experience() {
       ...inputFields,
       {
         id: uuidv4(),
-        company: "",
-        title: "",
-        sd: "",
-        ld: "",
-        location: "",
-        desc: "",
+        Company: "",
+        Title: "",
+        StartDate: "",
+        LastDate: "",
+        Location: "",
+        Description: "",
       },
     ]);
   };
@@ -73,22 +77,22 @@ function Experience() {
             <Label value="Company/Organization" />
             <br />
             <input
-              name="company"
+              name="Company"
               label="Company/organization"
               placeholder="Enter Company/organization Name"
               className="text-long"
-              value={inputField.firstName}
+              value={Experience.Company}
               onChange={(event) => handleChangeInput(inputField.id, event)}
             />
             <br />
             <Label value="Title" />
             <br />
             <input
-              name="title"
+              name="Title"
               label="Title"
               placeholder="Enter Title"
               className="text-long"
-              value={inputField.firstName}
+              value={Experience.Title}
               onChange={(event) => handleChangeInput(inputField.id, event)}
             />
             <br />
@@ -97,12 +101,12 @@ function Experience() {
                 <Label value="Start Date" />
                 <br />
                 <input
-                  name="sd"
+                  name="StartDate"
                   type="date"
                   label="Start Date"
                   placeholder="Enter Start Date"
                   className="text-long"
-                  value={inputField.firstName}
+                  value={Experience.StartDate}
                   onChange={(event) => handleChangeInput(inputField.id, event)}
                 />
                 <br />
@@ -111,12 +115,12 @@ function Experience() {
                 <Label value="Last Date" />
                 <br />
                 <input
-                  name="ld"
+                  name="LastDate"
                   type="date"
                   label="Last Date"
                   placeholder="Enter Last Date"
                   className="text-long"
-                  value={inputField.firstName}
+                  value={Experience.LastDate}
                   onChange={(event) => handleChangeInput(inputField.id, event)}
                 />
                 <br />
@@ -125,22 +129,22 @@ function Experience() {
             <Label value="Location" />
             <br />
             <input
-              name="location"
+              name="Location"
               label="Location"
               placeholder="Enter Location"
               className="text-long"
-              value={inputField.firstName}
+              value={Experience.Location}
               onChange={(event) => handleChangeInput(inputField.id, event)}
             />
             <br />
             <Label value="Description" />
             <textarea
-              name="desc"
+              name="Description"
               rows="3"
               cols="82"
               label="Description"
               variant="filled"
-              value={inputField.firstName}
+              value={Experience.Description}
               onChange={(event) => handleChangeInput(inputField.id, event)}
             />
             <br />
