@@ -4,10 +4,10 @@ import * as Icon from "react-bootstrap-icons";
 import { Dropdown } from "react-bootstrap";
 import { UserContext } from "../../../App";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const InternshipCard = ({ internship, deletePost, userId }) => {
-  const { state, dispatch } = useContext(UserContext);
+  const { state } = useContext(UserContext);
 
   const bookMarkPost = (postId) => {
     axios({
