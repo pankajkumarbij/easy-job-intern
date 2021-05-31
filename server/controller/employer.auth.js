@@ -6,9 +6,12 @@ const Employer = require("../models/employer");
 const {signupEmailFunc} = require("../utils/signupEmployer-email");
 const Job = require("../models/Job")
 const Internship = require("../models/Internship")
+
 const fresherJob = require("../models/Freshers");
 const Student = require("../models/student");
 const ObjectID = require('mongodb').ObjectID;
+const Company = require("../models/company")
+
 
 exports.signup = async (req, res) => {
   const {
@@ -19,6 +22,14 @@ exports.signup = async (req, res) => {
     password,
     passwordConfirmation,
   } = req.body;
+
+  const company = await Company.find({
+    companyName: companyName.toUpperCase().replace(/\s/g, ""),
+  })
+  if(company.length>0){
+    return res.status(400).send({message: "company name already exists!"})
+  }
+  
   if (password !== passwordConfirmation) {
     return res.json({ error: "passwordConfirmation field is missing or Password dosen't match" });
   }
@@ -199,6 +210,7 @@ exports.deleteEmployer = async(req, res) => {
   }
 }
 
+
 exports.viewStudent = async(req, res) => {
   try{
     if(!ObjectID.isValid(req.params.id)){
@@ -216,5 +228,38 @@ exports.viewStudent = async(req, res) => {
   catch(e){
     console.log(e)
     return res.status(400).send({message: "something went wrong!"})
+  }
+}
+
+exports.addCompany = async(req, res) => {
+  try{
+    const employer = await Employer.findById(req.user._id)
+    
+    const {companyName, companySize, overview, locations, tags, tagline, investmentStage, markets} = req.body
+    console.log(employer)
+    if(companyName !== employer.companyName){
+      return res.status(400).send({message: "you cannot add details for this company"})
+    }
+
+    const marketsArray = markets.split(",");
+    const locationsArray = locations.split(",");
+    const tagsArray = tags.split(",");
+    const company = new Company({
+      companyName: companyName.toUpperCase().replace(/\s/g, ""),
+      companySize,
+      overview,
+      locations: locationsArray,
+      tags: tagsArray,
+      tagline,
+      investmentStage,
+      markets: marketsArray,
+      createdBy: req.user._id
+    })
+    await company.save()
+    return res.status(200).send({message: "company details saved!"})
+  }
+  catch(e){
+    console.log(e)
+    return res.send(400).send({message: "something went wrong"})
   }
 }
