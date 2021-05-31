@@ -65,6 +65,12 @@ const Profile = () => {
       valid: false,
       touched: false,
     },
+    Education: {
+      value: [],
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
   };
 
   const [formValues, setFormValues] = useState(initialState);
@@ -93,10 +99,10 @@ const Profile = () => {
 
   console.log(formValues);
 
-  const changeOtherLinksValue = (newValue) => {
+  const changeValue = (newValue,name) => {
     console.log(newValue);
     const updatedFormValues = { ...formValues };
-    const name = "OtherLinks";
+    // const name = "OtherLinks";
     const updatedFormElement = { ...updatedFormValues[name] };
     updatedFormElement.value = newValue;
     updatedFormElement.valid = true;
@@ -105,8 +111,17 @@ const Profile = () => {
     updatedFormValues[name] = updatedFormElement;
 
     setFormValues(updatedFormValues);
-
   };
+
+  // const changeEducation = (newValue) => {
+  //   const updatedFormValues = { ...formValues };
+  //   const updatedFormElement = { ...updatedFormValues["Education"] };
+  //   updatedFormElement.value = newValue;
+  //   updatedFormElement.valid = true;
+  //   updatedFormElement.errorMessage = "";
+  //   updatedFormElement.touched = true;
+  //   updatedFormValues["Education"] = updatedFormElement;
+  // };
 
   return (
     <>
@@ -119,9 +134,9 @@ const Profile = () => {
           <Start
             General={formValues}
             handleChange={handleChange}
-            changeOtherLinksValue={changeOtherLinksValue}
+            changeOtherLinksValue={changeValue}
           />
-          <Education />
+          <Education Education={formValues.Education} changeValue={changeValue} />
           <Experience />
           <Project />
           <Skills />
