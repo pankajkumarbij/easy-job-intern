@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -11,19 +11,23 @@ import "./profile.css";
 import Label from "./Label";
 import { Row } from "react-bootstrap";
 
-function Education() {
+function Education({changeValue, Education}) {
   const [inputFields, setInputFields] = useState([
     {
       id: uuidv4(),
-      school: "",
-      degree: "",
-      study: "",
-      sd: "",
-      ld: "",
-      grade: "",
-      desc: "",
+      School: "",
+      Degree: "",
+      FieldOfStudy: "",
+      StartDate: "",
+      LastDate: "",
+      Grade: "",
+      Description: "",
     },
   ]);
+
+  useEffect(() => {
+    changeValue(inputFields, "Education");
+  },[inputFields])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,13 +50,13 @@ function Education() {
       ...inputFields,
       {
         id: uuidv4(),
-        school: "",
-        degree: "",
-        study: "",
-        sd: "",
-        ld: "",
-        grade: "",
-        desc: "",
+        School: "",
+        Degree: "",
+        FieldOfStudy: "",
+        StartDate: "",
+        LastDate: "",
+        Grade: "",
+        Description: "",
       },
     ]);
   };

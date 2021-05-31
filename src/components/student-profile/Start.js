@@ -16,7 +16,7 @@ const Start = ({ General, handleChange,changeOtherLinksValue }) => {
   console.log(inputFields);
 
   useEffect(() => {
-    changeOtherLinksValue(inputFields);
+    changeOtherLinksValue(inputFields, "Experience");
   },[inputFields])
 
   console.log(General);
