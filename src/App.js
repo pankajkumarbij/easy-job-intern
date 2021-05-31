@@ -48,6 +48,7 @@ import InternshipCompanyName from "./components/Internships/InternshipCompanyNam
 import JobCompanyName from "./components/Jobs/JobCompanyName";
 import FreshersJobCompanyName from "./components/FreshersJob/FreshersJobCompanyName";
 import BookmarkedInternships from "./components/Internships/BookmarkInternhsip";
+import BookmarkJobs from "./components/Jobs/BookmarkJob";
 
 export const UserContext = createContext();
 
@@ -283,6 +284,9 @@ const Routing = () => {
           </Route>
           <Route path="/bookmark/internship">
             <BookmarkedInternships />
+          </Route>
+          <Route path="/bookmark/job">
+            <BookmarkJobs />
           </Route>
           <Route exact path="/login/student-profile">
             <Profile />
