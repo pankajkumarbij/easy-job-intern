@@ -15,6 +15,7 @@ import { Col, Row } from "react-bootstrap";
 import General from "./components/General";
 import Education from "./components/Education";
 import Experience from "./components/Experience";
+import Project from "./components/Project";
 
 const ProfileView = () => {
   const [profile, setProfile] = useState();
@@ -62,6 +63,7 @@ const ProfileView = () => {
           {profile.General && <General general={profile.General} />}
           {profile.Education && <Education Education={profile.Education} />}
           {profile.Experience && <Experience Experience={profile.Education} />}
+          {profile.Project && <Project Project={profile.Project} />}
         </div>
       )}
     </div>
