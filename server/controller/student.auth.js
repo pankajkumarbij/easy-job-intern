@@ -137,6 +137,7 @@ exports.signin = async (req, res) => {
       user: { _id, email, personName, contact, branch, year, degree },
     });
   } catch (e) {
+      console.log(e);
     return res.json({ error: "Something Went Wrong" });
   }
 };
