@@ -101,6 +101,12 @@ const Profile = () => {
       valid: false,
       touched: false,
     },
+    Other: {
+      value: [],
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
   };
 
   const [formValues, setFormValues] = useState(initialState);
@@ -172,7 +178,7 @@ const Profile = () => {
           <Skills Skills={formValues.Skills} changeValue={changeValue} />
           <Achievments Achievments={formValues.Achievments} changeValue={changeValue} />
           <Volunteer VolunteerExperience={formValues.VolunteerExperience} changeValue={changeValue} />
-          <Other />
+          <Other Others={formValues.Other} changeValue={changeValue} />
         </div>
         <br />
       </div>
