@@ -59,6 +59,12 @@ const Profile = () => {
       valid: false,
       touched: false,
     },
+    OtherLinks: {
+      value: [],
+      errorMessage: "",
+      valid: false,
+      touched: false,
+    },
   };
 
   const [formValues, setFormValues] = useState(initialState);
@@ -87,6 +93,21 @@ const Profile = () => {
 
   console.log(formValues);
 
+  const changeOtherLinksValue = (newValue) => {
+    console.log(newValue);
+    const updatedFormValues = { ...formValues };
+    const name = "OtherLinks";
+    const updatedFormElement = { ...updatedFormValues[name] };
+    updatedFormElement.value = newValue;
+    updatedFormElement.valid = true;
+    updatedFormElement.errorMessage = "";
+    updatedFormElement.touched = true;
+    updatedFormValues[name] = updatedFormElement;
+
+    setFormValues(updatedFormValues);
+
+  };
+
   return (
     <>
       <div className="pt-5">
@@ -95,7 +116,11 @@ const Profile = () => {
           <h6 className="inst">
             Please Enter the details below to complete your student profile:-
           </h6>
-          <Start General={formValues} handleChange={handleChange} />
+          <Start
+            General={formValues}
+            handleChange={handleChange}
+            changeOtherLinksValue={changeOtherLinksValue}
+          />
           <Education />
           <Experience />
           <Project />
