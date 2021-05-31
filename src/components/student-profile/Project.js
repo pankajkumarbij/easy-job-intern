@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -11,10 +11,14 @@ import "./profile.css";
 import Label from "./Label";
 import { Row } from "react-bootstrap";
 
-function Project() {
+function Project({Project, changeValue}) {
   const [inputFields, setInputFields] = useState([
-    { id: uuidv4(), project: "", link: "", sd: "", ld: "", desc: "" },
+    { id: uuidv4(), ProjectName: "", ProjectTitle: "", StartDate: "", LastDate: "", Description: "" },
   ]);
+
+  useEffect(() => {
+    changeValue(inputFields, "Project");
+  },[inputFields])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,7 +39,7 @@ function Project() {
   const handleAddFields = () => {
     setInputFields([
       ...inputFields,
-      { id: uuidv4(), project: "", link: "", sd: "", ld: "", desc: "" },
+      { id: uuidv4(), ProjectName: "", ProjectTitle: "", StartDate: "", LastDate: "", Description: "" },
     ]);
   };
 
@@ -57,22 +61,22 @@ function Project() {
             <Label value="Project-Title" />
             <br />
             <input
-              name="project"
+              name="ProjectName"
               label="Project Name"
               placeholder="Enter Project Title"
               className="text-long"
-              value={inputField.firstName}
+              value={Project.ProjectName}
               onChange={(event) => handleChangeInput(inputField.id, event)}
             />
             <br />
             <Label value="Project-Link" />
             <br />
             <input
-              name="project"
+              name="ProjectLink"
               label="Project Name"
               placeholder="Enter Project Title"
               className="text-long"
-              value={inputField.firstName}
+              value={Project.ProjectTitle}
               onChange={(event) => handleChangeInput(inputField.id, event)}
             />
             <br />
@@ -81,12 +85,12 @@ function Project() {
                 <Label value="Start Date" />
                 <br />
                 <input
-                  name="sd"
+                  name="StartDate"
                   type="date"
                   label="Star Date"
                   placeholder="Enter Start Date"
                   className="text-long"
-                  value={inputField.firstName}
+                  value={Project.StartDate}
                   onChange={(event) => handleChangeInput(inputField.id, event)}
                 />
                 <br />
@@ -95,12 +99,12 @@ function Project() {
                 <Label value="Last Date" />
                 <br />
                 <input
-                  name="ld"
+                  name="LastDate"
                   type="date"
                   label="Last Date"
                   placeholder="Enter Last Date"
                   className="text-long"
-                  value={inputField.firstName}
+                  value={Project.LastDate}
                   onChange={(event) => handleChangeInput(inputField.id, event)}
                 />
                 <br />
@@ -108,12 +112,12 @@ function Project() {
             </Row>
             <Label value="Description" />
             <textarea
-              name="desc"
+              name="Description"
               rows="3"
               cols="82"
               label="Description"
               variant="filled"
-              value={inputField.firstName}
+              value={Project.Description}
               onChange={(event) => handleChangeInput(inputField.id, event)}
             />
             <br />
