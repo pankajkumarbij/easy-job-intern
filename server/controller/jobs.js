@@ -337,7 +337,7 @@ exports.searchBookmarkedJob = async (req, res) => {
     return res.status(500).send({ message: "User not found!" });
   }
   const match = {};
-  match._id = { $in: USER.bookmarkedInternship };
+  match._id = { $in: USER.bookmarkedJob };
   if (req.query.techstack) {
     match.techstack = { $in: req.query.techstack };
   }

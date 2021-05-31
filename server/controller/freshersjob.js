@@ -313,7 +313,9 @@ exports.getBookmarkedFresherJobs = async (req, res) => {
 
   let fresherJobs;
   try {
-    fresherJobs = await Freshers.find({ _id: { $in: USER.bookmarkedFresherJob } });
+    fresherJobs = await Freshers.find({
+      _id: { $in: USER.bookmarkedFresherJob },
+    });
   } catch (err) {
     res.status(500).send({ message: "something went wrong!" });
   }
@@ -322,8 +324,14 @@ exports.getBookmarkedFresherJobs = async (req, res) => {
 };
 
 exports.searchBookmarkedFresherJob = async (req, res) => {
+  let USER;
+  try {
+    USER = await Student.findById(req.user._id);
+  } catch (err) {
+    return res.status(500).send({ message: "User not found!" });
+  }
   const match = {};
-  match.bookmarkedBy = req.user._id;
+  match._id = { $in: USER.bookmarkedFresherJob };
   if (req.query.techstack) {
     match.techstack = { $in: req.query.techstack };
   }
