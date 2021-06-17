@@ -75,24 +75,13 @@ For a more clear understanding of contribution guidelines please read <a href="h
 <a href="https://crosswoc.ieeedtu.in/"><img src="./readme_assets/gssoc_logoNew.png" width="25%" height="200px"></a>
 </p>
 
-## ❤️&nbsp; Project Admin
+## ❤️&nbsp; Project Admin & Mentor
 
 <table>
 <tr>
     <td align="center" thead="admin"><a href="https://github.com/pankajkumarbij"><img alt="" src="https://avatars.githubusercontent.com/u/59636849?s=400&u=022a70168ed33225af6aed2a40d2c3778a36cbfa&v=4" width="100px;" alt="admin"/><br /><sub><b> Pankaj Kumar Bijarniya </b></sub></a></td></tr>
   </tr>
   </table>
-
-## 👨‍💻 Mentors
-
-<table>
-<tr>
-    <td align="center" thead="Mentor"><a href="https://github.com/asi309"><img src="readme_assets/p3.jfif" width="100px;" alt="Mentor"/><br /><sub><b>Asidipta</b></sub></a></td>
-    <td align="center" thead="Mentor"><a href="https://github.com/Vidit-jindal"><img src="readme_assets/p2.jfif" width="100px;" alt="admin"/><br /><sub><b>Vidit Jindal</b></sub></a></td>
-    <td align="center" thead="Mentor"><a href="https://github.com/palashgdev"><img src="readme_assets/p1.jfif" width="100px;" alt="admin"/><br /><sub><b>Palash Gupta</b></sub></a></td>
-  </tr>
-  </table>
-
 
 # Contributors:
 <a href="https://github.com/pankajkumarbij/easy-job-intern/graphs/contributors">
