@@ -4,18 +4,27 @@
 </div>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
- 
-<h2 align="center">
+<br> 
+<div align="center">
 
-![https://img.shields.io/badge/Licience-MIT-green](https://img.shields.io/badge/Licience-MIT-green)
-[![discord](https://img.shields.io/badge/Chat-on%20discord-red)](https://discord.gg/PBuuPMSVjB)
-[![GitHub issues](https://img.shields.io/github/issues/pankajkumarbij/easy-job-intern?style=plastic)](https://github.com/pankajkumarbij/easy-job-intern/issues)
-[![GitHub forks](https://img.shields.io/github/forks/pankajkumarbij/easy-job-intern)](https://github.com/pankajkumarbij/easy-job-intern/network)
-[![GitHub stars](https://img.shields.io/github/stars/pankajkumarbij/easy-job-intern?style=plastic)](https://github.com/pankajkumarbij/easy-job-intern)
-[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/pankajkumarbij/easy-job-intern?logo=github)](https://github.com/pankajkumarbij/easy-job-intern)
-![Contribotion](https://img.shields.io/badge/Contribution-Welcome-brightgreen)
+<a href="https://discord.gg/PBuuPMSVjB"><img src="https://img.shields.io/badge/Chat-on%20discord-red"></a>
+<a href="https://github.com/pankajkumarbij/easy-job-intern"><img src="https://img.shields.io/github/languages/code-size/pankajkumarbij/easy-job-intern?logo=github"></a>
+  
+<a href="https://github.com/pankajkumarbij/easy-job-intern"><img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103"></a>
+<a href="https://github.com/pankajkumarbij/easy-job-intern"><img src="https://img.shields.io/badge/Built%20by-developers%20%3C%2F%3E-0059b3"></a>
+<a href="https://github.com/pankajkumarbij/easy-job-intern"><img src="https://img.shields.io/static/v1.svg?label=Contributions&message=Welcome&color=yellow"></a>
+<a href="https://github.com/pankajkumarbij/"><img src="https://img.shields.io/badge/Maintained%3F-yes-brightgreen.svg?v=103"></a>
+<a href="https://github.com/pankajkumarbij/easy-job-intern/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?v=103"></a>
 
-</h2>
+<a href="https://github.com/pankajkumarbij/easy-job-intern/graphs/contributors"><img src="https://img.shields.io/github/contributors/pankajkumarbij/easy-job-intern?color=brightgreen"></a>
+<a href="https://github.com/pankajkumarbij/easy-job-intern/stargazers"><img src="https://img.shields.io/github/stars/pankajkumarbij/easy-job-intern?color=0059b3"></a>
+<a href="https://github.com/pankajkumarbij/easy-job-intern/network/members"><img src="https://img.shields.io/github/forks/pankajkumarbij/easy-job-intern?color=yellow"></a>
+<a href="https://github.com/pankajkumarbij/easy-job-intern/issues"><img src="https://img.shields.io/github/issues/pankajkumarbij/easy-job-intern?color=0059b3"></a>
+<a href="https://github.com/pankajkumarbij/easy-job-intern/issues?q=is%3Aissue+is%3Aclosed"><img src="https://img.shields.io/github/issues-closed-raw/pankajkumarbij/easy-job-intern?color=yellow"></a>
+<a href="https://github.com/pankajkumarbij/easy-job-intern/pulls"><img src="https://img.shields.io/github/issues-pr/pankajkumarbij/easy-job-intern?color=brightgreen"></a>
+<a href="https://github.com/pankajkumarbij/easy-job-intern/pulls?q=is%3Apr+is%3Aclosed"><img src="https://img.shields.io/github/issues-pr-closed-raw/pankajkumarbij/easy-job-intern?color=0059b3"></a> 
+
+</div>
 
 # About
 
