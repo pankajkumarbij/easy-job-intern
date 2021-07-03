@@ -50,9 +50,11 @@ const Home = () => {
                   Internship By Industry
                 </h4>
                 <ListGroup>
-                  <a className="itemLink" href="/industry-internship/IT">
-                    <ListGroup.Item variant="primary">IT</ListGroup.Item>
-                  </a>
+                <a className="itemLink" href="/industry-internship/IT">
+                <ListGroup.Item action variant="secondary">
+                  IT
+                </ListGroup.Item>
+              </a>
                   <a className="itemLink" href="/industry-internship/Marketing">
                     <ListGroup.Item action variant="secondary">
                       Marketing
@@ -103,7 +105,9 @@ const Home = () => {
                 </h4>
                 <ListGroup>
                   <a className="itemLink" href="/location-internship/Mumbai">
-                    <ListGroup.Item variant="primary">Mumbai</ListGroup.Item>
+                  <ListGroup.Item action variant="secondary">
+                  Mumbai
+                </ListGroup.Item>
                   </a>
                   <a className="itemLink" href="/location-internship/Pune">
                     <ListGroup.Item action variant="secondary">
@@ -154,9 +158,9 @@ const Home = () => {
                 </h4>
                 <ListGroup>
                   <a className="itemLink" href="/stream-internship/Management">
-                    <ListGroup.Item variant="primary">
-                      Management
-                    </ListGroup.Item>
+                  <ListGroup.Item action variant="secondary">
+                  Management
+                </ListGroup.Item>
                   </a>
                   <a className="itemLink" href="/stream-internship/Manufacturing">
                     <ListGroup.Item action variant="secondary">
@@ -207,9 +211,9 @@ const Home = () => {
                 </h4>
                 <ListGroup>
                   <a className="itemLink" href="/#">
-                    <ListGroup.Item variant="primary">
-                      Programming With Python
-                    </ListGroup.Item>
+                  <ListGroup.Item action variant="secondary">
+                  Programming with Python
+                  </ListGroup.Item>
                   </a>
                   <a className="itemLink" href="/#">
                     <ListGroup.Item action variant="secondary">
