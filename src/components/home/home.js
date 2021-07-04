@@ -135,7 +135,7 @@ const Home = () => {
                   <a className="itemLink" href="/location-internship/Gugaon">
                     {" "}
                     <ListGroup.Item action variant="info">
-                      Gugaon
+                      Gurgaon
                     </ListGroup.Item>{" "}
                   </a>
                   <a className="itemLink" href="/location-internship/Delhi">
@@ -143,10 +143,10 @@ const Home = () => {
                       Delhi
                     </ListGroup.Item>
                   </a>
-                  <a className="itemLink" href="/location-internship/India">
+                  <a className="itemLink" href="/location-internship/Noida">
                     {" "}
                     <ListGroup.Item action variant="dark">
-                      India
+                      Noida
                     </ListGroup.Item>{" "}
                   </a>
                 </ListGroup>
