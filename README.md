@@ -27,12 +27,9 @@ The main motive behind the design of this project to provide the best job and in
 
 Join Discord : https://discord.gg/PBuuPMSVjB
 
-# Tech Stack
+## 🛠️ Technology Stack
 
-| Database | Front-End | Back-End   |
-| -------- | --------- | ---------- |
-| MongoDB   | React      | Node.js    |
-| &nbsp;   | React Bootstrap | Express.js |
+<img alt="HTML" src="https://img.shields.io/badge/html5%20-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white"/> <img alt="CSS" src="https://img.shields.io/badge/css3%20-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white"/> <img alt="MongoDB" src="https://img.shields.io/badge/Mongodb%20-%23E34F26.svg?&style=for-the-badge&logo=Mongodb&logoColor=white"/> <img alt="Express" src="https://img.shields.io/badge/express%20-%23323330.svg?&style=for-the-badge&logo=express&logoColor=%23F7DF1E"/> <img alt="React" src="https://img.shields.io/badge/react%20-%2320232a.svg?&style=for-the-badge&logo=react&logoColor=%2361DAFB"/> <img alt="Node" src="https://img.shields.io/badge/Node.js-35495E?style=for-the-badge&logo=node.js&logoColor=4FC08D"/> <img alt="Bootstrap" src="https://img.shields.io/badge/bootstrap%20-%23323330.svg?&style=for-the-badge&logo=bootstrap&logoColor=%23F7DF1E"/>
 
 # Contribution Guidelines
 
