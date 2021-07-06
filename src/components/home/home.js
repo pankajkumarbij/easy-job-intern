@@ -4,7 +4,6 @@ import { Card, Container, Row, Col, Button, ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./home.css";
 import { UserContext } from "../../App";
-
 const Home = () => {
   const { state } = useContext(UserContext);
   console.log(state);
@@ -15,25 +14,24 @@ const Home = () => {
 
         <div
           style={{ backgroundColor: "" }}
-          
           class="col d-flex justify-content-center"
         >
           {!state && <Card
             style={{
-              width: "100%",
+              
               marginTop: "6%",
               opacity: "0.8",
-              background: "black",
-              color: "white",
+              backgroundImage: `url("./images/intern.png")`,
+              width:"80%",
+              height:"300px", 
+              color: "#00FFFF",
             }}
           >
             <Card.Body>
               <Card.Text>
-                <h2>Easy Job Intern</h2>
-                FIND BEST WINTER & SUMMER INTERNSHIPS FOR STUDENTS IN INDIA<br></br>
-                Apply to 10,000+ internships for free!
+                <h3>10,000+ INTERSHIPS ARE WAITING FOR YOU!<br></br><br></br><br></br></h3>
               </Card.Text>
-              <Button style={{color: '#000000',backgroundColor: '#ffc107',borderColor: 'white'}} variant="info" as={Link} to="/student-signup" >
+              <Button style={{color: 'black',backgroundColor: '#40E0D0',borderColor: '#FF00FF'}} variant="info" as={Link} to="/student-signup" >
                 Get Started 
               </Button>
             </Card.Body>
