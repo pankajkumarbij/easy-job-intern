@@ -21,7 +21,7 @@ const Home = () => {
               
               marginTop: "6%",
               opacity: "0.8",
-              backgroundImage: `url("./images/intern.png")`,
+              backgroundImage: "url(images/intern.png)",
               width:"80%",
               height:"300px", 
               color: "#00FFFF",
