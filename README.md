@@ -68,8 +68,9 @@ For a more clear understanding of contribution guidelines please read <a href="h
 # Open Source Programs we have been associated with: 
 
 <p align="center">
-<a href="https://crosswoc.ieeedtu.in/"><img src="./readme_assets/crosswoc.png" width="25%"></a>
-<a href="https://crosswoc.ieeedtu.in/"><img src="./readme_assets/gssoc_logoNew.png" width="25%" height="200px"></a>
+<a href="https://crosswoc.ieeedtu.in/"><img src="./readme_assets/crosswoc.png" width="25%"  height="200px"></a>
+<a href="https://gssoc.girlscript.tech/"><img src="./readme_assets/gssoc_logoNew.png" width="25%" height="200px"></a>
+<a href="https://www.pclubsummerofcode.in/"><img src="./readme_assets/psoc.PNG" width="25%" height="200px"></a>  
 </p>
 
 ## ❤️&nbsp; Project Admin & Mentor
