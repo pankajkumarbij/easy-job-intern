@@ -7,6 +7,7 @@
 }
 .searchBtn{
     width: 50px;
+    color: #F52887;
 }
 
 @media only screen and (max-width: 1090px){
@@ -23,5 +24,6 @@
     .navLINK{
         border-bottom: 1px solid #888;
     }
+    .linkText{ color: red ; }
 
 }

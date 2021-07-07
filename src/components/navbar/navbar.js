@@ -21,8 +21,8 @@ function NavBar() {
   
   return (
     <>
-      <Navbar bg="dark" variant="dark" expand="lg">
-        <Navbar.Brand as={Link} to="/" style={{ color: "yellow" }}>
+      <Navbar bg="info" variant="light" expand="lg">
+        <Navbar.Brand as={Link} to="/" style={{ color: "#F52887" }}>
           Easy Job Intern
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -30,7 +30,7 @@ function NavBar() {
           <Nav className="mr-auto">
             <Nav.Link>
               <Dropdown>
-                <Dropdown.Toggle variant="dark" id="dropdown-basic" className="navBTN">
+                <Dropdown.Toggle variant="info" id="dropdown-basic" className="navBTN" >
                   Internship
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -59,7 +59,7 @@ function NavBar() {
             </Nav.Link>
             <Nav.Link>
               <Dropdown>
-                <Dropdown.Toggle variant="dark" id="dropdown-basic" className="navBTN">
+                <Dropdown.Toggle variant="info" id="dropdown-basic" className="navBTN">
                   Jobs
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -83,7 +83,7 @@ function NavBar() {
             </Nav.Link>
             <Nav.Link>
               <Dropdown className="navLINK">
-                <Dropdown.Toggle variant="dark" id="dropdown-basic" className="navBTN">
+                <Dropdown.Toggle variant="info" id="dropdown-basic" className="navBTN">
                   Freshers Jobs
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -162,7 +162,7 @@ function NavBar() {
               <React.Fragment>
                 <Nav.Link>
                   <Dropdown>
-                    <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                    <Dropdown.Toggle variant="light" id="dropdown-basic">
                       <Icon.BoxArrowInRight /> Login
                     </Dropdown.Toggle>
 
@@ -178,7 +178,7 @@ function NavBar() {
                 </Nav.Link>
                 <Nav.Link>
                   <Dropdown>
-                    <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                    <Dropdown.Toggle variant="light" id="dropdown-basic">
                       <Icon.PersonPlus /> Signup
                     </Dropdown.Toggle>
 
