@@ -31,28 +31,28 @@ function NavBar() {
             <Nav.Link>
               <Dropdown>
                 <Dropdown.Toggle variant="info" id="dropdown-basic" className="navBTN" >
-                  Internship
+                  Internships
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item as={Link} to="/all-internships">
                     {" "}
-                    All Internship
+                    All Internships
                   </Dropdown.Item>
                   <Dropdown.Item as={Link} to="/internship/industry">
                     {" "}
-                    Internship By Industry
+                    Internships By Industry
                   </Dropdown.Item>
                   <Dropdown.Item as={Link} to="/internship/location">
                     {" "}
-                    Internship By Location
+                    Internships By Location
                   </Dropdown.Item>
                   <Dropdown.Item as={Link} to="/internship/stream">
                     {" "}
-                    Internship By Stream
+                    Internships By Stream
                   </Dropdown.Item>
                   <Dropdown.Item as={Link} to="/internship/companyName">
                     {" "}
-                    Internship By Company
+                    Internships By Company
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
