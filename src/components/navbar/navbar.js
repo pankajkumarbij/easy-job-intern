@@ -21,8 +21,8 @@ function NavBar() {
   
   return (
     <>
-      <Navbar bg="dark" variant="dark" expand="lg">
-        <Navbar.Brand as={Link} to="/" style={{ color: "yellow" }}>
+      <Navbar bg="info" variant="light" expand="lg">
+        <Navbar.Brand as={Link} to="/" style={{ color: "#F52887" }}>
           Easy Job Intern
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -30,36 +30,36 @@ function NavBar() {
           <Nav className="mr-auto">
             <Nav.Link>
               <Dropdown>
-                <Dropdown.Toggle variant="dark" id="dropdown-basic" className="navBTN">
-                  Internship
+                <Dropdown.Toggle variant="info" id="dropdown-basic" className="navBTN" >
+                  Internships
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item as={Link} to="/all-internships">
                     {" "}
-                    All Internship
+                    All Internships
                   </Dropdown.Item>
                   <Dropdown.Item as={Link} to="/internship/industry">
                     {" "}
-                    Internship By Industry
+                    Internships By Industry
                   </Dropdown.Item>
                   <Dropdown.Item as={Link} to="/internship/location">
                     {" "}
-                    Internship By Location
+                    Internships By Location
                   </Dropdown.Item>
                   <Dropdown.Item as={Link} to="/internship/stream">
                     {" "}
-                    Internship By Stream
+                    Internships By Stream
                   </Dropdown.Item>
                   <Dropdown.Item as={Link} to="/internship/companyName">
                     {" "}
-                    Internship By Company
+                    Internships By Company
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </Nav.Link>
             <Nav.Link>
               <Dropdown>
-                <Dropdown.Toggle variant="dark" id="dropdown-basic" className="navBTN">
+                <Dropdown.Toggle variant="info" id="dropdown-basic" className="navBTN">
                   Jobs
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -83,7 +83,7 @@ function NavBar() {
             </Nav.Link>
             <Nav.Link>
               <Dropdown className="navLINK">
-                <Dropdown.Toggle variant="dark" id="dropdown-basic" className="navBTN">
+                <Dropdown.Toggle variant="info" id="dropdown-basic" className="navBTN">
                   Freshers Jobs
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -162,7 +162,7 @@ function NavBar() {
               <React.Fragment>
                 <Nav.Link>
                   <Dropdown>
-                    <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                    <Dropdown.Toggle variant="light" id="dropdown-basic">
                       <Icon.BoxArrowInRight /> Login
                     </Dropdown.Toggle>
 
@@ -178,7 +178,7 @@ function NavBar() {
                 </Nav.Link>
                 <Nav.Link>
                   <Dropdown>
-                    <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                    <Dropdown.Toggle variant="light" id="dropdown-basic">
                       <Icon.PersonPlus /> Signup
                     </Dropdown.Toggle>
 
