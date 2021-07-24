@@ -21,8 +21,8 @@ function NavBar() {
   
   return (
     <>
-      <Navbar bg="info" variant="light" expand="lg">
-        <Navbar.Brand as={Link} to="/" style={{ color: "#F52887" }}>
+      <Navbar bg="dark" variant="dark" expand="lg">
+        <Navbar.Brand as={Link} to="/" style={{ color: "white" }}>
           Easy Job Intern
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -30,7 +30,7 @@ function NavBar() {
           <Nav className="mr-auto">
             <Nav.Link>
               <Dropdown>
-                <Dropdown.Toggle variant="info" id="dropdown-basic" className="navBTN" >
+                <Dropdown.Toggle variant="light" id="dropdown-basic" className="navBTN" >
                   Internships
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -59,7 +59,7 @@ function NavBar() {
             </Nav.Link>
             <Nav.Link>
               <Dropdown>
-                <Dropdown.Toggle variant="info" id="dropdown-basic" className="navBTN">
+                <Dropdown.Toggle variant="light" id="dropdown-basic" className="navBTN">
                   Jobs
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -83,7 +83,7 @@ function NavBar() {
             </Nav.Link>
             <Nav.Link>
               <Dropdown className="navLINK">
-                <Dropdown.Toggle variant="info" id="dropdown-basic" className="navBTN">
+                <Dropdown.Toggle variant="light" id="dropdown-basic" className="navBTN">
                   Freshers Jobs
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
