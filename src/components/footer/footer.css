@@ -19,13 +19,13 @@ body {
 }
 
 body {
-    background-color: #dde3fb;
+    background-color: #ebdde9;
     display: grid;
     place-items: center
 }
 
 .card {
-    background-color: #222222;
+    background-color: #2c2a2c;
     border-radius: 10px;
     font-family: 'Manrope', sans-serif
 }
@@ -35,27 +35,27 @@ body {
 }
 
 #inp1 {
-    background-color: #222222;
+    background-color: #1f1e1e;
     border: 1px solid #636161;
     font-size: 0.75rem
 }
 
 #inp1:focus {
     outline: none;
-    box-shadow: none
+    box-shadow: none;
 }
 
 .btn-newsletter {
-    background-color: #5c72d8;
+    background-color: #1a1b1b;
     font-size: 0.78rem;
-    border: 0px
+    border: 0px;
 }
 
 .btn-newsletter:focus {
     outline: none;
-    box-shadow: none
+    box-shadow: none;
 }
 
 *:focus {
-    outline: none
+    outline: none;
 }
