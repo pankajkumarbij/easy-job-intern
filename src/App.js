@@ -71,48 +71,6 @@ const Routing = () => {
     }
   }, [dispatch]);
 
-  // return (
-  //   <Switch>
-  //     <Route path="/" exact compo>
-  //       <Home />
-  //     </Route>
-  //     <Route path="/student-login" exact>
-  //       <Login />
-  //     </Route>
-  //     <Route path="/student-signup" exact>
-  //       <SignUp />
-  //     </Route>
-  //     <Route path="/employer-signup" exact>
-  //       <EmployerSignup />
-  //     </Route>
-  //     <Route path="/employer-login" exact>
-  //       <EmployerSignin />
-  //     </Route>
-  //     <Route path="/create-internship" exact>
-  //       <NewInternship />
-  //     </Route>
-  //     <Route path="/create-job" exact>
-  //       <NewJob />
-  //     </Route>
-  //     <Route path="/about-us" exact>
-  //       <AboutUs />
-  //     </Route>
-  //     <Route path="/contact-us" exact>
-  //       <ContactUs />
-  //     </Route>
-  //     <Route path="/privacy-policy" exact>
-  //       <PrivacyPolicy />
-  //     </Route>
-  //     <Route path="/terms-conditions" exact>
-  //       <TermsCondition />
-  //     </Route>
-  //     <Route exact path="/login/student-profile">
-  //       <Profile/>
-  //     </Route>
-  //     <Route component={Error} />
-  //   </Switch>
-  // );
-
   console.log(state);
 
   if (state) {
