@@ -224,8 +224,7 @@ const StudentSignup = () => {
                 <Form.Label style={{ fontWeight: "bold" }}>Name</Form.Label>
                 <Form.Control
                   className={`${
-                    !formValues.personName.valid &&
-                    formValues.personName.touched
+                    !formValues.personName.touched
                       ? "input-error"
                       : ""
                   }`}
@@ -236,11 +235,6 @@ const StudentSignup = () => {
                   value={formValues.personName.value}
                   onChange={handleChange}
                 />
-                {formValues.personName.errorMessage && (
-                  <span className="error">
-                    {formValues.personName.errorMessage}
-                  </span>
-                )}
               </Form.Group>
 
               {/* Email address */}
@@ -278,7 +272,8 @@ const StudentSignup = () => {
                 <InputGroup>
                 <Form.Control
                   className={`${
-                    !formValues.password.valid && formValues.password.touched
+                    !formValues.password.valid && 
+                    formValues.password.touched
                       ? "input-error"
                       : ""
                   }`}

@@ -6,7 +6,7 @@ import "./footer.css";
 function Footer() { 
   return (
     <>
-        <footer className=" bg-dark text-white newFooter" style={{padding: "0px", margin:"0px", backgroundColor:"#1A2226"}}> 
+        <footer className=" bg-dark text-light newFooter" style={{padding: "0px", margin:"0px", backgroundColor:"#2c2a2c"}}> 
        {/* <div className="container" style={{padding: "0px", margin:"0px", width:'100%'}}>*/}  {/*</div> */}
         <div className="row" style={{padding: "0px", width:'100%', marginLeft:'0px'}}>
                
@@ -14,16 +14,16 @@ function Footer() {
         <div className="col-md-3 col-sm-6" style={{paddingRight: "1%", margin:"0px"}}>
           <h5 style={{paddingTop:'2%'}}>Online Trainings</h5>
           <ul className="list-unstyled" style={{borderBottom: '2px dotted #6c6c6c'}}>
-            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  href="/#" >
+            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem",}}  variant="outline-light"  href="/#" >
                     Advanced Excel
                   </Button>{" "}</li>
-            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  href="/#" >
+            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-light"  href="/#" >
                     Data Science and ML
                   </Button>{" "}</li>
-            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  href="/#" >
+            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-light"  href="/#" >
                     Core Java
                   </Button>{" "}</li>
-            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  href="/#" >
+            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-light"  href="/#" >
                     Digital Marketing
                   </Button>{" "}</li>
           </ul>
@@ -33,16 +33,16 @@ function Footer() {
         <div className="col-md-3 col-sm-6" style={{paddingRight: "1%", margin:"0px"}}>
           <h5 style={{paddingTop:'2%'}}>Internship by Places</h5>
           <ul className="list-unstyled" style={{borderBottom: '2px dotted #6c6c6c'}}>
-            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  href="/#" >
+            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-light"  href="/#" >
                    Mumbai
                   </Button>{" "}</li>
-            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  href="/#" >
+            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-light"  href="/#" >
                     Delhi
                   </Button>{" "}</li>
-            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  href="/#" >
+            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-light"  href="/#" >
                     Bangalore
                   </Button>{" "}</li>
-            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  href="/#" >
+            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-light"  href="/#" >
                     PAN India
                   </Button>{" "}</li>
           </ul>
@@ -52,16 +52,16 @@ function Footer() {
           <div className="col-md-3 col-sm-6" style={{paddingRight: "1%", margin:"0px"}}>
           <h5 style={{paddingTop:'2%'}}>Internship by Stream</h5>
           <ul className="list-unstyled" style={{borderBottom: '2px dotted #6c6c6c'}}>
-            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  href="/#" >
+            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-light"  href="/#" >
                    Computer Science
                   </Button>{" "}</li>
-            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  href="/#" >
+            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-light"  href="/#" >
                     Content Marketing
                   </Button>{" "}</li>
-            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  href="#" >
+            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-light"  href="#" >
                     Summer Research Fellowship
                   </Button>{" "}</li>
-            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  href="#" >
+            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-light"  href="#" >
                     Electical Engineering
                   </Button>{" "}</li>
           </ul>
@@ -71,16 +71,16 @@ function Footer() {
           <div className="col-md-3 col-sm-6" style={{paddingRight: "1%", margin:"0px"}}>
           <h5 style={{paddingTop:'2%'}}>About Easy Job Intern</h5>
           <ul className="list-unstyled" style={{borderBottom: '2px dotted #6c6c6c'}}>
-            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  as={Link} to="/about-us" >
+            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-light"  as={Link} to="/about-us" >
                    About Us
                 </Button>{" "}</li>
-            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  as={Link} to="/contact-us" >
+            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-light"  as={Link} to="/contact-us" >
                   Contact Us
                   </Button>{" "}</li>
-            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  as={Link} to="/terms-conditions" >
+            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-light"  as={Link} to="/terms-conditions" >
                   Terms and Condition
               </Button>{" "}</li>
-            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-warning"  as={Link} to="/privacy-policy" >
+            <li><Button style={{ marginBottom: "5px", borderColor: "#343a40", padding: "2px 0.75rem", fontSize: "0.8rem"}}  variant="outline-light"  as={Link} to="/privacy-policy" >
                   Privacy Policy
                 </Button>{" "}</li>
           </ul>
@@ -109,7 +109,7 @@ function Footer() {
                 <Icon.Linkedin
                   style={{ color: "#ffc107" }}
                   className="mx-md-3 mx-2 icons"
-                ></Icon.Linkedin>{" "}
+                ></Icon.Linkedin>
               </a>
               <a href="/#">
                 <Icon.Facebook
@@ -130,7 +130,7 @@ function Footer() {
                 ></Icon.Youtube>{" "}
               </a>
               <br />
-              <span style={{ fontSize: "8px" }}>
+              <span style={{ fontSize: "15px" }}>
                 &copy; 2021 - All right reserved - Easy Job Intern
               </span>
             </div>

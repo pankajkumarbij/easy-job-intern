@@ -16,12 +16,6 @@ a, a:hover{
   max-width: max-content !important;
 } */
 
-.error {
-  color: #ff0000;
-  font-size: 1em;
-  display: relative;
-}
-
 .input-error {
   border: #ff0000 2px solid !important;
 }
