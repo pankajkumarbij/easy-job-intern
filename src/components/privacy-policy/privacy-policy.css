@@ -1,0 +1,19 @@
+.heading{
+    color:black;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.content{
+    color:black;
+    width:100%;
+    background-color:white;
+    height:100%;
+}
+
+.rules{
+    text-align:left;
+    padding-left: 45px;
+    padding-right: 25px;
+}
