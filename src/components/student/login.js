@@ -155,6 +155,7 @@ function LoginForm() {
                       ? "input-error"
                       : ""
                   }`}
+
                   type="email"
                   placeholder="Enter email"
                   name="email"

@@ -17,7 +17,6 @@ const EmployerSignup = () => {
       value: "",
       validation: {
         required: true,
-        minLength: 3,
       },
       errorMessage: "",
       valid: false,
