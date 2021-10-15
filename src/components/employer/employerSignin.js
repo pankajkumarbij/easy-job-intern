@@ -154,7 +154,8 @@ function EmployerSignin() {
                 <Form.Control
                   style={{ borderColor: "#ffc107", color: "#000000" }}
                   className={`${
-                    !formValues.email.valid && formValues.email.touched
+                    !formValues.email.valid && 
+                    formValues.email.touched
                       ? "input-error"
                       : ""
                   }`}
